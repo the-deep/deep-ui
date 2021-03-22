@@ -1,0 +1,104 @@
+:root {
+    --dui-font-family-sans-serif: Source Sans Pro, sans-serif;
+    --dui-font-family-monospace: Oxygen Mono, monospace;
+
+    --dui-color-black: #000000;
+    --dui-color-grey1: #333333;
+    --dui-color-grey2: #4f4f4f;
+    --dui-color-grey3: #828282;
+    --dui-color-grey4: #bdbdbd;
+    --dui-color-grey5: #e0e0e0;
+    --dui-color-grey6: #f2f2f2;
+    --dui-color-white: #ffffff;
+    --dui-color-backdrop: rgba(255, 255, 255, .5);
+
+    --dui-radius-modal: 5px;
+    --dui-height-max-modal: 96vh;
+    --dui-width-max-modal: 96vw;
+    --dui-width-min-modal: 360px;
+
+
+    --dui-color-brand: #00125b;
+    --dui-color-accent: #1a3ed0;
+    --dui-color-accent-hover: #1030b2;
+    --dui-color-text-on-accent: #ffffff;
+
+    --dui-color-background-primary-button: var(--dui-color-accent);
+    --dui-color-background-hover-primary-button: var(--dui-color-accent-hover);
+    --dui-color-text-primary-button: var(--dui-color-text-on-accent);
+    --dui-color-background-input-section: transparent;
+
+    --dui-color-background-tertiary-hover: #f5f8fb;
+
+    --dui-color-complement1: #008eff;
+    --dui-color-complement2: #00c9f0;
+    --dui-color-complement3: #ffb443;
+
+    --dui-color-positive: #29bb75;
+    --dui-color-information: #3fa2f7;
+    --dui-color-negative: #ff5c52;
+    --dui-color-danger: var(--dui-color-negative);
+
+    --dui-color-background: #f6f6f6;
+    --dui-color-background-information: #f5f8fb;
+    --dui-color-background-negative: #dfe7f2;
+    --dui-color-background-card: var(--dui-color-white);
+    --dui-color-background-modal: var(--dui-color-white);
+
+    --dui-color-text: var(--dui-color-grey1);
+    --dui-color-text-label: var(--dui-color-grey2);
+
+    --dui-color-background-disabled: var(--dui-color-grey5);
+    --dui-color-text-disabled: var(--dui-color-grey4);
+
+    --dui-color-gradient1: #cce8ff;
+    --dui-color-gradient2: #99d2ff;
+    --dui-color-gradient3: #66bbff;
+    --dui-color-gradient4: #33a5ff;
+    --dui-radius-border-input-section: 0;
+    --dui-color-input-label: var(--dui-color-grey3);
+    --dui-color-input-label-active: var(--dui-color-accent);
+
+    --dui-border-color-card: #f2f2f2;
+    --dui-color-separator: rgba(0, 0, 0, .1);
+    --dui-border-color-inner-card: #dfe7f2;
+    --dui-color-label: #828282;
+    --dui-color-text-dark: #333333;
+    --dui-color-background-progress-bar: #bdbdbd;
+
+    --dui-color-deep6: #f5f8fb;
+
+    --dui-height-navbar-icon: 3rem;
+
+    --dui-spacing-extra-small: 0.1rem;
+    --dui-spacing-small: 0.2rem;
+    --dui-spacing-medium: 0.45rem;
+    --dui-spacing-large: 0.66rem;
+    --dui-spacing-extra-large: 1.1rem;
+    --dui-spacing-super-large: 2rem;
+
+    --dui-font-size-small: 0.67rem;
+    --dui-font-size-medium: 0.86rem;
+    --dui-font-size-large: 1rem;
+
+    --dui-font-size-heading-large: 1.57rem;
+    --dui-font-size-heading-medium: 1.24rem;
+    --dui-font-size-heading-small: 1rem;
+    --dui-font-size-heading-extra-small: 0.8rem;
+
+    --dui-font-weight-light: 300;
+    --dui-font-weight-regular: 400;
+    --dui-font-weight-medium: 400;
+    --dui-font-weight-bold: 600;
+
+    --dui-width-separator-thin: 0.06em;
+    --dui-width-separator-medium: 0.1em;
+
+    /* FIXME: use relative size */
+    --dui-border-radius-card: 8px;
+    --dui-border-radius-modal: 8px;
+    --dui-border-radius-tag: 25px;
+    --dui-opacity-disabled-element: 0.3;
+    --dui-height-progress-bar: 10px;
+    --dui-border-radius-progress-bar: 15px;
+}

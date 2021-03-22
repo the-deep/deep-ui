@@ -1,0 +1,15 @@
+.tag-variants {
+    section {
+        padding: var(--dui-spacing-medium);
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+
+            >* {
+                flex-shrink: 0;
+                margin: var(--dui-spacing-large);
+            }
+        }
+    }
+}
