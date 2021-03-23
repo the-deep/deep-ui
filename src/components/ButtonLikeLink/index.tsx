@@ -1,5 +1,5 @@
 import React from 'react';
-import { isValidUrl } from '@togglecorp/fujs';
+import { isValidUrl, _cs } from '@togglecorp/fujs';
 import {
     Link as RouterLink,
     LinkProps as RouterLinkProps,
@@ -7,6 +7,7 @@ import {
 import {
     useButtonFeatures,
 } from '../Button';
+import styles from './styles.css';
 
 type PropsFromButton = Parameters<typeof useButtonFeatures>[0];
 export interface Props extends PropsFromButton, RouterLinkProps {
@@ -58,7 +59,7 @@ function ButtonLikeLink(props: Props) {
         return (
             <a
                 href={to as string}
-                className={className}
+                className={_cs(className, styles.link)}
                 target="_blank"
                 rel="noopener noreferrer"
                 {...linkProps}
@@ -70,7 +71,7 @@ function ButtonLikeLink(props: Props) {
 
     return (
         <RouterLink
-            className={className}
+            className={_cs(className, styles.link)}
             title={title}
             to={to}
             {...linkProps}

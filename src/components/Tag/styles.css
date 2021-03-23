@@ -13,7 +13,7 @@
     width: fit-content;
     text-align: center;
     color: var(--color);
-    font-size: var(--font-size); 
+    font-size: var(--font-size);
 
     &.default {
         --background-color: var(--dui-color-background);
