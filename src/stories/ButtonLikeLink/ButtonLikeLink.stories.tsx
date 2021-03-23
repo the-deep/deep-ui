@@ -36,6 +36,13 @@ WithActions.args = {
     to: 'https://wikipedia.org',
 };
 
+export const WithIconsAndActions = Template.bind({});
+WithIconsAndActions.args = {
+    children: 'Click me!',
+    icons: <IoAccessibility />,
+    actions: <IoShuffle />,
+    to: 'https://wikipedia.org',
+};
 export const Variants = () => (
     <div className={styles.buttonVariants}>
         <section>
