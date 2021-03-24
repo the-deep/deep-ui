@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoText } from 'react-icons/io5';
@@ -10,6 +10,7 @@ export default {
     title: 'Input/TextInput',
     component: TextInput,
     argTypes: {},
+    decorators: [withDesign],
 };
 
 const Template: Story<TextInputProps<string>> = (args) => {
@@ -28,6 +29,12 @@ const Template: Story<TextInputProps<string>> = (args) => {
 };
 
 export const Default = Template.bind({});
+Default.parameters = {
+    design: {
+        type: 'figma',
+        url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4791%3A345',
+    },
+};
 Default.args = {
     label: 'Name',
 };

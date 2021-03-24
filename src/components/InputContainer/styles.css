@@ -1,3 +1,5 @@
+/* TODO: Improve overrides */
+/* TODO: Add support for darkmode */
 .input-container {
     --box-shadow-color: transparent;
     --color-background-input-section: var(--dui-color-background-input-section);

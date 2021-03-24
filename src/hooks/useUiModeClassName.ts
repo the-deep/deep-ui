@@ -1,8 +1,8 @@
 import React from 'react';
-import UiModeContext, { UiModeType } from '../components/UiModeContext';
+import UiModeContext, { UiMode } from '#components/UiModeContext';
 
 function useUiModeClassName(
-    uiModeFromProps: UiModeType | undefined,
+    uiModeFromProps: UiMode | undefined,
     lightClassName: string,
     darkClassName: string,
 ) {

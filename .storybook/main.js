@@ -17,6 +17,7 @@ module.exports = {
         "@storybook/addon-essentials",
         "@storybook/addon-a11y",
         "storybook-dark-mode",
+        "storybook-addon-designs",
     ],
     webpackFinal: async (config, { configType }) => {
         config.module.rules = config.module.rules
