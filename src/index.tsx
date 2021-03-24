@@ -36,6 +36,8 @@ export { default as QuickActionButton } from './components/QuickActionButton';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';
 export { default as RawInput } from './components/RawInput';
 export type { Props as RawInputProps } from './components/RawInput';
+export { default as TextInput } from './components/TextInput';
+export type { Props as TextInputProps } from './components/TextInput';
 export { default as QuickActionLink } from './components/QuickActionLink';
 export type { Props as QuickActionLinkProps } from './components/QuickActionLink';
 export { default as Tag } from './components/Tag';

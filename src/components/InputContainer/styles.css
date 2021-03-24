@@ -5,6 +5,10 @@
     --color-text: var(--dui-color-text);
     --color-hint: var(--dui-color-text-label);
 
+    &.dark {
+        --color-text: var(--dui-color-text-on-dark);
+    }
+
     padding: 0;
     color: var(--color-text);
 

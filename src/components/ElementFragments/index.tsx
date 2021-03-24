@@ -7,16 +7,16 @@ export interface Props {
     children?: React.ReactNode;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
-    iconsClassName?: string;
-    childrenClassName?: string;
-    actionsClassName?: string;
+    iconsContainerClassName?: string;
+    childrenContainerClassName?: string;
+    actionsContainerClassName?: string;
 }
 
 function ElementFragments(props: Props) {
     const {
-        actionsClassName,
-        iconsClassName,
-        childrenClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
+        childrenContainerClassName,
         children,
         icons,
         actions,
@@ -25,17 +25,17 @@ function ElementFragments(props: Props) {
     return (
         <>
             {icons && (
-                <div className={_cs(iconsClassName, styles.icons)}>
+                <div className={_cs(iconsContainerClassName, styles.icons)}>
                     {icons}
                 </div>
             )}
             {children && (
-                <div className={_cs(childrenClassName, styles.children)}>
+                <div className={_cs(childrenContainerClassName, styles.children)}>
                     {children}
                 </div>
             )}
             {actions && (
-                <div className={_cs(actionsClassName, styles.actions)}>
+                <div className={_cs(actionsContainerClassName, styles.actions)}>
                     {actions}
                 </div>
             )}

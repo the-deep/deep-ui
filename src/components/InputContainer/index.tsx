@@ -1,6 +1,9 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { UiMode } from '#components/UiModeContext';
+import useUiModeClassName from '#hooks/useUiModeClassName';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -23,6 +26,7 @@ export interface Props {
     invalid?: boolean;
     inputSectionRef?: React.RefObject<HTMLDivElement>;
     containerRef?: React.RefObject<HTMLDivElement>;
+    uiMode?: UiMode;
 }
 
 function InputContainer(props: Props) {
@@ -46,7 +50,10 @@ function InputContainer(props: Props) {
         inputSectionRef,
         invalid,
         containerRef,
+        uiMode,
     } = props;
+
+    const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     return (
         <div
@@ -54,6 +61,7 @@ function InputContainer(props: Props) {
             className={_cs(
                 className,
                 styles.inputContainer,
+                uiModeClassName,
                 disabled && styles.disabled,
                 readOnly && styles.readOnly,
                 (invalid || !!error) && styles.errored,

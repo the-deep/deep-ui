@@ -46,6 +46,7 @@
     --dui-color-background-modal: var(--dui-color-white);
 
     --dui-color-text: var(--dui-color-grey1);
+    --dui-color-text-on-dark: var(--dui-color-white);
     --dui-color-text-label: var(--dui-color-grey2);
 
     --dui-color-background-disabled: var(--dui-color-grey5);
