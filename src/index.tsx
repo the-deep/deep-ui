@@ -34,6 +34,8 @@ export { default as Portal } from './components/Portal';
 export type { Props as PortalProps } from './components/Portal';
 export { default as QuickActionButton } from './components/QuickActionButton';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';
+export { default as RawInput } from './components/RawInput';
+export type { Props as RawInputProps } from './components/RawInput';
 export { default as QuickActionLink } from './components/QuickActionLink';
 export type { Props as QuickActionLinkProps } from './components/QuickActionLink';
 export { default as Tag } from './components/Tag';
