@@ -1,0 +1,11 @@
+.input-error {
+    --color: var(--dui-color-negative);
+
+    &.dark {
+        --color: var(--dui-color-negative-on-dark);
+    }
+
+    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
+    color: var(--color);
+    font-size: var(--dui-font-size-small);
+}

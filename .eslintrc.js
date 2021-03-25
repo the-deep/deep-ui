@@ -28,6 +28,7 @@ module.exports = {
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
                 alias: {
                     '#components': './src/components',
+                    '#hooks': './src/hooks',
                 },
             },
         },

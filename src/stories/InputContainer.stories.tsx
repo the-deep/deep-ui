@@ -17,10 +17,16 @@ const Template: Story<InputContainerProps> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.parameters = {
+    design: {
+        type: 'figma',
+        url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4791%3A345',
+    },
+};
 Default.args = {
     icons: <IoFlag />,
     actions: <IoClose />,
-    input: <div>input</div>,
-    label: 'Input',
-    error: 'Some error occurred',
+    input: <div>Input</div>,
+    label: 'Label',
+    // error: 'Some error occurred',
 };

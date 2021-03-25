@@ -1,34 +1,52 @@
+/* TODO: Improve overrides */
+/* TODO: Add support for darkmode */
 .input-container {
-    --box-shadow-color: transparent;
     --color-background-input-section: var(--dui-color-background-input-section);
-    --color-text-label: var(--dui-color-input-label);
-    --color-text: var(--dui-color-text);
-    --color-hint: var(--dui-color-text-label);
+    --color-input-section-border: var(--dui-color-input-border);
 
-    padding: 0;
+    --height-border: var(--dui-width-separator-thin);
+
+    --color-text-label: var(--dui-color-input-label);
+    --color-text-label-active: var(--dui-color-input-label-active);
+
+    --color-text: var(--dui-color-text);
+    --opacity: 1;
+
+    --disabled-opacity: var(--dui-opacity-disabled-element);
+    opacity: var(--opacity);
     color: var(--color-text);
 
-    &.disabled {
-        opacity: var(--dui-opacity-disabled-element);
-        --box-shadow-color: transparent;
+    &.light {
+        --color-text: var(--dui-color-text);
 
-        &:hover {
-            --box-shadow-color: transparent;
+        &.errored {
+            --color-border-input-section: var(--dui-color-negative);
         }
+    }
+
+    &.dark {
+        --color-text: var(--dui-color-text-on-dark);
+
+        &.errored {
+            --color-border-input-section: var(--dui-color-negative-on-dark);
+        }
+    }
+
+    &.filled {
+        --color-input-section-border: var(--dui-color-input-border-dark);
+    }
+
+
+    &.disabled {
+        --opacity: var(--dui-opacity-disabled-element);
     }
 
     &.read-only {
         --color-background-input-section: transparent;
-        --box-shadow-color: transparent;
-
-        &:hover {
-            --box-shadow-color: transparent;
-        }
     }
 
     &:hover {
-        --box-shadow-color: var(--dui-color-separator);
-        --color-text-label: var(--dui-color-input-label-hover);
+        --color-input-section-border: var(--dui-color-accent);
 
         &.read-only,
         &.disabled {
@@ -36,69 +54,61 @@
         }
     }
 
+    &.errored {
+        --color-input-section-border: var(--dui-color-negative);
+    }
+
     &:focus-within {
         --color-text-label: var(--dui-color-input-label-active);
         --box-shadow-color: var(--dui-color-accent);
+        --height-border: var(--dui-width-separator-medium);
+        --color-input-section-border: var(--dui-color-accent);
 
         &.errored {
-            --box-shadow-color: var(--dui-color-danger);
+            --color-input-section-border: var(--dui-color-negative);
         }
 
         &.read-only,
         &.disabled {
-            --box-shadow-color: transparent;
+            --color-input-section-border: var(--dui-color-separator);
         }
     }
 
-    .input-label {
-        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
-        color: var(--color-text-label);
-        font-size: var(--dui-font-size-small);
-        font-weight: var(--dui-font-weight-bold);
-    }
-
-    --box-shadow-offset-x: 0;
-    --box-shadow-offset-y: 2px;
-    --box-shadow-spread-radius: 2px;
-    --box-shadow-blur-radius: -1px;
-
     .input-section {
         display: flex;
+        position: relative;
         align-items: center;
-        border-radius: var(--dui-radius-border-input-section);
-        box-shadow: var(--box-shadow-offset-x) var(--box-shadow-offset-y) var(--box-shadow-spread-radius) var(--box-shadow-blur-radius) var(--box-shadow-color);
         background-color: var(--color-background-input-section);
-        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+        padding: var(--dui-spacing-medium) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
 
         .icons {
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            padding: var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-small);
         }
 
         .input {
+            display: flex;
+            align-items: center;
             flex-grow: 1;
-            padding: var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-small);
         }
 
         .actions {
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            padding: var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-small);
         }
-    }
 
-    .hint {
-        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
-        color: var(--color-hint);
-        font-size: var(--dui-font-size-small);
-    }
-
-    .error {
-        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
-        color: var(--dui-color-danger);
-        font-size: var(--dui-font-size-small);
+        .input-section-border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-input-section-border);
+            width: 100%;
+            height: var(--height-border);
+        }
     }
 }

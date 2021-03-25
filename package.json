@@ -104,6 +104,8 @@
         "rollup-plugin-postcss": "^3.1.8",
         "rollup-plugin-progress": "^1.1.2",
         "rollup-plugin-stylelint": "^1.0.0",
+        "storybook-addon-designs": "^6.0.0-alpha.3",
+        "storybook-dark-mode": "^1.0.7",
         "style-loader": "^1.2.1",
         "stylelint": "^13.7.0",
         "stylelint-config-concentric": "^2.0.2",

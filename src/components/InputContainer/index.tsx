@@ -1,6 +1,13 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import InputLabel from '#components/InputLabel';
+import InputError from '#components/InputError';
+import InputHint from '#components/InputHint';
+import InputBorder from '#components/InputBorder';
+import { UiMode } from '#components/UiModeContext';
+import useUiModeClassName from '#hooks/useUiModeClassName';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -23,6 +30,8 @@ export interface Props {
     invalid?: boolean;
     inputSectionRef?: React.RefObject<HTMLDivElement>;
     containerRef?: React.RefObject<HTMLDivElement>;
+    uiMode?: UiMode;
+    filled?: boolean;
 }
 
 function InputContainer(props: Props) {
@@ -46,7 +55,11 @@ function InputContainer(props: Props) {
         inputSectionRef,
         invalid,
         containerRef,
+        uiMode,
+        filled,
     } = props;
+
+    const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     return (
         <div
@@ -54,16 +67,19 @@ function InputContainer(props: Props) {
             className={_cs(
                 className,
                 styles.inputContainer,
+                uiModeClassName,
                 disabled && styles.disabled,
                 readOnly && styles.readOnly,
                 (invalid || !!error) && styles.errored,
+                filled && styles.filled,
             )}
         >
-            {label && (
-                <div className={_cs(styles.inputLabel, labelContainerClassName)}>
-                    {label}
-                </div>
-            )}
+            <InputLabel
+                className={labelContainerClassName}
+                uiMode={uiMode}
+            >
+                {label}
+            </InputLabel>
             <div
                 ref={inputSectionRef}
                 className={_cs(styles.inputSection, inputSectionClassName)}
@@ -81,16 +97,18 @@ function InputContainer(props: Props) {
                         {actions}
                     </div>
                 )}
+                <InputBorder
+                    className={styles.inputSectionBorder}
+                    errored={!!error}
+                />
             </div>
-            {error && (
-                <div className={_cs(styles.error, errorContainerClassName)}>
-                    {error}
-                </div>
-            )}
+            <InputError className={errorContainerClassName}>
+                {error}
+            </InputError>
             {!error && hint && (
-                <div className={_cs(styles.hint, hintContainerClassName)}>
+                <InputHint className={hintContainerClassName}>
                     {hint}
-                </div>
+                </InputHint>
             )}
         </div>
     );
