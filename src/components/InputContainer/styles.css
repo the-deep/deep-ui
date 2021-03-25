@@ -10,7 +10,6 @@
     --color-text-label-active: var(--dui-color-input-label-active);
 
     --color-text: var(--dui-color-text);
-    --color-hint: var(--dui-color-text-label);
     --opacity: 1;
 
     --disabled-opacity: var(--dui-opacity-disabled-element);
@@ -111,11 +110,5 @@
             width: 100%;
             height: var(--height-border);
         }
-    }
-
-    .hint {
-        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
-        color: var(--color-hint);
-        font-size: var(--dui-font-size-small);
     }
 }
