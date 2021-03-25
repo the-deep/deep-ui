@@ -13,8 +13,9 @@
     "style": "build/index.css",
     "typings": "build/index.d.ts",
     "scripts": {
-        "prepare": "rollup -c && tsc --project tsconfig-typings.json",
+        "prepare": "install-peers",
         "build": "rollup -c && tsc --project tsconfig-typings.json",
+        "prepack": "yarn build",
         "watch": "rollup -c -w",
         "typecheck": "tsc",
         "lint": "eslint --rule 'import/no-unresolved: 0' 'src/**/*.[tj]s?(x)'",
@@ -90,6 +91,7 @@
         "eslint-plugin-postcss-modules": "^1.2.0",
         "eslint-plugin-react": "^7.20.6",
         "eslint-plugin-react-hooks": "^4.1.2",
+        "install-peers-cli": "^2.2.0",
         "path": "^0.12.7",
         "postcss-loader": "^3.0.0",
         "postcss-nested": "^4.2.3",
