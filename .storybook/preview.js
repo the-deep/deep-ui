@@ -24,11 +24,15 @@ configureActions({
 
 const withDarkMode = (Story, context) => {
     const isDarkMode = useDarkMode();
+    const { setUiMode } = React.useContext(UiModeContext);
     const uiMode = isDarkMode ? 'dark' : 'light';
 
+    const contextValue = React.useMemo(() => ({ uiMode }), [uiMode]);
+    // Using `Story(context)` instead of `<Story {...context{ />` else the story gets dismounted
+    // https://github.com/storybookjs/storybook/issues/12255#issuecomment-697956943
     return (
-        <UiModeContext.Provider value={{ uiMode }}>
-            <Story {...context} />
+        <UiModeContext.Provider value={contextValue}>
+            {Story(context)}
         </UiModeContext.Provider>
     );
 }

@@ -1,11 +1,16 @@
 import React from 'react';
+import { _cs } from '@togglecorp/fujs';
 
+import useUiModeClassName from '#hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
+
+import styles from './styles.css';
 
 type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & RawInputProps<T>);
 export interface Props<T extends string> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
+    inputClassName?: string;
 }
 
 function TextInput<T extends string>(props: Props<T>) {
@@ -28,8 +33,11 @@ function TextInput<T extends string>(props: Props<T>) {
         inputElementRef,
         containerRef,
         inputSectionRef,
+        inputClassName,
         ...textInputProps
     } = props;
+
+    const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     return (
         <InputContainer
@@ -53,6 +61,12 @@ function TextInput<T extends string>(props: Props<T>) {
             input={(
                 <RawInput<T>
                     {...textInputProps}
+                    className={_cs(
+                        styles.input,
+                        uiModeClassName,
+                        !!error && styles.errored,
+                        inputClassName,
+                    )}
                     elementRef={inputElementRef}
                     readOnly={readOnly}
                     uiMode={uiMode}

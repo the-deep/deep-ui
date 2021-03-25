@@ -14,7 +14,7 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
     /**
     * input name
     */
-    name: N;
+    name?: N;
     /**
     * input value
     */
@@ -24,8 +24,8 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
     */
     onChange?: (
         value: string | undefined,
-        name: N,
-        e: React.FormEvent<HTMLInputElement> | undefined,
+        name?: N,
+        e?: React.FormEvent<HTMLInputElement> | undefined,
     ) => void;
     /**
      * UI mode: light or dark

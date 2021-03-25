@@ -37,6 +37,7 @@
     --dui-color-positive: #29bb75;
     --dui-color-information: #3fa2f7;
     --dui-color-negative: #ff5c52;
+    --dui-color-negative-on-dark: #ff9683;
     --dui-color-danger: var(--dui-color-negative);
 
     --dui-color-background: #f6f6f6;
@@ -48,6 +49,7 @@
     --dui-color-text: var(--dui-color-grey1);
     --dui-color-text-on-dark: var(--dui-color-white);
     --dui-color-text-label: var(--dui-color-grey2);
+    --dui-color-text-label-on-dark: var(--dui-color-grey6);
 
     --dui-color-background-disabled: var(--dui-color-grey5);
     --dui-color-text-disabled: var(--dui-color-grey4);
@@ -57,8 +59,12 @@
     --dui-color-gradient3: #66bbff;
     --dui-color-gradient4: #33a5ff;
     --dui-radius-border-input-section: 0;
-    --dui-color-input-label: var(--dui-color-grey3);
-    --dui-color-input-label-active: var(--dui-color-accent);
+
+    --dui-color-input-label: var(--dui-color-grey1);
+    --dui-color-input-label-active: var(--dui-color-input-label);
+    --dui-color-input-placeholder: var(--dui-color-grey3);
+    --dui-color-input-border: var(--dui-color-grey4);
+    --dui-color-input-border-dark: var(--dui-color-grey3);
 
     --dui-border-color-card: #f2f2f2;
     --dui-color-separator: rgba(0, 0, 0, .1);

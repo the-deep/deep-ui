@@ -1,0 +1,11 @@
+.input-border {
+    --color: var(--dui-color-input-border);
+    --height: var(--dui-width-separator-thin);
+
+    background-color: var(--color);
+    height: var(--height);
+
+    &.errored {
+        --color: var(--dui-color-negative);
+    }
+}

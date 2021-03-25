@@ -15,6 +15,7 @@ export default {
 
 const Template: Story<TextInputProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
+
     const handleChange = (e: string | undefined) => {
         updateArgs({ value: e });
     };
@@ -29,14 +30,15 @@ const Template: Story<TextInputProps<string>> = (args) => {
 };
 
 export const Default = Template.bind({});
+Default.args = {
+    label: 'Name',
+};
+
 Default.parameters = {
     design: {
         type: 'figma',
         url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4791%3A345',
     },
-};
-Default.args = {
-    label: 'Name',
 };
 
 export const WithIcon = Template.bind({});
@@ -63,4 +65,10 @@ export const WithPlaceholder = Template.bind({});
 WithPlaceholder.args = {
     label: 'Name',
     placeholder: 'Enter your name',
+};
+
+export const WithError = Template.bind({});
+WithError.args = {
+    label: 'Name',
+    error: 'This field is required',
 };

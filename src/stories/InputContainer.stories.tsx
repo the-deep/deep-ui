@@ -26,7 +26,7 @@ Default.parameters = {
 Default.args = {
     icons: <IoFlag />,
     actions: <IoClose />,
-    input: <div>input</div>,
-    label: 'Input',
-    error: 'Some error occurred',
+    input: <div>Input</div>,
+    label: 'Label',
+    // error: 'Some error occurred',
 };
