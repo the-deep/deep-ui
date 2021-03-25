@@ -1,8 +1,8 @@
 .input-label {
-    --color: var(--color-text-label);
+    --color: var(--dui-color-text-label);
 
     &.dark {
-        --color: var(--color-text-label-on-dark);
+        --color: var(--dui-color-text-label-on-dark);
     }
 
     padding: var(--dui-spacing-small) var(--dui-spacing-medium);
