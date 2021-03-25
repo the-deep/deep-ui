@@ -1,6 +1,6 @@
 {
     "name": "@the-deep/deep-ui",
-    "version": "1.0.0",
+    "version": "1.0.1-beta.0",
     "description": "React component library by Deep",
     "files": [
         "/build"
@@ -41,8 +41,7 @@
         "@babel/runtime-corejs3": "^7.11.2",
         "@storybook/client-api": "^6.0.21",
         "@togglecorp/fujs": "^1.9.2-beta.0",
-        "react-icons": "^4.2.0",
-        "react-router-dom": "^5.2.0"
+        "react-icons": "^4.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.11.5",
