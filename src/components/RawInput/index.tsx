@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import type { UiMode } from '#components/UiModeContext';
+import type { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 
 import styles from './styles.css';

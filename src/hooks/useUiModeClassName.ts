@@ -1,5 +1,5 @@
 import React from 'react';
-import UiModeContext, { UiMode } from '#components/UiModeContext';
+import UiModeContext, { UiMode } from '../components/UiModeContext';
 
 function useUiModeClassName(
     uiModeFromProps: UiMode | undefined,
