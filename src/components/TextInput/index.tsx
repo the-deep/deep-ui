@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import useUiModeClassName from '#hooks/useUiModeClassName';
+import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
 
