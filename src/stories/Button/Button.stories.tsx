@@ -134,6 +134,12 @@ export const Variants = () => (
                 >
                     Inverted
                 </Button>
+                <Button
+                    variant="action"
+                    big
+                >
+                    Action
+                </Button>
             </div>
         </section>
     </div>

@@ -109,6 +109,7 @@
 
     --dui-width-separator-thin: 0.06em;
     --dui-width-separator-medium: 0.1em;
+    --dui-width-separator-thick: 0.12em;
 
     /* FIXME: use relative size */
     --dui-border-radius-card: 8px;
