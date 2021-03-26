@@ -2,7 +2,6 @@ import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import { IoText } from 'react-icons/io5';
 
 import DateInput, { Props as DateInputProps } from '#components/DateInput';
 
