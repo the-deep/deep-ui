@@ -29,5 +29,5 @@ OpenInitially.args = {
     confirmationHeader: 'Exit the Matrix',
     confirmationMessage: 'Choose one of the pills.',
     children: 'Exit',
-    opened: true,
+    confirmationOnMount: true,
 };

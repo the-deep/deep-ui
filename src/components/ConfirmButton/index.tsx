@@ -20,7 +20,7 @@ export type Props<N> = {
     /**
     * This props is intended to be used only on storybook to capture snapshots
     */
-    opened?: boolean;
+    confirmationOnMount?: boolean;
 } & Omit<ButtonProps<N>, 'onClick'>;
 
 function ConfirmButton<N>(props: Props<N>) {
@@ -34,14 +34,14 @@ function ConfirmButton<N>(props: Props<N>) {
         confirmLabel = 'Yes',
         cancelLabel = 'No',
         className,
-        opened,
+        confirmationOnMount,
         ...otherProps
     } = props;
 
-    const [showConfirmModal, setShowConfirmModal] = useState(opened);
+    const [confirmModalVisible, setConfirmModalVisible] = useState(confirmationOnMount);
 
     const handleConfirmModalShow = useCallback(() => {
-        setShowConfirmModal(true);
+        setConfirmModalVisible(true);
     }, []);
 
     const handleConfirmModalClose = useCallback(() => {
@@ -49,12 +49,12 @@ function ConfirmButton<N>(props: Props<N>) {
             onCancel();
         }
 
-        setShowConfirmModal(false);
+        setConfirmModalVisible(false);
     }, [onCancel]);
 
     const handleConfirmModalConfirm = useCallback(() => {
         onConfirm();
-        setShowConfirmModal(false);
+        setConfirmModalVisible(false);
     }, [onConfirm]);
 
     return (
@@ -64,7 +64,7 @@ function ConfirmButton<N>(props: Props<N>) {
                 {...otherProps}
                 onClick={handleConfirmModalShow}
             />
-            {showConfirmModal && (
+            {confirmModalVisible && (
                 <Modal
                     heading={confirmationHeader}
                     onClose={handleConfirmModalClose}
