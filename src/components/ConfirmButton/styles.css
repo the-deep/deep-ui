@@ -1,0 +1,10 @@
+.action-buttons-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--dui-spacing-extra-large) calc(var(--dui-dpacing-extra-large) - var(--dui-spacing-medium) / 2);
+
+    .action-button {
+        flex-shrink: 0;
+        margin: 0 calc(var(--dui-spacing-medium) / 2);
+    }
+}
