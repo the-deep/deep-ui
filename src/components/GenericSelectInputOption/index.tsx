@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton from '#components/RawButton';
@@ -42,18 +42,6 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
 
     const divRef = useRef<HTMLButtonElement>(null);
     const focusedByMouse = useRef(false);
-
-    useEffect(
-        () => {
-            if (isFocused && !focusedByMouse.current && divRef.current) {
-                divRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                });
-            }
-        },
-        [focusedByMouse, isFocused],
-    );
 
     const handleClick = useCallback(
         () => {
