@@ -32,6 +32,7 @@
         "paths": {
             "#components/*": ["./src/components/*"],
             "#hooks/*": ["./src/hooks/*"]
+            "#utils/*": ["./src/utils/*"]
         }
     },
     "include": ["./src/index.tsx", "./src/stories", "./src/declarations"]

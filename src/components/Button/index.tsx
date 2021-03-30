@@ -8,6 +8,7 @@ export type ButtonVariant = (
     | 'secondary'
     | 'tertiary'
     | 'inverted'
+    | 'action'
 );
 
 const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
@@ -15,6 +16,7 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     inverted: styles.inverted,
+    action: styles.action,
 };
 
 export interface Props<N> extends Omit<
