@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton from '#components/RawButton';
-import genericMemo from '#utils';
+import { genericMemo } from '#utils';
 
 import styles from './styles.css';
 
@@ -41,7 +41,6 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
 
     const isFocused = focusedKey === optionKey;
 
-    const divRef = useRef<HTMLButtonElement>(null);
     const focusedByMouse = useRef(false);
 
     const handleClick = useCallback(
@@ -73,7 +72,6 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
 
     return (
         <RawButton
-            elementRef={divRef}
             className={_cs(
                 styles.optionRenderer,
                 optionContainerClassName,

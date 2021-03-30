@@ -8,6 +8,8 @@ import { MdCheck } from 'react-icons/md';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '#components/SelectInputContainer';
+import ElementFragments from '#components/ElementFragments';
+
 import { genericMemo } from '#utils';
 import EmptyOptions from './EmptyOptions';
 import EmptySelectedOptions from './EmptySelectedOptions';
@@ -17,17 +19,21 @@ import styles from './styles.css';
 interface OptionProps {
     children: React.ReactNode;
 }
+
 function Option(props: OptionProps) {
     const { children } = props;
     return (
-        <>
-            <div className={styles.icon}>
+        <ElementFragments
+            icons={(
                 <MdCheck />
-            </div>
-            <div className={styles.label}>
+            )}
+            childrenContainerClassName={styles.label}
+            iconsContainerClassName={styles.icon}
+        >
+            <div className={styles.text}>
                 { children }
             </div>
-        </>
+        </ElementFragments>
     );
 }
 
@@ -201,7 +207,7 @@ function SearchSelectInput<
             optionKeySelector={keySelector}
             optionRenderer={Option}
             optionRendererParams={optionRendererParams}
-            optionContainerClassName={styles.optionContainer}
+            // optionContainerClassName={styles.optionContainer}
             onOptionClick={handleOptionClick}
             valueDisplay={valueDisplay}
             searchPlaceholder={searchPlaceholder}

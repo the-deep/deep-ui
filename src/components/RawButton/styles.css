@@ -1,6 +1,6 @@
 .raw-button {
     position: relative;
-    outline: var(--dui-width-separator-thin) dashed transparent;
+    outline: none;
     border: 0;
     background-color: transparent;
     cursor: pointer;
