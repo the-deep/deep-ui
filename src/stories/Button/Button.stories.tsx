@@ -45,56 +45,62 @@ export const Variants = () => (
         <section>
             <h3>Normal</h3>
             <div className={styles.content}>
-                <Button name={undefined}>
+                <Button>
                     Default
                 </Button>
-                <Button variant="primary" name={undefined}>
+                <Button variant="primary">
                     Primary
                 </Button>
-                <Button variant="secondary" name={undefined}>
+                <Button variant="secondary">
                     Secondary
                 </Button>
-                <Button variant="tertiary" name={undefined}>
+                <Button variant="tertiary">
                     Tertiary
                 </Button>
-                <Button variant="inverted" name={undefined}>
+                <Button variant="inverted">
                     Inverted
+                </Button>
+                <Button variant="action">
+                    Action
                 </Button>
             </div>
         </section>
         <section>
             <h3>Disabled</h3>
             <div className={styles.content}>
-                <Button disabled name={undefined}>
+                <Button disabled>
                     Default
                 </Button>
                 <Button
                     variant="primary"
                     disabled
-                    name={undefined}
+
                 >
                     Primary
                 </Button>
                 <Button
                     variant="secondary"
                     disabled
-                    name={undefined}
                 >
                     Secondary
                 </Button>
                 <Button
                     variant="tertiary"
                     disabled
-                    name={undefined}
                 >
                     Tertiary
                 </Button>
                 <Button
                     variant="inverted"
                     disabled
-                    name={undefined}
                 >
                     Inverted
+                </Button>
+                <Button
+                    variant="action"
+                    disabled
+                >
+                    Action
                 </Button>
             </div>
         </section>
@@ -107,28 +113,24 @@ export const Variants = () => (
                 <Button
                     variant="primary"
                     big
-                    name={undefined}
                 >
                     Primary
                 </Button>
                 <Button
                     variant="secondary"
                     big
-                    name={undefined}
                 >
                     Secondary
                 </Button>
                 <Button
                     variant="tertiary"
                     big
-                    name={undefined}
                 >
                     Tertiary
                 </Button>
                 <Button
                     variant="inverted"
                     big
-                    name={undefined}
                 >
                     Inverted
                 </Button>

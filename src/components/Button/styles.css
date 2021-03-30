@@ -53,6 +53,13 @@
         &.tertiary {
             --color-border: var(--dui-color-text-disabled);
         }
+
+        &.action {
+            --padding-h: 0;
+            --padding-v: 0;
+            --color-border: transparent;
+            --color-background: transparent;
+        }
     }
 
     &.primary {
