@@ -2,7 +2,10 @@ import React from 'react';
 import SearchSelectInput, {
     Props as SearchSelectInputProps,
 } from '#components/SearchSelectInput';
-import { rankedSearchOnList } from '#utils';
+import {
+    rankedSearchOnList,
+    genericMemo,
+} from '#utils';
 
 type Def = { containerClassName?: string };
 type OptionKey = string | number;
@@ -74,4 +77,4 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
     );
 }
 
-export default SelectInput;
+export default genericMemo(SelectInput);

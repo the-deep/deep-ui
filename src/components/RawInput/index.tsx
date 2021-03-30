@@ -1,8 +1,9 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import type { UiMode } from '../UiModeContext';
-import useUiModeClassName from '../../hooks/useUiModeClassName';
+import type { UiMode } from '#components/UiModeContext';
+import useUiModeClassName from '#hooks/useUiModeClassName';
+import genericMemo from '#utils';
 
 import styles from './styles.css';
 
@@ -84,4 +85,4 @@ function RawInput<N extends string>(
     );
 }
 
-export default RawInput;
+export default genericMemo(RawInput);

@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton from '#components/RawButton';
+import genericMemo from '#utils';
 
 import styles from './styles.css';
 
@@ -89,4 +90,4 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
         </RawButton>
     );
 }
-export default GenericOption;
+export default genericMemo(GenericOption);

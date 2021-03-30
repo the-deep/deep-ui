@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import { UiMode } from '#components/UiModeContext';
 import useUiModeClassName from '#hooks/useUiModeClassName';
+import genericMemo from '#utils';
 
 import styles from './styles.css';
 
@@ -65,4 +66,4 @@ function RawButton<N extends number | string | undefined>(props: RawButtonProps<
     );
 }
 
-export default RawButton;
+export default genericMemo(RawButton);

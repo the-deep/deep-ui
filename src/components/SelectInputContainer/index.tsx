@@ -11,6 +11,8 @@ import List from '#components/List';
 import useBlurEffect from '#hooks/useBlurEffect';
 import useKeyboard from '#hooks/useKeyboard';
 
+import { genericMemo } from '#utils';
+
 import styles from './styles.css';
 
 interface GroupProps {
@@ -313,4 +315,4 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
     );
 }
 
-export default SelectInputContainer;
+export default genericMemo(SelectInputContainer);

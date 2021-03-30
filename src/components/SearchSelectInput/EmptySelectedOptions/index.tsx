@@ -9,4 +9,4 @@ function EmptySelectedOptions() {
         </div>
     );
 }
-export default EmptySelectedOptions;
+export default React.memo(EmptySelectedOptions);

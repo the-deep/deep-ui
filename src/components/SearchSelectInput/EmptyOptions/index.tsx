@@ -36,4 +36,4 @@ function EmptyOptions(props: DefaultEmptyComponentProps) {
         </div>
     );
 }
-export default EmptyOptions;
+export default React.memo(EmptyOptions);

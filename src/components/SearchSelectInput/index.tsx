@@ -8,6 +8,7 @@ import { MdCheck } from 'react-icons/md';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '#components/SelectInputContainer';
+import { genericMemo } from '#utils';
 import EmptyOptions from './EmptyOptions';
 import EmptySelectedOptions from './EmptySelectedOptions';
 
@@ -213,4 +214,4 @@ function SearchSelectInput<
     );
 }
 
-export default SearchSelectInput;
+export default genericMemo(SearchSelectInput);
