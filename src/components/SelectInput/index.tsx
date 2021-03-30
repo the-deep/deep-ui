@@ -61,6 +61,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
             />
         );
     }
+
     return (
         <SearchSelectInput
             {...otherProps}

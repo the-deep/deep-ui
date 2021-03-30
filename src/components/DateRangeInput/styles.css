@@ -1,0 +1,6 @@
+.date-range-modal {
+    .end-date-input,
+    .start-date-input {
+        margin: var(--dui-spacing-extra-large) 0;
+    }
+}
