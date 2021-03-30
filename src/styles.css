@@ -37,6 +37,7 @@
     --dui-color-positive: #29bb75;
     --dui-color-information: #3fa2f7;
     --dui-color-negative: #ff5c52;
+    --dui-color-surface-negative: #dfe7f2;
     --dui-color-negative-on-dark: #ff9683;
     --dui-color-danger: var(--dui-color-negative);
 
