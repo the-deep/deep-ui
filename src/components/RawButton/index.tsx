@@ -27,6 +27,11 @@ export interface RawButtonProps<N extends number | string | undefined> extends O
 
 /**
  * The most basic button component (without styles)
+ * This component is meant to be a builder component
+ * and comes only with the functionality of button but no
+ * styling. Since, `button` element in html has browser and OS dependent styling,
+ * we use raw button as a base component for other types of buttons or
+ * clickable elements
  */
 function RawButton<N extends number | string | undefined>(props: RawButtonProps<N>) {
     const {
