@@ -46,3 +46,5 @@ export { default as TextArea } from './components/TextArea';
 export type { Props as TextAreaProps } from './components/TextArea';
 export { default as TextInput } from './components/TextInput';
 export type { Props as TextInputProps } from './components/TextInput';
+export { default as CircularProgressBar } from './components/CircularProgressBar';
+export type { Props as CircularProgressBarProps } from './components/CircularProgressBar';

@@ -1,0 +1,15 @@
+.progress-bar {
+    .arc-background {
+        fill: var(--dui-color-background-progress-bar);
+        opacity: 0.2;
+    }
+
+    .arc {
+        fill: var(--dui-color-complement2);
+    }
+
+    .circle {
+        fill: var(--dui-color-background-progress-bar);
+        opacity: 0.2;
+    }
+}

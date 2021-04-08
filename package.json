@@ -42,6 +42,7 @@
         "@babel/runtime-corejs3": "^7.11.2",
         "@storybook/client-api": "^6.0.21",
         "@togglecorp/fujs": "^1.9.2-beta.0",
+        "d3-shape": "^2.1.0",
         "react-icons": "^4.2.0"
     },
     "devDependencies": {
