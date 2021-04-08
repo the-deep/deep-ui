@@ -18,6 +18,8 @@ export { default as ContainerCard } from './components/ContainerCard';
 export type { Props as ContainerCardProps } from './components/ContainerCard';
 export { default as DateInput } from './components/DateInput';
 export type { Props as DateInputProps } from './components/DateInput';
+export { default as SearchSelectInput } from './components/SelectInput';
+export type { Props as SearchSelectInputProps } from './components/SelectInput';
 export { default as SelectInput } from './components/SelectInput';
 export type { Props as SelectInputProps } from './components/SelectInput';
 export { default as ElementFragments } from './components/ElementFragments';

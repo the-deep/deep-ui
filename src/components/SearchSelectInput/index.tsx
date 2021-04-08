@@ -7,10 +7,10 @@ import { MdCheck } from 'react-icons/md';
 
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
-} from '#components/SelectInputContainer';
-import ElementFragments from '#components/ElementFragments';
+} from '../SelectInputContainer';
+import ElementFragments from '../ElementFragments';
 
-import { genericMemo } from '#utils';
+import { genericMemo } from '../../utils';
 import EmptyOptions from './EmptyOptions';
 import EmptySelectedOptions from './EmptySelectedOptions';
 

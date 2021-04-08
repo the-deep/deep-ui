@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchSelectInput, {
     Props as SearchSelectInputProps,
-} from '#components/SearchSelectInput';
+} from '../SearchSelectInput';
 import {
     rankedSearchOnList,
     genericMemo,
-} from '#utils';
+} from '../../utils';
 
 type Def = { containerClassName?: string };
 type OptionKey = string | number;
