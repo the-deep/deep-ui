@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Portal from '#components/Portal';
+import Portal from '../Portal';
 
 import styles from './styles.css';
 

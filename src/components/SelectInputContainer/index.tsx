@@ -2,16 +2,16 @@ import React, { useCallback } from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from 'react-icons/io';
 
-import GenericSelectInputOption, { ContentBaseProps, OptionKey } from '#components/GenericSelectInputOption';
+import GenericSelectInputOption, { ContentBaseProps, OptionKey } from '../GenericSelectInputOption';
 import Popup from '../Popup';
-import InputContainer, { Props as InputContainerProps } from '#components/InputContainer';
-import RawInput from '#components/RawInput';
-import Button from '#components/Button';
-import List from '#components/List';
-import useBlurEffect from '#hooks/useBlurEffect';
-import useKeyboard from '#hooks/useKeyboard';
+import InputContainer, { Props as InputContainerProps } from '../InputContainer';
+import RawInput from '../RawInput';
+import Button from '../Button';
+import List from '../List';
 
-import { genericMemo } from '#utils';
+import useBlurEffect from '../../hooks/useBlurEffect';
+import useKeyboard from '../../hooks/useKeyboard';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 

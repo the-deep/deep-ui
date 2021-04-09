@@ -1,8 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import RawButton from '#components/RawButton';
-import { genericMemo } from '#utils';
+import RawButton from '../RawButton';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
