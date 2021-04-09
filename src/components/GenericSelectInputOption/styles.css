@@ -1,0 +1,8 @@
+.option-renderer {
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
+    text-align: left;
+
+    &.focused {
+        background-color: var(--dui-color-background-hover-light);
+    }
+}

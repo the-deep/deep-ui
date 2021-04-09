@@ -24,7 +24,7 @@ export interface Props {
     input: React.ReactNode;
     label?: React.ReactNode;
     hint?: React.ReactNode;
-    error?: React.ReactNode;
+    error?: string;
     disabled?: boolean;
     readOnly?: boolean;
     invalid?: boolean;
@@ -92,7 +92,7 @@ function InputContainer(props: Props) {
                 <div className={_cs(styles.input, inputContainerClassName)}>
                     {input}
                 </div>
-                {(!readOnly && actions) && (
+                {actions && (
                     <div className={_cs(styles.actions, actionsContainerClassName)}>
                         {actions}
                     </div>

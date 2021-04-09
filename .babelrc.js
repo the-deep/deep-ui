@@ -57,6 +57,7 @@ module.exports = (api) => {
                     'alias': {
                         '#components': './src/components',
                         '#hooks': './src/hooks',
+                        '#utils': './src/utils',
                     },
                 },
             ],

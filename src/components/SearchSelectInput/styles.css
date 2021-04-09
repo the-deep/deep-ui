@@ -1,0 +1,35 @@
+.option {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+
+    .icon {
+        opacity: 0;
+    }
+
+    .label {
+        display: flex;
+        flex-grow: 1;
+        padding: 0 var(--dui-spacing-small);
+        overflow: auto;
+
+        .text {
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &.active {
+        color: var(--dui-color-accent);
+
+        .icon {
+            opacity: 1;
+        }
+    }
+
+    &:hover {
+        background-color: var(--dui-color-background-information);
+    }
+}

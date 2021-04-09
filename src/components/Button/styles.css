@@ -14,7 +14,6 @@
     position: relative;
     align-items: center;
     justify-content: space-around;
-    border: 0;
     border: var(--dui-width-separator-thin) solid var(--color-border);
     border-radius: var(--border-radius);
     background-color: var(--color-background);
@@ -53,6 +52,13 @@
 
         &.tertiary {
             --color-border: var(--dui-color-text-disabled);
+        }
+
+        &.action {
+            --padding-h: 0;
+            --padding-v: 0;
+            --color-border: transparent;
+            --color-background: transparent;
         }
     }
 
@@ -106,6 +112,14 @@
             &:hover {
                 --color-background: var(--dui-color-background-tertiary-hover);
             }
+        }
+
+        &.action {
+            --padding-h: 0;
+            --padding-v: 0;
+            --color-border: transparent;
+            --color-background: transparent;
+            --color-text: var(--dui-color-text);
         }
     }
 

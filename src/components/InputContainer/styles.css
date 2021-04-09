@@ -36,13 +36,14 @@
         --color-input-section-border: var(--dui-color-input-border-dark);
     }
 
+    &.read-only {
+        --color-background-input-section: transparent;
+    }
 
     &.disabled {
         --opacity: var(--dui-opacity-disabled-element);
-    }
-
-    &.read-only {
-        --color-background-input-section: transparent;
+        --height-border: var(--dui-width-separator-thin);
+        --color-input-section-border: var(--dui-color-input-border);
     }
 
     &:hover {
@@ -51,6 +52,8 @@
         &.read-only,
         &.disabled {
             --color-text-label: var(--dui-color-input-label);
+            --color-input-section-border: var(--dui-color-input-border);
+            --height-border: var(--dui-width-separator-thin);
         }
     }
 
@@ -70,7 +73,8 @@
 
         &.read-only,
         &.disabled {
-            --color-input-section-border: var(--dui-color-separator);
+            --color-input-section-border: var(--dui-color-input-border);
+            --height-border: var(--dui-width-separator-thin);
         }
     }
 
