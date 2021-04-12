@@ -3,6 +3,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
 
 import DraggableContent, { Props as DraggableContentProps } from '#components/DraggableContent';
+import DropContainer from '#components/DropContainer';
 
 export default {
     title: 'View/DraggableContent',
@@ -12,11 +13,16 @@ export default {
 };
 
 const Template: Story<DraggableContentProps> = (args) => (
-    <div style={{ width: '300px' }}>
-        <DraggableContent
-            {...args}
-        />
-    </div>
+    <>
+        <div style={{ width: '300px' }}>
+            <DraggableContent
+                {...args}
+            />
+        </div>
+        <DropContainer>
+            Drop content
+        </DropContainer>
+    </>
 );
 
 export const Default = Template.bind({});

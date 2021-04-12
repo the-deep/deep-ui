@@ -1,0 +1,16 @@
+.drag-and-drop {
+    .drag-content {
+        margin: 20px;
+        width: 300px;
+    }
+
+    .drop-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        background-color: var(--dui-color-background);
+        width: 300px;
+        height: 200px;
+    }
+}
