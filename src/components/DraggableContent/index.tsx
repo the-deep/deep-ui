@@ -16,7 +16,7 @@ export interface Props {
     elementRef?: DivElementProps['ref'];
     value?: SerializableValue;
     dropEffect?: 'copy' | 'move' | 'link' | 'none';
-    onDragStart?: (value?: SerializableValue) => void;
+    onDragStart?: (value: SerializableValue | undefined) => void;
 }
 
 function DraggableContent(props: Props) {

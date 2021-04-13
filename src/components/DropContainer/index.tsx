@@ -8,7 +8,7 @@ import styles from './styles.css';
 export interface Props {
     className?: string;
     children?: React.ReactNode;
-    onDrop?: (value?: DraggableContentProps['value']) => void;
+    onDrop?: (value: DraggableContentProps['value'] | undefined) => void;
     dropOverlayContainerClassName?: string;
     dropOverlayContent?: React.ReactNode;
     draggedOverClassName?: string;
