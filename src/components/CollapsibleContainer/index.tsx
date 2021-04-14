@@ -21,7 +21,7 @@ export interface Props extends ContainerProps {
     componentRef?: React.MutableRefObject<{
         setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     } | null>;
-
+    initialIsCollapsed?: boolean;
 }
 
 function CollapsibleContainer(props: Props) {
@@ -37,6 +37,7 @@ function CollapsibleContainer(props: Props) {
             <IoChevronBackCircle />
         ),
         componentRef,
+        initialIsCollapsed = false,
         ...otherProps
     } = props;
 
@@ -45,7 +46,7 @@ function CollapsibleContainer(props: Props) {
         setIsCollapsedTrue,
         setIsCollapsedFalse,
         setIsCollapsed,
-    ] = useBooleanState(false);
+    ] = useBooleanState(initialIsCollapsed);
 
     React.useEffect(
         () => {
