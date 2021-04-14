@@ -4,7 +4,6 @@ import {
     MdCheckBoxOutlineBlank,
     MdIndeterminateCheckBox,
 } from 'react-icons/md';
-import { _cs } from '@togglecorp/fujs';
 
 import { UiMode } from '../../UiModeContext';
 
@@ -22,25 +21,21 @@ function Checkmark(props: CheckmarkProps) {
         value,
     } = props;
 
-    const iconClassName = _cs(
-        className,
-    );
-
     return (
         <>
             {indeterminate && (
                 <MdIndeterminateCheckBox
-                    className={iconClassName}
+                    className={className}
                 />
             )}
             {value && !indeterminate && (
                 <MdCheckBox
-                    className={iconClassName}
+                    className={className}
                 />
             )}
             {!value && !indeterminate && (
                 <MdCheckBoxOutlineBlank
-                    className={iconClassName}
+                    className={className}
                 />
             )}
         </>
