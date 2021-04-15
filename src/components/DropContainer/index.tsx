@@ -1,4 +1,5 @@
 import React from 'react';
+import { IoDownloadOutline } from 'react-icons/io5';
 import { _cs } from '@togglecorp/fujs';
 
 import type { Props as DraggableContentProps } from '../DraggableContent';
@@ -20,7 +21,7 @@ function DropContaier(props: Props) {
         children,
         onDrop,
         dropOverlayContainerClassName,
-        dropOverlayContent = 'Drop content here',
+        dropOverlayContent = <IoDownloadOutline className={styles.dropOverlayIcon} />,
         draggedOverClassName,
     } = props;
 
@@ -72,11 +73,9 @@ function DropContaier(props: Props) {
             onDragOver={handleDragOver}
             onDrop={handleDrop}
         >
-            { isBeingDraggedOver && (
-                <div className={_cs(styles.dropOverlay, dropOverlayContainerClassName)}>
-                    { dropOverlayContent }
-                </div>
-            )}
+            <div className={_cs(styles.dropOverlay, dropOverlayContainerClassName)}>
+                { dropOverlayContent }
+            </div>
             { children }
         </div>
     );

@@ -24,7 +24,7 @@ const Template: Story = () => (
             Etiam porta volutpat mollis.
         </DraggableContent>
         <DropContainer className={styles.dropContainer}>
-            Drop container
+            Drop here!
         </DropContainer>
     </div>
 );
