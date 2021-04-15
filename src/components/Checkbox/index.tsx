@@ -8,7 +8,9 @@ import DefaultCheckmark, { CheckmarkProps } from './Checkmark';
 
 import styles from './styles.css';
 
-export interface CheckboxProps<N> {
+type OptionKey = string | number;
+
+export interface Props<N extends OptionKey> {
     className?: string;
     labelContainerClassName?: string;
     checkmark?: (p: CheckmarkProps) => React.ReactElement;
@@ -24,7 +26,7 @@ export interface CheckboxProps<N> {
     name: N;
 }
 
-function Checkbox<N extends string | number>(props: CheckboxProps<N>) {
+function Checkbox<N extends OptionKey>(props: Props<N>) {
     const {
         label,
         tooltip,

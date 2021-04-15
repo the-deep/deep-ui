@@ -10,6 +10,8 @@ export type { Props as ButtonLikeLinkProps } from './components/ButtonLikeLink';
 export { default as ButtonLikeLink } from './components/ButtonLikeLink';
 export type { Props as CardProps } from './components/Card';
 export { default as Card } from './components/Card';
+export type { Props as CheckboxProps } from './components/Checkbox';
+export { default as Checkbox } from './components/Checkbox';
 export { default as ConfirmButton } from './components/ConfirmButton';
 export type { Props as ConfirmButtonProps } from './components/ConfirmButton';
 export type { Props as ContainerProps } from './components/Container';
