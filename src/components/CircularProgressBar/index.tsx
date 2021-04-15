@@ -2,11 +2,11 @@ import React from 'react';
 import { arc } from 'd3-shape';
 import { _cs } from '@togglecorp/fujs';
 
-import styles from './styles.scss';
+import styles from './styles.css';
 
 const arcGenerator = arc().cornerRadius(5);
 
-interface Props {
+export interface Props {
     width: number;
     arcWidth: number;
     value: number;

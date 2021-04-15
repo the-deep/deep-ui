@@ -6,9 +6,9 @@ import InformationCardFragments, {
     InformationVariant,
 } from '../InformationCardFragments';
 
-import styles from './styles.scss';
+import styles from './styles.css';
 
-interface Props {
+export interface Props {
     className?: string;
     icon?: React.ReactNode;
     label: string;

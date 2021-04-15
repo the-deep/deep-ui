@@ -1,21 +1,21 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Numeral from '../Numeral';
+import Numeral, { Props as NumeralProps } from '../Numeral';
 import CircularProgressBar from '../CircularProgressBar';
 import InformationCardFragments, {
     InformationVariant,
 } from '../InformationCardFragments';
 
-import styles from './styles.scss';
+import styles from './styles.css';
 
-interface Props {
+export interface Props {
     className?: string;
     icon?: React.ReactNode;
     label: string;
     value?: number;
     variant: InformationVariant;
-    valuePrecision?: number;
+    valuePrecision?: NumeralProps['precision'];
     coloredBackground?: boolean;
 }
 

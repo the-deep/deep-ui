@@ -6,6 +6,7 @@ import {
     isDefined,
     formattedNormalize,
     _cs,
+    Lang,
 } from '@togglecorp/fujs';
 
 import styles from './styles.css';
@@ -45,7 +46,7 @@ export interface Props {
      */
     value?: number,
 
-    valueModifier: (value: number) => React.ReactNode,
+    valueModifier?: (value: number) => React.ReactNode,
     signClassName?: string;
     prefixClassName?: string;
     numberClassName?: string;
@@ -90,7 +91,7 @@ function Numeral(props: Props) {
             const {
                 number: n,
                 normalizeSuffix: ns,
-            } = formattedNormalize(num, 'en');
+            } = formattedNormalize(num, Lang.en);
 
             num = n;
             nSuffix = ns;
