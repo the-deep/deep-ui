@@ -1,6 +1,6 @@
 .numeral {
     display: flex;
-    font-family: var(--font-family-monospace);
+    font-family: var(--dui-font-family-monospace);
 
     .prefix,
     .sign,

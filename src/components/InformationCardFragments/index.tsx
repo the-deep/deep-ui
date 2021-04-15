@@ -9,9 +9,9 @@ export type InformationVariant = 'accent'
     | 'complement3';
 
 export interface Props {
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
     value: React.ReactNode;
-    label: React.ReactNode;
+    label?: React.ReactNode;
     iconContainerClassName?: string;
     valueAndLabelContainerClassName?: string;
     valueContainerClassName?: string;
@@ -67,9 +67,11 @@ function InformationCardFragments(props: Props) {
                 <div className={_cs(styles.value, valueContainerClassName)}>
                     { value }
                 </div>
-                <div className={_cs(styles.label, labelContainerClassName)}>
-                    { label }
-                </div>
+                {label && (
+                    <div className={_cs(styles.label, labelContainerClassName)}>
+                        { label }
+                    </div>
+                )}
             </div>
         </>
     );
