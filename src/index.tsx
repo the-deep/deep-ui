@@ -14,6 +14,8 @@ export type { Props as CheckboxProps } from './components/Checkbox';
 export { default as Checkbox } from './components/Checkbox';
 export { default as ConfirmButton } from './components/ConfirmButton';
 export type { Props as ConfirmButtonProps } from './components/ConfirmButton';
+export type { Props as CollapsibleContainerProps } from './components/CollapsibleContainer';
+export { default as CollapsibleContainer } from './components/CollapsibleContainer';
 export type { Props as ContainerProps } from './components/Container';
 export { default as Container } from './components/Container';
 export type { Props as ContainerCardProps } from './components/ContainerCard';
