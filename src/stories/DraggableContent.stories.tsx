@@ -21,6 +21,7 @@ const Template: Story<DraggableContentProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+    name: 'myText',
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed convallis quam, quis molestie nisi. Integer fringilla maximus tellus at aliquam. Nunc ac turpis non elit placerat luctus. Mauris vehicula, dui vitae feugiat malesuada, diam elit porttitor tellus, ut ultricies nibh est at ante. Maecenas congue congue nulla quis feugiat. Etiam porta volutpat mollis.',
 };
 Default.parameters = {

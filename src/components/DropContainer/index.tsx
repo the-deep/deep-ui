@@ -3,7 +3,10 @@ import { IoDownloadOutline } from 'react-icons/io5';
 import { _cs } from '@togglecorp/fujs';
 
 import Container, { Props as ContainerProps } from '../Container';
-import type { Props as DraggableContentProps } from '../DraggableContent';
+import type {
+    Props as DraggableContentProps,
+    SerializableValue,
+} from '../DraggableContent';
 
 import styles from './styles.css';
 
@@ -14,6 +17,7 @@ export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     dropOverlayContainerClassName?: string;
     dropOverlayContent?: React.ReactNode;
     draggedOverClassName?: string;
+    name: string;
 }
 
 function DropContaier(props: Props) {
@@ -24,6 +28,7 @@ function DropContaier(props: Props) {
         dropOverlayContainerClassName,
         dropOverlayContent = <IoDownloadOutline className={styles.dropOverlayIcon} />,
         draggedOverClassName,
+        name,
         ...otherProps
     } = props;
 
@@ -55,12 +60,19 @@ function DropContaier(props: Props) {
 
         if (onDrop) {
             const data = e.dataTransfer.getData('text');
-            onDrop(data as unknown as DraggableContentProps['value']);
+            try {
+                const resolvedData = JSON.parse(data);
+                if (resolvedData.$name === name) {
+                    onDrop(resolvedData as SerializableValue);
+                }
+            } catch (exception) {
+                console.error(exception);
+            }
         }
 
         dragEnterRef.current = 0;
         setIsBeingDraggedOver(false);
-    }, [setIsBeingDraggedOver, onDrop]);
+    }, [setIsBeingDraggedOver, onDrop, name]);
 
     const containerElementProps = React.useMemo(() => ({
         onDragEnter: handleDragEnter,
