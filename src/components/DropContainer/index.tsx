@@ -2,11 +2,12 @@ import React from 'react';
 import { IoDownloadOutline } from 'react-icons/io5';
 import { _cs } from '@togglecorp/fujs';
 
+import Container, { Props as ContainerProps } from '../Container';
 import type { Props as DraggableContentProps } from '../DraggableContent';
 
 import styles from './styles.css';
 
-export interface Props {
+export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     className?: string;
     children?: React.ReactNode;
     onDrop?: (value: DraggableContentProps['value'] | undefined) => void;
@@ -23,6 +24,7 @@ function DropContaier(props: Props) {
         dropOverlayContainerClassName,
         dropOverlayContent = <IoDownloadOutline className={styles.dropOverlayIcon} />,
         draggedOverClassName,
+        ...otherProps
     } = props;
 
     const [isBeingDraggedOver, setIsBeingDraggedOver] = React.useState(false);
@@ -60,24 +62,29 @@ function DropContaier(props: Props) {
         setIsBeingDraggedOver(false);
     }, [setIsBeingDraggedOver, onDrop]);
 
+    const containerElementProps = React.useMemo(() => ({
+        onDragEnter: handleDragEnter,
+        onDragLeave: handleDragLeave,
+        onDragOver: handleDragOver,
+        onDrop: handleDrop,
+    }), [handleDragEnter, handleDragLeave, handleDragOver, handleDrop]);
+
     return (
-        <div
+        <Container
+            {...otherProps}
             className={_cs(
                 styles.dropContainer,
                 className,
                 isBeingDraggedOver && styles.draggedOver,
                 isBeingDraggedOver && draggedOverClassName,
             )}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
+            containerElementProps={containerElementProps}
         >
             <div className={_cs(styles.dropOverlay, dropOverlayContainerClassName)}>
                 { dropOverlayContent }
             </div>
             { children }
-        </div>
+        </Container>
     );
 }
 
