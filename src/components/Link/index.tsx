@@ -34,7 +34,12 @@ function Link(props: Props) {
         ...otherProps
     } = props;
 
-    const isExternalLink = React.useMemo(() => isValidUrl(to as string), [to]);
+    const isExternalLink = React.useMemo(
+        () => (
+            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:'))
+        ),
+        [to],
+    );
 
     return (
         <div className={_cs(className, styles.link, disabled && styles.disabled)}>
@@ -43,7 +48,7 @@ function Link(props: Props) {
                     { icons }
                 </div>
             )}
-            { isExternalLink ? (
+            {isExternalLink ? (
                 // eslint-disable-next-line jsx-a11y/anchor-has-content
                 <a
                     href={to as string}
