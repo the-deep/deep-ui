@@ -1,0 +1,10 @@
+.draggable-content {
+    display: flex;
+    align-items: flex-start;
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
+
+    .actions {
+        cursor: move;
+    }
+}

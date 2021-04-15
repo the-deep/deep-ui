@@ -8,6 +8,9 @@ import styles from './styles.css';
 
 export interface Props {
     className?: string;
+
+    // Note: not to be exposed by extended components
+    containerElementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
     heading?: React.ReactNode;
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
@@ -41,10 +44,14 @@ function Container(props: Props) {
         footerActions,
         footerClassName,
         sub = false,
+        containerElementProps,
     } = props;
 
     return (
-        <div className={_cs(styles.container, className)}>
+        <div
+            className={_cs(styles.container, className)}
+            {...containerElementProps}
+        >
             {(heading || headerActions || headerIcons) && (
                 <Header
                     icons={headerIcons}
