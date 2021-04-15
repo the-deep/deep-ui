@@ -65,6 +65,7 @@ function CollapsibleContainer(props: Props) {
                 className={expandButtonClassName}
                 onClick={setIsCollapsedFalse}
                 variant="primary"
+                name={undefined}
             >
                 {expandButtonContent}
             </QuickActionButton>
@@ -79,6 +80,7 @@ function CollapsibleContainer(props: Props) {
                             className={_cs(styles.collapseButton, collapseButtonClassName)}
                             childrenClassName={styles.children}
                             onClick={setIsCollapsedTrue}
+                            name={undefined}
                         >
                             {collapseButtonContent}
                         </Button>
