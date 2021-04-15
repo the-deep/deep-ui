@@ -20,3 +20,10 @@ Default.args = {
     heading: 'Collapsible container',
     children: 'This container is collapsible',
 };
+
+export const InitallyCollapsed = Template.bind({});
+InitallyCollapsed.args = {
+    collapsedInitially: true,
+    heading: 'Collapsible container',
+    children: 'This container is collapsible',
+};
