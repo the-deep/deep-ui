@@ -42,6 +42,8 @@ export type { Props as LinkProps } from './components/Link';
 export { default as Link } from './components/Link';
 export type { Props as ModalProps } from './components/Modal';
 export { default as Modal } from './components/Modal';
+export type { Props as NumeralProps } from './components/Numeral';
+export { default as Numeral } from './components/Numeral';
 export type { Props as PortalProps } from './components/Portal';
 export { default as Portal } from './components/Portal';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';

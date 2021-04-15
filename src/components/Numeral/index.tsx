@@ -1,233 +1,186 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {
     addSeparator,
     isFalsy,
     isTruthy,
-    isNotDefined,
+    isDefined,
     formattedNormalize,
+    _cs,
 } from '@togglecorp/fujs';
-import { FaramOutputElement } from '@togglecorp/faram';
 
-import styles from './styles.scss';
+import styles from './styles.css';
 
-
-const propTypes = {
+export interface Props {
+    className?: string;
     /**
-     * reqired for style override
+     * Text to show if invalid value is supplied
      */
-    className: PropTypes.string,
-
-    style: PropTypes.object,
-
+    invalidText?: React.ReactNode;
     /**
-     * string to show, if value is unexpected
-     * Default: -
+     * Normalize numer into Millions(M), Billion(B)
      */
-    invalidText: PropTypes.string,
-    /**
-     * Normalize numer into Lac, Cr, Ar
-     */
-    normal: PropTypes.bool,
+    normal?: boolean;
     /**
      * Numer of digits after decimal point. Rounding is also applied.
      */
-    precision: PropTypes.number,
+    precision?: number | 'auto';
     /**
      * Prefix the output with certain string. Eg. $
      */
-    prefix: PropTypes.string,
+    prefix?: string,
     /**
      * Specify which separator to use for thousands
      */
-    separator: PropTypes.string,
-    /**
-     * Show or hide thousands separator
-     */
-    showSeparator: PropTypes.bool,
+    separator?: string | null,
     /**
      * Show both positive and negative sign for number
      */
-    showSign: PropTypes.bool,
+    showSign?: boolean,
     /**
      * Prefix the output with certain string. Eg. %
      */
-    suffix: PropTypes.string,
+    suffix?: string,
     /**
      * The value of the numeral
      */
-    value: PropTypes.number,
+    value?: number,
 
-    transformer: PropTypes.func,
-
-    lang: PropTypes.string,
-};
-
-const defaultProps = {
-    className: '',
-    style: undefined,
-    invalidText: '-',
-    normal: false,
-    precision: 2,
-    prefix: undefined,
-    separator: undefined,
-    showSeparator: true,
-    showSign: false,
-    suffix: undefined,
-    value: undefined,
-    lang: undefined,
-    transformer: undefined,
-};
-
-
-const addNepaliSeparator = (num) => {
-    if (isNotDefined(num)) {
-        return num;
-    }
-    return String(num).replace(/\B(?=(\d{3})(?!\d))/, ',').replace(/\B(?=(\d{2})+(?=,))/g, ',');
-};
+    valueModifier: (value: number) => React.ReactNode,
+    signClassName?: string;
+    prefixClassName?: string;
+    numberClassName?: string;
+    normalizationSuffixClassName?: string;
+    suffixClassName?: string;
+}
 
 /**
  * Numeral component for formatted numbers
  */
-export class NormalNumeral extends React.PureComponent {
-    static propTypes = propTypes;
-
-    static defaultProps = defaultProps;
-
-    static getNormalizedNumber({
-        value,
-        showSign = false,
-        normal = false,
-        precision = undefined,
-        showSeparator = true,
+function Numeral(props: Props) {
+    const {
+        className,
+        invalidText = '-',
+        normal,
+        precision,
+        prefix,
         separator = ',',
-        lang = 'en',
-    }) {
+        showSign,
+        suffix,
+        valueModifier,
+        value,
+        signClassName,
+        prefixClassName,
+        numberClassName,
+        normalizationSuffixClassName,
+        suffixClassName,
+    } = props;
+
+    const [number, normalizationSuffix] = React.useMemo(() => {
+        if (isFalsy(value)) {
+            return [];
+        }
+
         // Only use absolute part if showSign is true (sign are added later)
-        let number = isTruthy(showSign) ? Math.abs(value) : value;
+        let num = isTruthy(showSign) ? Math.abs(value) : value;
 
         // Get normalize-suffix and reduce the number
-        let normalizeSuffix;
+        let nSuffix;
 
         if (normal) {
-            const { number: num, normalizeSuffix: norm } = formattedNormalize(number, lang);
-            number = num;
-            normalizeSuffix = norm;
+            const {
+                number: n,
+                normalizeSuffix: ns,
+            } = formattedNormalize(num, 'en');
+
+            num = n;
+            nSuffix = ns;
         }
+
+        const integer = Math.floor(num);
+        const fraction = num - integer;
+
+        let formattedNumber = String(num);
 
         // Convert number to fixed precision
         if (isTruthy(precision)) {
-            number = number.toFixed(precision);
+            let p = 2;
+
+            if (precision === 'auto') {
+                const absoluteValue = Math.abs(num);
+                if (absoluteValue < 1) {
+                    p = Math.ceil(-Math.log10(absoluteValue)) + 1;
+                }
+
+                if (integer > 100) {
+                    // 140.1234M -> 140 M
+                    p = 0;
+                } else {
+                    // 96.0334M -> 96.03 M
+                    if (fraction > 0.01) {
+                        p = 2;
+                    }
+
+                    p = 0;
+                }
+            } else {
+                p = precision;
+            }
+
+            formattedNumber = num.toFixed(p);
         }
 
         // Convert number to add separator
-        if (showSeparator) {
-            number = lang === 'ne'
-                ? addNepaliSeparator(number)
-                : addSeparator(number, separator);
+        if (isDefined(separator) && fraction === 0) {
+            formattedNumber = addSeparator(num, separator);
         }
 
-        return { number, normalizeSuffix };
-    }
+        return [formattedNumber, nSuffix];
+    }, [
+        value,
+        showSign,
+        normal,
+        precision,
+        separator,
+    ]);
 
-    static renderText(props) {
-        const {
-            normal,
-            precision,
-            prefix = '',
-            separator,
-            showSeparator,
-            showSign,
-            suffix = '',
-            value,
-            invalidText,
-            lang,
-            transformer,
-        } = { ...defaultProps, ...props };
-
-        if (isFalsy(value)) {
-            return invalidText;
-        }
-
-        const { number, normalizeSuffix = '' } = NormalNumeral.getNormalizedNumber({
-            value, showSign, normal, precision, showSeparator, separator, lang,
-        });
-
-        return `${prefix}${transformer ? transformer(number) : number}${normalizeSuffix}${suffix}`;
-    }
-
-    render() {
-        const {
-            className,
-            normal,
-            precision,
-            prefix,
-            separator,
-            showSeparator,
-            showSign,
-            suffix,
-            value,
-            lang,
-            invalidText,
-            transformer,
-            style,
-        } = this.props;
-
-        if (isFalsy(value)) {
-            return (
-                <span
-                    className={className}
-                >
-                    {invalidText}
-                </span>
-            );
-        }
-
-        const { number, normalizeSuffix } = NormalNumeral.getNormalizedNumber({
-            value, showSign, normal, precision, showSeparator, separator, lang,
-        });
-
-        return (
-            <span
-                className={`numeral ${className} ${styles.numeral}`}
-                style={style}
-            >
-                {
-                    isTruthy(prefix) && (
-                        <span className="prefix">
+    return (
+        <div className={_cs(styles.numeral, className)}>
+            { isFalsy(value) ? (
+                invalidText
+            ) : (
+                <>
+                    { isTruthy(prefix) && (
+                        <div className={_cs(styles.prefix, prefixClassName)}>
                             {prefix}
-                        </span>
-                    )
-                }
-                {
-                    isTruthy(showSign) && value !== 0 && (
-                        <span className="sign">
+                        </div>
+                    )}
+                    { isTruthy(showSign) && value !== 0 && (
+                        <div className={_cs(styles.sign, signClassName)}>
                             {value > 0 ? '+' : '-'}
-                        </span>
-                    )
-                }
-                <span className="number">
-                    {transformer ? transformer(number) : number}
-                </span>
-                {
-                    isTruthy(normalizeSuffix) && (
-                        <span className="normalized-suffix">
-                            {normalizeSuffix}
-                        </span>
-                    )
-                }
-                {
-                    isTruthy(suffix) && (
-                        <span className="suffix">
+                        </div>
+                    )}
+                    <div className={_cs(styles.number, numberClassName)}>
+                        {valueModifier ? valueModifier(number) : number}
+                    </div>
+                    { isTruthy(normalizationSuffix) && (
+                        <div
+                            className={_cs(
+                                styles.normalizationSuffix,
+                                normalizationSuffixClassName,
+                            )}
+                        >
+                            {normalizationSuffix}
+                        </div>
+                    )}
+                    { isTruthy(suffix) && (
+                        <div className={_cs(styles.suffix, suffixClassName)}>
                             {suffix}
-                        </span>
-                    )
-                }
-            </span>
-        );
-    }
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
+    );
 }
 
-export default FaramOutputElement(NormalNumeral);
-
+export default Numeral;
