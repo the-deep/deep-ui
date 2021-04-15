@@ -29,6 +29,22 @@ function DraggableContent(props: Props) {
         value,
     } = props;
 
+    const [draggable, setDraggable] = React.useState(false);
+
+    const handleDragEnd = React.useCallback(() => {
+        setDraggable(false);
+    }, [setDraggable]);
+
+    React.useEffect(() => {
+        window.addEventListener('mouseup', handleDragEnd);
+        window.addEventListener('dragend', handleDragEnd);
+
+        return () => {
+            window.removeEventListener('mouseup', handleDragEnd);
+            window.removeEventListener('dragend', handleDragEnd);
+        };
+    }, [handleDragEnd]);
+
     const handleDragStart = React.useCallback((e) => {
         const data = JSON.stringify(value);
 
@@ -40,17 +56,27 @@ function DraggableContent(props: Props) {
         }
     }, [onDragStart, dropEffect, value]);
 
+    const handleDragHandleMouseDown = React.useCallback(() => {
+        setDraggable(true);
+    }, [setDraggable]);
+
     return (
         <div
             ref={elementRef}
             className={_cs(styles.draggableContent, className)}
-            draggable
+            draggable={draggable}
             onDragStart={handleDragStart}
         >
             <ElementFragments
                 actionsContainerClassName={styles.actions}
                 actions={(
-                    <GrDrag />
+                    <div
+                        role="presentation"
+                        onMouseDown={handleDragHandleMouseDown}
+                        className={styles.actionContainer}
+                    >
+                        <GrDrag />
+                    </div>
                 )}
             >
                 { children }

@@ -44,16 +44,16 @@ function DropContaier(props: Props) {
         }
     }, [setIsBeingDraggedOver]);
 
-    const handleDragOver = React.useCallback((e) => {
+    const handleDragOver: React.DragEventHandler<HTMLDivElement> = React.useCallback((e) => {
         e.preventDefault();
     }, []);
 
-    const handleDrop = React.useCallback((e) => {
+    const handleDrop: React.DragEventHandler<HTMLDivElement> = React.useCallback((e) => {
         e.preventDefault();
 
         if (onDrop) {
             const data = e.dataTransfer.getData('text');
-            onDrop(data as DraggableContentProps['value']);
+            onDrop(data as unknown as DraggableContentProps['value']);
         }
 
         dragEnterRef.current = 0;
