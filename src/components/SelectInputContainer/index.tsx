@@ -264,6 +264,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
                                 // uiMode={uiMode}
                                 title="Clear"
                                 variant="action"
+                                name={undefined}
                             >
                                 <IoMdClose />
                             </Button>
