@@ -13,7 +13,11 @@ export default {
 
 const Template: Story = () => (
     <div className={styles.dragAndDrop}>
-        <DraggableContent className={styles.dragContent}>
+        <DraggableContent
+            className={styles.dragContent}
+            name="myText"
+            value={{ text: 'ok' }}
+        >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Nulla sed convallis quam, quis molestie nisi.
             Integer fringilla maximus tellus at aliquam.
@@ -23,7 +27,11 @@ const Template: Story = () => (
             Maecenas congue congue nulla quis feugiat.
             Etiam porta volutpat mollis.
         </DraggableContent>
-        <DropContainer className={styles.dropContainer}>
+        <DropContainer
+            className={styles.dropContainer}
+            name="myText"
+            onDrop={(value) => console.warn('Dropped', value)}
+        >
             Drop here!
         </DropContainer>
     </div>

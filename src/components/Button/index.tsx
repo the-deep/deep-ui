@@ -34,8 +34,8 @@ export interface Props<N> extends Omit<
     actionsClassName?: string;
     disabled?: boolean;
     big?: boolean;
-    name?: N;
-    onClick?: (name: N | undefined, e: React.MouseEvent<HTMLButtonElement>) => void;
+    name: N;
+    onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big';

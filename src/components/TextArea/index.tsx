@@ -7,11 +7,11 @@ import styles from './styles.css';
 
 interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>, 'ref' | 'onChange' | 'value' | 'name'> {
     className?: string;
-    name?: K;
+    name: K;
     value: string | undefined | null;
     onChange?: (
         value: string | undefined,
-        name: K | undefined,
+        name: K,
         e: React.FormEvent<HTMLTextAreaElement>,
     ) => void;
     elementRef?: React.Ref<HTMLTextAreaElement>;

@@ -8,15 +8,16 @@ import styles from './styles.css';
 
 type DivElementProps = React.HTMLProps<HTMLDivElement>;
 
-type SerializableValue = Record<string, unknown>;
+export type SerializableValue = Record<string, unknown>;
 
 export interface Props {
     className?: string;
     children: React.ReactNode;
     elementRef?: DivElementProps['ref'];
-    value?: SerializableValue;
+    name: string;
+    value: SerializableValue;
     dropEffect?: 'copy' | 'move' | 'link' | 'none';
-    onDragStart?: (value: SerializableValue | undefined) => void;
+    onDragStart?: (value: SerializableValue) => void;
 }
 
 function DraggableContent(props: Props) {
@@ -27,6 +28,7 @@ function DraggableContent(props: Props) {
         dropEffect = 'copy',
         onDragStart,
         value,
+        name,
     } = props;
 
     const [draggable, setDraggable] = React.useState(false);
@@ -45,16 +47,20 @@ function DraggableContent(props: Props) {
         };
     }, [handleDragEnd]);
 
-    const handleDragStart = React.useCallback((e) => {
-        const data = JSON.stringify(value);
+    const handleDragStart: React.DragEventHandler<HTMLDivElement> = React.useCallback((e) => {
+        const myValue = {
+            ...value,
+            $name: name,
+        };
+        const data = JSON.stringify(myValue);
 
         e.dataTransfer.setData('text/plain', data);
         e.dataTransfer.dropEffect = dropEffect;
 
         if (onDragStart) {
-            onDragStart(value);
+            onDragStart(myValue);
         }
-    }, [onDragStart, dropEffect, value]);
+    }, [onDragStart, dropEffect, value, name]);
 
     const handleDragHandleMouseDown = React.useCallback(() => {
         setDraggable(true);
