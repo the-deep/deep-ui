@@ -10,12 +10,12 @@
     --dui-color-grey5: #e0e0e0;
     --dui-color-grey6: #f2f2f2;
     --dui-color-white: #ffffff;
-    --dui-color-backdrop: rgba(255, 255, 255, .5);
+    --dui-color-backdrop: rgba(255, 255, 255, .6);
 
     --dui-radius-popup-border: .2em;
     --dui-radius-blur-shadow: .2em;
-    --dui-color-shadow: rgba(0, 0, 0, .3);
     --dui-radius-modal: 5px;
+    --dui-color-shadow: rgba(0, 0, 0, .3);
 
     --dui-height-popup-tip: 10px;
     --dui-width-popup-tip: 20px;
@@ -52,10 +52,12 @@
     --dui-color-danger: var(--dui-color-negative);
 
     --dui-color-background: #f6f6f6;
+    --dui-color-foreground: #ffffff;
+
     --dui-color-background-information: #f5f8fb;
     --dui-color-background-negative: #dfe7f2;
-    --dui-color-background-card: var(--dui-color-white);
-    --dui-color-background-modal: var(--dui-color-white);
+    --dui-color-background-card: var(--dui-color-foreground);
+    --dui-color-background-modal: var(--dui-color-foreground);
 
     --dui-color-text: var(--dui-color-grey1);
     --dui-color-text-on-dark: var(--dui-color-white);
@@ -90,11 +92,11 @@
 
     --dui-height-navbar-icon: 3rem;
 
-    --dui-spacing-super-small: 0.1rem;
-    --dui-spacing-extra-small: 0.14rem;
-    --dui-spacing-small: 0.28rem;
-    --dui-spacing-medium: 0.55rem;
-    --dui-spacing-large: 0.66rem;
+    --dui-spacing-super-small: 0.14rem;
+    --dui-spacing-extra-small: 0.26rem;
+    --dui-spacing-small: 0.47rem;
+    --dui-spacing-medium: 0.75rem;
+    --dui-spacing-large: 0.83rem;
     --dui-spacing-extra-large: 1.2rem;
     --dui-spacing-super-large: 2.1rem;
     --dui-spacing-mega-large: 3.2rem;

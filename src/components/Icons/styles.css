@@ -1,9 +1,10 @@
 .icons {
     display: flex;
     align-items: center;
-    padding: var(--dui-spacing-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
+    flex-wrap: wrap;
+    padding: 0 calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
 
     >* {
-        margin: 0 var(--dui-spacing-extra-small);
+        margin: var(--dui-spacing-small);
     }
 }

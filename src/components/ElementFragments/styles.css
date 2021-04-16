@@ -1,28 +1,14 @@
 .icons {
-    display: flex;
-    align-items: center;
     flex-shrink: 0;
-    padding: 0 calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
-
-    >* {
-        margin: 0 var(--dui-spacing-extra-small);
-    }
 }
 
 .children {
     display: flex;
     align-items: center;
     flex-grow: 1;
-    padding: 0 var(--dui-spacing-small);
+    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
 }
 
 .actions {
-    display: flex;
-    align-items: center;
     flex-shrink: 0;
-    padding: 0 calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
-
-    >* {
-        margin: 0 var(--dui-spacing-extra-small);
-    }
 }

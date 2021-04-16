@@ -1,6 +1,9 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import Icons from '../Icons';
+import Actions from '../Actions';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -25,9 +28,9 @@ function ElementFragments(props: Props) {
     return (
         <>
             {icons && (
-                <div className={_cs(iconsContainerClassName, styles.icons)}>
+                <Icons className={_cs(iconsContainerClassName, styles.icons)}>
                     {icons}
-                </div>
+                </Icons>
             )}
             {children && (
                 <div className={_cs(childrenContainerClassName, styles.children)}>
@@ -35,9 +38,9 @@ function ElementFragments(props: Props) {
                 </div>
             )}
             {actions && (
-                <div className={_cs(actionsContainerClassName, styles.actions)}>
+                <Actions className={_cs(actionsContainerClassName, styles.actions)}>
                     {actions}
-                </div>
+                </Actions>
             )}
         </>
     );

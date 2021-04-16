@@ -1,0 +1,12 @@
+.numeral {
+    display: flex;
+    font-family: var(--dui-font-family-monospace);
+
+    .prefix,
+    .sign,
+    .number,
+    .normalization-suffix,
+    .suffix {
+        white-space: nowrap;
+    }
+}
