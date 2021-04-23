@@ -1,14 +1,16 @@
 .icons {
     flex-shrink: 0;
+    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
 }
 
 .children {
     display: flex;
     align-items: center;
     flex-grow: 1;
-    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
+    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
 }
 
 .actions {
     flex-shrink: 0;
+    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
 }

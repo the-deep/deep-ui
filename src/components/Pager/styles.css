@@ -24,6 +24,12 @@
             font-weight: var(--dui-font-weight-bold);
             user-select: none;
         }
+
+        &.page-number-hidden {
+            .page-number-button {
+                padding: var(--dui-spacing-extra-small);
+            }
+        }
     }
 
     .info-and-config {

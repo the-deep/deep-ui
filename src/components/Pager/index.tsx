@@ -63,7 +63,21 @@ type PaginationItem = {
     label: string;
 };
 
-function pagination(totalCapacity: number, active: number, total: number) {
+function applyPagination(
+    totalCapacity: number,
+    active: number,
+    total: number,
+    showAllPages = false,
+) {
+    if (showAllPages) {
+        return range(1, total).map((index) => {
+            if (index === active) {
+                return { type: 'fakeButton', label: String(active), key: 'active' };
+            }
+            return { type: 'button', index };
+        });
+    }
+
     const oneSideCapacity = (totalCapacity - 1) / 2;
     const startIndex = 1;
     const lastIndex = total;
@@ -139,11 +153,13 @@ export type PagerProps = {
     onActivePageChange: (pageNumber: number) => void;
     totalCapacity?: number;
     options?: PagerOption[] | null;
-    infoHidden?: boolean;
+    hideInfo?: boolean;
     disabled?: boolean;
-    showLabel?: boolean;
-    showPrevNext?: boolean;
-    showPages?: boolean;
+    showPrevAndNextLabel?: boolean;
+    hidePrevAndNext?: boolean;
+    hidePages?: boolean;
+    hidePageNumberLabel?: boolean;
+    showAllPages?: boolean;
 } & ({
     itemsPerPageControlHidden: true;
     onItemsPerPageChange?: (pageCapacity: number) => void;
@@ -168,10 +184,12 @@ function Pager(props: PagerProps) {
         maxItemsPerPage = 25,
         totalCapacity = 7,
         disabled = false,
-        infoHidden,
-        showLabel,
-        showPrevNext = true,
-        showPages = true,
+        hideInfo,
+        showPrevAndNextLabel = false,
+        hidePrevAndNext,
+        hidePages,
+        hidePageNumberLabel,
+        showAllPages = false,
     } = props;
 
     const showingTitle = 'Showing';
@@ -189,11 +207,16 @@ function Pager(props: PagerProps) {
     const currentItemsStart = itemsOnPage > 0 ? offset + 1 : offset;
     const currentItemsEnd = offset + itemsOnPage;
 
-    const pages = pagination(totalCapacity, activePage, numPages);
+    const pages = applyPagination(totalCapacity, activePage, numPages, showAllPages);
 
     const pageList = pages.length > 1 && (
-        <div className={styles.pageList}>
-            {showPrevNext && (
+        <div
+            className={_cs(
+                styles.pageList,
+                hidePageNumberLabel && styles.pageNumberHidden,
+            )}
+        >
+            {!hidePrevAndNext && (
                 <Button
                     name={undefined}
                     className={styles.pageButton}
@@ -202,23 +225,25 @@ function Pager(props: PagerProps) {
                     icons={<FaChevronLeft />}
                     variant="action"
                 >
-                    {showLabel && (
+                    {showPrevAndNextLabel && (
                         'Previous'
                     )}
                 </Button>
             )}
-            {showPages && pages.map((page) => {
+            {!hidePages && pages.map((page) => {
                 if (page.type === 'button') {
                     return (
                         <Button
                             key={`button-${page.index}`}
                             name={undefined}
                             onClick={() => onActivePageChange(page.index)}
-                            className={styles.pageButton}
+                            className={_cs(styles.pageButton, styles.pageNumberButton)}
                             disabled={disabled}
-                            variant="action"
+                            variant={hidePageNumberLabel ? 'inverted' : 'action'}
                         >
-                            {page.index}
+                            {!hidePageNumberLabel && (
+                                page.index
+                            )}
                         </Button>
                     );
                 }
@@ -226,11 +251,17 @@ function Pager(props: PagerProps) {
                     return (
                         <Button
                             key={`button-${page.key}`}
-                            variant="inverted"
+                            variant={hidePageNumberLabel ? 'primary' : 'inverted'}
                             name={undefined}
-                            className={_cs(styles.pageButton, styles.active)}
+                            className={_cs(
+                                styles.pageButton,
+                                styles.pageNumberButton,
+                                styles.active,
+                            )}
                         >
-                            {page.label}
+                            {!hidePageNumberLabel && (
+                                page.label
+                            )}
                         </Button>
                     );
                 }
@@ -243,7 +274,7 @@ function Pager(props: PagerProps) {
                     </div>
                 );
             })}
-            {showPrevNext && (
+            {!hidePrevAndNext && (
                 <Button
                     name={undefined}
                     onClick={() => onActivePageChange(activePage + 1)}
@@ -252,7 +283,7 @@ function Pager(props: PagerProps) {
                     actions={<FaChevronRight />}
                     variant="action"
                 >
-                    {showLabel && (
+                    {showPrevAndNextLabel && (
                         'Next'
                     )}
                 </Button>
@@ -260,7 +291,7 @@ function Pager(props: PagerProps) {
         </div>
     );
 
-    const info = !infoHidden && (itemsCount > maxItemsPerPage) && (
+    const info = !hideInfo && (itemsCount > maxItemsPerPage) && (
         <div className={styles.currentRangeInformation}>
             <div className={styles.showing}>
                 { showingTitle }

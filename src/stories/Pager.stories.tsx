@@ -6,7 +6,7 @@ import { Story } from '@storybook/react/types-6-0';
 import Pager, { PagerProps } from '#components/Pager';
 
 export default {
-    title: 'Input/Pager',
+    title: 'View/Pager',
     component: Pager,
     argTypes: {},
     decorators: [withDesign],
@@ -36,7 +36,7 @@ Default.args = {
     activePage: 2,
     maxItemsPerPage: 10,
     itemsCount: 100,
-    infoHidden: true,
+    hideInfo: true,
 };
 Default.parameters = {
     design: {
@@ -44,16 +44,34 @@ Default.parameters = {
         url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4925%3A3559',
     },
 };
-export const PreviousNext = Template.bind({});
-PreviousNext.args = {
-    showLabel: true,
-    showPages: false,
+
+export const PreviousNextOnly = Template.bind({});
+PreviousNextOnly.args = {
+    showPrevAndNextLabel: true,
+    hidePages: true,
     activePage: 1,
     maxItemsPerPage: 10,
     itemsCount: 100,
-    infoHidden: true,
+    hideInfo: true,
 };
-PreviousNext.parameters = {
+PreviousNextOnly.parameters = {
+    design: {
+        type: 'figma',
+        url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4925%3A3559',
+    },
+};
+
+export const DotsOnly = Template.bind({});
+DotsOnly.args = {
+    activePage: 1,
+    maxItemsPerPage: 10,
+    itemsCount: 100,
+    hideInfo: true,
+    hidePageNumberLabel: true,
+    showAllPages: true,
+    hidePrevAndNext: true,
+};
+DotsOnly.parameters = {
     design: {
         type: 'figma',
         url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4925%3A3559',
