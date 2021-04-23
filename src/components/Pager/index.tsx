@@ -200,10 +200,10 @@ function Pager(props: PagerProps) {
                     onClick={() => onActivePageChange(activePage - 1)}
                     disabled={activePage <= 1 || disabled}
                     icons={<FaChevronLeft />}
-                    variant="inverted"
+                    variant="action"
                 >
                     {showLabel && (
-                        'Prev'
+                        'Previous'
                     )}
                 </Button>
             )}
@@ -216,7 +216,7 @@ function Pager(props: PagerProps) {
                             onClick={() => onActivePageChange(page.index)}
                             className={styles.pageButton}
                             disabled={disabled}
-                            variant="secondary"
+                            variant="action"
                         >
                             {page.index}
                         </Button>
@@ -250,7 +250,7 @@ function Pager(props: PagerProps) {
                     disabled={activePage >= numPages || disabled}
                     className={styles.pageButton}
                     actions={<FaChevronRight />}
-                    variant="inverted"
+                    variant="action"
                 >
                     {showLabel && (
                         'Next'
@@ -289,6 +289,7 @@ function Pager(props: PagerProps) {
 
     const minOption = Math.min(0, ...itemsPerPageOptions.map((opt) => opt.key));
 
+    // eslint-disable-next-line react/destructuring-assignment
     const itemPerPageControl = !props.itemsPerPageControlHidden && (itemsCount > minOption) && (
         <div className={styles.itemsPerPage}>
             <SelectInput
@@ -298,6 +299,7 @@ function Pager(props: PagerProps) {
                 keySelector={(item) => item.key}
                 labelSelector={(item) => item.label}
                 value={maxItemsPerPage}
+                // eslint-disable-next-line react/destructuring-assignment
                 onChange={props.onItemsPerPageChange}
                 disabled={disabled}
                 searchPlaceholder=""

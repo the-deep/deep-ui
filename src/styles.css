@@ -134,3 +134,7 @@
     --dui-height-progress-bar: 10px;
     --dui-border-radius-progress-bar: 15px;
 }
+
+body {
+    font-size: 13px;
+}
