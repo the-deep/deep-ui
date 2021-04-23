@@ -43,6 +43,41 @@ export function BasicTabs() {
     );
 }
 
+export function SecondaryTab() {
+    const [value, setValue] = useState('tab-one');
+    return (
+        <Tabs
+            value={value}
+            onChange={setValue}
+            variant="secondary"
+        >
+            <TabList>
+                <Tab name="tab-one">
+                    Home
+                </Tab>
+                <Tab name="tab-two">
+                    Profile
+                </Tab>
+                <Tab name="tab-three">
+                    Notifications
+                </Tab>
+            </TabList>
+
+            <TabPanel name="tab-one">
+                This is the home page!
+            </TabPanel>
+            <TabPanel
+                name="tab-two"
+            >
+                This is the profile page!
+            </TabPanel>
+            <TabPanel name="tab-three">
+                Your notifications are here!
+            </TabPanel>
+        </Tabs>
+    );
+}
+
 export function DisabledTab() {
     const [value, setValue] = useState('tab-one');
     return (
