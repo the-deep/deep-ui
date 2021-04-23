@@ -13,6 +13,7 @@ export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClic
 
 export default function Tab<T extends TabKey>(props: Props<T>) {
     const {
+        variant,
         activeTab,
         setActiveTab,
     } = React.useContext(TabContext);
@@ -35,6 +36,8 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
                 isActive && styles.active,
                 isActive && activeClassName,
                 disabled && styles.disabled,
+                variant === 'primary' && styles.primaryTab,
+                variant === 'secondary' && styles.secondaryTab,
             )}
             onClick={setActiveTab}
             name={name}
