@@ -66,7 +66,10 @@ WithAction.args = {
     optionRendererParams: (_, option) => ({ children: option.label }),
     valueDisplay: '',
     actions: (
-        <Button variant="action">
+        <Button
+            name="check-all"
+            variant="action"
+        >
             <BsCheckAll />
         </Button>
     ),

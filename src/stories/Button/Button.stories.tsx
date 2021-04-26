@@ -45,22 +45,39 @@ export const Variants = () => (
         <section>
             <h3>Normal</h3>
             <div className={styles.content}>
-                <Button>
+                <Button
+                    name="default"
+                >
                     Default
                 </Button>
-                <Button variant="primary">
+                <Button
+                    variant="primary"
+                    name="primary"
+                >
                     Primary
                 </Button>
-                <Button variant="secondary">
+                <Button
+                    variant="secondary"
+                    name="secondary"
+                >
                     Secondary
                 </Button>
-                <Button variant="tertiary">
+                <Button
+                    variant="tertiary"
+                    name="tertiary"
+                >
                     Tertiary
                 </Button>
-                <Button variant="inverted">
+                <Button
+                    variant="inverted"
+                    name="inverted"
+                >
                     Inverted
                 </Button>
-                <Button variant="action">
+                <Button
+                    variant="action"
+                    name="action"
+                >
                     Action
                 </Button>
             </div>
@@ -68,11 +85,15 @@ export const Variants = () => (
         <section>
             <h3>Disabled</h3>
             <div className={styles.content}>
-                <Button disabled>
+                <Button
+                    disabled
+                    name="disabled-button"
+                >
                     Default
                 </Button>
                 <Button
                     variant="primary"
+                    name="disabled-primary-button"
                     disabled
 
                 >
@@ -80,24 +101,28 @@ export const Variants = () => (
                 </Button>
                 <Button
                     variant="secondary"
+                    name="disabled-secondary-button"
                     disabled
                 >
                     Secondary
                 </Button>
                 <Button
                     variant="tertiary"
+                    name="disabled-tertiary-button"
                     disabled
                 >
                     Tertiary
                 </Button>
                 <Button
                     variant="inverted"
+                    name="disabled-inverted-button"
                     disabled
                 >
                     Inverted
                 </Button>
                 <Button
                     variant="action"
+                    name="disabled-action-button"
                     disabled
                 >
                     Action
@@ -107,35 +132,43 @@ export const Variants = () => (
         <section>
             <h3>Big</h3>
             <div className={styles.content}>
-                <Button big name={undefined}>
+                <Button
+                    big
+                    name="big-button"
+                >
                     Default
                 </Button>
                 <Button
                     variant="primary"
+                    name="big-primary-button"
                     big
                 >
                     Primary
                 </Button>
                 <Button
                     variant="secondary"
+                    name="big-secondary-button"
                     big
                 >
                     Secondary
                 </Button>
                 <Button
                     variant="tertiary"
+                    name="big-tertiary-button"
                     big
                 >
                     Tertiary
                 </Button>
                 <Button
                     variant="inverted"
+                    name="big-inverted-button"
                     big
                 >
                     Inverted
                 </Button>
                 <Button
                     variant="action"
+                    name="big-action-button"
                     big
                 >
                     Action
