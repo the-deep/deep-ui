@@ -46,7 +46,7 @@ export interface Props {
      */
     value?: number,
 
-    valueModifier?: (value: number) => React.ReactNode,
+    valueModifier?: (value: string | undefined) => React.ReactNode,
     signClassName?: string;
     prefixClassName?: string;
     numberClassName?: string;

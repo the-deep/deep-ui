@@ -67,7 +67,10 @@ const CollapsedGroup = ({
     return (
         <div style={{ margin: '10px' }}>
             <header>
-                <Button onClick={handleGroupButtonClick}>
+                <Button
+                    name="group-expand"
+                    onClick={handleGroupButtonClick}
+                >
                     Group
                     &nbsp;
                     {title}
