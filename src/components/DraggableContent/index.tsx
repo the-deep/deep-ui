@@ -18,6 +18,7 @@ export interface Props {
     value: SerializableValue;
     dropEffect?: 'copy' | 'move' | 'link' | 'none';
     onDragStart?: (value: SerializableValue) => void;
+    onDragStop?: (value: SerializableValue) => void;
 }
 
 function DraggableContent(props: Props) {
@@ -27,6 +28,7 @@ function DraggableContent(props: Props) {
         elementRef,
         dropEffect = 'copy',
         onDragStart,
+        onDragStop,
         value,
         name,
     } = props;
@@ -35,7 +37,10 @@ function DraggableContent(props: Props) {
 
     const handleDragEnd = React.useCallback(() => {
         setDraggable(false);
-    }, [setDraggable]);
+        if (onDragStop) {
+            onDragStop(value);
+        }
+    }, [setDraggable, onDragStop, value]);
 
     React.useEffect(() => {
         window.addEventListener('mouseup', handleDragEnd);
