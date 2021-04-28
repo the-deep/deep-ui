@@ -1,0 +1,96 @@
+.table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: inherit;
+
+    .header-row {
+        .header-cell {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            border: 0;
+            background-color: var(--dui-color-background);
+
+            &:not(:first-child) {
+                border-left: 0;
+            }
+
+            &.stick-left {
+                left: 0;
+                z-index: 3;
+            }
+
+            .header-component {
+                padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+            }
+        }
+    }
+
+    .row {
+        .row-header-cell {
+            position: sticky;
+            left: 0;
+            z-index: 1;
+            border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+            background-color: var(--dui-color-foreground);
+            text-align: left;
+
+            .cell-component {
+                padding: var(--dui-spacing-medium);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .cell {
+            border-top: 0;
+            border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+            background-color: var(--dui-color-foreground);
+
+            .cell-component {
+                padding: var(--dui-spacing-medium);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &.small {
+        .row {
+            .row-header-cell {
+                .cell-component {
+                    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
+                }
+            }
+
+            .cell {
+                .cell-component {
+                    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
+                }
+            }
+        }
+    }
+
+    &.large {
+        .row {
+            .row-header-cell {
+                .cell-component {
+                    overflow: initial;
+                    text-overflow: initial;
+                    white-space: initial;
+                }
+            }
+
+            .cell {
+                .cell-component {
+                    overflow: initial;
+                    text-overflow: initial;
+                    white-space: initial;
+                }
+            }
+        }
+    }
+}

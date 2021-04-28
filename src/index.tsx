@@ -72,6 +72,8 @@ export { default as SegmentInput } from './components/SegmentInput';
 export type { Props as SegmentInputProps } from './components/SegmentInput';
 export type { Props as TabProps } from './components/Tab';
 export { default as Tab } from './components/Tab';
+export type { Props as TableProps } from './components/Table';
+export { default as Table } from './components/Table';
 export type { Props as TabListProps } from './components/TabList';
 export { default as TabList } from './components/TabList';
 export type { Props as TabPanelProps } from './components/TabPanel';
