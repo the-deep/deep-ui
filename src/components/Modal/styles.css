@@ -13,36 +13,33 @@
         display: flex;
         align-items: center;
         flex-shrink: 0;
-        padding: calc(var(--dui-spacing-extra-large) - var(--dui-spacing-medium));
+        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-medium));
 
         .title-container {
             flex-grow: 1;
-            padding: var(--dui-spacing-medium);
+            padding: var(--dui-spacing-small) var(--dui-spacing-medium);
         }
 
         .actions {
             flex-shrink: 0;
-            padding: var(--dui-spacing-medium);
+            padding: var(--dui-spacing-small) var(--dui-spacing-medium);
 
             .close-button {
                 border: none;
-                background-color: transparent;
-                padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
-                color: var(--dui-color-text);
-                font-size: var(--dui-font-size-large);
+                font-size: 1.2em;
             }
         }
     }
 
     .modal-body {
         flex-grow: 1;
-        padding: var(--dui-spacing-extra-large);
+        padding: var(--dui-spacing-medium) var(--dui-spacing-large);
         overflow: auto;
     }
 
     .modal-footer {
         flex-shrink: 0;
-        padding: var(--dui-spacing-extra-large);
+        padding: var(--dui-spacing-medium) var(--dui-spacing-large);
     }
 }
 

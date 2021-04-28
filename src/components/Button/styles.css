@@ -1,6 +1,6 @@
 .button {
-    --padding-internal-h: var(--dui-spacing-small);
-    --padding-h: var(--dui-spacing-extra-large);
+    --padding-internal-h: var(--dui-spacing-extra-small);
+    --padding-h: var(--dui-spacing-large);
     --padding-v: var(--dui-spacing-small);
     --color-border: transparent;
     --color-text: transparent;

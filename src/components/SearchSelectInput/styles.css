@@ -1,16 +1,18 @@
 .option {
     display: flex;
     align-items: center;
+    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
     overflow: auto;
 
     .icon {
         opacity: 0;
+        font-size: 1.2em;
     }
 
     .label {
         display: flex;
         flex-grow: 1;
-        padding: 0 var(--dui-spacing-small);
+        padding: 0 var(--dui-spacing-extra-small);
         overflow: auto;
 
         .text {

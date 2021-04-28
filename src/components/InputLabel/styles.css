@@ -5,7 +5,7 @@
         --color: var(--dui-color-text-label-on-dark);
     }
 
-    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
+    padding: var(--dui-spacing-extra-small) var(--dui-spacing-medium);
     color: var(--color);
     font-size: var(--dui-font-size-small);
     font-weight: var(--dui-font-weight-bold);

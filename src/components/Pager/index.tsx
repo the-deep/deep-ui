@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -70,7 +70,7 @@ function applyPagination(
     showAllPages = false,
 ) {
     if (showAllPages) {
-        return range(1, total).map((index) => {
+        return range(1, total).map((index): PaginationItem => {
             if (index === active) {
                 return { type: 'fakeButton', label: String(active), key: 'active' };
             }
@@ -91,7 +91,7 @@ function applyPagination(
     // So the two sides made a treaty
     // If any of the side had an excess that year and the other side had a shortage,
     // they had to give the excess to the other side
-    // Thay way, all the ration would be used
+    // That way, all the ration would be used
     const leftExcess = left.excess;
     const rightExcess = right.excess;
     if (right.hasShortage() && leftExcess > 0) {
@@ -276,7 +276,7 @@ function Pager(props: PagerProps) {
             })}
             {!hidePrevAndNext && (
                 <Button
-                    name={undefined}
+                    name={activePage + 1}
                     onClick={() => onActivePageChange(activePage + 1)}
                     disabled={activePage >= numPages || disabled}
                     className={styles.pageButton}
@@ -318,7 +318,9 @@ function Pager(props: PagerProps) {
 
     const itemsPerPageOptions = options ?? defaultOptions;
 
-    const minOption = Math.min(0, ...itemsPerPageOptions.map((opt) => opt.key));
+    const minOption = useMemo(() => (
+        Math.min(0, ...itemsPerPageOptions.map((opt) => opt.key))
+    ), [itemsPerPageOptions]);
 
     // eslint-disable-next-line react/destructuring-assignment
     const itemPerPageControl = !props.itemsPerPageControlHidden && (itemsCount > minOption) && (

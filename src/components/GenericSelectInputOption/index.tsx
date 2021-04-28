@@ -73,7 +73,7 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
     return (
         <RawButton
             className={_cs(
-                styles.optionRenderer,
+                styles.genericSelectInputOption,
                 optionContainerClassName,
                 containerClassName,
                 isFocused && !focusedByMouse.current && styles.focused,
