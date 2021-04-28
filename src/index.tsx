@@ -50,6 +50,8 @@ export type { Props as NumeralProps } from './components/Numeral';
 export { default as Numeral } from './components/Numeral';
 export type { Props as PercentageInformationCardProps } from './components/PercentageInformationCard';
 export { default as PercentageInformationCard } from './components/PercentageInformationCard';
+export type { PagerProps } from './components/Pager';
+export { default as Pager } from './components/Pager';
 export type { Props as PortalProps } from './components/Portal';
 export { default as Portal } from './components/Portal';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';

@@ -1,7 +1,7 @@
 .button {
-    --padding-internal-h: var(--dui-spacing-small);
-    --padding-h: var(--dui-spacing-extra-large);
-    --padding-v: var(--dui-spacing-medium);
+    --padding-internal-h: var(--dui-spacing-extra-small);
+    --padding-h: var(--dui-spacing-large);
+    --padding-v: var(--dui-spacing-small);
     --color-border: transparent;
     --color-text: transparent;
     --color-background: transparent;
@@ -24,7 +24,7 @@
     text-transform: var(--text-transform);
     color: var(--color-text);
     font-family: inherit;
-    font-size: var(--font-size); 
+    font-size: var(--font-size);
     font-weight: var(--font-weight-bold);
 
     .icons {
@@ -124,7 +124,7 @@
     }
 
     &.big {
-        --padding-v: var(--dui-spacing-large);
+        --padding-v: var(--dui-spacing-medium);
         --font-size: var(--dui-font-size-large);
     }
 }

@@ -94,13 +94,13 @@
 
     --dui-spacing-super-small: 0.14rem;
     --dui-spacing-extra-small: 0.26rem;
-    --dui-spacing-small: 0.47rem;
-    --dui-spacing-medium: 0.75rem;
-    --dui-spacing-large: 0.83rem;
-    --dui-spacing-extra-large: 1.2rem;
-    --dui-spacing-super-large: 2.1rem;
-    --dui-spacing-mega-large: 3.2rem;
-    --dui-spacing-ultra-large: 4.7rem;
+    --dui-spacing-small: 0.41rem;
+    --dui-spacing-medium: 0.79rem;
+    --dui-spacing-large: 1.17rem;
+    --dui-spacing-extra-large: 1.83rem;
+    --dui-spacing-super-large: 3.01rem;
+    --dui-spacing-mega-large: 4.81rem;
+    --dui-spacing-ultra-large: 6.89rem;
 
     --dui-font-size-super-small: 0.5rem;
     --dui-font-size-extra-small: 0.63rem;
@@ -133,4 +133,8 @@
     --dui-opacity-disabled-element: 0.3;
     --dui-height-progress-bar: 10px;
     --dui-border-radius-progress-bar: 15px;
+}
+
+body {
+    font-size: 13px;
 }

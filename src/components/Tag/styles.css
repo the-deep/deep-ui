@@ -2,14 +2,14 @@
     --background-color: var(--dui-color-background);
     --color: var(--dui-color-text);
     --font-size: var(--dui-font-size-medium);
-    --padding-v: var(--dui-spacing-medium);
+    --padding-v: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
     --border-radius: calc(var(--font-size) + var(--padding-v));
 
     display: flex;
     align-items: center;
     border-radius: var(--border-radius);
     background-color: var(--background-color);
-    padding: var(--padding-v) calc(var(--dui-spacing-extra-large) - var(--dui-spacing-small));
+    padding: var(--padding-v) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
     width: fit-content;
     text-align: center;
     color: var(--color);

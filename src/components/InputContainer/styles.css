@@ -83,27 +83,27 @@
         position: relative;
         align-items: center;
         background-color: var(--color-background-input-section);
-        padding: var(--dui-spacing-medium) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+        padding: var(--dui-spacing-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
         .icons {
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            padding: 0 var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-extra-small);
         }
 
         .input {
             display: flex;
             align-items: center;
             flex-grow: 1;
-            padding: 0 var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-extra-small);
         }
 
         .actions {
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            padding: 0 var(--dui-spacing-small);
+            padding: 0 var(--dui-spacing-extra-small);
         }
 
         .input-section-border {

@@ -54,6 +54,7 @@ function Modal(props: Props) {
                                     className={styles.closeButton}
                                     onClick={onClose}
                                     name="Close"
+                                    variant="action"
                                 >
                                     <IoClose />
                                 </Button>

@@ -1,0 +1,80 @@
+.pager {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .page-list {
+        display: flex;
+        align-items: center;
+        padding: var(--dui-spacing-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+
+        .page-button {
+            margin: 0 var(--dui-spacing-extra-small);
+            padding: var(--dui-spacing-extra-small);
+            font-size: var(--dui-font-size-large);
+            font-weight: var(--dui-font-weight-bold);
+        }
+
+        .page-span {
+            display: flex;
+            align-items: baseline;
+            margin: 0 var(--dui-spacing-extra-small);
+            padding: 0 var(--dui-spacing-medium);
+            color: var(--dui-color-text-label);
+            font-weight: var(--dui-font-weight-bold);
+            user-select: none;
+        }
+
+        &.page-number-hidden {
+            .page-number-button {
+                padding: var(--dui-spacing-extra-small);
+            }
+        }
+    }
+
+    .info-and-config {
+        display: flex;
+        padding: var(--dui-spacing-small) 0;
+
+        .items-per-page {
+            display: flex;
+            align-items: baseline;
+            flex-shrink: 0;
+            padding: 0 var(--dui-spacing-medium);
+
+            .input {
+                width: 112px;
+            }
+        }
+
+        .current-range-information {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 0 calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+
+            .showing {
+                padding: 0 var(--dui-spacing-extra-small);
+            }
+
+            .range {
+                display: flex;
+                align-items: center;
+
+                .from,
+                .to,
+                .separator {
+                    padding: 0 var(--dui-spacing-extra-small);
+                }
+            }
+
+            .of {
+                padding: 0 var(--dui-spacing-extra-small);
+            }
+        }
+    }
+}
+
+.per-page-option-popup {
+    width: 132px;
+}

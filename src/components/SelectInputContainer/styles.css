@@ -12,7 +12,7 @@
             flex-grow: 1;
 
             .group-header {
-                padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
+                padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
