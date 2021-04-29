@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Numeral from '../Numeral';
+import NumberOutput from '../NumberOutput';
 import InformationCardFragments, {
     InformationVariant,
 } from '../InformationCardFragments';
@@ -52,7 +52,7 @@ function InformationCard(props: Props) {
                 coloredBackground={coloredBackground}
                 icon={icon}
                 value={(
-                    <Numeral
+                    <NumberOutput
                         value={value}
                         precision={valuePrecision}
                     />

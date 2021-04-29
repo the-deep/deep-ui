@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Numeral, { Props as NumeralProps } from '../Numeral';
+import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 import CircularProgressBar from '../CircularProgressBar';
 import InformationCardFragments, {
     InformationVariant,
@@ -15,7 +15,7 @@ export interface Props {
     label: string;
     value?: number;
     variant: InformationVariant;
-    valuePrecision?: NumeralProps['precision'];
+    valuePrecision?: NumberOutputProps['precision'];
     coloredBackground?: boolean;
 }
 
@@ -69,7 +69,7 @@ function PercentageInformationCard(props: Props) {
                     </CircularProgressBar>
                 )}
                 value={(
-                    <Numeral
+                    <NumberOutput
                         value={value}
                         precision={valuePrecision}
                         suffix="%"
