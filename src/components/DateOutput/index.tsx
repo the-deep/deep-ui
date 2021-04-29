@@ -20,8 +20,10 @@ function DateOutput(props: Props) {
         className,
     } = props;
 
-    const date = new Date(value);
-    const formattedValueList = populateFormat(breakFormat(format), date);
+    const formattedValueList = React.useMemo(() => {
+        const date = new Date(value);
+        return populateFormat(breakFormat(format), date);
+    }, [format, value]);
     const formattedDate = formattedValueList.find((d) => d.type === 'date');
 
     return (
