@@ -1,6 +1,6 @@
 .icon-container {
     padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
-    font-size: var(--font-size-ultra-large);
+    font-size: var(--dui-font-size-extra-large);
 
     &.accent {
         color: var(--dui-color-accent);
@@ -47,13 +47,13 @@
 
     .value {
         padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-        font-size: var(--font-size-ultra-large);
+        font-size: var(--dui-font-size-extra-large);
         font-weight: var(--font-weight-bold);
     }
 
     .label {
         padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-        font-size: var(--font-size-large);
+        font-size: var(--dui-font-size-large);
     }
 
     &.accent {

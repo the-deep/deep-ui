@@ -20,6 +20,7 @@ export const Default = Template.bind({});
 Default.args = {
     icon: <IoFlag />,
     value: 120,
+    label: 'Hello darkness, my old friend',
 };
 
 export const WithColoredBackground = Template.bind({});
@@ -27,4 +28,5 @@ WithColoredBackground.args = {
     icon: <IoFlag />,
     value: 320,
     coloredBackground: true,
+    label: 'Hello darkness, my old friend',
 };

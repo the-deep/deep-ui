@@ -55,9 +55,9 @@ export interface Props {
 }
 
 /**
- * Numeral component for formatted numbers
+ * NumberOutput component for formatted numbers
  */
-function Numeral(props: Props) {
+function NumberOutput(props: Props) {
     const {
         className,
         invalidText = '-',
@@ -184,4 +184,4 @@ function Numeral(props: Props) {
     );
 }
 
-export default Numeral;
+export default NumberOutput;

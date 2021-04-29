@@ -1,16 +1,16 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import Numeral, { Props as NumeralProps } from '#components/Numeral';
+import NumberOutput, { Props as NumberOutputProps } from '#components/NumberOutput';
 
 export default {
-    title: 'View/Numeral',
-    component: Numeral,
+    title: 'View/NumberOutput',
+    component: NumberOutput,
     argTypes: {},
 };
 
-const Template: Story<NumeralProps> = (args) => (
-    <Numeral
+const Template: Story<NumberOutputProps> = (args) => (
+    <NumberOutput
         {...args}
     />
 );
