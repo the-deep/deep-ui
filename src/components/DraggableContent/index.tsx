@@ -2,7 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { GrDrag } from 'react-icons/gr';
 
-import ElementFragments from '../ElementFragments';
+import ElementFragments, { Props as ElementFragmentsProps } from '../ElementFragments';
 
 import styles from './styles.css';
 
@@ -10,7 +10,7 @@ type DivElementProps = React.HTMLProps<HTMLDivElement>;
 
 export type SerializableValue = Record<string, unknown>;
 
-export interface Props {
+export interface Props extends ElementFragmentsProps {
     className?: string;
     children: React.ReactNode;
     elementRef?: DivElementProps['ref'];
@@ -31,6 +31,10 @@ function DraggableContent(props: Props) {
         onDragStop,
         value,
         name,
+        actions,
+        iconsContainerClassName,
+        actionsContainerClassName,
+        ...elementFragmentsProps
     } = props;
 
     const [draggable, setDraggable] = React.useState(false);
@@ -79,15 +83,20 @@ function DraggableContent(props: Props) {
             onDragStart={handleDragStart}
         >
             <ElementFragments
-                actionsContainerClassName={styles.actions}
+                {...elementFragmentsProps}
+                iconsContainerClassName={_cs(styles.icon, iconsContainerClassName)}
+                actionsContainerClassName={_cs(styles.actions, actionsContainerClassName)}
                 actions={(
-                    <div
-                        role="presentation"
-                        onMouseDown={handleDragHandleMouseDown}
-                        className={styles.actionContainer}
-                    >
-                        <GrDrag />
-                    </div>
+                    <>
+                        <div
+                            role="presentation"
+                            onMouseDown={handleDragHandleMouseDown}
+                            className={styles.dragContainer}
+                        >
+                            <GrDrag />
+                        </div>
+                        {actions}
+                    </>
                 )}
             >
                 { children }

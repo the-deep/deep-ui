@@ -4,7 +4,17 @@
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
+    .icons {
+        display: flex;
+        flex-direction: column;
+    }
+
     .actions {
-        cursor: move;
+        display: flex;
+        flex-direction: column;
+
+        .drag-container {
+            cursor: move;
+        }
     }
 }
