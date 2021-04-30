@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 import { isNotDefined } from '@togglecorp/fujs';
 
 // FIXME: move this somewhere nice
@@ -79,7 +79,8 @@ function useDownloading(name: string, valueCreator: () => Row[] | undefined | nu
 
         const currentTimestamp = (new Date()).getTime();
         const fileName = `${name}-${currentTimestamp}.csv`;
-        saveAs(blob, fileName);
+        console.info('Downloading not implemented', fileName, blob);
+        // saveAs(blob, fileName);
     };
     return handleClick;
 }

@@ -4,9 +4,9 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Table, { Props as TableProps, Column } from '#components/Table';
 // import { FilterType } from '#components/Table/types';
-import useFiltering, { useFilterState, FilterContext } from '#components/Table/useFiltering';
-import useOrdering, { useOrderState, OrderContext } from '#components/Table/useOrdering';
-import useSorting, { useSortState, SortContext } from '#components/Table/useSorting';
+// import useFiltering, { useFilterState, FilterContext } from '#components/Table/useFiltering';
+// import useOrdering, { useOrderState, OrderContext } from '#components/Table/useOrdering';
+// import useSorting, { useSortState, SortContext } from '#components/Table/useSorting';
 import {
     createStringColumn,
     createNumberColumn,
@@ -97,6 +97,7 @@ const columns = [
      */
 ];
 
+/*
 const staticColumnOrdering = [
     { name: 'id' },
     { name: 'name' },
@@ -105,8 +106,10 @@ const staticColumnOrdering = [
     { name: 'datetime' },
     { name: 'aboveBudget' },
 ];
+ */
 
-const Template: Story<TableProps<Program, number, Column<Program, number, any, any>>> = (args) => {
+const Template: Story<TableProps<Program, number, Column<Program, number, any, any>>> = (args) => (
+    /*
     const sortState = useSortState();
     const { sorting } = sortState;
 
@@ -119,8 +122,9 @@ const Template: Story<TableProps<Program, number, Column<Program, number, any, a
     const orderedColumns = useOrdering(columns, ordering);
     const filteredData = useFiltering(filtering, orderedColumns, data);
     const sortedData = useSorting(sorting, orderedColumns, filteredData);
+     */
 
-    return (
+    /*
         <SortContext.Provider value={sortState}>
             <FilterContext.Provider value={filterState}>
                 <OrderContext.Provider value={orderState}>
@@ -133,8 +137,15 @@ const Template: Story<TableProps<Program, number, Column<Program, number, any, a
                 </OrderContext.Provider>
             </FilterContext.Provider>
         </SortContext.Provider>
-    );
-};
+     */
+
+    <Table
+        {...args}
+        columns={columns}
+        data={data}
+        className={styles.table}
+    />
+);
 
 export const Default = Template.bind({});
 Default.args = {

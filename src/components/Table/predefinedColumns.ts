@@ -119,8 +119,8 @@ export function createNumberColumn<D, K>(
         },
         cellRenderer: NumberOutput,
         cellRendererParams: (_: K, datum: D): NumberOutputProps => ({
-            value: accessor(datum),
-            placeholder: 'N/a',
+            // Note override null with undefined
+            value: accessor(datum) ?? undefined,
         }),
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareNumber(accessor(foo), accessor(bar)),

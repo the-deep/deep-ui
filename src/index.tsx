@@ -72,8 +72,21 @@ export { default as SegmentInput } from './components/SegmentInput';
 export type { Props as SegmentInputProps } from './components/SegmentInput';
 export type { Props as TabProps } from './components/Tab';
 export { default as Tab } from './components/Tab';
-export type { Props as TableProps } from './components/Table';
+
+export type { Props as TableProps, Column as TableColumn } from './components/Table';
 export { default as Table } from './components/Table';
+export { default as TableCell } from './components/Table/Cell';
+export type { CellProps as TableCellProps } from './components/Table/Cell';
+export { default as TableHeaderCell } from './components/Table/HeaderCell';
+export type { HeaderCellProps as TableHeaderCellProps } from './components/Table/HeaderCell';
+export { createStringColumn, createNumberColumn } from './components/Table/predefinedColumns';
+export type { SortDirection as TableSortDirection, FilterType as TableFilterType } from './components/Table/types';
+export { default as useDownloading, convertTableData, convertJsonToCsv } from './components/Table/useDownloading';
+export { default as useFiltering, useFilterState, FilterContext } from './components/Table/useFiltering';
+export { HideContext } from './components/Table/useHiding';
+export { default as useOrdering, useOrderState, OrderContext } from './components/Table/useOrdering';
+export { default as useSorting, useSortState, SortContext } from './components/Table/useSorting';
+
 export type { Props as TabListProps } from './components/TabList';
 export { default as TabList } from './components/TabList';
 export type { Props as TabPanelProps } from './components/TabPanel';

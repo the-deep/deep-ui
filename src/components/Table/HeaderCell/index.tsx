@@ -141,6 +141,7 @@ function HeaderCell(props: HeaderCellProps) {
         [name, filterValue, onFilterValueChange],
     );
 
+    /*
     const handleNumericFilterMinChange = useCallback(
         (value: number | undefined) => {
             if (onFilterValueChange) {
@@ -164,6 +165,7 @@ function HeaderCell(props: HeaderCellProps) {
         },
         [name, filterValue, onFilterValueChange],
     );
+     */
 
     const handleDragStart = useCallback(
         (e: React.DragEvent<HTMLDivElement>) => {
@@ -303,6 +305,7 @@ function HeaderCell(props: HeaderCellProps) {
                             value={filterValue?.subMatch}
                             placeholder="Search"
                             onChange={handleStringFilterChange}
+                            uiMode={uiMode}
                         />
                     )}
                     {/*
