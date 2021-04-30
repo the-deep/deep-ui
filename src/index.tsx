@@ -58,12 +58,16 @@ export type { Props as QuickActionButtonProps } from './components/QuickActionBu
 export { default as QuickActionButton } from './components/QuickActionButton';
 export { default as QuickActionLink } from './components/QuickActionLink';
 export type { Props as QuickActionLinkProps } from './components/QuickActionLink';
+export { default as RadioInput } from './components/RadioInput';
+export type { Props as RadioInputProps } from './components/RadioInput';
 export { default as RawInput } from './components/RawInput';
 export type { Props as RawInputProps } from './components/RawInput';
 export { default as SearchSelectInput } from './components/SelectInput';
 export type { Props as SearchSelectInputProps } from './components/SelectInput';
 export { default as SelectInput } from './components/SelectInput';
 export type { Props as SelectInputProps } from './components/SelectInput';
+export { default as SegmentInput } from './components/SegmentInput';
+export type { Props as SegmentInputProps } from './components/SegmentInput';
 export type { Props as TabProps } from './components/Tab';
 export { default as Tab } from './components/Tab';
 export type { Props as TabListProps } from './components/TabList';

@@ -52,6 +52,7 @@
     --dui-color-danger: var(--dui-color-negative);
 
     --dui-color-background: #f6f6f6;
+    --dui-color-background-hover: #f6f6fa;
     --dui-color-foreground: #ffffff;
 
     --dui-color-background-information: #f5f8fb;

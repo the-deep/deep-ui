@@ -1,0 +1,24 @@
+.radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+
+    .icon {
+        font-size: 1.2em;
+    }
+
+    .input {
+        display: none;
+    }
+
+    &.active {
+        .icon {
+            color: var(--dui-color-accent);
+        }
+    }
+
+    &:hover {
+        background-color: var(--dui-color-background-hover);
+    }
+}
