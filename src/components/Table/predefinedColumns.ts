@@ -1,13 +1,13 @@
 import {
     compareString,
     compareNumber,
-    compareDate,
+    // compareDate,
     // compareBoolean,
 } from '@togglecorp/fujs';
 
 import HeaderCell, { HeaderCellProps } from './HeaderCell';
 import Cell, { CellProps } from './Cell';
-import Numeral, { Props as NumeralProps } from '../Numeral';
+import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 // import DateTime, { DateTimeProps } from '../DateTime';
 // import YesNo, { YesNoProps } from '../YesNo';
 
@@ -103,7 +103,7 @@ export function createNumberColumn<D, K>(
         hideable?: boolean;
     },
 ) {
-    const item: Column<D, K, NumeralProps, HeaderCellProps> & {
+    const item: Column<D, K, NumberOutputProps, HeaderCellProps> & {
         valueSelector: (item: D) => number | undefined | null,
         valueComparator: (foo: D, bar: D) => number,
     } = {
@@ -117,8 +117,8 @@ export function createNumberColumn<D, K>(
             orderable: options?.orderable,
             hideable: options?.hideable,
         },
-        cellRenderer: Numeral,
-        cellRendererParams: (_: K, datum: D): NumeralProps => ({
+        cellRenderer: NumberOutput,
+        cellRendererParams: (_: K, datum: D): NumberOutputProps => ({
             value: accessor(datum),
             placeholder: 'N/a',
         }),
