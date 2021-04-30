@@ -124,9 +124,9 @@
     --dui-font-weight-medium: 400;
     --dui-font-weight-bold: 600;
 
-    --dui-width-separator-thin: 0.06em;
-    --dui-width-separator-medium: 0.1em;
-    --dui-width-separator-thick: 0.12em;
+    --dui-width-separator-thin: 1px;
+    --dui-width-separator-medium: 2px;
+    --dui-width-separator-thick: 3px;
 
     /* FIXME: use relative size */
     --dui-border-radius-card: 8px;
