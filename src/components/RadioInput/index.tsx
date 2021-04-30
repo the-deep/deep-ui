@@ -9,15 +9,14 @@ import Radio, { Props as RadioProps } from './Radio';
 
 import styles from './styles.css';
 
-export interface Props<N, O> {
+export interface Props<N, O, V> {
     className?: string;
     options: O[];
     name: N;
-    value: number | string;
-    onChange: (value: number | string, name: N) => void;
-    radioKeySelector: (option: O) => string | number;
+    value: V;
+    onChange: (value: V, name: N) => void;
+    radioKeySelector: (option: O) => V;
     radioLabelSelector: (option: O) => React.ReactNode;
-    input: React.ReactNode;
     label?: React.ReactNode;
     hint?: React.ReactNode;
     error?: string;
@@ -26,11 +25,15 @@ export interface Props<N, O> {
     errorContainerClassName?: string;
     radioListContainerClassName?: string;
     disabled?: boolean;
-    radioRenderer?: (p: RadioProps<N>) => React.ReactElement;
+    radioRenderer?: (p: RadioProps<V>) => React.ReactElement;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function RadioInput<N extends string | number, O extends object>(props: Props<N, O>) {
+function RadioInput<
+    N extends string | number,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    O extends object,
+    V extends string | number
+>(props: Props<N, O, V>) {
     const {
         className,
         name,
@@ -55,13 +58,12 @@ function RadioInput<N extends string | number, O extends object>(props: Props<N,
         }
     }, [onChange, name]);
 
-    const radioRendererParams = React.useCallback((key, item) => ({
-        key,
+    const radioRendererParams = React.useCallback((key: V, item: O) => ({
+        inputName: name,
         label: radioLabelSelector(item),
         name: key,
-        inputName: name,
-        value: key === value,
         onClick: handleRadioClick,
+        value: key === value,
     }), [name, radioLabelSelector, value, handleRadioClick]);
 
     return (
@@ -70,7 +72,8 @@ function RadioInput<N extends string | number, O extends object>(props: Props<N,
                 { label }
             </InputLabel>
             <div className={_cs(styles.radioListContainer, radioListContainerClassName)}>
-                <List
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                <List<O, RadioProps<V>, V, any, any>
                     data={options}
                     rendererParams={radioRendererParams}
                     renderer={radioRenderer}

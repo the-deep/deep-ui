@@ -10,15 +10,15 @@ import InputElementFragments from '../../InputElementFragments';
 import styles from './styles.css';
 
 export interface Props<N> {
-    name: N;
     className?: string;
-    value: boolean;
-    onClick: (name: N) => void;
+    inputName?: string | number;
     label?: React.ReactNode;
-    inputName: string | undefined;
+    name: N;
+    onClick: (name: N) => void;
+    value: boolean;
 }
 
-function Radio<N extends string>(props: Props<N>) {
+function Radio<N extends string | number>(props: Props<N>) {
     const {
         name,
         label,
