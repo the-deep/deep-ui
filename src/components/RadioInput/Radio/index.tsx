@@ -1,5 +1,8 @@
 import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import {
+    _cs,
+    isDefined,
+} from '@togglecorp/fujs';
 import {
     IoRadioButtonOn,
     IoRadioButtonOff,
@@ -55,7 +58,7 @@ function Radio<N extends string | number>(props: Props<N>) {
             <input
                 className={styles.input}
                 type="radio"
-                name={inputName}
+                name={isDefined(inputName) ? String(inputName) : undefined}
                 checked={value}
                 onClick={handleClick}
             />

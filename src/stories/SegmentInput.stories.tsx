@@ -1,6 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
+import { FaApple } from 'react-icons/fa';
+
 import SegmentInput, { Props as SegmentInputProps } from '#components/SegmentInput';
 
 export default {
@@ -23,7 +25,7 @@ const options: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<SegmentInputProps<Option['key'], Option>> = (props) => {
+const Template: Story<SegmentInputProps<Option['key'], Option, Option['label'], any>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string | number) => {
@@ -47,4 +49,11 @@ export const Default = Template.bind({});
 Default.args = {
     name: 'test',
     value: '1',
+    segmentRendererParams: (o) => {
+        if (o.key === '1') {
+            return { icons: <FaApple /> };
+        }
+
+        return {};
+    },
 };

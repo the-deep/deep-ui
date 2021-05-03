@@ -9,7 +9,7 @@ import Radio, { Props as RadioProps } from './Radio';
 
 import styles from './styles.css';
 
-export interface Props<N, O, V> {
+export interface Props<N, O, V, RRP extends RadioProps<V>> {
     className?: string;
     options: O[];
     name: N;
@@ -25,15 +25,17 @@ export interface Props<N, O, V> {
     errorContainerClassName?: string;
     radioListContainerClassName?: string;
     disabled?: boolean;
-    radioRenderer?: (p: RadioProps<V>) => React.ReactElement;
+    radioRenderer: (p: RRP) => React.ReactElement;
+    radioRendererParams: (o: O) => Omit<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'>;
 }
 
 function RadioInput<
     N extends string | number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
-    V extends string | number
->(props: Props<N, O, V>) {
+    V extends string | number,
+    RRP extends RadioProps<V>,
+>(props: Props<N, O, V, RRP>) {
     const {
         className,
         name,
@@ -50,6 +52,7 @@ function RadioInput<
         hintContainerClassName,
         errorContainerClassName,
         radioRenderer = Radio,
+        radioRendererParams: radioRendererParamsFromProps,
     } = props;
 
     const handleRadioClick = React.useCallback((radioKey) => {
@@ -58,13 +61,27 @@ function RadioInput<
         }
     }, [onChange, name]);
 
-    const radioRendererParams = React.useCallback((key: V, item: O) => ({
-        inputName: name,
-        label: radioLabelSelector(item),
-        name: key,
-        onClick: handleRadioClick,
-        value: key === value,
-    }), [name, radioLabelSelector, value, handleRadioClick]);
+    const radioRendererParams: (
+        k: V,
+        i: O,
+    ) => RRP = React.useCallback((key: V, item: O) => {
+        // NOTE: this is required becase this is advance usecase
+        // and the typings
+        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'> = {
+            inputName: name,
+            label: radioLabelSelector(item),
+            name: key,
+            onClick: handleRadioClick,
+            value: key === value,
+        };
+
+        const combinedProps = {
+            ...(radioRendererParamsFromProps ? radioRendererParamsFromProps(item) : undefined),
+            ...radioProps,
+        } as RRP;
+
+        return combinedProps;
+    }, [name, radioLabelSelector, value, handleRadioClick, radioRendererParamsFromProps]);
 
     return (
         <div className={_cs(styles.radioInput, className)}>
@@ -73,7 +90,7 @@ function RadioInput<
             </InputLabel>
             <div className={_cs(styles.radioListContainer, radioListContainerClassName)}>
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                <List<O, RadioProps<V>, V, any, any>
+                <List<O, RadioProps<V> & RRP, V, any, any>
                     data={options}
                     rendererParams={radioRendererParams}
                     renderer={radioRenderer}
