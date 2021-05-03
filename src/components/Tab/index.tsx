@@ -2,31 +2,55 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import RawButton, { RawButtonProps } from '../RawButton';
 
-import { TabKey, TabContext } from '../TabContext';
+import { TabKey, TabContext, TabVariant } from '../TabContext';
 
 import styles from './styles.css';
 
-export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick'>{
+const tabVariantToStyleMap: {
+    [key in TabVariant]: string;
+} = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+};
+
+export const setHashToBrowser = (hash: string | undefined) => {
+    if (hash) {
+        window.location.replace(`#/${hash}`);
+    } else {
+        window.location.hash = '';
+    }
+};
+
+export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick' | 'variant'>{
     name: T;
     activeClassName?: string;
 }
 
 export default function Tab<T extends TabKey>(props: Props<T>) {
+    const context = React.useContext(TabContext);
+
     const {
         variant,
-        activeTab,
-        setActiveTab,
-    } = React.useContext(TabContext);
+        disabled: disabledFromContext,
+    } = context;
 
     const {
         activeClassName,
         className,
         name,
-        disabled,
+        disabled: disabledFromProps,
         ...otherProps
     } = props;
 
-    const isActive = name === activeTab;
+    let isActive = false;
+
+    if (context.useHash) {
+        isActive = context.hash === name;
+    } else {
+        isActive = context.activeTab === name;
+    }
+
+    const disabled = disabledFromContext || disabledFromProps;
 
     return (
         <RawButton
@@ -36,10 +60,9 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
                 isActive && styles.active,
                 isActive && activeClassName,
                 disabled && styles.disabled,
-                variant === 'primary' && styles.primaryTab,
-                variant === 'secondary' && styles.secondaryTab,
+                variant && tabVariantToStyleMap[variant],
             )}
-            onClick={setActiveTab}
+            onClick={context.useHash ? setHashToBrowser : context.setActiveTab}
             name={name}
             disabled={disabled}
             role="tab"

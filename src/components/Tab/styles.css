@@ -13,7 +13,7 @@
         pointer-events: none;
     }
 
-    &.primary-tab {
+    &.primary {
         --color-separator: var(--dui-color-separator);
         border-bottom: var(--dui-width-separator-medium) solid var(--color-separator);
 
@@ -28,7 +28,7 @@
         }
     }
 
-    &.secondary-tab {
+    &.secondary {
         --background-color: var(--dui-color-white);
         background-color: var(--background-color);
 

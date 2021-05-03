@@ -7,7 +7,7 @@ export interface Props extends React.HTMLProps<HTMLDivElement> {
 }
 
 export default function TabPanel(props: Props) {
-    const { activeTab } = React.useContext(TabContext);
+    const context = React.useContext(TabContext);
 
     const {
         name,
@@ -15,7 +15,15 @@ export default function TabPanel(props: Props) {
         ...otherProps
     } = props;
 
-    if (name !== activeTab) {
+    let isActive = false;
+
+    if (context.useHash) {
+        isActive = context.hash === name;
+    } else {
+        isActive = context.activeTab === name;
+    }
+
+    if (!isActive) {
         return null;
     }
 
