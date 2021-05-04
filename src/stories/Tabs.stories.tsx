@@ -84,6 +84,12 @@ Secondary.args = {
     variant: 'secondary',
 };
 
+export const Step = Template.bind({});
+Step.args = {
+    value: 'tab-three',
+    variant: 'step',
+};
+
 export function DisabledTab() {
     const [value, setValue] = useState('tab-one');
     return (

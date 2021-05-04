@@ -12,11 +12,13 @@ const tabVariantToStyleMap: {
 } = {
     primary: styles.primary,
     secondary: styles.secondary,
+    step: styles.step,
 };
 
 export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick' | 'variant'>{
     name: T;
     activeClassName?: string;
+    borderWrapperClassName?: string;
 }
 
 export default function Tab<T extends TabKey>(props: Props<T>) {
@@ -32,6 +34,7 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
         className,
         name,
         disabled: disabledFromProps,
+        borderWrapperClassName,
         ...otherProps
     } = props;
 
@@ -44,8 +47,7 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
     }
 
     const disabled = disabledFromContext || disabledFromProps;
-
-    return (
+    const button = (
         <RawButton
             className={_cs(
                 className,
@@ -63,6 +65,24 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
             {...otherProps}
         />
     );
+
+    // The clip path used for step tab does not support border
+    // So we wrap it into a container and set its background as border
+    if (variant === 'step') {
+        return (
+            <div
+                className={_cs(
+                    styles.borderWrapper,
+                    disabled && styles.disabled,
+                    borderWrapperClassName,
+                )}
+            >
+                { button }
+            </div>
+        );
+    }
+
+    return button;
 }
 
 export interface TabListProps extends React.HTMLProps<HTMLDivElement> {
