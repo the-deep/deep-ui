@@ -37,8 +37,9 @@ function Segment<N>(props: SegmentProps<N>) {
 
 export interface Props<
     N, O, V, RRP extends RadioProps<V>
-> extends Omit<RadioInputProps<N, O, V, RRP>, 'radioRendererParams' | 'radioRenderer'> {
+> extends Omit<RadioInputProps<N, O, V, RRP>, 'radioRendererParams' | 'radioRenderer' | 'radioListContainerClassName'> {
     segmentRendererParams: RadioInputProps<N, O, V, RRP>['radioRendererParams'];
+    segmentListContainerClassName: RadioInputProps<N, O, V, RRP>['radioListContainerClassName'];
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -51,6 +52,7 @@ function SegmentInput<
 >(props: Props<N, O, V, RRP>) {
     const {
         segmentRendererParams,
+        segmentListContainerClassName,
         ...otherProps
     } = props;
     return (
@@ -58,6 +60,7 @@ function SegmentInput<
             {...otherProps}
             radioRenderer={Segment}
             radioRendererParams={segmentRendererParams}
+            radioListContainerClassName={segmentListContainerClassName}
         />
     );
 }

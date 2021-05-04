@@ -20,6 +20,7 @@ export interface Props<N> {
     onClick: (name: N) => void;
     value: boolean;
     disabled?: boolean;
+    readOnly?: boolean;
 }
 
 function Radio<N extends string | number>(props: Props<N>) {
@@ -31,6 +32,7 @@ function Radio<N extends string | number>(props: Props<N>) {
         inputName,
         onClick,
         disabled,
+        readOnly,
     } = props;
 
     const handleClick = React.useCallback(() => {
@@ -47,6 +49,7 @@ function Radio<N extends string | number>(props: Props<N>) {
                 value && styles.active,
                 className,
                 disabled && styles.disabled,
+                readOnly && styles.readOnly,
             )}
         >
             <InputElementFragments

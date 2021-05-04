@@ -25,6 +25,7 @@ export interface Props<N, O, V, RRP extends RadioProps<V>> {
     errorContainerClassName?: string;
     radioListContainerClassName?: string;
     disabled?: boolean;
+    readOnly?: boolean;
     radioRenderer: (p: RRP) => React.ReactElement;
     radioRendererParams: (o: O) => Omit<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'>;
 }
@@ -54,13 +55,14 @@ function RadioInput<
         radioRenderer = Radio,
         radioRendererParams: radioRendererParamsFromProps,
         disabled,
+        readOnly,
     } = props;
 
     const handleRadioClick = React.useCallback((radioKey) => {
-        if (onChange) {
+        if (onChange && !readOnly) {
             onChange(radioKey, name);
         }
-    }, [onChange, name]);
+    }, [readOnly, onChange, name]);
 
     const radioRendererParams: (
         k: V,
@@ -68,13 +70,14 @@ function RadioInput<
     ) => RRP = React.useCallback((key: V, item: O) => {
         // NOTE: this is required becase this is advance usecase
         // and the typings
-        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value' | 'disabled'> = {
+        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value' | 'disabled' | 'readOnly'> = {
             inputName: name,
             label: radioLabelSelector(item),
             name: key,
             onClick: handleRadioClick,
             value: key === value,
             disabled,
+            readOnly,
         };
 
         const combinedProps = {
@@ -83,7 +86,15 @@ function RadioInput<
         } as RRP;
 
         return combinedProps;
-    }, [name, radioLabelSelector, value, handleRadioClick, radioRendererParamsFromProps, disabled]);
+    }, [
+        name,
+        radioLabelSelector,
+        value,
+        handleRadioClick,
+        radioRendererParamsFromProps,
+        disabled,
+        readOnly,
+    ]);
 
     return (
         <div

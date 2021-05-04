@@ -36,9 +36,10 @@ export interface Props<N> extends Omit<
     big?: boolean;
     name: N;
     onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
+    readOnly?: boolean;
 }
 
-type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big';
+type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly';
 export function useButtonFeatures(
     props: Pick<Props<void>, ButtonFeatureKeys>,
 ) {
@@ -53,14 +54,16 @@ export function useButtonFeatures(
         icons,
         actions,
         big,
+        readOnly,
     } = props;
 
     const buttonClassName = _cs(
-        className,
         styles.button,
         variant,
         buttonVariantToStyleMap[variant],
+        readOnly && styles.readOnly,
         big && styles.big,
+        className,
     );
 
     const buttonChildren = (
@@ -104,14 +107,15 @@ function Button<N>(props: Props<N>) {
         big,
         name,
         onClick,
+        readOnly,
         ...otherProps
     } = props;
 
     const handleButtonClick = React.useCallback((e) => {
-        if (onClick) {
+        if (onClick && !readOnly) {
             onClick(name, e);
         }
-    }, [name, onClick]);
+    }, [name, onClick, readOnly]);
 
     const buttonProps = useButtonFeatures({
         variant,
@@ -124,8 +128,10 @@ function Button<N>(props: Props<N>) {
         actions,
         disabled,
         big,
+        readOnly,
     });
 
+    // FIXME: Use raw button
     return (
         <button
             type="button"

@@ -1,6 +1,8 @@
 .radio {
+    --cursor: default;
     display: flex;
     align-items: center;
+    cursor: var(--cursor);
     padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
     .icon {
@@ -22,10 +24,12 @@
     }
 
     &:not(.disabled) {
-        cursor: pointer;
-
         &:hover {
             background-color: var(--dui-color-background-hover);
+        }
+
+        &:not(.read-only) {
+            --cursor: pointer;
         }
     }
 }
