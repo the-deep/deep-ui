@@ -1,9 +1,17 @@
 import React from 'react';
 
-const getHashFromBrowser = () => window.location.hash.substr(2);
+import {
+    getHashFromBrowser,
+    setHashToBrowser,
+} from '../utils';
 
-function useHash() {
+function useHash(initialValue?: string) {
+    const initialValueRef = React.useRef<string | undefined>(initialValue);
     const [hash, setHash] = React.useState(getHashFromBrowser());
+
+    React.useEffect(() => {
+        setHashToBrowser(initialValueRef.current);
+    }, []);
 
     const handleHashChange = React.useCallback(() => {
         setHash(getHashFromBrowser());

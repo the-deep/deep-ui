@@ -16,7 +16,7 @@ export default {
 const Template: Story<TabsProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const handleChange = (e: boolean | undefined) => {
+    const handleChange = (e: string) => {
         updateArgs({ value: e });
     };
 
@@ -75,6 +75,7 @@ Default.args = {
 export const Hash = Template.bind({});
 Hash.args = {
     useHash: true,
+    initialHash: 'tab-two',
 };
 
 export const Secondary = Template.bind({});

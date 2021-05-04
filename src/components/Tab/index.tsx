@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 import RawButton, { RawButtonProps } from '../RawButton';
 
 import { TabKey, TabContext, TabVariant } from '../TabContext';
+import { setHashToBrowser } from '../../utils';
 
 import styles from './styles.css';
 
@@ -11,14 +12,6 @@ const tabVariantToStyleMap: {
 } = {
     primary: styles.primary,
     secondary: styles.secondary,
-};
-
-export const setHashToBrowser = (hash: string | undefined) => {
-    if (hash) {
-        window.location.replace(`#/${hash}`);
-    } else {
-        window.location.hash = '';
-    }
 };
 
 export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick' | 'variant'>{

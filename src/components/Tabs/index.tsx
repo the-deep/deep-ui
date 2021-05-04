@@ -21,6 +21,7 @@ export type Props<T extends TabKey> = BaseProps & (
         onChange: (key: T) => void;
     } | {
         useHash: true;
+        initialHash?: string;
         value?: never;
         onChange?: never;
     }
@@ -33,7 +34,8 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
         disabled,
     } = props;
 
-    const hash = useHash();
+    // eslint-disable-next-line react/destructuring-assignment
+    const hash = useHash(props.useHash ? props.initialHash : undefined);
 
     const contextValue = React.useMemo(() => {
         if (props.useHash) {
