@@ -9,4 +9,8 @@
     color: var(--color);
     font-size: var(--dui-font-size-small);
     font-weight: var(--dui-font-weight-bold);
+
+    &.disabled {
+        opacity: var(--dui-opacity-disabled-element);
+    }
 }

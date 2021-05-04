@@ -23,7 +23,7 @@ const options: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<RadioInputProps<Option['key'], Option>> = (props) => {
+const Template: Story<RadioInputProps<Option['key'], Option, Option['label'], any>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string | number) => {

@@ -10,6 +10,7 @@ interface Props {
     className?: string;
     children?: React.ReactNode;
     uiMode?: UiMode;
+    disabled?: boolean;
 }
 
 function InputLabel(props: Props) {
@@ -17,6 +18,7 @@ function InputLabel(props: Props) {
         children,
         className,
         uiMode,
+        disabled,
     } = props;
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
@@ -31,6 +33,7 @@ function InputLabel(props: Props) {
                 _cs(
                     styles.inputLabel,
                     uiModeClassName,
+                    disabled && styles.disabled,
                     className,
                 )
             }

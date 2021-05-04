@@ -1,7 +1,6 @@
 .radio {
     display: flex;
     align-items: center;
-    cursor: pointer;
     padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
     .icon {
@@ -18,7 +17,15 @@
         }
     }
 
-    &:hover {
-        background-color: var(--dui-color-background-hover);
+    &.disabled {
+        opacity: var(--dui-opacity-disabled-element);
+    }
+
+    &:not(.disabled) {
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--dui-color-background-hover);
+        }
     }
 }

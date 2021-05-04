@@ -53,6 +53,7 @@ function RadioInput<
         errorContainerClassName,
         radioRenderer = Radio,
         radioRendererParams: radioRendererParamsFromProps,
+        disabled,
     } = props;
 
     const handleRadioClick = React.useCallback((radioKey) => {
@@ -67,12 +68,13 @@ function RadioInput<
     ) => RRP = React.useCallback((key: V, item: O) => {
         // NOTE: this is required becase this is advance usecase
         // and the typings
-        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'> = {
+        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value' | 'disabled'> = {
             inputName: name,
             label: radioLabelSelector(item),
             name: key,
             onClick: handleRadioClick,
             value: key === value,
+            disabled,
         };
 
         const combinedProps = {
@@ -81,11 +83,20 @@ function RadioInput<
         } as RRP;
 
         return combinedProps;
-    }, [name, radioLabelSelector, value, handleRadioClick, radioRendererParamsFromProps]);
+    }, [name, radioLabelSelector, value, handleRadioClick, radioRendererParamsFromProps, disabled]);
 
     return (
-        <div className={_cs(styles.radioInput, className)}>
-            <InputLabel className={labelContainerClassName}>
+        <div
+            className={_cs(
+                styles.radioInput,
+                disabled && styles.disabled,
+                className,
+            )}
+        >
+            <InputLabel
+                className={labelContainerClassName}
+                disabled={disabled}
+            >
                 { label }
             </InputLabel>
             <div className={_cs(styles.radioListContainer, radioListContainerClassName)}>
