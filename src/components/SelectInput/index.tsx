@@ -56,7 +56,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
                 labelSelector={labelSelector}
                 onSearchValueChange={setSearchInputValue}
                 searchOptions={searchOptions}
-                searchOptionsShownInitially
+                // searchOptionsShownInitially
             />
         );
     }
@@ -72,7 +72,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
             labelSelector={labelSelector}
             onSearchValueChange={setSearchInputValue}
             searchOptions={searchOptions}
-            searchOptionsShownInitially
+            // searchOptionsShownInitially
         />
     );
 }

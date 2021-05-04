@@ -1,0 +1,39 @@
+import React from 'react';
+import SearchMultiSelectInput, {
+    Props as SearchMultiSelectInputProps,
+} from '../SearchMultiSelectInput';
+import { rankedSearchOnList } from '../../utils';
+
+type Def = { containerClassName?: string };
+type OptionKey = string | number;
+
+export type MultiSelectInputProps<
+    T extends OptionKey,
+    K extends string,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    O extends object,
+    P extends Def,
+> = SearchMultiSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'onShowDropdownChange'>;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+function MultiSelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
+    props: MultiSelectInputProps<T, K, O, P>,
+) {
+    const {
+        name,
+        options,
+        ...otherProps
+    } = props;
+
+    return (
+        <SearchMultiSelectInput
+            {...otherProps}
+            name={name}
+            options={options}
+            sortFunction={rankedSearchOnList}
+            searchOptions={options}
+        />
+    );
+}
+
+export default MultiSelectInput;

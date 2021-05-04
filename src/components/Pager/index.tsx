@@ -168,11 +168,14 @@ export type PagerProps = {
     onItemsPerPageChange: (pageCapacity: number) => void;
 })
 
-const defaultOptions: PagerOption[] = [
+const defaultItemPerPageOptions: PagerOption[] = [
     { label: '10 / page', key: 10 },
     { label: '25 / page', key: 25 },
     { label: '50 / page', key: 50 },
 ];
+
+const itemsPerPageKeySelector = (o: PagerOption) => o.key;
+const itemsPerPageLabelSelector = (o: PagerOption) => o.label;
 
 function Pager(props: PagerProps) {
     const {
@@ -316,7 +319,7 @@ function Pager(props: PagerProps) {
         </div>
     );
 
-    const itemsPerPageOptions = options ?? defaultOptions;
+    const itemsPerPageOptions = options ?? defaultItemPerPageOptions;
 
     const minOption = useMemo(() => (
         Math.min(0, ...itemsPerPageOptions.map((opt) => opt.key))
@@ -329,13 +332,13 @@ function Pager(props: PagerProps) {
                 name="itemsPerPageSelection"
                 className={styles.input}
                 options={itemsPerPageOptions}
-                keySelector={(item) => item.key}
-                labelSelector={(item) => item.label}
+                keySelector={itemsPerPageKeySelector}
+                labelSelector={itemsPerPageLabelSelector}
                 value={maxItemsPerPage}
                 // eslint-disable-next-line react/destructuring-assignment
                 onChange={props.onItemsPerPageChange}
                 disabled={disabled}
-                searchPlaceholder=""
+                placeholder=""
                 optionsPopupClassName={styles.perPageOptionPopup}
                 nonClearable
             />

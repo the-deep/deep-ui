@@ -2,18 +2,20 @@ import React from 'react';
 
 import styles from './styles.css';
 
-interface DefaultEmptyComponentProps {
-    optionsPending?: boolean;
-    isFiltered?: boolean;
+export interface Props {
+    pending?: boolean;
+    filtered?: boolean;
+    empty?: boolean;
 }
 
-function EmptyOptions(props: DefaultEmptyComponentProps) {
+function EmptyOptions(props: Props) {
     const {
-        isFiltered = false,
-        optionsPending = false,
+        filtered = false,
+        pending = false,
+        empty = false,
     } = props;
 
-    if (optionsPending) {
+    if (pending) {
         // FIXME: use loading
         return (
             <div className={styles.empty}>
@@ -22,7 +24,11 @@ function EmptyOptions(props: DefaultEmptyComponentProps) {
         );
     }
 
-    if (isFiltered) {
+    if (!empty) {
+        return null;
+    }
+
+    if (filtered) {
         return (
             <div className={styles.empty}>
                 No matching options available.
@@ -36,4 +42,4 @@ function EmptyOptions(props: DefaultEmptyComponentProps) {
         </div>
     );
 }
-export default React.memo(EmptyOptions);
+export default EmptyOptions;

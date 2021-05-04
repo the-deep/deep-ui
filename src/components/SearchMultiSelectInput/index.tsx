@@ -2,35 +2,16 @@ import React, { useCallback, useMemo, useState } from 'react';
 import {
     _cs,
     listToMap,
+    isDefined,
     unique,
 } from '@togglecorp/fujs';
-import { MdCheck } from 'react-icons/md';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
 import { rankedSearchOnList } from '../../utils';
+import Option from './Option';
 
 import styles from './styles.css';
-
-interface OptionProps {
-    children: React.ReactNode;
-}
-function Option(props: OptionProps) {
-    const {
-        children,
-    } = props;
-
-    return (
-        <>
-            <div className={styles.icon}>
-                <MdCheck />
-            </div>
-            <div className={styles.label}>
-                { children }
-            </div>
-        </>
-    );
-}
 
 type Def = { containerClassName?: string, title?: string; };
 type OptionKey = string | number;
@@ -43,7 +24,8 @@ export type Props<
     P extends Def,
     OMISSION extends string,
 > = Omit<{
-    value: T | undefined | null;
+    value: T[] | undefined | null;
+    onChange: (newValue: T[], name: K) => void;
     options: O[] | undefined | null;
     searchOptions?: O[] | undefined | null;
     keySelector: (option: O) => T;
@@ -77,14 +59,11 @@ export type Props<
         | 'focusedKey'
         | 'onFocusedKeyChange'
     >
-) & (
-    { nonClearable: true; onChange: (newValue: T, name: K) => void }
-    | { nonClearable?: false; onChange: (newValue: T | undefined, name: K) => void }
 );
 
 const emptyList: unknown[] = [];
 
-function SearchSelectInput<
+function SearchMultiSelectInput<
     T extends OptionKey,
     K extends string,
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -101,7 +80,7 @@ function SearchSelectInput<
         onOptionsChange,
         options: optionsFromProps,
         optionsPending,
-        value,
+        value: valueFromProps,
         sortFunction,
         searchOptions: searchOptionsFromProps,
         onSearchValueChange,
@@ -111,6 +90,7 @@ function SearchSelectInput<
 
     const options = optionsFromProps ?? (emptyList as O[]);
     const searchOptions = searchOptionsFromProps ?? (emptyList as O[]);
+    const value = valueFromProps ?? (emptyList as T[]);
 
     const [searchInputValue, setSearchInputValue] = React.useState('');
     const [showDropdown, setShowDropdown] = React.useState(false);
@@ -124,6 +104,13 @@ function SearchSelectInput<
         [key: string]: boolean,
     }>({});
 
+    const optionsMap = useMemo(
+        () => (
+            listToMap(options, keySelector, (i) => i)
+        ),
+        [options, keySelector],
+    );
+
     const optionsLabelMap = useMemo(
         () => (
             listToMap(options, keySelector, labelSelector)
@@ -131,15 +118,17 @@ function SearchSelectInput<
         [options, keySelector, labelSelector],
     );
 
-    const valueDisplay = value ? optionsLabelMap[value] ?? '?' : '';
+    const valueDisplay = useMemo(
+        () => (
+            value.map((v) => optionsLabelMap[v] ?? '?').join(', ')
+        ),
+        [value, optionsLabelMap],
+    );
 
     // NOTE: we can skip this calculation if optionsShowInitially is false
     const selectedOptions = useMemo(
-        () => {
-            const selectedValue = options?.find((item) => keySelector(item) === value);
-            return !selectedValue ? [] : [selectedValue];
-        },
-        [value, options, keySelector],
+        () => value.map((valueKey) => optionsMap[valueKey]).filter(isDefined),
+        [value, optionsMap],
     );
 
     const realOptions = useMemo(
@@ -196,12 +185,12 @@ function SearchSelectInput<
             if (myVal) {
                 setSelectedKeys(
                     listToMap(
-                        value ? [value] : [],
+                        value,
                         (item) => item,
                         () => true,
                     ),
                 );
-                setFocusedKey(value ? { key: value } : undefined);
+                setFocusedKey(undefined);
             } else {
                 setSelectedKeys({});
                 setFocusedKey(undefined);
@@ -216,42 +205,51 @@ function SearchSelectInput<
 
     const optionRendererParams = useCallback(
         (key: OptionKey, option: O) => {
-            const isActive = key === value;
+            const isActive = value.findIndex((item) => item === key) !== -1;
 
             return {
                 children: labelSelector(option),
                 containerClassName: _cs(styles.option, isActive && styles.active),
                 title: labelSelector(option),
+                isActive,
             };
         },
-        [value, labelSelector],
+        [labelSelector, value],
     );
 
+    // FIXME: value should not be on dependency list
     const handleOptionClick = useCallback(
         (k: T, v: O) => {
-            if (onOptionsChange) {
-                onOptionsChange(((existingOptions) => {
-                    const safeOptions = existingOptions ?? [];
-                    const opt = safeOptions.find((item) => keySelector(item) === k);
-                    if (opt) {
-                        return existingOptions;
-                    }
-                    return [...safeOptions, v];
-                }));
+            const newValue = [...value];
+
+            const optionKeyIndex = value.findIndex((d) => d === k);
+            if (optionKeyIndex !== -1) {
+                newValue.splice(optionKeyIndex, 1);
+            } else {
+                newValue.push(k);
+
+                if (onOptionsChange) {
+                    onOptionsChange(((existingOptions) => {
+                        const safeOptions = existingOptions ?? [];
+                        const opt = safeOptions.find((item) => keySelector(item) === k);
+                        if (opt) {
+                            return existingOptions;
+                        }
+                        return [...safeOptions, v];
+                    }));
+                }
             }
-            onChange(k, name);
+
+            onChange(newValue, name);
         },
-        [onChange, name, onOptionsChange, keySelector],
+        [value, onChange, name, onOptionsChange, keySelector],
     );
 
     const handleClear = useCallback(
         () => {
-            if (!props.nonClearable) {
-                props.onChange(undefined, name);
-            }
+            onChange([], name);
         },
-        // eslint-disable-next-line react/destructuring-assignment
-        [name, props.onChange, props.nonClearable],
+        [name, onChange],
     );
 
     return (
@@ -276,9 +274,10 @@ function SearchSelectInput<
             onFocusedChange={setFocused}
             focusedKey={focusedKey}
             onFocusedKeyChange={setFocusedKey}
-            persistentOptionPopup={false}
+            persistentOptionPopup
+            nonClearable={false}
         />
     );
 }
 
-export default SearchSelectInput;
+export default SearchMultiSelectInput;
