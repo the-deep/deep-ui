@@ -86,6 +86,7 @@ export { default as useFiltering, useFilterState, FilterContext } from './compon
 export { HideContext } from './components/Table/useHiding';
 export { default as useOrdering, useOrderState, OrderContext } from './components/Table/useOrdering';
 export { default as useSorting, useSortState, SortContext } from './components/Table/useSorting';
+export { default as useRowExpansion, ExpansionOptions, ExpansionRowChildrenProps } from './components/Table/useRowExpansion';
 
 export type { Props as TabListProps } from './components/TabList';
 export { default as TabList } from './components/TabList';

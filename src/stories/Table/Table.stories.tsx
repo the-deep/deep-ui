@@ -1,8 +1,13 @@
 import React from 'react';
+import { _cs } from '@togglecorp/fujs';
 // import { isDefined } from '@togglecorp/fujs';
 
 import { Story } from '@storybook/react/types-6-0';
-import Table, { Props as TableProps, Column } from '#components/Table';
+import Table, {
+    Props as TableProps,
+    Column,
+} from '#components/Table';
+import useRowExpansion from '#components/Table/useRowExpansion';
 // import { FilterType } from '#components/Table/types';
 // import useFiltering, { useFilterState, FilterContext } from '#components/Table/useFiltering';
 // import useOrdering, { useOrderState, OrderContext } from '#components/Table/useOrdering';
@@ -162,4 +167,35 @@ export const Large = Template.bind({});
 Large.args = {
     keySelector: (d) => d.id,
     variant: 'large',
+};
+
+export const Expandable: Story<
+    TableProps<Program, number, Column<Program, number, any, any>>
+> = (args) => {
+    const keySelector = (d: Program) => d.id;
+
+    const [rowModifier] = useRowExpansion<Program, number>(
+        ({ datum }) => (
+            <div className={styles.expandedRow}>
+                {datum.name}
+            </div>
+        ),
+        {
+            expandedRowClassName: styles.expandedRow,
+            expandedCellClassName: styles.expandedCell,
+            expansionCellClassName: styles.expansionCell,
+            expansionRowClassName: styles.expansionRow,
+        },
+    );
+
+    return (
+        <Table
+            {...args}
+            columns={columns}
+            data={data}
+            className={styles.table}
+            keySelector={keySelector}
+            rowModifier={rowModifier}
+        />
+    );
 };
