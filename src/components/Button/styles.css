@@ -9,6 +9,7 @@
     --font-size: var(--dui-font-size-medium);
     --border-radius: calc(var(--font-size) + var(--dui-spacing-medium));
     --text-transform: none;
+    --cursor: default;
 
     display: flex;
     position: relative;
@@ -17,7 +18,7 @@
     border: var(--dui-width-separator-thin) solid var(--color-border);
     border-radius: var(--border-radius);
     background-color: var(--color-background);
-    cursor: pointer;
+    cursor: var(--cursor);
     padding: var(--padding);
     width: fit-content;
     overflow: hidden;
@@ -71,6 +72,10 @@
     }
 
     &:not(:disabled) {
+        &:not(&.read-only) {
+            --cursor: pointer;
+        }
+
         &.primary {
             --color-border: var(--dui-color-background-primary-button);
             --color-background: var(--dui-color-background-primary-button);
