@@ -1,0 +1,23 @@
+.image-preview {
+    position: relative;
+    width: 100%;
+
+    .tools {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        background-color: var(--dui-color-backdrop-dark);
+        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+
+        .tool-button {
+            padding: var(--dui-spacing-small);
+            color: var(--dui-color-text-on-dark);
+            font-size: 1.2em;
+        }
+    }
+
+    .image {
+        width: 100%;
+    }
+}
