@@ -48,3 +48,24 @@ Default.args = {
     name: 'test',
     value: '1',
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    name: 'test',
+    value: '1',
+    disabled: true,
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    name: 'test',
+    value: '1',
+    readOnly: true,
+};
+
+export const Error = Template.bind({});
+Error.args = {
+    name: 'test',
+    value: '1',
+    error: 'This is wrong',
+};

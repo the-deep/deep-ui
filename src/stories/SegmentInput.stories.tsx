@@ -57,3 +57,45 @@ Default.args = {
         return {};
     },
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    name: 'test',
+    value: '1',
+    disabled: true,
+    segmentRendererParams: (o) => {
+        if (o.key === '1') {
+            return { icons: <FaApple /> };
+        }
+
+        return {};
+    },
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    name: 'test',
+    value: '1',
+    readOnly: true,
+    segmentRendererParams: (o) => {
+        if (o.key === '1') {
+            return { icons: <FaApple /> };
+        }
+
+        return {};
+    },
+};
+
+export const Error = Template.bind({});
+Error.args = {
+    name: 'test',
+    value: '1',
+    error: 'This is wrong',
+    segmentRendererParams: (o) => {
+        if (o.key === '1') {
+            return { icons: <FaApple /> };
+        }
+
+        return {};
+    },
+};

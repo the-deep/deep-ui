@@ -40,6 +40,18 @@ WithIconsAndActions.args = {
     actions: <IoShuffle />,
 };
 
+export const Disabled = Template.bind({});
+Disabled.args = {
+    children: 'Click me!',
+    disabled: true,
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    children: 'Click me!',
+    readOnly: true,
+};
+
 export const Variants = () => (
     <div className={styles.buttonVariants}>
         <section>
@@ -124,6 +136,53 @@ export const Variants = () => (
                     variant="action"
                     name="disabled-action-button"
                     disabled
+                >
+                    Action
+                </Button>
+            </div>
+        </section>
+        <section>
+            <h3>Read Only</h3>
+            <div className={styles.content}>
+                <Button
+                    readOnly
+                    name="readOnly-button"
+                >
+                    Default
+                </Button>
+                <Button
+                    variant="primary"
+                    name="readOnly-primary-button"
+                    readOnly
+
+                >
+                    Primary
+                </Button>
+                <Button
+                    variant="secondary"
+                    name="readOnly-secondary-button"
+                    readOnly
+                >
+                    Secondary
+                </Button>
+                <Button
+                    variant="tertiary"
+                    name="readOnly-tertiary-button"
+                    readOnly
+                >
+                    Tertiary
+                </Button>
+                <Button
+                    variant="inverted"
+                    name="readOnly-inverted-button"
+                    readOnly
+                >
+                    Inverted
+                </Button>
+                <Button
+                    variant="action"
+                    name="readOnly-action-button"
+                    readOnly
                 >
                     Action
                 </Button>
