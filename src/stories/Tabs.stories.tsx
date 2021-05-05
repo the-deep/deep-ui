@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Story } from '@storybook/react/types-6-0';
+import { useArgs } from '@storybook/client-api';
 
-import Tabs from '#components/Tabs';
+import Tabs, { Props as TabsProps } from '#components/Tabs';
 import Tab from '#components/Tab';
 import TabList from '#components/TabList';
 import TabPanel from '#components/TabPanel';
@@ -11,13 +13,15 @@ export default {
     argTypes: {},
 };
 
-export function BasicTabs() {
-    const [value, setValue] = useState('tab-one');
-    return (
-        <Tabs
-            value={value}
-            onChange={setValue}
-        >
+const Template: Story<TabsProps<string>> = (args) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const handleChange = (e: string) => {
+        updateArgs({ value: e });
+    };
+
+    const children = (
+        <>
             <TabList>
                 <Tab name="tab-one">
                     Home
@@ -39,44 +43,52 @@ export function BasicTabs() {
             <TabPanel name="tab-three">
                 Your notifications are here!
             </TabPanel>
-        </Tabs>
+        </>
     );
-}
 
-export function SecondaryTab() {
-    const [value, setValue] = useState('tab-one');
+    if (args.useHash) {
+        return (
+            <Tabs
+                {...args}
+            >
+                {children}
+            </Tabs>
+        );
+    }
+
     return (
         <Tabs
+            {...args}
             value={value}
-            onChange={setValue}
-            variant="secondary"
+            onChange={handleChange}
         >
-            <TabList>
-                <Tab name="tab-one">
-                    Home
-                </Tab>
-                <Tab name="tab-two">
-                    Profile
-                </Tab>
-                <Tab name="tab-three">
-                    Notifications
-                </Tab>
-            </TabList>
-
-            <TabPanel name="tab-one">
-                This is the home page!
-            </TabPanel>
-            <TabPanel
-                name="tab-two"
-            >
-                This is the profile page!
-            </TabPanel>
-            <TabPanel name="tab-three">
-                Your notifications are here!
-            </TabPanel>
+            {children}
         </Tabs>
     );
-}
+};
+
+export const Default = Template.bind({});
+Default.args = {
+    value: 'tab-one',
+};
+
+export const Hash = Template.bind({});
+Hash.args = {
+    useHash: true,
+    initialHash: 'tab-two',
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+    value: 'tab-one',
+    variant: 'secondary',
+};
+
+export const Step = Template.bind({});
+Step.args = {
+    value: 'tab-three',
+    variant: 'step',
+};
 
 export function DisabledTab() {
     const [value, setValue] = useState('tab-one');

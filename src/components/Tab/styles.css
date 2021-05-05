@@ -13,7 +13,7 @@
         pointer-events: none;
     }
 
-    &.primary-tab {
+    &.primary {
         --color-separator: var(--dui-color-separator);
         border-bottom: var(--dui-width-separator-medium) solid var(--color-separator);
 
@@ -28,7 +28,7 @@
         }
     }
 
-    &.secondary-tab {
+    &.secondary {
         --background-color: var(--dui-color-white);
         background-color: var(--background-color);
 
@@ -40,5 +40,55 @@
         &.disabled {
             --text-color: var(--dui-color-text-disabled);
         }
+    }
+
+    &.step {
+        --background-color: var(--dui-color-white);
+        --text-color: var(--dui-color-accent);
+        position: relative;
+        background-color: var(--background-color);
+
+        &.active {
+            --background-color: var(--dui-color-background-information);
+        }
+
+        &.disabled {
+            --text-color: var(--dui-color-text-disabled);
+        }
+    }
+}
+
+.border-wrapper {
+    --offset: 12px;
+    background-color: var(--dui-color-accent);
+    clip-path: polygon(calc(100% - var(--offset)) 0%, 100% 50%, calc(100% - var(--offset)) 100%, 0% 100%, var(--offset) 50%, 0% 0%);
+    padding: var(--dui-width-separator-thin);
+
+    .step {
+        clip-path: polygon(calc(100% - var(--offset)) 0%, 100% 50%, calc(100% - var(--offset)) 100%, 0% 100%, var(--offset) 50%, 0% 0%);
+    }
+
+    &:first-child {
+        clip-path: polygon(calc(100% - var(--offset)) 0%, 100% 50%, calc(100% - var(--offset)) 100%, 0% 100%, 0% 0%);
+
+        .step {
+            clip-path: polygon(calc(100% - var(--offset)) 0%, 100% 50%, calc(100% - var(--offset)) 100%, 0% 100%, 0% 0%);
+        }
+    }
+
+    &:last-child {
+        clip-path: polygon(100% 0%, 100% 100%, 0% 100%, var(--offset) 50%, 0% 0%);
+
+        .step {
+            clip-path: polygon(100% 0%, 100% 100%, 0% 100%, var(--offset) 50%, 0% 0%);
+        }
+    }
+
+    &:not(:first-child) {
+        margin-left: calc(-1 * var(--offset) + var(--dui-width-separator-medium));
+    }
+
+    &.disabled {
+        background-color: var(--dui-color-separator);
     }
 }

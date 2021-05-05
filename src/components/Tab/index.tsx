@@ -2,33 +2,52 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import RawButton, { RawButtonProps } from '../RawButton';
 
-import { TabKey, TabContext } from '../TabContext';
+import { TabKey, TabContext, TabVariant } from '../TabContext';
+import { setHashToBrowser } from '../../utils';
 
 import styles from './styles.css';
 
-export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick'>{
+const tabVariantToStyleMap: {
+    [key in TabVariant]: string;
+} = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+    step: styles.step,
+};
+
+export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClick' | 'variant'>{
     name: T;
     activeClassName?: string;
+    borderWrapperClassName?: string;
 }
 
 export default function Tab<T extends TabKey>(props: Props<T>) {
+    const context = React.useContext(TabContext);
+
     const {
         variant,
-        activeTab,
-        setActiveTab,
-    } = React.useContext(TabContext);
+        disabled: disabledFromContext,
+    } = context;
 
     const {
         activeClassName,
         className,
         name,
-        disabled,
+        disabled: disabledFromProps,
+        borderWrapperClassName,
         ...otherProps
     } = props;
 
-    const isActive = name === activeTab;
+    let isActive = false;
 
-    return (
+    if (context.useHash) {
+        isActive = context.hash === name;
+    } else {
+        isActive = context.activeTab === name;
+    }
+
+    const disabled = disabledFromContext || disabledFromProps;
+    const button = (
         <RawButton
             className={_cs(
                 className,
@@ -36,10 +55,9 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
                 isActive && styles.active,
                 isActive && activeClassName,
                 disabled && styles.disabled,
-                variant === 'primary' && styles.primaryTab,
-                variant === 'secondary' && styles.secondaryTab,
+                variant && tabVariantToStyleMap[variant],
             )}
-            onClick={setActiveTab}
+            onClick={context.useHash ? setHashToBrowser : context.setActiveTab}
             name={name}
             disabled={disabled}
             role="tab"
@@ -47,6 +65,24 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
             {...otherProps}
         />
     );
+
+    // The clip path used for step tab does not support border
+    // So we wrap it into a container and set its background as border
+    if (variant === 'step') {
+        return (
+            <div
+                className={_cs(
+                    styles.borderWrapper,
+                    disabled && styles.disabled,
+                    borderWrapperClassName,
+                )}
+            >
+                { button }
+            </div>
+        );
+    }
+
+    return button;
 }
 
 export interface TabListProps extends React.HTMLProps<HTMLDivElement> {

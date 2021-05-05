@@ -25,3 +25,13 @@ export function rankedSearchOnList<T>(
 }
 
 export const genericMemo: (<T>(c: T) => T) = memo;
+
+export const getHashFromBrowser = () => window.location.hash.substr(2);
+export const setHashToBrowser = (hash: string | undefined) => {
+    if (hash) {
+        window.location.replace(`#/${hash}`);
+    } else {
+        window.location.hash = '';
+    }
+};
+

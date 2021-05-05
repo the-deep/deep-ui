@@ -1,29 +1,62 @@
 import React from 'react';
 
-import { TabKey, TabVariant, TabContext } from '../TabContext';
+import {
+    TabKey,
+    TabVariant,
+    TabContext,
+} from '../TabContext';
 
-export interface Props <T> {
+import useHash from '../../hooks/useHash';
+
+export interface BaseProps {
     children: React.ReactNode;
-    value: T;
-    onChange: (key: T) => void;
     variant?: TabVariant;
+    disabled?: boolean;
 }
 
-export function Tabs<T>(props: Props<T>) {
+export type Props<T extends TabKey> = BaseProps & (
+    {
+        useHash?: false;
+        value: T;
+        onChange: (key: T) => void;
+    } | {
+        useHash: true;
+        initialHash?: string;
+        value?: never;
+        onChange?: never;
+    }
+);
+
+export function Tabs<T extends TabKey>(props: Props<T>) {
     const {
         children,
-        value,
-        onChange,
         variant = 'primary',
+        disabled,
     } = props;
 
-    const contextValue = React.useMemo(() => ({
+    // eslint-disable-next-line react/destructuring-assignment
+    const hash = useHash(props.useHash ? props.initialHash : undefined);
+
+    const contextValue = React.useMemo(() => {
+        if (props.useHash) {
+            return {
+                variant,
+                disabled,
+                hash,
+                useHash: props.useHash,
+            };
+        }
+
         // Note: following cast is required since we do not have any other method
         // to provide template in the context type
-        variant,
-        activeTab: value as unknown as TabKey,
-        setActiveTab: onChange as unknown as (key: TabKey) => void,
-    }), [value, onChange, variant]);
+        return {
+            variant,
+            disabled,
+            activeTab: props.value,
+            setActiveTab: props.onChange as (key: TabKey) => void,
+        };
+        // eslint-disable-next-line react/destructuring-assignment
+    }, [props.value, props.onChange, variant, disabled, props.useHash, hash]);
 
     return (
         <TabContext.Provider value={contextValue}>
