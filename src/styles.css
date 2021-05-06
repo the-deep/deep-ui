@@ -11,7 +11,7 @@
     --dui-color-grey6: #f2f2f2;
     --dui-color-white: #ffffff;
     --dui-color-backdrop: rgba(255, 255, 255, .6);
-    --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
+    --dui-color-backdrop-dark: rgba(0, 0, 0, .8);
 
     --dui-radius-popup-border: .2em;
     --dui-radius-blur-shadow: .2em;

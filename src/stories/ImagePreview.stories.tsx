@@ -10,9 +10,17 @@ export default {
 };
 
 const Template: Story<ImagePreviewProps> = (args) => (
-    <ImagePreview
-        {...args}
-    />
+    <div
+        style={{
+            border: '1px solid red',
+            width: '100%',
+            height: '400px',
+        }}
+    >
+        <ImagePreview
+            {...args}
+        />
+    </div>
 );
 
 export const Default = Template.bind({});

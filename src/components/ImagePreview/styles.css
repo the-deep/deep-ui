@@ -1,6 +1,8 @@
 .image-preview {
     position: relative;
+    z-index: 0;
     width: 100%;
+    height: 100%;
 
     .tools {
         position: absolute;
@@ -19,5 +21,20 @@
 
     .image {
         width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    :global {
+        .react-transform-component {
+            width: 100%;
+            height: 100%;
+
+            .react-transform-element {
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }
