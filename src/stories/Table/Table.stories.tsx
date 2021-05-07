@@ -1,6 +1,5 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-// import { isDefined } from '@togglecorp/fujs';
 
 import { Story } from '@storybook/react/types-6-0';
 import Table, {
@@ -8,16 +7,9 @@ import Table, {
     Column,
 } from '#components/Table';
 import useRowExpansion from '#components/Table/useRowExpansion';
-// import { FilterType } from '#components/Table/types';
-// import useFiltering, { useFilterState, FilterContext } from '#components/Table/useFiltering';
-// import useOrdering, { useOrderState, OrderContext } from '#components/Table/useOrdering';
-// import useSorting, { useSortState, SortContext } from '#components/Table/useSorting';
 import {
     createStringColumn,
     createNumberColumn,
-    // createDateColumn,
-    // createDateTimeColumn,
-    // createYesNoColumn,
 } from '#components/Table/predefinedColumns';
 
 import styles from './styles.css';

@@ -11,8 +11,6 @@ import {
     FaSortUp,
     FaSortDown,
     FaSort,
-    // FaLessThanEqual,
-    // FaGreaterThanEqual,
     FaSearch,
     FaGripVertical,
 } from 'react-icons/fa';
@@ -23,7 +21,6 @@ import {
 import { UiMode } from '../../UiModeContext';
 import Button from '../../Button';
 import TextInput from '../../TextInput';
-// import NumberInput from '../../NumberInput';
 
 import { BaseHeader, SortDirection, FilterType } from '../types';
 import { SortContext } from '../useSorting';
@@ -140,32 +137,6 @@ function HeaderCell(props: HeaderCellProps) {
         },
         [name, filterValue, onFilterValueChange],
     );
-
-    /*
-    const handleNumericFilterMinChange = useCallback(
-        (value: number | undefined) => {
-            if (onFilterValueChange) {
-                onFilterValueChange(
-                    name,
-                    { ...filterValue, greaterThanOrEqualTo: value },
-                );
-            }
-        },
-        [name, filterValue, onFilterValueChange],
-    );
-
-    const handleNumericFilterMaxChange = useCallback(
-        (value: number | undefined) => {
-            if (onFilterValueChange) {
-                onFilterValueChange(
-                    name,
-                    { ...filterValue, lessThanOrEqualTo: value },
-                );
-            }
-        },
-        [name, filterValue, onFilterValueChange],
-    );
-     */
 
     const handleDragStart = useCallback(
         (e: React.DragEvent<HTMLDivElement>) => {
@@ -308,31 +279,6 @@ function HeaderCell(props: HeaderCellProps) {
                             uiMode={uiMode}
                         />
                     )}
-                    {/*
-                    {filterType === FilterType.number && (
-                        <>
-                            <NumberInput
-                                name="numberFilterMin"
-                                icons={<FaGreaterThanEqual className={styles.icon} />}
-                                className={styles.numberInput}
-                                inputContainerClassName={styles.rawInputContainer}
-                                value={filterValue?.greaterThanOrEqualTo}
-                                placeholder="Min"
-                                type="number"
-                                onChange={handleNumericFilterMinChange}
-                            />
-                            <NumberInput
-                                name="numberFilterMax"
-                                icons={<FaLessThanEqual className={styles.icon} />}
-                                className={styles.numberInput}
-                                inputContainerClassName={styles.rawInputContainer}
-                                value={filterValue?.lessThanOrEqualTo}
-                                placeholder="Max"
-                                onChange={handleNumericFilterMaxChange}
-                            />
-                        </>
-                    )}
-                    */}
                 </div>
             )}
         </div>

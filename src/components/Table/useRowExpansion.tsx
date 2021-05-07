@@ -14,7 +14,10 @@ export interface ExpansionOptions {
 function useRowExpansion<D, K>(
     expansionRowChildren: ExpansionRowChildrenProps<D, K>,
     options: ExpansionOptions = {},
-) {
+) : [
+    (rowOptions: RowOptions<D, K>) => React.ReactElement,
+    boolean,
+] {
     const {
         expandedRowClassName,
         expandedCellClassName,
@@ -22,10 +25,10 @@ function useRowExpansion<D, K>(
         expansionRowClassName,
     } = options;
 
-    const [expandedRow, setExpandedRow] = React.useState<K>();
+    const [expandedRow, setExpandedRow] = React.useState<K | undefined>();
     const rowModifier: (
         o: RowOptions<D, K>
-    ) => React.ReactElement = React.useCallback((rowOptions: RowOptions<D, K>) => {
+    ) => React.ReactElement = React.useCallback((rowOptions) => {
         const {
             rowKey,
             row,
@@ -80,7 +83,7 @@ function useRowExpansion<D, K>(
         expansionCellClassName,
     ]);
 
-    return [rowModifier, expandedRow];
+    return [rowModifier, !!expandedRow];
 }
 
 export default useRowExpansion;
