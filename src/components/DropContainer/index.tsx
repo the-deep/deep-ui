@@ -18,9 +18,10 @@ export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     dropOverlayContent?: React.ReactNode;
     draggedOverClassName?: string;
     name: string;
+    disabled?: boolean;
 }
 
-function DropContaier(props: Props) {
+function DropContainer(props: Props) {
     const {
         className,
         children,
@@ -29,6 +30,7 @@ function DropContaier(props: Props) {
         dropOverlayContent = <IoDownloadOutline className={styles.dropOverlayIcon} />,
         draggedOverClassName,
         name,
+        disabled,
         ...otherProps
     } = props;
 
@@ -74,12 +76,15 @@ function DropContaier(props: Props) {
         setIsBeingDraggedOver(false);
     }, [setIsBeingDraggedOver, onDrop, name]);
 
-    const containerElementProps = React.useMemo(() => ({
-        onDragEnter: handleDragEnter,
-        onDragLeave: handleDragLeave,
-        onDragOver: handleDragOver,
-        onDrop: handleDrop,
-    }), [handleDragEnter, handleDragLeave, handleDragOver, handleDrop]);
+    const containerElementProps = React.useMemo(
+        () => (!disabled ? ({
+            onDragEnter: handleDragEnter,
+            onDragLeave: handleDragLeave,
+            onDragOver: handleDragOver,
+            onDrop: handleDrop,
+        }) : undefined),
+        [handleDragEnter, handleDragLeave, handleDragOver, handleDrop, disabled],
+    );
 
     return (
         <Container
@@ -92,12 +97,14 @@ function DropContaier(props: Props) {
             )}
             containerElementProps={containerElementProps}
         >
-            <div className={_cs(styles.dropOverlay, dropOverlayContainerClassName)}>
-                { dropOverlayContent }
-            </div>
+            {!disabled && (
+                <div className={_cs(styles.dropOverlay, dropOverlayContainerClassName)}>
+                    { dropOverlayContent }
+                </div>
+            )}
             { children }
         </Container>
     );
 }
 
-export default DropContaier;
+export default DropContainer;
