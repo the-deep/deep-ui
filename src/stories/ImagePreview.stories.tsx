@@ -12,7 +12,6 @@ export default {
 const Template: Story<ImagePreviewProps> = (args) => (
     <div
         style={{
-            border: '1px solid red',
             width: '100%',
             height: '400px',
         }}

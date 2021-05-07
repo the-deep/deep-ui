@@ -21,10 +21,12 @@ function Cover(props: Props) {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const resizeObserverRef = React.useRef<ResizeObserver>();
     const mutationObserverRef = React.useRef<MutationObserver>();
-    const callbackRef = React.useRef();
+    const callbackRef = React.useRef<number | undefined>();
 
     const queueSync = React.useCallback(() => {
-        window.cancelIdleCallback(callbackRef.current);
+        if (callbackRef.current) {
+            window.cancelIdleCallback(callbackRef.current);
+        }
 
         callbackRef.current = window.requestIdleCallback(() => {
             if (dummyRef.current && containerRef.current) {

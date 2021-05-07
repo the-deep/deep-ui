@@ -55,9 +55,8 @@ function ImagePreview(props: Props) {
             { pending && <PendingMessage /> }
 
             <TransformWrapper
-                options={{
-                    limitToBounds: false,
-                    limitToWrapper: true,
+                wheel={{
+                    step: 100,
                 }}
             >
                 {({

@@ -10,8 +10,8 @@
     --dui-color-grey5: #e0e0e0;
     --dui-color-grey6: #f2f2f2;
     --dui-color-white: #ffffff;
-    --dui-color-backdrop: rgba(255, 255, 255, .6);
-    --dui-color-backdrop-dark: rgba(0, 0, 0, .8);
+    --dui-color-backdrop: rgba(255, 255, 255, .8);
+    --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
 
     --dui-radius-popup-border: .2em;
     --dui-radius-blur-shadow: .2em;
@@ -135,6 +135,8 @@
     --dui-opacity-disabled-element: 0.3;
     --dui-height-progress-bar: 10px;
     --dui-border-radius-progress-bar: 15px;
+
+    --dui-duration-transition-medium: .3s;
 }
 
 body {
