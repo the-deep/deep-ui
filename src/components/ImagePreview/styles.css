@@ -1,0 +1,55 @@
+.image-preview {
+    position: relative;
+    z-index: 0;
+    background-color: var(--dui-color-background);
+    width: 100%;
+    height: 100%;
+
+    .tools {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transition: var(--dui-duration-transition-medium) opacity ease-in-out;
+        opacity: 0;
+        z-index: 1;
+        background-color: var(--dui-color-backdrop-dark);
+        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+
+        .tool-button {
+            padding: var(--dui-spacing-small);
+            color: var(--dui-color-text-on-dark);
+            font-size: 1.2em;
+        }
+    }
+
+    &:hover {
+        .tools {
+            opacity: 1;
+        }
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    :global {
+        .react-transform-component {
+            width: 100%;
+            height: 100%;
+
+            .react-transform-element {
+                cursor: move;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.expanded-modal {
+    width: var(--dui-width-max-modal);
+    height: var(--dui-height-max-modal);
+}

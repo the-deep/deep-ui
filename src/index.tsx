@@ -38,6 +38,8 @@ export type { Props as HeadingProps } from './components/Heading';
 export { default as Heading } from './components/Heading';
 export type { Props as IconsProps } from './components/Icons';
 export { default as Icons } from './components/Icons';
+export type { Props as ImagePreviewProps } from './components/ImagePreview';
+export { default as ImagePreview } from './components/ImagePreview';
 export type { Props as InformationCardProps } from './components/InformationCard';
 export { default as InformationCard } from './components/InformationCard';
 export type { Props as InputContainerProps } from './components/InputContainer';

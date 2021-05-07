@@ -2,6 +2,7 @@ import React from 'react';
 
 type SetTrueFn = () => void;
 type SetFalseFn = () => void;
+type ToggleFn = () => void;
 type SetValueFn = React.Dispatch<React.SetStateAction<boolean>>;
 
 export default function useBooleanState(initialValue: boolean): [
@@ -9,6 +10,7 @@ export default function useBooleanState(initialValue: boolean): [
     SetTrueFn,
     SetFalseFn,
     SetValueFn,
+    ToggleFn,
 ] {
     const [value, setValue] = React.useState(initialValue);
 
@@ -20,5 +22,9 @@ export default function useBooleanState(initialValue: boolean): [
         setValue(false);
     }, [setValue]);
 
-    return [value, setTrue, setFalse, setValue];
+    const toggleFn = React.useCallback(() => {
+        setValue((oldValue) => !oldValue);
+    }, [setValue]);
+
+    return [value, setTrue, setFalse, setValue, toggleFn];
 }

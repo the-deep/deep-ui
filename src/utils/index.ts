@@ -34,4 +34,3 @@ export const setHashToBrowser = (hash: string | undefined) => {
         window.location.hash = '';
     }
 };
-
