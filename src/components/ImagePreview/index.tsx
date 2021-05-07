@@ -9,6 +9,7 @@ import {
     AiOutlineZoomOut,
     AiOutlineExpand,
     AiOutlineExpandAlt,
+    AiOutlineClose,
 } from 'react-icons/ai';
 
 import { useButtonFeatures } from '../Button';
@@ -73,6 +74,18 @@ function ImagePreview(props: Props) {
                             <div className={styles.tools}>
                                 <button
                                     {...buttonProps}
+                                    onClick={toggleExpanded}
+                                    title={expanded ? "Close fullscreen" : "View fullscreen"}
+                                    type="button"
+                                >
+                                    { expanded ? (
+                                        <AiOutlineClose />
+                                    ) : (
+                                        <AiOutlineExpandAlt />
+                                    )}
+                                </button>
+                                <button
+                                    {...buttonProps}
                                     onClick={zoomIn}
                                     title="Zoom in"
                                     type="button"
@@ -95,14 +108,6 @@ function ImagePreview(props: Props) {
                                 >
                                     <AiOutlineExpand />
                                 </button>
-                                <button
-                                    {...buttonProps}
-                                    onClick={toggleExpanded}
-                                    title="Toggle fullscreen"
-                                    type="button"
-                                >
-                                    <AiOutlineExpandAlt />
-                                </button>
                             </div>
                         )}
                         <TransformComponent>
@@ -122,8 +127,10 @@ function ImagePreview(props: Props) {
     if (expanded) {
         return (
             <Modal
+                className={styles.expandedModal}
                 heading={null}
                 onClose={setExpandedFalse}
+                bodyClassName={styles.body}
             >
                 {children}
             </Modal>

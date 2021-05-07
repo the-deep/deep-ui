@@ -48,3 +48,8 @@
         }
     }
 }
+
+.expanded-modal {
+    width: var(--dui-width-max-modal);
+    height: var(--dui-height-max-modal);
+}
