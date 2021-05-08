@@ -67,7 +67,7 @@ function ConfirmButton<N>(props: Props<N>) {
             {confirmModalVisible && (
                 <Modal
                     heading={confirmationHeader}
-                    onClose={handleConfirmModalClose}
+                    onCloseButtonClick={handleConfirmModalClose}
                     footerClassName={styles.actionButtonsRow}
                     footer={(
                         <>

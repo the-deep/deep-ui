@@ -32,13 +32,11 @@ function ElementFragments(props: Props) {
                     {icons}
                 </Icons>
             )}
-            {children && (
-                <div className={_cs(childrenContainerClassName, styles.children)}>
-                    {children}
-                </div>
-            )}
+            <div className={_cs(childrenContainerClassName, styles.children)}>
+                {children}
+            </div>
             {actions && (
-                <Actions className={_cs(actionsContainerClassName, styles.actions)}>
+                <Actions className={actionsContainerClassName}>
                     {actions}
                 </Actions>
             )}

@@ -10,7 +10,9 @@ export default {
 };
 
 const Template: Story<ConfirmButtonProps<string>> = (args) => (
-    <ConfirmButton {...args} />
+    <>
+        <ConfirmButton {...args} />
+    </>
 );
 
 export const Default = Template.bind({});
