@@ -6,7 +6,9 @@ import useConfirmation, {
     ExtraProps as ConfirmExtraProps,
 } from '../../hooks/useConfirmation';
 
-export interface Props<N extends string | number | undefined> extends QuickActionButtonProps<N>, ConfirmOptions {
+export interface Props<
+    N extends string | number | undefined
+> extends QuickActionButtonProps<N>, ConfirmOptions {
     confirmModalProps?: ConfirmExtraProps,
 }
 

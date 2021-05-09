@@ -9,7 +9,7 @@ function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T 
         return obj;
     }
 
-    const newObj = {...obj};
+    const newObj = { ...obj };
 
     Object.keys(newObj).forEach((key) => {
         if (obj[key] === undefined) {
@@ -19,7 +19,6 @@ function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T 
 
     return newObj;
 }
-
 
 export interface Options {
     showConfirmationInitially: boolean;
@@ -74,7 +73,11 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
         ...removeElementsWithUndefinedValue(options),
     };
 
-    const [showModal, setShowModalTrue, setShowModalFalse] = useBooleanState(showConfirmationInitially);
+    const [
+        showModal,
+        setShowModalTrue,
+        setShowModalFalse,
+    ] = useBooleanState(showConfirmationInitially);
 
     const handleCancelButtonClick = React.useCallback(() => {
         setShowModalFalse();
@@ -85,7 +88,7 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
         if (onResolve) {
             onResolve(false);
         }
-    }, [setShowModalFalse]);
+    }, [setShowModalFalse, onDeny, onResolve]);
 
     const handleConfirmButtonClick = React.useCallback(() => {
         setShowModalFalse();
@@ -96,7 +99,7 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
         if (onResolve) {
             onResolve(true);
         }
-    }, [setShowModalFalse]);
+    }, [setShowModalFalse, onResolve, onConfirm]);
 
     const modal = React.useMemo(() => {
         if (!showModal) {
@@ -104,7 +107,6 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
         }
 
         const {
-            hideCloseButton,
             footerActions,
             ...modalProps
         } = extraProps ?? {};
@@ -113,7 +115,8 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
             <Modal
                 {...modalProps}
                 heading={heading}
-                onCloseButtonClick={handleCancelButtonClick}
+                hideCloseButton
+                // onCloseButtonClick={handleCancelButtonClick}
                 footerActions={(
                     <>
                         { footerActions }

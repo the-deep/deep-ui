@@ -75,7 +75,7 @@ function ImagePreview(props: Props) {
                                 <button
                                     {...buttonProps}
                                     onClick={toggleExpanded}
-                                    title={expanded ? "Close fullscreen" : "View fullscreen"}
+                                    title={expanded ? 'Close fullscreen' : 'View fullscreen'}
                                     type="button"
                                 >
                                     { expanded ? (
@@ -129,7 +129,7 @@ function ImagePreview(props: Props) {
             <Modal
                 className={styles.expandedModal}
                 heading={null}
-                onClose={setExpandedFalse}
+                onCloseButtonClick={setExpandedFalse}
                 bodyClassName={styles.body}
             >
                 {children}

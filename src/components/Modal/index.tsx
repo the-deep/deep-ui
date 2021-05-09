@@ -30,12 +30,6 @@ export type Props = BaseProps & ({
     onCloseButtonClick?: never;
 })
 
-
-// # New breaking changes
-// - onClose ==> onCloseButtonClick
-// - headingClassName ==> headerClassName
-// - sending heading = null no longer hides header (instead it's hidden if none of header elements are provided and hideCloseButton is set)
-
 function Modal(props: Props) {
     const {
         heading,

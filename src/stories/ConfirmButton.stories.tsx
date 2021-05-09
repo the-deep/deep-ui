@@ -10,26 +10,24 @@ export default {
 };
 
 const Template: Story<ConfirmButtonProps<string>> = (args) => (
-    <>
-        <ConfirmButton {...args} />
-    </>
+    <ConfirmButton {...args} />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-    confirmLabel: 'Blue pill',
-    cancelLabel: 'Red pill',
-    confirmationHeader: 'Exit the Matrix',
-    confirmationMessage: 'Your decision is final.',
+    confirmButtonContent: 'Blue pill',
+    denyButtonContent: 'Red pill',
+    heading: 'Exit the Matrix',
+    message: 'Your decision is final.',
     children: 'Exit',
 };
 
 export const OpenInitially = Template.bind({});
 OpenInitially.args = {
-    confirmLabel: 'Blue',
-    cancelLabel: 'Red',
-    confirmationHeader: 'Exit the Matrix',
-    confirmationMessage: 'Choose one of the pills.',
+    confirmButtonContent: 'Blue',
+    denyButtonContent: 'Red',
+    heading: 'Exit the Matrix',
+    message: 'Choose one of the pills.',
+    showConfirmationInitially: true,
     children: 'Exit',
-    confirmationOnMount: true,
 };

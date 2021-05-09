@@ -35,7 +35,7 @@ CustomProperties.args = {
     confirmButtonContent: 'Blue pill',
     confirmButtonActions: <IoCheckmarkDone />,
     denyButtonContent: 'Red pill',
-    denyButtonActions: <IoClose />
+    denyButtonActions: <IoClose />,
 };
 
 export const ShowInitially = Template.bind({});
