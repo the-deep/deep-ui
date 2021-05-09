@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
-    background-color: var(--dui-color-backdrop);
+    background-color: var(--dui-color-backdrop-dark);
     width: 100vw;
     height: 100vh;
 }

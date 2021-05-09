@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { Props as ButtonProps } from '../Button';
+import QuickActionButton, { Props as QuickActionButtonProps } from '../QuickActionButton';
 import useConfirmation, {
     Options as ConfirmOptions,
     ExtraProps as ConfirmExtraProps,
@@ -8,7 +8,7 @@ import useConfirmation, {
 
 export interface Props<
     N extends string | number | undefined
-> extends ButtonProps<N>, ConfirmOptions {
+> extends QuickActionButtonProps<N>, ConfirmOptions {
     confirmModalProps?: ConfirmExtraProps,
 }
 
@@ -54,7 +54,7 @@ function QuickActionConfirmButton<N extends string | number | undefined>(props: 
 
     return (
         <>
-            <Button
+            <QuickActionButton
                 {...buttonProps}
                 name={undefined}
                 onClick={onButtonClick}

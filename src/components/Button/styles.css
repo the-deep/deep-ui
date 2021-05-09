@@ -56,6 +56,7 @@
         }
 
         &.action {
+            --padding: 0;
             --padding-h: 0;
             --padding-v: 0;
             --color-border: transparent;
@@ -120,11 +121,19 @@
         }
 
         &.action {
+            --padding: 0;
+            --padding-internal-h: 0;
             --padding-h: 0;
             --padding-v: 0;
             --color-border: transparent;
             --color-background: transparent;
             --color-text: var(--dui-color-text);
+
+            .icons,
+            .children,
+            .actions {
+                font-size: 1.2em;
+            }
         }
     }
 
