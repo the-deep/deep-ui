@@ -1,4 +1,5 @@
 .empty {
     padding: var(--dui-spacing-large);
-    color: var(--dui-color-text-disabled-light);
+    min-height: 2em;
+    color: var(--dui-color-text-watermark);
 }

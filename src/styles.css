@@ -137,6 +137,7 @@
     --dui-border-radius-progress-bar: 15px;
 
     --dui-duration-transition-medium: .3s;
+    --dui-duration-delay-short: .2s;
 }
 
 body {

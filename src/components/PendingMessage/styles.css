@@ -4,4 +4,17 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--dui-color-backdrop);
+    animation: appear var(--dui-duration-transition-medium) linear forwards;
+    animation-duration: var(--dui-duration-delay-short);
 }
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+

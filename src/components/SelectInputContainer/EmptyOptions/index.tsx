@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PendingMessage from '../../PendingMessage';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -16,10 +18,9 @@ function EmptyOptions(props: Props) {
     } = props;
 
     if (pending) {
-        // FIXME: use loading
         return (
             <div className={styles.empty}>
-                Fetching options...
+                <PendingMessage />
             </div>
         );
     }
@@ -30,6 +31,7 @@ function EmptyOptions(props: Props) {
 
     if (filtered) {
         return (
+            // FIXME: use message
             <div className={styles.empty}>
                 No matching options available.
             </div>

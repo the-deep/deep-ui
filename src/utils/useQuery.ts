@@ -42,7 +42,7 @@ function useQuery<T, V>(
                 () => {
                     setPending(false);
                 },
-                200 + Math.floor(400 * Math.random()),
+                2000 + Math.floor(4000 * Math.random()),
             );
             return () => {
                 clearTimeout(timer);
