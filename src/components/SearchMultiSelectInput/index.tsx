@@ -30,6 +30,7 @@ export type Props<
     searchOptions?: O[] | undefined | null;
     keySelector: (option: O) => T;
     labelSelector: (option: O) => string;
+    optionLabelSelector: (option: O) => React.ReactNode;
     name: K;
     disabled?: boolean;
     readOnly?: boolean;
@@ -75,6 +76,7 @@ function SearchMultiSelectInput<
     const {
         keySelector,
         labelSelector,
+        optionLabelSelector,
         name,
         onChange,
         onOptionsChange,
@@ -208,7 +210,7 @@ function SearchMultiSelectInput<
             const isActive = value.findIndex((item) => item === key) !== -1;
 
             return {
-                children: labelSelector(option),
+                children: optionLabelSelector ? optionLabelSelector(option) : labelSelector(option),
                 containerClassName: _cs(styles.option, isActive && styles.active),
                 title: labelSelector(option),
                 isActive,

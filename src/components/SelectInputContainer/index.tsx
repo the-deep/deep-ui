@@ -76,7 +76,6 @@ export type Props<
     persistentOptionPopup?: boolean;
     placeholder?: string;
     valueDisplay: string;
-
     nonClearable?: boolean;
     onClear: () => void;
 }, OMISSION> & Omit<InputContainerProps, 'input'> & ({
