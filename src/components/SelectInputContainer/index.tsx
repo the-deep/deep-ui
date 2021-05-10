@@ -137,7 +137,6 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
     } = props;
 
     const options = optionsFromProps ?? (emptyList as O[]);
-    const optionsEmpty = options.length <= 0;
 
     const containerRef = useRef<HTMLDivElement>(null);
     const inputSectionRef = useRef<HTMLDivElement>(null);
