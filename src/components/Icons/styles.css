@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0 calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
 
     >* {
-        margin: var(--dui-spacing-small);
+        flex-shrink: 0;
+        margin: 0 var(--dui-spacing-extra-small);
     }
 }

@@ -108,16 +108,16 @@
     --dui-font-size-extra-small: 0.63rem;
     --dui-font-size-small: 0.74rem;
     --dui-font-size-medium: 0.87rem;
-    --dui-font-size-large: 1rem;
-    --dui-font-size-extra-large: 1.3rem;
+    --dui-font-size-large: 1.1rem;
+    --dui-font-size-extra-large: 1.57rem;
     --dui-font-size-super-large: 2.2rem;
     --dui-font-size-mega-large: 3.4rem;
     --dui-font-size-ultra-large: 4.7rem;
 
-    --dui-font-size-heading-large: 1.57rem;
-    --dui-font-size-heading-medium: 1.24rem;
-    --dui-font-size-heading-small: 1rem;
-    --dui-font-size-heading-extra-small: 0.8rem;
+    --dui-font-size-heading-large: var(--dui-font-size-super-large);
+    --dui-font-size-heading-medium: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-small: var(--dui-font-size-large);
+    --dui-font-size-heading-extra-small: var(--dui-font-size-small);
 
     --dui-font-weight-light: 300;
     --dui-font-weight-regular: 400;
@@ -140,6 +140,7 @@
     --dui-duration-delay-short: .2s;
 }
 
+html,
 body {
     font-size: 13px;
 }

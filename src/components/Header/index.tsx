@@ -1,9 +1,8 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Actions from '../Actions';
+import ElementFragments from '../ElementFragments';
 import Heading from '../Heading';
-import Icons from '../Icons';
 
 import styles from './styles.css';
 
@@ -12,8 +11,8 @@ export interface Props {
     headingClassName?: string;
     descriptionClassName?: string;
     headingContainerClassName?: string;
-    iconsClassName?: string;
-    actionsClassName?: string;
+    iconsContainerClassName?: string;
+    actionsContainerClassName?: string;
     heading?: React.ReactNode;
     description?: React.ReactNode;
     icons?: React.ReactNode;
@@ -26,9 +25,9 @@ function Header(props: Props) {
         className,
         headingClassName,
         descriptionClassName,
-        iconsClassName,
+        iconsContainerClassName,
         headingContainerClassName,
-        actionsClassName,
+        actionsContainerClassName,
         heading,
         description,
         actions,
@@ -37,13 +36,14 @@ function Header(props: Props) {
     } = props;
 
     return (
-        <div className={_cs(className, styles.header)}>
-            { icons && (
-                <Icons className={_cs(styles.icons, iconsClassName)}>
-                    { icons }
-                </Icons>
-            )}
-            <div className={_cs(styles.midContainer, headingContainerClassName)}>
+        <header className={_cs(className, styles.header)}>
+            <ElementFragments
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                actions={actions}
+                actionsContainerClassName={actionsContainerClassName}
+                childrenContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
+            >
                 <Heading
                     size={headingSize}
                     className={_cs(styles.heading, headingClassName)}
@@ -51,17 +51,12 @@ function Header(props: Props) {
                     { heading }
                 </Heading>
                 {description && (
-                    <div className={_cs(styles.description, descriptionClassName)}>
+                    <p className={_cs(styles.description, descriptionClassName)}>
                         {description}
-                    </div>
+                    </p>
                 )}
-            </div>
-            { actions && (
-                <Actions className={_cs(styles.actions, actionsClassName)}>
-                    { actions }
-                </Actions>
-            )}
-        </div>
+            </ElementFragments>
+        </header>
     );
 }
 

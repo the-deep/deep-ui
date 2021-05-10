@@ -1,17 +1,12 @@
 .container-card {
-    padding: 0;
+    border-radius: var(--dui-border-radius-card);
+    background-color: var(--dui-color-background-card);
 
     .header {
-        border-bottom: var(--width-separator-thin) solid var(--color-separator);
-        padding: var(--dui-spacing-large);
+        border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     }
 
     .container {
         background-color: transparent;
-        padding: 0;
-
-        .content {
-            padding: var(--dui-spacing-large);
-        }
     }
 }
