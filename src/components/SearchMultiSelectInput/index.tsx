@@ -216,7 +216,7 @@ function SearchMultiSelectInput<
                 isActive,
             };
         },
-        [labelSelector, value],
+        [labelSelector, value, optionLabelSelector],
     );
 
     // FIXME: value should not be on dependency list

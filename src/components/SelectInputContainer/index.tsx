@@ -334,7 +334,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
                         onClick={handleSearchInputClick}
                         onFocus={() => onFocusedChange(true)}
                         onBlur={() => onFocusedChange(false)}
-                        placeholder={valueDisplay ?? placeholder}
+                        placeholder={valueDisplay || placeholder}
                         autoComplete="off"
                         onKeyDown={handleKeyDown}
                     />

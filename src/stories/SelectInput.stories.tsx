@@ -89,6 +89,7 @@ const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containe
             grouped
             groupKeySelector={(d) => d.parentKey}
             groupLabelSelector={(d) => d.parentLabel}
+            optionLabelSelector={() => 'Hello'}
         />
     );
 };
@@ -96,6 +97,7 @@ const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containe
 export const NoValueGrouped = GroupedTemplate.bind({});
 NoValueGrouped.args = {
     value: undefined,
+    optionLabelSelector: () => 'Hello',
 };
 
 export const DefaultGrouped = GroupedTemplate.bind({});

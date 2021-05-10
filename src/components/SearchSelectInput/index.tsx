@@ -226,7 +226,7 @@ function SearchSelectInput<
                 title: labelSelector(option),
             };
         },
-        [value, labelSelector],
+        [value, labelSelector, optionLabelSelector],
     );
 
     const handleOptionClick = useCallback(
