@@ -41,7 +41,7 @@ const Template: Story<SearchMultiSelectInputProps<string, string, Option, { cont
         options[3],
     ]);
 
-    const [pending, searchOptions] = useQuery(
+    const [pending, searchOptions, ,totalCount] = useQuery(
         options,
         searchValue,
         entityListTransformer,
@@ -52,6 +52,7 @@ const Template: Story<SearchMultiSelectInputProps<string, string, Option, { cont
         <SearchMultiSelectInput
             label="Vegetables"
             {...props}
+            totalOptionsCount={totalCount}
             options={cacheOptions}
             value={value}
             onChange={setValue}
