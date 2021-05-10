@@ -7,7 +7,7 @@ import { rankedSearchOnList } from '../../utils';
 type Def = { containerClassName?: string };
 type OptionKey = string | number;
 
-export type MultiSelectInputProps<
+export type Props<
     T extends OptionKey,
     K extends string,
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -17,7 +17,7 @@ export type MultiSelectInputProps<
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function MultiSelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
-    props: MultiSelectInputProps<T, K, O, P>,
+    props: Props<T, K, O, P>,
 ) {
     const {
         name,
