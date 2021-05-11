@@ -56,8 +56,10 @@ export type { Props as NumberOutputProps } from './components/NumberOutput';
 export { default as NumberOutput } from './components/NumberOutput';
 export type { Props as PercentageInformationCardProps } from './components/PercentageInformationCard';
 export { default as PercentageInformationCard } from './components/PercentageInformationCard';
-export type { PagerProps } from './components/Pager';
+export type { Props as PagerProps } from './components/Pager';
 export { default as Pager } from './components/Pager';
+export type { Props as PendingMessageProps } from './components/PendingMessage';
+export { default as PendingMessage } from './components/PendingMessage';
 export type { Props as PortalProps } from './components/Portal';
 export { default as Portal } from './components/Portal';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';
@@ -90,7 +92,8 @@ export { default as useFiltering, useFilterState, FilterContext } from './compon
 export { HideContext } from './components/Table/useHiding';
 export { default as useOrdering, useOrderState, OrderContext } from './components/Table/useOrdering';
 export { default as useSorting, useSortState, SortContext } from './components/Table/useSorting';
-export { default as useRowExpansion, ExpansionOptions, ExpansionRowChildrenProps } from './components/Table/useRowExpansion';
+export { default as useRowExpansion } from './components/Table/useRowExpansion';
+export type { ExpansionOptions, ExpansionRowChildrenProps } from './components/Table/useRowExpansion';
 
 export type { Props as TabListProps } from './components/TabList';
 export { default as TabList } from './components/TabList';

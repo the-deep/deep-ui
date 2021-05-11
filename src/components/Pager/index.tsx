@@ -145,7 +145,16 @@ interface PagerOption {
     label: string;
 }
 
-export type PagerProps = {
+const defaultItemPerPageOptions: PagerOption[] = [
+    { label: '10 / page', key: 10 },
+    { label: '25 / page', key: 25 },
+    { label: '50 / page', key: 50 },
+];
+
+const itemsPerPageKeySelector = (o: PagerOption) => o.key;
+const itemsPerPageLabelSelector = (o: PagerOption) => o.label;
+
+export type Props = {
     activePage: number;
     className?: string;
     itemsCount: number;
@@ -168,16 +177,7 @@ export type PagerProps = {
     onItemsPerPageChange: (pageCapacity: number) => void;
 })
 
-const defaultItemPerPageOptions: PagerOption[] = [
-    { label: '10 / page', key: 10 },
-    { label: '25 / page', key: 25 },
-    { label: '50 / page', key: 50 },
-];
-
-const itemsPerPageKeySelector = (o: PagerOption) => o.key;
-const itemsPerPageLabelSelector = (o: PagerOption) => o.label;
-
-function Pager(props: PagerProps) {
+function Pager(props: Props) {
     const {
         activePage: activePageProps,
         className,
