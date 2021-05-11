@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import List, { Props  as ListProps } from '#components/List';
+import List, { Props as ListProps } from '#components/List';
 import Button from '#components/Button';
 
 export default {

@@ -2,8 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import {
     IoFlag,
-    IoClose,
-    IoChatboxOutline ,
+    IoChatboxOutline,
     IoArrowBack,
 } from 'react-icons/io5';
 
@@ -28,6 +27,7 @@ Default.args = {
     heading: 'Heading',
     headerIcons: (
         <Button
+            name={undefined}
             variant="action"
             big
         >
@@ -36,10 +36,10 @@ Default.args = {
     ),
     headerActions: (
         <>
-            <QuickActionButton>
+            <QuickActionButton name={undefined}>
                 <IoFlag />
             </QuickActionButton>
-            <QuickActionButton>
+            <QuickActionButton name={undefined}>
                 <IoChatboxOutline />
             </QuickActionButton>
         </>

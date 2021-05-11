@@ -41,7 +41,7 @@ const Template: Story<SearchMultiSelectInputProps<string, string, Option, { cont
         options[3],
     ]);
 
-    const [pending, searchOptions, ,totalCount] = useQuery(
+    const [pending, searchOptions, , totalCount] = useQuery(
         options,
         searchValue,
         entityListTransformer,

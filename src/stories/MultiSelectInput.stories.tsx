@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import MultiSelectInput, { MultiSelectInputProps } from '#components/MultiSelectInput';
+import MultiSelectInput, { Props as MultiSelectInputProps } from '#components/MultiSelectInput';
 
 export default {
     title: 'Input/MultiSelectInput',
