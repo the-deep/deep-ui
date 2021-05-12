@@ -7,7 +7,7 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
-export interface RawButtonProps<N extends number | string | undefined> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
+export interface Props<N extends number | string | undefined> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
     /**
     * Style for the button
     */
@@ -34,7 +34,7 @@ export interface RawButtonProps<N extends number | string | undefined> extends O
  * we use raw button as a base component for other types of buttons or
  * clickable elements
  */
-function RawButton<N extends number | string | undefined>(props: RawButtonProps<N>) {
+function RawButton<N extends number | string | undefined>(props: Props<N>) {
     const {
         className,
         onClick,

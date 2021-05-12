@@ -1,6 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-import RawButton, { RawButtonProps } from '../RawButton';
+import RawButton, { Props as RawButtonProps } from '../RawButton';
 
 import { TabKey, TabContext, TabVariant } from '../TabContext';
 import { setHashToBrowser } from '../../utils';
