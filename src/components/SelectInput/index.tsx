@@ -18,7 +18,7 @@ export type Props<
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
-> = SearchSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially'>;
+> = SearchSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially' | 'totalOptionsCount'>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function SelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
@@ -30,6 +30,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
         labelSelector,
         nonClearable, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
         onChange, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
+        totalOptionsCount, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
         ...otherProps
     } = props;
 
@@ -56,7 +57,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
                 labelSelector={labelSelector}
                 onSearchValueChange={setSearchInputValue}
                 searchOptions={searchOptions}
-                searchOptionsShownInitially
+                // searchOptionsShownInitially
             />
         );
     }
@@ -72,7 +73,7 @@ function SelectInput<T extends OptionKey, K extends string, O extends object, P 
             labelSelector={labelSelector}
             onSearchValueChange={setSearchInputValue}
             searchOptions={searchOptions}
-            searchOptionsShownInitially
+            // searchOptionsShownInitially
         />
     );
 }

@@ -12,17 +12,19 @@ export interface ContentBaseProps {
 }
 export type OptionKey = string | number;
 
-export interface GenericOptionParams<P extends ContentBaseProps, OK extends OptionKey, O> {
+export interface Props<P extends ContentBaseProps, OK extends OptionKey, O> {
     optionContainerClassName?: string;
     contentRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => React.ReactNode;
     contentRendererParam: (key: OK, opt: O) => P;
     option: O;
     optionKey: OK;
     onClick: (optionKey: OK, option: O) => void;
-    focusedKey?: OK | undefined;
-    onFocus?: (optionKey: OK) => void;
+    focusedKey?: { key: OK, mouse?: boolean } | undefined;
+    onFocus?: (options: { key: OK, mouse?: boolean }) => void;
+
 }
-function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
+
+function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O>({
     optionContainerClassName,
     contentRenderer,
     contentRendererParam,
@@ -31,7 +33,7 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
     onFocus,
     optionKey,
     focusedKey,
-}: GenericOptionParams<P, OK, O>) {
+}: Props<P, OK, O>) {
     const params = contentRendererParam(optionKey, option);
     const {
         containerClassName,
@@ -39,9 +41,19 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
         ...props
     } = params;
 
-    const isFocused = focusedKey === optionKey;
+    const isFocused = focusedKey?.key === optionKey;
 
+    const divRef = useRef<HTMLButtonElement>(null);
     const focusedByMouse = useRef(false);
+
+    React.useEffect(() => {
+        if (focusedKey && focusedKey.key === optionKey && !focusedKey.mouse && divRef.current) {
+            divRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    }, [optionKey, focusedKey, isFocused]);
 
     const handleClick = useCallback(
         () => {
@@ -52,9 +64,8 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
 
     const handleMouseMove = useCallback(
         () => {
-            focusedByMouse.current = true;
             if (onFocus) {
-                onFocus(optionKey);
+                onFocus({ key: optionKey, mouse: true });
             }
         },
         [
@@ -72,20 +83,21 @@ function GenericOption<P extends ContentBaseProps, OK extends OptionKey, O>({
 
     return (
         <RawButton
+            elementRef={divRef}
             className={_cs(
-                styles.genericSelectInputOption,
+                styles.genericSelectOption,
                 optionContainerClassName,
                 containerClassName,
-                isFocused && !focusedByMouse.current && styles.focused,
             )}
             onClick={handleClick}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             title={title}
             name={optionKey}
+            focused={isFocused}
         >
             {contentRenderer(props)}
         </RawButton>
     );
 }
-export default genericMemo(GenericOption);
+export default genericMemo(GenericSelectOption);

@@ -96,7 +96,10 @@
             display: flex;
             align-items: center;
             flex-grow: 1;
-            padding: 0 var(--dui-spacing-extra-small);
+
+            input {
+                padding: 0 var(--dui-spacing-extra-small);
+            }
         }
 
         .actions {

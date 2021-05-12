@@ -36,7 +36,7 @@ interface NoGroupOptions {
 }
 
 // eslint-disable-next-line max-len
-export type ListProps<D, P, K extends OptionKey, GP, GK extends OptionKey> = (
+export type Props<D, P, K extends OptionKey, GP, GK extends OptionKey> = (
     BaseProps<D, P, K> & (GroupOptions<D, GP, GK> | NoGroupOptions)
 );
 
@@ -46,7 +46,7 @@ export type GroupedListProps<D, P, K extends OptionKey, GP, GK extends OptionKey
 );
 
 function hasGroup<D, P, K extends OptionKey, GP, GK extends OptionKey>(
-    props: ListProps<D, P, K, GP, GK>,
+    props: Props<D, P, K, GP, GK>,
 ): props is (BaseProps<D, P, K> & GroupOptions<D, GP, GK>) {
     return !!(props as BaseProps<D, P, K> & GroupOptions<D, GP, GK>).grouped;
 }
@@ -133,7 +133,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
 }
 
 function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends OptionKey>(
-    props: ListProps<D, P, K, GP, GK>,
+    props: Props<D, P, K, GP, GK>,
 ) {
     const {
         data,

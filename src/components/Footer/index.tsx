@@ -1,16 +1,18 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Actions from '../Actions';
+import ElementFragments from '../ElementFragments';
 
 import styles from './styles.css';
 
 export interface Props {
     className?: string;
+    iconsContainerClassName?: string;
     actionsContainerClassName?: string;
+    icons?: React.ReactNode;
     actions?: React.ReactNode;
     children?: React.ReactNode;
-    contentClassName?: string;
+    childrenContainerClassName?: string;
 }
 
 function Footer(props: Props) {
@@ -18,21 +20,24 @@ function Footer(props: Props) {
         className,
         actionsContainerClassName,
         actions,
-        contentClassName,
+        childrenContainerClassName,
+        iconsContainerClassName,
         children,
+        icons,
     } = props;
 
     return (
-        <div className={_cs(className, styles.footer)}>
-            <div className={_cs(contentClassName, styles.content)}>
+        <footer className={_cs(className, styles.footer)}>
+            <ElementFragments
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                actions={actions}
+                actionsContainerClassName={actionsContainerClassName}
+                childrenContainerClassName={childrenContainerClassName}
+            >
                 { children }
-            </div>
-            { actions && (
-                <Actions className={_cs(styles.actions, actionsContainerClassName)}>
-                    { actions }
-                </Actions>
-            )}
-        </div>
+            </ElementFragments>
+        </footer>
     );
 }
 

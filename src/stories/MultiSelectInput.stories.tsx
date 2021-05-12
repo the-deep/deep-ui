@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import SelectInput, { Props as SelectInputProps } from '#components/SelectInput';
+import MultiSelectInput, { Props as MultiSelectInputProps } from '#components/MultiSelectInput';
 
 export default {
-    title: 'Input/SelectInput',
-    component: SelectInput,
+    title: 'Input/MultiSelectInput',
+    component: MultiSelectInput,
     argTypes: {},
 };
 
@@ -17,31 +17,31 @@ interface Option {
 }
 
 const options: Option[] = [
-    { key: '1', label: 'Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple Apple ', parentKey: '1', parentLabel: 'Red' },
-    { key: '2', label: 'Banana', parentKey: '2', parentLabel: 'Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow Yellow ' },
-    { key: '3', label: 'Grapes', parentKey: '3', parentLabel: 'Green' },
-    { key: '4', label: 'Avocado', parentKey: '3', parentLabel: 'Green' },
-    { key: '5', label: 'Pear', parentKey: '3', parentLabel: 'Green' },
+    { key: '1', label: 'Potato Potato Potato Potato Potato Potato Potato', parentKey: '1', parentLabel: 'Brown' },
+    { key: '2', label: 'Tomato', parentKey: '2', parentLabel: 'Red' },
+    { key: '3', label: 'Pumpkin', parentKey: '2', parentLabel: 'Red' },
+    { key: '4', label: 'Gourd', parentKey: '3', parentLabel: 'Green' },
+    { key: '5', label: 'Spinach', parentKey: '3', parentLabel: 'Green' },
+    { key: '6', label: 'Eggplant', parentKey: '4', parentLabel: 'PurplePurplPurplPurplPurplPurplPurplPurplPurplPurplPurplPurplPurplPurpleeeeeeeeeeeee' },
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<SelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const Template: Story<MultiSelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const setValue = (e: string) => {
+    const setValue = (e: string[]) => {
         updateArgs({ value: e });
     };
 
     return (
-        <SelectInput
-            label="Fruit"
+        <MultiSelectInput
+            label="Vegetables"
             {...props}
-            value={value}
             options={options}
+            value={value}
+            onChange={setValue}
             keySelector={(d) => d.key}
             labelSelector={(d) => d.label}
-            onChange={setValue}
-            nonClearable
         />
     );
 };
@@ -53,43 +53,41 @@ NoValue.args = {
 
 export const Default = Template.bind({});
 Default.args = {
-    value: '1',
+    value: ['1', '3'],
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-    value: '1',
+    value: ['1', '3'],
     disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
-    value: '1',
+    value: ['1', '3'],
     readOnly: true,
 };
 
 // eslint-disable-next-line max-len
-const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const GroupedTemplate: Story<MultiSelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const setValue = (e: string) => {
+    const setValue = (e: string[]) => {
         updateArgs({ value: e });
     };
 
     return (
-        <SelectInput
-            label="Fruit"
+        <MultiSelectInput
+            label="Vegetables"
             {...props}
-            value={value}
             options={options}
+            value={value}
+            onChange={setValue}
             keySelector={(d) => d.key}
             labelSelector={(d) => d.label}
-            onChange={setValue}
-            nonClearable
             grouped
             groupKeySelector={(d) => d.parentKey}
             groupLabelSelector={(d) => d.parentLabel}
-            optionLabelSelector={() => 'Hello'}
         />
     );
 };
@@ -97,22 +95,21 @@ const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containe
 export const NoValueGrouped = GroupedTemplate.bind({});
 NoValueGrouped.args = {
     value: undefined,
-    optionLabelSelector: () => 'Hello',
 };
 
 export const DefaultGrouped = GroupedTemplate.bind({});
 DefaultGrouped.args = {
-    value: '1',
+    value: ['1', '3'],
 };
 
 export const DisabledGrouped = GroupedTemplate.bind({});
 DisabledGrouped.args = {
-    value: '1',
+    value: ['1', '3'],
     disabled: true,
 };
 
 export const ReadOnlyGrouped = GroupedTemplate.bind({});
 ReadOnlyGrouped.args = {
-    value: '1',
+    value: ['1', '3'],
     readOnly: true,
 };

@@ -1,5 +1,8 @@
 import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import {
+    _cs,
+    isDefined,
+} from '@togglecorp/fujs';
 
 import type { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
@@ -15,7 +18,7 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
     /**
     * input name
     */
-    name?: N;
+    name: N;
     /**
     * input value
     */
@@ -25,7 +28,7 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
     */
     onChange?: (
         value: string | undefined,
-        name?: N,
+        name: N,
         e?: React.FormEvent<HTMLInputElement> | undefined,
     ) => void;
     /**
@@ -40,7 +43,7 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
 /**
  * The most basic input component with default stylings removed (without any styling)
  */
-function RawInput<N extends string>(
+function RawInput<N extends string | number>(
     {
         className,
         onChange,
@@ -77,7 +80,7 @@ function RawInput<N extends string>(
             ref={elementRef}
             className={_cs(className, styles.rawInput, themeClassName)}
             onChange={handleChange}
-            name={name}
+            name={isDefined(name) ? String(name) : undefined}
             value={value ?? ''}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}

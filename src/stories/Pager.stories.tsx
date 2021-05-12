@@ -3,7 +3,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { useArgs } from '@storybook/client-api';
 import { Story } from '@storybook/react/types-6-0';
 
-import Pager, { PagerProps } from '#components/Pager';
+import Pager, { Props as PagerProps } from '#components/Pager';
 
 export default {
     title: 'View/Pager',

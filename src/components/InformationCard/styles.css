@@ -3,7 +3,7 @@
     align-items: flex-start;
     border-radius: var(--dui-border-radius-card);
     background-color: var(--dui-color-white);
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-medium));
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
     &.colored-background {
         &.accent {

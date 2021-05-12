@@ -1,7 +1,7 @@
 .heading {
     display: flex;
     align-items: center;
-    padding: var(--dui-spacing-small);
+    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
     color: var(--dui-color-black);
     font-weight: var(--dui-font-weight-bold);
 

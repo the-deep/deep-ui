@@ -1,7 +1,13 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import { IoFlag, IoClose, IoChatboxOutline } from 'react-icons/io5';
+import {
+    IoFlag,
+    IoChatboxOutline,
+    IoArrowBack,
+} from 'react-icons/io5';
 
+import Button from '#components/Button';
+import QuickActionButton from '#components/QuickActionButton';
 import Container, { Props as ContainerProps } from '#components/Container';
 
 export default {
@@ -19,8 +25,25 @@ const Template: Story<ContainerProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     heading: 'Heading',
-    headerIcons: <IoFlag />,
-    headerActions: <IoClose />,
+    headerIcons: (
+        <Button
+            name={undefined}
+            variant="action"
+            big
+        >
+            <IoArrowBack />
+        </Button>
+    ),
+    headerActions: (
+        <>
+            <QuickActionButton name={undefined}>
+                <IoFlag />
+            </QuickActionButton>
+            <QuickActionButton name={undefined}>
+                <IoChatboxOutline />
+            </QuickActionButton>
+        </>
+    ),
     headerDescription: 'Header Description',
     footerContent: 'Footer',
     footerActions: <IoChatboxOutline />,

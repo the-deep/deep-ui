@@ -132,7 +132,7 @@
             .icons,
             .children,
             .actions {
-                font-size: 1.2em;
+                font-size: 1.27em;
             }
         }
     }
@@ -140,5 +140,13 @@
     &.big {
         --padding-v: var(--dui-spacing-medium);
         --font-size: var(--dui-font-size-large);
+
+        &.action {
+            .icons,
+            .children,
+            .actions {
+                font-size: 1.4em;
+            }
+        }
     }
 }

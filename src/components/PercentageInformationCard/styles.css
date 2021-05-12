@@ -3,7 +3,7 @@
     align-items: flex-start;
     border-radius: var(--dui-border-radius-card);
     background-color: var(--dui-color-foreground);
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-medium));
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
     .value-container {
         font-size: var(--dui-font-size-extra-large);
@@ -25,7 +25,7 @@
             background-color: var(--dui-color-grey5);
             width: var(--width);
             height: var(--width);
-            font-size: var(--dui-font-size-large);
+            font-size: 0.8em;
         }
     }
 

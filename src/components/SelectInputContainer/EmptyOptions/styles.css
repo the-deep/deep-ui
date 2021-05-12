@@ -1,4 +1,6 @@
+.hidden-options-count,
 .empty {
     padding: var(--dui-spacing-large);
+    min-height: 2em;
     color: var(--dui-color-text-watermark);
 }

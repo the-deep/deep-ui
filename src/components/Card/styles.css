@@ -1,5 +1,5 @@
 .card {
     border-radius: var(--dui-border-radius-card);
     background-color: var(--dui-color-background-card);
-    padding: var(--dui-spacing-large);
+    padding: var(--dui-spacing-medium);
 }
