@@ -39,7 +39,8 @@ function DraggableContent(props: Props) {
 
     const [draggable, setDraggable] = React.useState(false);
 
-    const handleDragEnd = React.useCallback(() => {
+    const handleDragEnd = React.useCallback((e) => {
+        e.stopPropagation();
         setDraggable(false);
         if (onDragStop) {
             onDragStop(value);
@@ -57,6 +58,7 @@ function DraggableContent(props: Props) {
     }, [handleDragEnd]);
 
     const handleDragStart: React.DragEventHandler<HTMLDivElement> = React.useCallback((e) => {
+        e.stopPropagation();
         const myValue = {
             ...value,
             $name: name,
