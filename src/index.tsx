@@ -66,6 +66,8 @@ export type { Props as PortalProps } from './components/Portal';
 export { default as Portal } from './components/Portal';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';
 export { default as QuickActionButton } from './components/QuickActionButton';
+export type { Props as QuickActionConfirmButtonProps } from './components/QuickActionConfirmButton';
+export { default as QuickActionConfirmButton } from './components/QuickActionConfirmButton';
 export { default as QuickActionLink } from './components/QuickActionLink';
 export type { Props as QuickActionLinkProps } from './components/QuickActionLink';
 export { default as RadioInput } from './components/RadioInput';
