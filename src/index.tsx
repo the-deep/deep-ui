@@ -32,6 +32,8 @@ export type { Props as DropContainerProps } from './components/DropContainer';
 export { default as DropContainer } from './components/DropContainer';
 export type { Props as ElementFragmentsProps } from './components/ElementFragments';
 export { default as ElementFragments } from './components/ElementFragments';
+export type { Props as ExpandableContainerProps } from './components/ExpandableContainer';
+export { default as ExpandableContainer } from './components/ExpandableContainer';
 export type { Props as FooterProps } from './components/Footer';
 export { default as Footer } from './components/Footer';
 export type { Props as HeaderProps } from './components/Header';
