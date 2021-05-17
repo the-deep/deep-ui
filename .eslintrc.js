@@ -86,7 +86,9 @@ module.exports = {
             components: ['Link'],
             specialLink: ['to'],
         }],
-        'jsx-a11y/label-has-for': 'warn',
+        'jsx-a11y/label-has-associated-control': [2, {
+            controlComponents: ['RawInput'],
+        }],
 
         'react/prop-types': 0,
         'react/jsx-props-no-spreading': 0,
