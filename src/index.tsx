@@ -117,3 +117,5 @@ export type { Props as TextAreaProps } from './components/TextArea';
 export { default as TextArea } from './components/TextArea';
 export type { Props as TextInputProps } from './components/TextInput';
 export { default as TextInput } from './components/TextInput';
+export type { Props as FileInputProps } from './components/FileInput';
+export { default as FileInput } from './components/FileInput';

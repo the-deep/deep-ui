@@ -5,6 +5,7 @@ import { MdFileUpload } from 'react-icons/md';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
+import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
 
 type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
@@ -48,10 +49,7 @@ function FileInput<T extends string>(props: Props<T>) {
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
-    const dragEnterRef = React.useRef(0);
     const [status, setStatus] = useState<string>('No file chosen');
-    const [isBeingDraggedOver, setIsBeingDraggedOver] = React.useState(false);
-
     const isValidFile = useCallback((fileName: string, mimeType: string, acceptString?: string) => {
         // if there is no accept string, anything is valid
         if (!acceptString) {
@@ -70,33 +68,14 @@ function FileInput<T extends string>(props: Props<T>) {
         });
     }, []);
 
-    const handleDragEnter = useCallback(() => {
-        if (dragEnterRef.current === 0) {
-            setIsBeingDraggedOver(true);
-        }
-
-        dragEnterRef.current += 1;
-    }, [setIsBeingDraggedOver]);
-
-    const handleDragLeave = useCallback(() => {
-        dragEnterRef.current -= 1;
-
-        if (dragEnterRef.current === 0) {
-            setIsBeingDraggedOver(false);
-        }
-    }, [setIsBeingDraggedOver]);
-
     const getStatus = useCallback((files: File[]) => {
-        if (files && files.length > 1) {
+        if (!files || files.length === 0) {
+            return 'No file chosen';
+        }
+        if (files.length > 1) {
             return `${files?.length} files selected`;
         }
-        if (files && files.length === 0) {
-            return 'Invalid files selected';
-        }
-        if (files) {
-            return files[0]?.name;
-        }
-        return 'No file chosen';
+        return files[0]?.name;
     }, []);
 
     const handleChange = useCallback(
@@ -121,7 +100,7 @@ function FileInput<T extends string>(props: Props<T>) {
         const fileList = Array.from(e.dataTransfer.files);
         const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
         if (!multiple && fileList.length > 1) {
-            setStatus('Multiple file selection no allowed. Please, select a single file.');
+            setStatus('Multiple file selection not allowed. Please, select a single file.');
         } else {
             const newStatus = getStatus(validFiles);
             setStatus(newStatus);
@@ -130,20 +109,21 @@ function FileInput<T extends string>(props: Props<T>) {
             }
         }
         e.dataTransfer.clearData();
-        dragEnterRef.current = 0;
-        setIsBeingDraggedOver(false);
     }, [
         getStatus,
         multiple,
         onChange,
-        setIsBeingDraggedOver,
         accept,
         isValidFile,
     ]);
 
-    const handleDragOver: React.DragEventHandler<HTMLDivElement> = (e) => {
-        e.preventDefault();
-    };
+    const {
+        dropping,
+        onDragOver,
+        onDragEnter,
+        onDragLeave,
+        onDrop,
+    } = useDropHandler(handleDrop);
 
     return (
         <InputContainer
@@ -172,12 +152,12 @@ function FileInput<T extends string>(props: Props<T>) {
                         uiModeClassName,
                         !!error && styles.errored,
                         inputClassName,
-                        isBeingDraggedOver && styles.draggedOver,
+                        dropping && styles.draggedOver,
                     )}
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}
-                    onDragEnter={handleDragEnter}
-                    onDragLeave={handleDragLeave}
+                    onDrop={onDrop}
+                    onDragOver={onDragOver}
+                    onDragEnter={onDragEnter}
+                    onDragLeave={onDragLeave}
                 >
                     {!disabled && (
                         <div className={_cs(styles.dropOverlay)} />
