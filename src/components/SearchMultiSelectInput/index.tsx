@@ -30,7 +30,7 @@ export type Props<
     searchOptions?: O[] | undefined | null;
     keySelector: (option: O) => T;
     labelSelector: (option: O) => string;
-    optionLabelSelector: (option: O) => React.ReactNode;
+    optionLabelSelector?: (option: O) => React.ReactNode;
     name: K;
     disabled?: boolean;
     readOnly?: boolean;
