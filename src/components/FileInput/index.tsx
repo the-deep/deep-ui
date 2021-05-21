@@ -78,44 +78,38 @@ function FileInput<T extends string>(props: Props<T>) {
         return files[0]?.name;
     }, []);
 
-    const handleChange = useCallback(
-        (_: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>) => {
-            if (e) {
-                const { files: newFiles } = (e.target as HTMLInputElement);
-                if (newFiles) {
-                    const fileList = Array.from(newFiles);
-                    const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
-                    const newStatus = getStatus(validFiles);
-                    setStatus(newStatus);
-                    if (onChange) {
-                        onChange(validFiles);
-                    }
+    const handleFiles = useCallback((files: FileList | null) => {
+        if (files) {
+            const fileList = Array.from(files);
+            const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
+            if (!multiple && validFiles.length > 1) {
+                if (onChange) {
+                    onChange(validFiles.slice(0, 1));
+                }
+            } else {
+                const newStatus = getStatus(validFiles);
+                setStatus(newStatus);
+                if (onChange) {
+                    onChange(validFiles);
                 }
             }
-        }, [onChange, isValidFile, accept, getStatus],
-    );
+        }
+    }, [accept, multiple, getStatus, isValidFile, onChange]);
+
+    const handleChange = useCallback((
+        _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
+    ) => {
+        if (e) {
+            const { files } = (e.target as HTMLInputElement);
+            handleFiles(files);
+        }
+    }, [handleFiles]);
 
     const handleDrop: React.DragEventHandler<HTMLDivElement> = useCallback((e) => {
         e.preventDefault();
-        const fileList = Array.from(e.dataTransfer.files);
-        const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
-        if (!multiple && fileList.length > 1) {
-            setStatus('Multiple file selection not allowed. Please, select a single file.');
-        } else {
-            const newStatus = getStatus(validFiles);
-            setStatus(newStatus);
-            if (onChange) {
-                onChange(validFiles);
-            }
-        }
+        handleFiles(e.dataTransfer.files);
         e.dataTransfer.clearData();
-    }, [
-        getStatus,
-        multiple,
-        onChange,
-        accept,
-        isValidFile,
-    ]);
+    }, [handleFiles]);
 
     const {
         dropping,
