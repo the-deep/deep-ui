@@ -16,6 +16,24 @@ export interface Props<T extends string> extends InheritedProps<T> {
     onChange?: (files: File[]) => void;
 }
 
+export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
+    // if there is no accept string, anything is valid
+    if (!acceptString) {
+        return true;
+    }
+    const extensionMatch = /\.\w+$/.exec(fileName);
+    const mimeMatch = /^.+\//.exec(mimeType);
+
+    const fileTypeList = acceptString.split(/,\s+/);
+    return fileTypeList.some((fileType) => {
+        // check mimeType such as image/png or image/*
+        if (mimeType === fileType || (!!mimeMatch && `${mimeMatch[0]}*` === fileType)) {
+            return true;
+        }
+        return !!extensionMatch && extensionMatch[0].toLowerCase() === fileType.toLowerCase();
+    });
+};
+
 function FileInput<T extends string>(props: Props<T>) {
     const {
         actions,
@@ -50,23 +68,6 @@ function FileInput<T extends string>(props: Props<T>) {
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     const [status, setStatus] = useState<string>('No file chosen');
-    const isValidFile = useCallback((fileName: string, mimeType: string, acceptString?: string) => {
-        // if there is no accept string, anything is valid
-        if (!acceptString) {
-            return true;
-        }
-        const extensionMatch = /\.\w+$/.exec(fileName);
-        const mimeMatch = /^.+\//.exec(mimeType);
-
-        const fileTypeList = acceptString.split(/,\s+/);
-        return fileTypeList.some((fileType) => {
-            // check mimeType such as image/png or image/*
-            if (mimeType === fileType || (!!mimeMatch && `${mimeMatch[0]}*` === fileType)) {
-                return true;
-            }
-            return !!extensionMatch && extensionMatch[0].toLowerCase() === fileType.toLowerCase();
-        });
-    }, []);
 
     const getStatus = useCallback((files: File[]) => {
         if (!files || files.length === 0) {
@@ -94,7 +95,7 @@ function FileInput<T extends string>(props: Props<T>) {
                 }
             }
         }
-    }, [accept, multiple, getStatus, isValidFile, onChange]);
+    }, [accept, multiple, getStatus, onChange]);
 
     const handleChange = useCallback((
         _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
