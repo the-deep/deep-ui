@@ -200,7 +200,7 @@ function HeaderCell(props: HeaderCellProps) {
         onDragEnter,
         onDragLeave,
         onDrop,
-    } = useDropHandler(handleDragEnter, handleDrop);
+    } = useDropHandler(handleDrop, handleDragEnter);
 
     return (
         <div
