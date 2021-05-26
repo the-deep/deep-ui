@@ -13,9 +13,9 @@
     --dui-color-backdrop: rgba(255, 255, 255, .9);
     --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
 
-    --dui-radius-popup-border: .2em;
-    --dui-radius-blur-shadow: .2em;
-    --dui-radius-modal: 5px;
+    --dui-radius-popup-border: .2rem;
+    --dui-radius-blur-shadow: .2rem;
+    --dui-radius-modal: .2rem;
     --dui-color-shadow: rgba(0, 0, 0, .3);
 
     --dui-height-popup-tip: 10px;
@@ -35,6 +35,8 @@
     --dui-color-text-primary-button: var(--dui-color-text-on-accent);
     --dui-color-background-input-section: transparent;
 
+    --dui-color-background-dark: var(--dui-color-grey2);
+
     --dui-color-background-tertiary-hover: #f5f8fb;
 
     --dui-color-complement1: #008eff;
@@ -51,6 +53,10 @@
 
     --dui-color-negative-on-dark: #ff9683;
     --dui-color-danger: var(--dui-color-negative);
+    --dui-color-text-on-danger: var(--dui-color-text-on-dark);
+
+    --dui-color-success: var(--dui-color-positive);
+    --dui-color-text-on-success: var(--dui-color-text-on-dark);
 
     --dui-color-background: #f6f6f6;
     --dui-color-background-hover: #f6f6fa;
@@ -77,7 +83,9 @@
     --dui-color-gradient2: #99d2ff;
     --dui-color-gradient3: #66bbff;
     --dui-color-gradient4: #33a5ff;
+
     --dui-radius-border-input-section: 0;
+    --dui-radius-border-alerts: 0.24rem;
 
     --dui-color-input-label: var(--dui-color-grey1);
     --dui-color-input-label-active: var(--dui-color-input-label);

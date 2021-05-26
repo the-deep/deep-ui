@@ -3,7 +3,7 @@
     --padding-h: var(--dui-spacing-large);
     --padding-v: var(--dui-spacing-small);
     --color-border: transparent;
-    --color-text: transparent;
+    --color-text: inherit;
     --color-background: transparent;
     --padding: var(--padding-v) calc(var(--padding-h) - var(--padding-internal-h));
     --font-size: var(--dui-font-size-medium);
@@ -61,6 +61,7 @@
             --padding-v: 0;
             --color-border: transparent;
             --color-background: transparent;
+            --color-text: inherit;
         }
     }
 
@@ -127,7 +128,8 @@
             --padding-v: 0;
             --color-border: transparent;
             --color-background: transparent;
-            --color-text: var(--dui-color-text);
+            --color-text: inherit;
+            --font-size: inherit;
 
             .icons,
             .children,

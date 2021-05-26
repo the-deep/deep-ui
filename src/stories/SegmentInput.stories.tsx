@@ -38,8 +38,8 @@ const Template: Story<SegmentInputProps<Option['key'], Option, Option['label'], 
             {...props}
             value={value}
             options={options}
-            radioKeySelector={(d: Option) => d.key}
-            radioLabelSelector={(d: Option) => d.label}
+            segmentKeySelector={(d: Option) => d.key}
+            segmentLabelSelector={(d: Option) => d.label}
             onChange={setValue}
         />
     );
