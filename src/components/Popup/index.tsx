@@ -2,6 +2,10 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import Portal from '../Portal';
+import useParentPositionTracking from '../../hooks/useParentPositionTracking';
+import useUnmountTransition from '../../hooks/useUnmountTransition';
+
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -25,7 +29,7 @@ interface FloatingPlacementProps {
     maxHeight: string | undefined;
 }
 
-function getFloatPlacement(parentRef: React.RefObject<HTMLElement>): FloatingPlacementProps {
+function getFloatPlacement(bcr: DOMRect | undefined): FloatingPlacementProps {
     const placement = {
         ...defaultPlacement,
     };
@@ -35,15 +39,14 @@ function getFloatPlacement(parentRef: React.RefObject<HTMLElement>): FloatingPla
     let contentWidth = 'auto';
     let maxHeight = 'auto';
 
-    if (parentRef?.current) {
-        const parentBCR = parentRef.current.getBoundingClientRect();
-        const { x, y, width, height } = parentBCR;
+    if (bcr) {
+        const { x, y, width, height } = bcr;
 
         const cX = window.innerWidth / 2;
         const cY = window.innerHeight / 2;
 
-        horizontalPosition = (cX - parentBCR.x) > 0 ? 'right' : 'left';
-        verticalPosition = (cY - parentBCR.y) > 0 ? 'bottom' : 'top';
+        horizontalPosition = (cX - bcr.x) > 0 ? 'right' : 'left';
+        verticalPosition = (cY - bcr.y) > 0 ? 'bottom' : 'top';
 
         if (horizontalPosition === 'left') {
             placement.right = `${window.innerWidth - x - width}px`;
@@ -70,60 +73,41 @@ function getFloatPlacement(parentRef: React.RefObject<HTMLElement>): FloatingPla
     };
 }
 
-function useAttachedFloatingPlacement(parentRef: React.RefObject<HTMLElement>) {
-    const [placement, setPlacement] = React.useState<FloatingPlacementProps>({
-        placement: defaultPlacement,
-        width: 'auto',
-        maxHeight: 'auto',
-        horizontalPosition: 'left',
-        verticalPosition: 'top',
-    });
-
-    React.useLayoutEffect(() => {
-        setPlacement(getFloatPlacement(parentRef));
-    }, [setPlacement, parentRef]);
-
-    // FIXME: throttle
-    const handleScroll = React.useCallback(() => {
-        setPlacement(getFloatPlacement(parentRef));
-    }, [setPlacement, parentRef]);
-
-    // FIXME: throttle
-    const handleResize = React.useCallback(() => {
-        setPlacement(getFloatPlacement(parentRef));
-    }, [setPlacement, parentRef]);
-
-    React.useEffect(() => {
-        document.addEventListener('scroll', handleScroll, true);
-        window.addEventListener('resize', handleResize, true);
-
-        return () => {
-            document.removeEventListener('scroll', handleScroll, true);
-            window.removeEventListener('resize', handleResize, true);
-        };
-    }, [handleScroll, handleResize]);
-
-    return placement;
-}
-
 export interface Props {
     className?: string;
     contentClassName?: string;
-    parentRef: React.RefObject<HTMLElement>;
     elementRef?: React.RefObject<HTMLDivElement>;
     contentRef?: React.RefObject<HTMLDivElement>;
     children: React.ReactNode;
+    show?: boolean;
+    onHide?: () => void;
 }
 
 function Popup(props: Props) {
     const {
-        parentRef,
         children,
         className,
         contentClassName,
         contentRef,
         elementRef,
+        show,
+        // onHide,
     } = props;
+
+    const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
+
+    const shouldUnmount = useUnmountTransition(show);
+
+    const dummyRef = React.useRef<HTMLDivElement>(null);
+    const parentBCR = useParentPositionTracking(dummyRef, delayedShow);
+
+    React.useEffect(() => {
+        setDelayedShow(show);
+    }, [show]);
+
+    if (shouldUnmount) {
+        return null;
+    }
 
     const {
         placement,
@@ -131,31 +115,41 @@ function Popup(props: Props) {
         horizontalPosition,
         verticalPosition,
         maxHeight,
-    } = useAttachedFloatingPlacement(parentRef);
+    } = getFloatPlacement(parentBCR);
 
     return (
-        <Portal>
+        <>
             <div
-                style={placement}
-                ref={elementRef}
-                className={_cs(
-                    styles.popup,
-                    className,
-                    horizontalPosition === 'left' ? styles.left : styles.right,
-                    verticalPosition === 'top' ? styles.top : styles.bottom,
-                )}
-            >
-                <div className={styles.tip} />
+                ref={dummyRef}
+                className={styles.dummy}
+            />
+            <Portal>
                 <div
-                    ref={contentRef}
-                    className={_cs(styles.content, contentClassName)}
-                    style={{ minWidth: width, maxHeight }}
+                    style={{
+                        ...placement,
+                        minWidth: width,
+                    }}
+                    ref={elementRef}
+                    className={_cs(
+                        styles.popup,
+                        className,
+                        horizontalPosition === 'left' ? styles.left : styles.right,
+                        verticalPosition === 'top' ? styles.top : styles.bottom,
+                        !show && styles.hidden,
+                    )}
                 >
-                    { children }
+                    <div className={styles.tip} />
+                    <div
+                        ref={contentRef}
+                        className={_cs(styles.content, contentClassName)}
+                        style={{ minWidth: width, maxHeight }}
+                    >
+                        { children }
+                    </div>
                 </div>
-            </div>
-        </Portal>
+            </Portal>
+        </>
     );
 }
 
-export default Popup;
+export default genericMemo(Popup);
