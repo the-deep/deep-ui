@@ -51,9 +51,9 @@ function Header(props: Props) {
                     { heading }
                 </Heading>
                 {description && (
-                    <p className={_cs(styles.description, descriptionClassName)}>
+                    <div className={_cs(styles.description, descriptionClassName)}>
                         {description}
-                    </p>
+                    </div>
                 )}
             </ElementFragments>
         </header>
