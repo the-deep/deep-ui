@@ -1,4 +1,5 @@
 import React from 'react';
+import { isFalsyString } from '@togglecorp/fujs';
 
 import {
     TabKey,
@@ -7,6 +8,7 @@ import {
 } from '../TabContext';
 
 import useHash from '../../hooks/useHash';
+import { getHashFromBrowser } from '../../utils';
 
 export interface BaseProps {
     children: React.ReactNode;
@@ -21,6 +23,9 @@ export type Props<T extends TabKey> = BaseProps & (
         onChange: (key: T) => void;
     } | {
         useHash: true;
+        // defaultHash will not override already existing hash
+        defaultHash?: string;
+        // initialHash will override hash there is already a hash
         initialHash?: string;
         value?: never;
         onChange?: never;
@@ -35,7 +40,13 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
     } = props;
 
     // eslint-disable-next-line react/destructuring-assignment
-    const hash = useHash(props.useHash ? props.initialHash : undefined);
+    const defaultHash = props.useHash && isFalsyString(getHashFromBrowser())
+        // eslint-disable-next-line react/destructuring-assignment
+        ? props.defaultHash
+        : undefined;
+
+    // eslint-disable-next-line react/destructuring-assignment
+    const hash = useHash(props.useHash ? props.initialHash || defaultHash : undefined);
 
     const contextValue = React.useMemo(() => {
         if (props.useHash) {
