@@ -56,7 +56,7 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
             />
             <Checkbox
                 name="filtered"
-                label="Filtered empty"
+                label="Filtered"
                 value={filtered}
                 onChange={handleCheckboxChange}
             />

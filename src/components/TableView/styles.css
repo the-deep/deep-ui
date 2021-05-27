@@ -1,0 +1,15 @@
+.table-view {
+    position: relative;
+    z-index: 0;
+    overflow: auto;
+
+    &.empty {
+        &.pending {
+            min-height: 6em;
+        }
+    }
+
+    .table {
+        width: 100%;
+    }
+}
