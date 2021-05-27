@@ -57,84 +57,20 @@ const columns = [
         'id',
         'ID',
         (item) => item.id,
-        // { sortable: true },
     ),
     createStringColumn<Program, number>(
         'name',
         'Name',
         (item) => item.name,
-        // { sortable: true, filterType: FilterType.string, cellAsHeader: true },
     ),
     createNumberColumn<Program, number>(
         'budget',
         'Budget',
         (item) => item.budget,
-        // { sortable: true, filterType: FilterType.number },
     ),
-    /*
-    createDateColumn<Program, number>(
-        'date',
-        'Date',
-        (item) => item.date,
-        { sortable: true, orderable: true },
-    ),
-    createDateTimeColumn<Program, number>(
-        'datetime',
-        'Date Time',
-        (item) => item.date,
-        { sortable: true, orderable: true },
-    ),
-    createYesNoColumn<Program, number>(
-        'aboveBudget',
-        'Above Budget',
-        (item) => isDefined(item.budget) && item.budget > 100,
-        { sortable: true, orderable: true },
-    ),
-     */
 ];
-
-/*
-const staticColumnOrdering = [
-    { name: 'id' },
-    { name: 'name' },
-    { name: 'budget' },
-    { name: 'date' },
-    { name: 'datetime' },
-    { name: 'aboveBudget' },
-];
- */
 
 const Template: Story<TableProps<Program, number, Column<Program, number, any, any>>> = (args) => (
-    /*
-    const sortState = useSortState();
-    const { sorting } = sortState;
-
-    const filterState = useFilterState();
-    const { filtering } = filterState;
-
-    const orderState = useOrderState(staticColumnOrdering);
-    const { ordering } = orderState;
-
-    const orderedColumns = useOrdering(columns, ordering);
-    const filteredData = useFiltering(filtering, orderedColumns, data);
-    const sortedData = useSorting(sorting, orderedColumns, filteredData);
-     */
-
-    /*
-        <SortContext.Provider value={sortState}>
-            <FilterContext.Provider value={filterState}>
-                <OrderContext.Provider value={orderState}>
-                    <Table
-                        {...args}
-                        columns={orderedColumns}
-                        data={sortedData}
-                        className={styles.table}
-                    />
-                </OrderContext.Provider>
-            </FilterContext.Provider>
-        </SortContext.Provider>
-     */
-
     <Table
         {...args}
         columns={columns}
