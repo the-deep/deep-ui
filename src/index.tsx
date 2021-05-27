@@ -32,6 +32,8 @@ export type { Props as DateInputProps } from './components/DateInput';
 export { default as DateInput } from './components/DateInput';
 export type { Props as DateOutputProps } from './components/DateOutput';
 export { default as DateOutput } from './components/DateOutput';
+export type { Props as DateRangeOutputProps } from './components/DateRangeOutput';
+export { default as DateRangeOutput } from './components/DateRangeOutput';
 export type { Props as DraggableContentProps } from './components/DraggableContent';
 export { default as DraggableContent } from './components/DraggableContent';
 export type { Props as DropContainerProps } from './components/DropContainer';

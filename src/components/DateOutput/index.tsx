@@ -10,13 +10,13 @@ import styles from './styles.css';
 export interface Props {
     className?: string;
     value: string | number;
-    format: string;
+    format?: string;
 }
 
 function DateOutput(props: Props) {
     const {
         value,
-        format = 'dd-MM-yyyy',
+        format = 'dd MMM, yyyy',
         className,
     } = props;
 
