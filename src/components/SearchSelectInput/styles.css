@@ -5,14 +5,14 @@
     overflow: auto;
 
     .icon {
+        display: flex;
+        align-items: center;
         opacity: 0;
         font-size: 1.2em;
     }
 
     .label {
         display: flex;
-        flex-grow: 1;
-        padding: 0 var(--dui-spacing-extra-small);
         overflow: auto;
 
         .text {

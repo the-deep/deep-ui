@@ -62,7 +62,7 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
         [optionKey, option, onClick],
     );
 
-    const handleMouseMove = useCallback(
+    const handleMouseEnter = useCallback(
         () => {
             if (onFocus) {
                 onFocus({ key: optionKey, mouse: true });
@@ -90,7 +90,7 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
                 containerClassName,
             )}
             onClick={handleClick}
-            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             title={title}
             name={optionKey}

@@ -5,6 +5,8 @@ import {
     unique,
 } from '@togglecorp/fujs';
 import { MdCheck } from 'react-icons/md';
+
+import ElementFragments from '../ElementFragments';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
@@ -16,19 +18,17 @@ interface OptionProps {
     children: React.ReactNode;
 }
 function Option(props: OptionProps) {
-    const {
-        children,
-    } = props;
+    const { children } = props;
 
     return (
-        <>
-            <div className={styles.icon}>
-                <MdCheck />
-            </div>
-            <div className={styles.label}>
+        <ElementFragments
+            icons={<MdCheck className={styles.icon} />}
+            childrenContainerClassName={styles.label}
+        >
+            <div className={styles.text}>
                 { children }
             </div>
-        </>
+        </ElementFragments>
     );
 }
 

@@ -1,7 +1,12 @@
+.dummy {
+    pointer-events: none;
+    display: none;
+}
+
 .popup {
     position: fixed;
     border-radius: var(--dui-radius-popup-border);
-    background-color: var(--dui-color-white);
+    background-color: var(--dui-color-foreground);
     filter: drop-shadow(0 0 var(--dui-radius-blur-shadow) var(--dui-color-shadow));
     max-width: calc(100vw - 2 * var(--dui-spacing-large));
 
@@ -17,15 +22,17 @@
     }
 
     &.top {
+        animation: appear-from-top var(--dui-duration-transition-medium) ease-in forwards;
         .tip {
-            bottom: calc(-1 * var(--dui-height-popup-tip));
+            bottom: calc(-1 * var(--dui-height-popup-tip) + 1px);
             clip-path: polygon(100% 0%, 0 0, 50% 100%);
         }
     }
 
     &.bottom {
+        animation: appear-from-bottom var(--dui-duration-transition-medium) ease-in forwards;
         .tip {
-            top: calc(-1 * var(--dui-height-popup-tip));
+            top: calc(-1 * var(--dui-height-popup-tip) + 1px);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
     }
@@ -46,5 +53,66 @@
         width: 100%;
         height: 100%;
         overflow: auto;
+    }
+
+    &.hidden {
+        transform-origin: 0 0;
+
+        &.top {
+            animation: hide-from-top var(--dui-duration-transition-medium) ease-in forwards;
+        }
+
+        &.bottom {
+            animation: hide-from-bottom var(--dui-duration-transition-medium) ease-in forwards;
+        }
+    }
+
+}
+
+@keyframes hide-from-top {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+
+@keyframes hide-from-bottom {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}
+
+@keyframes appear-from-top {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes appear-from-bottom {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

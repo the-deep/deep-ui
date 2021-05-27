@@ -3,6 +3,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 
 function useParentPositionTracking(
     elementRef: React.RefObject<HTMLElement>,
+    shouldTrack = true,
 ) {
     const [bcr, setBcr] = React.useState<DOMRect | undefined>(undefined);
     const callbackRef = React.useRef<number | undefined>();
@@ -41,6 +42,10 @@ function useParentPositionTracking(
     }, [queueSync, elementRef]);
 
     React.useEffect(() => {
+        if (!shouldTrack) {
+            return undefined;
+        }
+
         const { current: el } = elementRef;
 
         if (!el) {
@@ -79,7 +84,7 @@ function useParentPositionTracking(
                 mutationObserverRef.current.disconnect();
             }
         };
-    }, [elementRef, handleResize, handleAttributeMutation, handleScroll]);
+    }, [elementRef, handleResize, handleAttributeMutation, handleScroll, shouldTrack]);
 
     return bcr;
 }

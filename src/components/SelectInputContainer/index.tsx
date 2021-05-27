@@ -340,22 +340,20 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
                     />
                 )}
             />
-            {dropdownShown && (
-                <Popup
-                    elementRef={popupRef}
-                    parentRef={inputSectionRef}
-                    className={_cs(optionsPopupClassName, styles.popup)}
-                    contentClassName={styles.popupContent}
-                >
-                    {popup}
-                    <EmptyOptions
-                        filtered={optionsFiltered}
-                        pending={optionsPending}
-                        optionsCount={options.length}
-                        totalOptionsCount={totalOptionsCount}
-                    />
-                </Popup>
-            )}
+            <Popup
+                elementRef={popupRef}
+                className={_cs(optionsPopupClassName, styles.popup)}
+                contentClassName={styles.popupContent}
+                show={dropdownShown}
+            >
+                {popup}
+                <EmptyOptions
+                    filtered={optionsFiltered}
+                    pending={optionsPending}
+                    optionsCount={options.length}
+                    totalOptionsCount={totalOptionsCount}
+                />
+            </Popup>
         </>
     );
 }
