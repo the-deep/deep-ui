@@ -1,20 +1,14 @@
 .draggable-content {
-    display: flex;
-    align-items: flex-start;
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
-    .icons {
-        display: flex;
-        flex-direction: column;
-    }
+    .drag-container {
+        cursor: move;
 
-    .actions {
-        display: flex;
-        flex-direction: column;
-
-        .drag-container {
-            cursor: move;
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

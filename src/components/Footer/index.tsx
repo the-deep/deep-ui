@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import ElementFragments from '../ElementFragments';
+import QuickActionGroup from '../QuickActionGroup';
 
 import styles from './styles.css';
 
@@ -13,6 +14,8 @@ export interface Props {
     actions?: React.ReactNode;
     children?: React.ReactNode;
     childrenContainerClassName?: string;
+    quickActions?: React.ReactNode;
+    quickActionsContainerClassName?: string;
 }
 
 function Footer(props: Props) {
@@ -24,6 +27,8 @@ function Footer(props: Props) {
         iconsContainerClassName,
         children,
         icons,
+        quickActions,
+        quickActionsContainerClassName,
     } = props;
 
     return (
@@ -31,7 +36,16 @@ function Footer(props: Props) {
             <ElementFragments
                 icons={icons}
                 iconsContainerClassName={iconsContainerClassName}
-                actions={actions}
+                actions={(
+                    <>
+                        {actions}
+                        {quickActions && (
+                            <QuickActionGroup className={quickActionsContainerClassName}>
+                                {quickActions}
+                            </QuickActionGroup>
+                        )}
+                    </>
+                )}
                 actionsContainerClassName={actionsContainerClassName}
                 childrenContainerClassName={childrenContainerClassName}
             >

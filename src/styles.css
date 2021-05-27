@@ -95,6 +95,7 @@
 
     --dui-border-color-card: #f2f2f2;
     --dui-color-separator: rgba(0, 0, 0, .1);
+    --dui-color-separator-info: var(--dui-color-surface-information);
     --dui-border-color-inner-card: #dfe7f2;
     --dui-color-label: #828282;
     --dui-color-text-dark: #333333;
@@ -149,9 +150,4 @@
 
     --dui-duration-transition-medium: .2s;
     --dui-duration-delay-short: .2s;
-}
-
-html,
-body {
-    font-size: 13px;
 }

@@ -70,7 +70,9 @@ const columns = [
     ),
 ];
 
-const Template: Story<TableViewProps<Program, number, Column<Program, number, any, any>>> = (args) => {
+const Template: Story<
+    TableViewProps<Program, number, Column<Program, number, any, any>>
+> = (args) => {
     const [{
         empty,
         pending,

@@ -1,0 +1,11 @@
+.quick-action-group {
+    display: flex;
+    align-items: center;
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator-info);
+    border-radius: calc(1em + 2 * var(--dui-spacing-extra-small));
+    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
+
+    >* {
+        margin: 0 var(--dui-spacing-extra-small);
+    }
+}
