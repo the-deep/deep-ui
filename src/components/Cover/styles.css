@@ -6,4 +6,12 @@
 .cover {
     pointer-events: none;
     position: fixed;
+    opacity: 0;
+    animation: appear var(--dui-duration-transition-medium) ease-in forwards;
+    animation-delay: var(--dui-duration-delay-short);
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
