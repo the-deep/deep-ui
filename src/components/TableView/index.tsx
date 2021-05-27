@@ -20,7 +20,7 @@ export type Props<
     C
 > & Omit<MessageProps, MessagePropOmission> & {
     className?: string;
-    contentClassName,
+    contentClassName?: string,
 };
 
 function TableView<
