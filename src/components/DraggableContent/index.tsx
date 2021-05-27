@@ -2,7 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { GrDrag } from 'react-icons/gr';
 
-import ElementFragments, { Props as ElementFragmentsProps } from '../ElementFragments';
+import Container, { Props as ContainerProps } from '../Container';
 
 import styles from './styles.css';
 
@@ -10,7 +10,7 @@ type DivElementProps = React.HTMLProps<HTMLDivElement>;
 
 export type SerializableValue = Record<string, unknown>;
 
-export interface Props extends ElementFragmentsProps {
+export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     className?: string;
     children: React.ReactNode;
     elementRef?: DivElementProps['ref'];
@@ -31,10 +31,9 @@ function DraggableContent(props: Props) {
         onDragStop,
         value,
         name,
-        actions,
-        iconsContainerClassName,
-        actionsContainerClassName,
-        ...elementFragmentsProps
+        headerActions,
+        sub = true,
+        ...containerProps
     } = props;
 
     const [draggable, setDraggable] = React.useState(false);
@@ -78,32 +77,30 @@ function DraggableContent(props: Props) {
     }, [setDraggable]);
 
     return (
-        <div
-            ref={elementRef}
+        <Container
+            {...containerProps}
+            sub={sub}
             className={_cs(styles.draggableContent, className)}
-            draggable={draggable}
-            onDragStart={handleDragStart}
+            containerElementProps={{
+                ref: elementRef,
+                draggable,
+                onDragStart: handleDragStart,
+            }}
+            headerActions={(
+                <>
+                    {headerActions}
+                    <div
+                        role="presentation"
+                        onMouseDown={handleDragHandleMouseDown}
+                        className={styles.dragContainer}
+                    >
+                        <GrDrag className={styles.icon} />
+                    </div>
+                </>
+            )}
         >
-            <ElementFragments
-                {...elementFragmentsProps}
-                iconsContainerClassName={_cs(styles.icon, iconsContainerClassName)}
-                actionsContainerClassName={_cs(styles.actions, actionsContainerClassName)}
-                actions={(
-                    <>
-                        <div
-                            role="presentation"
-                            onMouseDown={handleDragHandleMouseDown}
-                            className={styles.dragContainer}
-                        >
-                            <GrDrag />
-                        </div>
-                        {actions}
-                    </>
-                )}
-            >
-                { children }
-            </ElementFragments>
-        </div>
+            { children }
+        </Container>
     );
 }
 

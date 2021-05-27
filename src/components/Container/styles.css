@@ -10,11 +10,15 @@
 
     .content {
         flex-grow: 1;
-        padding: var(--dui-spacing-medium);
+        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
         overflow: auto;
     }
 
     .footer {
         flex-shrink: 0;
+    }
+
+    &.sub {
+        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small)) 0;
     }
 }

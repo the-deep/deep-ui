@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Header from '../Header';
+import Header, { Props as HeaderProps } from '../Header';
 import Footer from '../Footer';
 
 import styles from './styles.css';
@@ -22,7 +22,10 @@ export interface Props {
     contentClassName?: string;
     footerClassName?: string;
     footerContent?: React.ReactNode;
+    footerIcons?: React.ReactNode;
     footerActions?: React.ReactNode;
+    footerQuickActions?: React.ReactNode;
+    headingSize?: HeaderProps['headingSize'];
 
     // Is sub container? (i.e. Container with small heading)
     sub?: boolean;
@@ -41,15 +44,22 @@ function Container(props: Props) {
         headingClassName,
         contentClassName,
         footerContent,
+        footerIcons,
         footerActions,
         footerClassName,
         sub = false,
         containerElementProps,
+        headingSize,
+        footerQuickActions,
     } = props;
 
     return (
         <div
-            className={_cs(styles.container, className)}
+            className={_cs(
+                styles.container,
+                sub && styles.sub,
+                className,
+            )}
             {...containerElementProps}
         >
             {(heading || headerActions || headerIcons) && (
@@ -58,7 +68,7 @@ function Container(props: Props) {
                     actions={headerActions}
                     className={_cs(styles.header, headerClassName)}
                     heading={heading}
-                    headingSize={sub ? 'medium' : 'large'}
+                    headingSize={headingSize ?? sub ? 'medium' : 'large'}
                     description={headerDescription}
                     descriptionClassName={headerDescriptionClassName}
                     headingClassName={headingClassName}
@@ -67,10 +77,12 @@ function Container(props: Props) {
             <div className={_cs(styles.content, contentClassName)}>
                 { children }
             </div>
-            {(footerContent || footerActions) && (
+            {(footerContent || footerActions || footerQuickActions) && (
                 <Footer
                     actions={footerActions}
                     className={_cs(styles.footer, footerClassName)}
+                    quickActions={footerQuickActions}
+                    icons={footerIcons}
                 >
                     { footerContent }
                 </Footer>

@@ -46,6 +46,18 @@ Default.args = {
     ),
     headerDescription: 'Header Description',
     footerContent: 'Footer',
-    footerActions: <IoChatboxOutline />,
+    footerQuickActions: (
+        <>
+            <QuickActionButton name={undefined}>
+                <IoChatboxOutline />
+            </QuickActionButton>
+            <QuickActionButton name={undefined}>
+                <IoFlag />
+            </QuickActionButton>
+            <QuickActionButton name={undefined}>
+                <IoChatboxOutline />
+            </QuickActionButton>
+        </>
+    ),
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed convallis quam, quis molestie nisi. Integer fringilla maximus tellus at aliquam. Nunc ac turpis non elit placerat luctus. Mauris vehicula, dui vitae feugiat malesuada, diam elit porttitor tellus, ut ultricies nibh est at ante. Maecenas congue congue nulla quis feugiat. Etiam porta volutpat mollis. Morbi libero eros, malesuada nec metus ac, varius cursus purus. Proin metus tellus, fermentum vel tellus et, tristique mattis urna. Nunc sapien sapien, malesuada posuere nulla in, imperdiet placerat orci. Phasellus dapibus magna sit amet neque sollicitudin laoreet.',
 };

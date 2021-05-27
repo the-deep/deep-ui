@@ -1,7 +1,10 @@
 import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
-import { IoCloseCircle } from 'react-icons/io5';
+import {
+    IoCloseCircle,
+    IoCheckmarkCircle,
+} from 'react-icons/io5';
 
 import DraggableContent, { Props as DraggableContentProps } from '#components/DraggableContent';
 
@@ -24,7 +27,12 @@ export const Default = Template.bind({});
 Default.args = {
     name: 'myText',
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed convallis quam, quis molestie nisi. Integer fringilla maximus tellus at aliquam. Nunc ac turpis non elit placerat luctus. Mauris vehicula, dui vitae feugiat malesuada, diam elit porttitor tellus, ut ultricies nibh est at ante. Maecenas congue congue nulla quis feugiat. Etiam porta volutpat mollis.',
-    actions: <IoCloseCircle />,
+    footerQuickActions: (
+        <>
+            <IoCloseCircle style={{ color: 'tomato' }} />
+            <IoCheckmarkCircle style={{ color: 'teal' }} />
+        </>
+    ),
 };
 Default.parameters = {
     design: {
