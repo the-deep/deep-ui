@@ -3,10 +3,11 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    opacity: 0;
     background-color: var(--dui-color-backdrop);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
     animation: appear var(--dui-duration-transition-medium) linear forwards;
-    animation-duration: var(--dui-duration-delay-short);
+    animation-delay: var(--dui-duration-delay-long);
 
     .icon {
         padding: var(--dui-spacing-small);
@@ -23,12 +24,7 @@
 }
 
 @keyframes appear {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 

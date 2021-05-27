@@ -3,7 +3,7 @@
     --padding-h: var(--dui-spacing-large);
     --padding-v: var(--dui-spacing-small);
     --color-border: transparent;
-    --color-text: inherit;
+    --color-text: transparent;
     --color-background: transparent;
     --padding: var(--padding-v) calc(var(--padding-h) - var(--padding-internal-h));
     --font-size: var(--dui-font-size-medium);
@@ -46,96 +46,65 @@
         padding: 0 var(--padding-internal-h);
     }
 
-    &:disabled {
-        --color-border: var(--dui-color-background-disabled);
-        --color-background: var(--dui-color-background-disabled);
-        --color-text: var(--dui-color-text-disabled);
-
-        &.tertiary {
-            --color-border: var(--dui-color-text-disabled);
-        }
-
-        &.action {
-            --padding: 0;
-            --padding-h: 0;
-            --padding-v: 0;
-            --color-border: transparent;
-            --color-background: transparent;
-            --color-text: inherit;
-        }
-    }
 
     &.primary {
         --text-transform: uppercase;
-    }
+        --color-border: var(--dui-color-background-primary-button);
+        --color-background: var(--dui-color-background-primary-button);
+        --color-text: var(--dui-color-text-primary-button);
 
-    &.secondary {
-        --text-transform: uppercase;
-    }
-
-    &:not(:disabled) {
-        &:not(&.read-only) {
-            --cursor: pointer;
-        }
-
-        &.primary {
-            --color-border: var(--dui-color-background-primary-button);
-            --color-background: var(--dui-color-background-primary-button);
-            --color-text: var(--dui-color-text-primary-button);
-
+        &:not(:disabled) {
             &:hover {
                 --color-border: var(--dui-color-background-hover-primary-button);
                 --color-background: var(--dui-color-background-hover-primary-button);
             }
         }
+    }
 
-        &.secondary {
-            --color-border: var(--dui-color-grey6);
-            --color-background: var(--dui-color-grey6);
-            --color-text: var(--dui-color-black);
+    &.secondary {
+        --text-transform: uppercase;
+        --color-border: transparent;
+        --color-background: var(--dui-color-background-information);
+        --color-text: var(--dui-color-accent);
 
-            &:hover {
-                --color-border: var(--dui-color-grey5);
-                --color-background: var(--dui-color-grey5);
-            }
-        }
-
-        &.inverted {
-            --color-border: transparent;
-            --color-background: var(--dui-color-background-information);
-            --color-text: var(--dui-color-accent);
-
+        &:not(:disabled) {
             &:hover {
                 --color-border: transparent;
                 --color-background: var(--dui-color-background-negative);
             }
         }
+    }
 
-        &.tertiary {
-            --color-border: var(--dui-color-accent);
-            --color-background: transparent;
-            --color-text: var(--dui-color-accent);
+    &.tertiary {
+        --color-background: var(--dui-color-foreground);
+        --color-text: var(--dui-color-accent);
+        --color-border: var(--dui-color-accent);
 
+        &:disabled {
+            --color-border: var(--dui-color-text-disabled);
+            --color-text: var(--dui-color-text);
+        }
+
+        &:not(:disabled) {
             &:hover {
                 --color-background: var(--dui-color-background-tertiary-hover);
             }
         }
+    }
 
-        &.action {
-            --padding: 0;
-            --padding-internal-h: 0;
-            --padding-h: 0;
-            --padding-v: 0;
-            --color-border: transparent;
-            --color-background: transparent;
-            --color-text: inherit;
-            --font-size: inherit;
+    &.action {
+        --padding: 0;
+        --padding-internal-h: 0;
+        --padding-h: 0;
+        --padding-v: 0;
+        --color-border: transparent;
+        --color-background: transparent;
+        --color-text: inherit;
 
-            .icons,
-            .children,
-            .actions {
-                font-size: 1.27em;
-            }
+        .icons,
+        .children,
+        .actions {
+            font-size: 1.27em;
         }
     }
 
@@ -149,6 +118,26 @@
             .actions {
                 font-size: 1.4em;
             }
+        }
+    }
+
+    &:disabled {
+        --cursor: not-allowed;
+        opacity: var(--dui-opacity-disabled-element);
+        filter: saturate(var(--dui-saturation-disabled-element));
+
+        &.action {
+            --padding: 0;
+            --padding-h: 0;
+            --padding-v: 0;
+            --color-border: transparent;
+            --color-background: transparent;
+        }
+    }
+
+    &:not(&.read-only) {
+        &:not(:disabled) {
+            --cursor: pointer;
         }
     }
 }

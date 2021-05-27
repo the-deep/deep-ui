@@ -140,14 +140,18 @@
     --dui-width-separator-medium: 2px;
     --dui-width-separator-thick: 3px;
 
+    --dui-opacity-disabled-element: 0.4;
+    --dui-saturation-disabled-element: 0.6;
+
     /* FIXME: use relative size */
     --dui-border-radius-card: 8px;
     --dui-border-radius-modal: 8px;
     --dui-border-radius-tag: 25px;
-    --dui-opacity-disabled-element: 0.3;
     --dui-height-progress-bar: 10px;
     --dui-border-radius-progress-bar: 15px;
 
     --dui-duration-transition-medium: .2s;
-    --dui-duration-delay-short: .2s;
+    --dui-duration-delay-short: 150ms;
+    --dui-duration-delay-medium: 250ms;
+    --dui-duration-delay-long: 400ms;
 }

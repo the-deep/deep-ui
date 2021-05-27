@@ -22,7 +22,7 @@ function useParentPositionTracking(
                 const elementBCR = el.parentElement.getBoundingClientRect();
                 setBcr(elementBCR);
             }
-        }, { timeout: 200 });
+        }, { timeout: 100 });
     }, [elementRef, setBcr]);
 
     const handleResize = queueSync;

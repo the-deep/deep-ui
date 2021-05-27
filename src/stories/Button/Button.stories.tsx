@@ -52,7 +52,7 @@ ReadOnly.args = {
     readOnly: true,
 };
 
-export const Variants = () => (
+export const Variants: Story = () => (
     <div className={styles.buttonVariants}>
         <section>
             <h3>Normal</h3>
@@ -79,12 +79,6 @@ export const Variants = () => (
                     name="tertiary"
                 >
                     Tertiary
-                </Button>
-                <Button
-                    variant="inverted"
-                    name="inverted"
-                >
-                    Inverted
                 </Button>
                 <Button
                     variant="action"
@@ -124,13 +118,6 @@ export const Variants = () => (
                     disabled
                 >
                     Tertiary
-                </Button>
-                <Button
-                    variant="inverted"
-                    name="disabled-inverted-button"
-                    disabled
-                >
-                    Inverted
                 </Button>
                 <Button
                     variant="action"
@@ -173,13 +160,6 @@ export const Variants = () => (
                     Tertiary
                 </Button>
                 <Button
-                    variant="inverted"
-                    name="readOnly-inverted-button"
-                    readOnly
-                >
-                    Inverted
-                </Button>
-                <Button
                     variant="action"
                     name="readOnly-action-button"
                     readOnly
@@ -217,13 +197,6 @@ export const Variants = () => (
                     big
                 >
                     Tertiary
-                </Button>
-                <Button
-                    variant="inverted"
-                    name="big-inverted-button"
-                    big
-                >
-                    Inverted
                 </Button>
                 <Button
                     variant="action"

@@ -40,7 +40,7 @@ function Cover(props: Props) {
                 containerRef.current.style.width = `${width}px`;
                 containerRef.current.style.height = `${height}px`;
             }
-        }, { timeout: 200 });
+        }, { timeout: 100 });
     }, [bcr]);
 
     return (

@@ -7,7 +7,6 @@ export type ButtonVariant = (
     'primary'
     | 'secondary'
     | 'tertiary'
-    | 'inverted'
     | 'action'
 );
 
@@ -15,7 +14,6 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
     primary: styles.primary,
     secondary: styles.secondary,
     tertiary: styles.tertiary,
-    inverted: styles.inverted,
     action: styles.action,
 };
 
@@ -60,7 +58,7 @@ export function useButtonFeatures(
     const buttonClassName = _cs(
         styles.button,
         variant,
-        buttonVariantToStyleMap[variant],
+        buttonVariantToStyleMap[variant] ?? styles.primary,
         readOnly && styles.readOnly,
         big && styles.big,
         className,

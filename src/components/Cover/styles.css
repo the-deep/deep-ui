@@ -8,7 +8,7 @@
     position: fixed;
     opacity: 0;
     animation: appear var(--dui-duration-transition-medium) ease-in forwards;
-    animation-delay: var(--dui-duration-delay-short);
+    animation-delay: var(--dui-duration-delay-long);
 }
 
 @keyframes appear {
