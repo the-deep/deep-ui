@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, memo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { listToGroupList } from '@togglecorp/fujs';
 
-export const typedMemo: (<T>(c: T) => T) = memo;
+import { genericMemo } from '../utils';
 
-type OptionKey = string | number;
+export type OptionKey = string | number;
 
 const emptyList: unknown[] = [];
 
@@ -174,4 +174,4 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
     );
 }
 
-export default typedMemo(List);
+export default genericMemo(List);

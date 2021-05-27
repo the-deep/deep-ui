@@ -7,18 +7,26 @@ import styles from './styles.css';
 
 export interface Props {
     className?: string;
-    message?: string;
+    message?: React.ReactNode;
+    compact?: boolean;
 }
 
 function PendingMessage(props: Props) {
     const {
         className,
         message = 'Please wait...',
+        compact,
     } = props;
 
     return (
-        <Cover className={_cs(styles.pendingMessage, className)}>
-            <PendingAnimation />
+        <Cover
+            className={_cs(
+                styles.pendingMessage,
+                className,
+                compact && styles.compact,
+            )}
+        >
+            <PendingAnimation className={styles.icon} />
             <div className={styles.message}>
                 { message }
             </div>

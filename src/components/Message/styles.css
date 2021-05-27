@@ -1,34 +1,30 @@
-.pending-message {
+.message {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    background-color: var(--dui-color-backdrop);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
-    animation: appear var(--dui-duration-transition-medium) linear forwards;
-    animation-duration: var(--dui-duration-delay-short);
+    text-align: center;
+    color: var(--dui-color-text-message);
 
-    .icon {
+    .icon-container {
+        display: flex;
+        align-items: center;
         padding: var(--dui-spacing-small);
+        font-size: 3em;
     }
 
-    .message {
+    .content {
         padding: var(--dui-spacing-small);
     }
 
     &.compact {
+        align-items: initial;
         flex-direction: row;
+        justify-content: center;
         padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+
+        .icon-container {
+            font-size: 1.3em;
+        }
     }
 }
-
-@keyframes appear {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-

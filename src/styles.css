@@ -68,6 +68,7 @@
     --dui-color-text-label: var(--dui-color-grey2);
     --dui-color-text-label-on-dark: var(--dui-color-grey6);
     --dui-color-text-watermark: var(--dui-color-grey-4);
+    --dui-color-text-message: rgba(0, 0, 0, .5);
 
     --dui-color-background-disabled: var(--dui-color-grey5);
     --dui-color-text-disabled: var(--dui-color-grey4);
