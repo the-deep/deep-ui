@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PendingMessage from '../../PendingMessage';
+import PendingAnimation from '../../PendingAnimation';
 
 import styles from './styles.css';
 
@@ -22,7 +22,7 @@ function EmptyOptions(props: Props) {
     if (pending) {
         return (
             <div className={styles.empty}>
-                <PendingMessage />
+                <PendingAnimation />
             </div>
         );
     }
