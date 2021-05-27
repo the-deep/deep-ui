@@ -49,7 +49,7 @@ function Group({
 
 export type Props<
     OK extends OptionKey,
-    N,
+    N extends string | number,
     O,
     P extends ContentBaseProps,
     OMISSION extends string,
@@ -90,7 +90,7 @@ export type Props<
 const emptyList: unknown[] = [];
 
 // eslint-disable-next-line @typescript-eslint/ban-types, max-len
-function SelectInputContainer<OK extends OptionKey, N extends string, O extends object, P extends ContentBaseProps>(
+function SelectInputContainer<OK extends OptionKey, N extends string | number, O extends object, P extends ContentBaseProps>(
     props: Props<OK, N, O, P, never>,
 ) {
     const {

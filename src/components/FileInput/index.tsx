@@ -8,8 +8,8 @@ import { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
-export interface Props<T extends string> extends InheritedProps<T> {
+type InheritedProps<T extends string|number> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
+export interface Props<T extends string|number> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     showStatus?: boolean;
@@ -35,7 +35,7 @@ export const isValidFile = (fileName: string, mimeType: string, acceptString?: s
     });
 };
 
-function FileInput<T extends string>(props: Props<T>) {
+function FileInput<T extends string|number>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,

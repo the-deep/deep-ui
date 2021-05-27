@@ -28,7 +28,7 @@ export type Props = BaseProps & ({
     hideCloseButton?: false;
     onCloseButtonClick: () => void;
 } | {
-    hideCloseButton: true;
+    hideCloseButton?: true;
     onCloseButtonClick?: never;
 })
 

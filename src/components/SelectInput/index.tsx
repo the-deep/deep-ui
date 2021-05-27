@@ -14,14 +14,19 @@ const emptyList: unknown[] = [];
 
 export type Props<
     T extends OptionKey,
-    K extends string,
+    K extends string | number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
 > = SearchSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially' | 'totalOptionsCount'>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function SelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
+function SelectInput<
+    T extends OptionKey,
+    K extends string | number,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    O extends object,
+    P extends Def
+>(
     props: Props<T, K, O, P>,
 ) {
     const {

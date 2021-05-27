@@ -10,9 +10,9 @@ export default {
     argTypes: {},
 };
 
-const Template: Story<DateRangeInputProps> = (args) => {
+const Template: Story<DateRangeInputProps<any>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
-    const handleChange = (e: string | undefined) => {
+    const handleChange = (e: any) => {
         updateArgs({ value: e });
     };
 
@@ -31,12 +31,12 @@ Default.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-    value: '',
+    value: undefined,
     disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
-    value: 'This is raw input',
+    value: undefined,
     readOnly: true,
 };

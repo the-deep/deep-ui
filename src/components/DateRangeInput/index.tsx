@@ -68,7 +68,7 @@ export function useInputValue<T>(initialValue: T | undefined): [
 
 interface DateRangeModalProps {
     onDateRangeSelect: (startDate: string, endDate: string) => void;
-    onCloseButtonClick: ModalProps['onClose'];
+    onCloseButtonClick: ModalProps['onCloseButtonClick'];
 }
 
 // TODO: move to separate component
@@ -91,9 +91,10 @@ function DateRangeModal(props: DateRangeModalProps) {
         <Modal
             heading="Select date range"
             className={styles.dateRangeModal}
-            onClose={onCloseButtonClick}
+            onCloseButtonClick={onCloseButtonClick}
             footer={(
                 <Button
+                    name="select"
                     disabled={!startDate || !endDate}
                     onClick={handleSelectButtonClick}
                 >
@@ -102,12 +103,14 @@ function DateRangeModal(props: DateRangeModalProps) {
             )}
         >
             <DateInput
+                name="startDate"
                 className={styles.startDateInput}
                 label="Start date"
                 value={startDate}
                 onChange={setStartDate}
             />
             <DateInput
+                name="endDate"
                 className={styles.endDateInput}
                 label="End date"
                 value={endDate}
@@ -117,18 +120,22 @@ function DateRangeModal(props: DateRangeModalProps) {
     );
 }
 
-export interface Props<N> {
-    name?: N;
+export interface Props<N extends string | number> {
+    name: N;
     value?: DateRangeValue;
-    onChange: (newValue: DateRangeValue | undefined, name?: N) => void;
+    onChange: (newValue: DateRangeValue | undefined, name: N) => void;
+    disabled?: boolean;
+    readOnly?: boolean;
 }
 
 // TODO: Expose more props (eg: elementRef, inputElementRef, etc)
-function DateRangeInput<N extends string>(props: Props<N>) {
+function DateRangeInput<N extends string | number>(props: Props<N>) {
     const {
         name,
         value,
         onChange,
+        disabled,
+        readOnly,
     } = props;
 
     const [showCustomDateRangeModal, setShowCustomDateRangeModal] = React.useState(false);
@@ -144,9 +151,9 @@ function DateRangeInput<N extends string>(props: Props<N>) {
                 key: 'customRange',
                 startDate,
                 endDate,
-            });
+            }, name);
         }
-    }, [setShowCustomDateRangeModal, onChange]);
+    }, [setShowCustomDateRangeModal, onChange, name]);
 
     const handleSelectInputChange = React.useCallback((newValue) => {
         if (newValue === 'customRange') {
@@ -155,12 +162,12 @@ function DateRangeInput<N extends string>(props: Props<N>) {
             if (newValue) {
                 onChange({
                     key: newValue,
-                });
+                }, name);
             } else {
-                onChange(undefined);
+                onChange(undefined, name);
             }
         }
-    }, [onChange]);
+    }, [onChange, name]);
 
     const displayValueSelector = React.useCallback((d: DateRangeOption) => {
         if (d.key !== 'customRange') {
@@ -180,6 +187,8 @@ function DateRangeInput<N extends string>(props: Props<N>) {
                 displayValueSelector={displayValueSelector}
                 value={value?.key}
                 onChange={handleSelectInputChange}
+                disabled={disabled}
+                readOnly={readOnly}
             />
             {showCustomDateRangeModal && (
                 <DateRangeModal

@@ -37,7 +37,7 @@ type OptionKey = string | number;
 
 export type Props<
     T extends OptionKey,
-    K,
+    K extends string | number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
@@ -56,6 +56,7 @@ export type Props<
     sortFunction?: (options: O[], search: string, labelSelector: (option: O) => string) => O[];
     onSearchValueChange?: (value: string) => void;
     onShowDropdownChange?: (value: boolean) => void;
+    displayValueSelector?: (option: O) => string;
 }, OMISSION> & (
     SelectInputContainerProps<T, K, O, P,
         'name'
@@ -87,7 +88,7 @@ const emptyList: unknown[] = [];
 
 function SearchSelectInput<
     T extends OptionKey,
-    K extends string,
+    K extends string | number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
@@ -108,6 +109,7 @@ function SearchSelectInput<
         searchOptions: searchOptionsFromProps,
         onSearchValueChange,
         onShowDropdownChange,
+        displayValueSelector,
         ...otherProps
     } = props;
 
@@ -132,7 +134,21 @@ function SearchSelectInput<
         [options, keySelector, labelSelector],
     );
 
-    const valueDisplay = value ? optionsLabelMap[value] ?? '?' : '';
+    const optionsMap = useMemo(() => (
+        listToMap(options, keySelector, (d) => d)
+    ), [options, keySelector]);
+
+    const valueDisplay = useMemo(() => {
+        if (!value) {
+            return '';
+        }
+
+        if (displayValueSelector) {
+            return displayValueSelector(optionsMap[value]);
+        }
+
+        return optionsLabelMap[value] ?? '?';
+    }, [value, optionsMap, optionsLabelMap, displayValueSelector]);
 
     // NOTE: we can skip this calculation if optionsShowInitially is false
     const selectedOptions = useMemo(

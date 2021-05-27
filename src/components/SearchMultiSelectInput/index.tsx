@@ -18,7 +18,7 @@ type OptionKey = string | number;
 
 export type Props<
     T extends OptionKey,
-    K,
+    K extends string|number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
@@ -66,7 +66,7 @@ const emptyList: unknown[] = [];
 
 function SearchMultiSelectInput<
     T extends OptionKey,
-    K extends string,
+    K extends string | number,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,

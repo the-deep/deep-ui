@@ -7,13 +7,13 @@ import RawInput, { Props as RawInputProps } from '../RawInput';
 
 import styles from './styles.css';
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & RawInputProps<T>);
-export interface Props<T extends string> extends InheritedProps<T> {
+type InheritedProps<T extends string | number> = (Omit<InputContainerProps, 'input'> & RawInputProps<T>);
+export interface Props<T extends string | number> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
 }
 
-function DateInput<T extends string>(props: Props<T>) {
+function DateInput<T extends string | number>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,
