@@ -1,8 +1,12 @@
 import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import {
+    _cs,
+    isNotDefined,
+} from '@togglecorp/fujs';
 
 import Portal from '../Portal';
 import useParentPositionTracking from '../../hooks/useParentPositionTracking';
+import useMousePositionTracking from '../../hooks/useMousePositionTracking';
 import useUnmountTransition from '../../hooks/useUnmountTransition';
 
 import { genericMemo } from '../../utils';
@@ -29,7 +33,7 @@ interface FloatingPlacementProps {
     maxHeight: string | undefined;
 }
 
-function getFloatPlacement(bcr: DOMRect | undefined): FloatingPlacementProps {
+function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacementProps {
     const placement = {
         ...defaultPlacement,
     };
@@ -73,6 +77,127 @@ function getFloatPlacement(bcr: DOMRect | undefined): FloatingPlacementProps {
     };
 }
 
+function getFloatPlacementOnMousePosition(
+    x: number | undefined,
+    y: number | undefined,
+): FloatingPlacementProps {
+    const placement = {
+        ...defaultPlacement,
+    };
+
+    if (isNotDefined(x) || isNotDefined(y)) {
+        return {
+            placement,
+            horizontalPosition: 'left',
+            verticalPosition: 'bottom',
+            width: 'auto',
+            maxHeight: 'auto',
+        };
+    }
+
+    const offsetX = -20;
+    const offsetY = 6;
+
+    const cX = window.innerWidth / 2;
+    const cY = window.innerHeight / 2;
+
+    const horizontalPosition = (cX - x) > 0 ? 'right' : 'left';
+    const verticalPosition = (cY - y) > 0 ? 'bottom' : 'top';
+
+    if (horizontalPosition === 'left') {
+        placement.right = `${window.innerWidth - x - offsetX}px`;
+    } else if (horizontalPosition === 'right') {
+        placement.left = `${x + offsetX}px`;
+    }
+
+    if (verticalPosition === 'top') {
+        placement.bottom = `${window.innerHeight - y + offsetY}px`;
+    } else if (verticalPosition === 'bottom') {
+        placement.top = `${y + offsetY}px`;
+    }
+
+    return {
+        placement,
+        horizontalPosition,
+        verticalPosition,
+        width: 'auto',
+        maxHeight: 'auto',
+    };
+}
+
+type PopupFeatureKeys = 'show' | 'elementRef' | 'className' | 'contentClassName' | 'contentRef' | 'children' | 'tipClassName';
+export function usePopupFeatures(
+    props: Pick<Props, PopupFeatureKeys> & {
+        matchParentWidth?: boolean;
+        useMousePosition?: boolean;
+    },
+) {
+    const {
+        show,
+        elementRef,
+        contentRef,
+        className,
+        contentClassName,
+        children,
+        tipClassName,
+        matchParentWidth,
+        useMousePosition,
+    } = props;
+    const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
+    const dummyRef = React.useRef<HTMLDivElement>(null);
+    const parentBCR = useParentPositionTracking(dummyRef, delayedShow && !useMousePosition);
+    const [mouseX, mouseY] = useMousePositionTracking(useMousePosition && delayedShow);
+    const {
+        placement,
+        width,
+        horizontalPosition,
+        verticalPosition,
+        maxHeight,
+    } = useMousePosition
+        ? getFloatPlacementOnMousePosition(mouseX, mouseY)
+        : getFloatPlacementOnParentRect(parentBCR);
+
+    React.useEffect(() => {
+        setDelayedShow(show);
+    }, [show]);
+
+    const popupChildren = (
+        <Portal>
+            <div
+                style={{
+                    ...placement,
+                    width: matchParentWidth ? width : undefined,
+                }}
+                ref={elementRef}
+                className={_cs(
+                    styles.popup,
+                    className,
+                    horizontalPosition === 'left' ? styles.left : styles.right,
+                    verticalPosition === 'top' ? styles.top : styles.bottom,
+                    !show && styles.hidden,
+                )}
+            >
+                <div className={_cs(styles.tip, tipClassName)} />
+                <div
+                    ref={contentRef}
+                    className={_cs(styles.content, contentClassName)}
+                    style={{
+                        width: matchParentWidth ? width : undefined,
+                        maxHeight,
+                    }}
+                >
+                    { children }
+                </div>
+            </div>
+        </Portal>
+    );
+
+    return {
+        dummyRef,
+        popupChildren,
+    };
+}
+
 export interface Props {
     className?: string;
     contentClassName?: string;
@@ -80,7 +205,7 @@ export interface Props {
     contentRef?: React.RefObject<HTMLDivElement>;
     children: React.ReactNode;
     show?: boolean;
-    onHide?: () => void;
+    tipClassName?: string;
 }
 
 function Popup(props: Props) {
@@ -91,31 +216,24 @@ function Popup(props: Props) {
         contentRef,
         elementRef,
         show,
-        // onHide,
+        tipClassName,
     } = props;
 
-    const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
+    const {
+        dummyRef,
+        popupChildren,
+    } = usePopupFeatures({
+        children,
+        className,
+        contentClassName,
+        contentRef,
+        elementRef,
+        show,
+        tipClassName,
+        matchParentWidth: true,
+    });
 
     const shouldUnmount = useUnmountTransition(show);
-
-    const dummyRef = React.useRef<HTMLDivElement>(null);
-    const parentBCR = useParentPositionTracking(dummyRef, delayedShow);
-
-    React.useEffect(() => {
-        setDelayedShow(show);
-    }, [show]);
-
-    if (shouldUnmount) {
-        return null;
-    }
-
-    const {
-        placement,
-        width,
-        horizontalPosition,
-        verticalPosition,
-        maxHeight,
-    } = getFloatPlacement(parentBCR);
 
     return (
         <>
@@ -123,31 +241,7 @@ function Popup(props: Props) {
                 ref={dummyRef}
                 className={styles.dummy}
             />
-            <Portal>
-                <div
-                    style={{
-                        ...placement,
-                        minWidth: width,
-                    }}
-                    ref={elementRef}
-                    className={_cs(
-                        styles.popup,
-                        className,
-                        horizontalPosition === 'left' ? styles.left : styles.right,
-                        verticalPosition === 'top' ? styles.top : styles.bottom,
-                        !show && styles.hidden,
-                    )}
-                >
-                    <div className={styles.tip} />
-                    <div
-                        ref={contentRef}
-                        className={_cs(styles.content, contentClassName)}
-                        style={{ minWidth: width, maxHeight }}
-                    >
-                        { children }
-                    </div>
-                </div>
-            </Portal>
+            {!shouldUnmount && popupChildren }
         </>
     );
 }

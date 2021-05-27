@@ -1,0 +1,12 @@
+.tooltip {
+    background-color: var(--dui-color-background-dark);
+    color: var(--dui-color-text-on-dark);
+
+    .tip {
+        background-color: var(--dui-color-background-dark);
+    }
+
+    .content {
+        padding: var(--dui-spacing-medium);
+    }
+}
