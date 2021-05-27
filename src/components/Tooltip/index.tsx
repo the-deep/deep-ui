@@ -20,7 +20,7 @@ function Tooltip(props: Props) {
         children,
         className,
         contentClassName,
-        delay = 300,
+        delay = 200,
     } = props;
 
     const tooltipRef = React.useRef<HTMLDivElement>(null);

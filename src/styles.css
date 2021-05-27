@@ -10,7 +10,7 @@
     --dui-color-grey5: #e0e0e0;
     --dui-color-grey6: #f2f2f2;
     --dui-color-white: #ffffff;
-    --dui-color-backdrop: rgba(0, 255, 255, .9);
+    --dui-color-backdrop: rgba(255, 255, 255, .9);
     --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
 
     --dui-radius-popup-border: .2em;
@@ -138,7 +138,7 @@
     --dui-height-progress-bar: 10px;
     --dui-border-radius-progress-bar: 15px;
 
-    --dui-duration-transition-medium: .3s;
+    --dui-duration-transition-medium: .2s;
     --dui-duration-delay-short: .2s;
 }
 

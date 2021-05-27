@@ -10,7 +10,7 @@ function useUnmountTransition(show: boolean | undefined) {
             window.clearTimeout(timeoutRef.current);
             timeoutRef.current = window.setTimeout(() => {
                 setShouldUnmount(true);
-            }, 300);
+            }, 200);
         } else {
             setShouldUnmount(!show);
         }
