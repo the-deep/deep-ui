@@ -4,5 +4,6 @@
 }
 
 .cover {
+    pointer-events: none;
     position: fixed;
 }
