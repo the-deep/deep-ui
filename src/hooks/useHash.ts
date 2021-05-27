@@ -10,7 +10,9 @@ function useHash(value?: string) {
     const [hash, setHash] = useState(getHashFromBrowser());
 
     React.useEffect(() => {
-        setHashToBrowser(initialValue);
+        if (initialValue) {
+            setHashToBrowser(initialValue);
+        }
     }, [initialValue]);
 
     const handleHashChange = React.useCallback(() => {

@@ -1,6 +1,5 @@
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import { useArgs } from '@storybook/client-api';
 import FileInput, { Props as FileInputProps } from '#components/FileInput';
 
 export default {
@@ -10,8 +9,7 @@ export default {
 };
 
 const Template: Story<FileInputProps<string>> = (args) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [value, setValue] = useState<File[]>();
+    const [, setValue] = useState<File[]>();
 
     const handleChange = (v: File[]) => {
         setValue(v);

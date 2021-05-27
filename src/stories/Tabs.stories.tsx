@@ -75,7 +75,7 @@ Default.args = {
 export const Hash = Template.bind({});
 Hash.args = {
     useHash: true,
-    initialHash: 'tab-two',
+    defaultHash: 'tab-two',
 };
 
 export const Secondary = Template.bind({});
