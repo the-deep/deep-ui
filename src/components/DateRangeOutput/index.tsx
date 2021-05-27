@@ -6,8 +6,8 @@ import styles from './styles.css';
 
 export interface Props {
     className?: string;
-    startDate: DateOutputProps['value'];
-    endDate: DateOutputProps['value'];
+    startDate?: DateOutputProps['value'];
+    endDate?: DateOutputProps['value'];
     format?: DateOutputProps['format'];
 }
 
@@ -21,15 +21,21 @@ function DateRangeOutput(props: Props) {
 
     return (
         <div className={_cs(styles.dateRangeOutput, className)}>
-            <DateOutput
-                value={startDate}
-                format={format}
-            />
-            <div className={styles.separator}>-</div>
-            <DateOutput
-                value={endDate}
-                format={format}
-            />
+            {startDate && (
+                <DateOutput
+                    value={startDate}
+                    format={format}
+                />
+            )}
+            {startDate && endDate && (
+                <div className={styles.separator}>-</div>
+            )}
+            {endDate && (
+                <DateOutput
+                    value={endDate}
+                    format={format}
+                />
+            )}
         </div>
     );
 }
