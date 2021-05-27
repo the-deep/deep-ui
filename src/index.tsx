@@ -2,6 +2,12 @@ import './styles.css';
 
 export type { Props as ActionsProps } from './components/Actions';
 export { default as Actions } from './components/Actions';
+export type { Props as AlertProps } from './components/Alert';
+export { default as Alert } from './components/Alert';
+export type { Props as AlertContainerProps } from './components/AlertContainer';
+export { default as AlertContainer } from './components/AlertContainer';
+export type { AlertContextParams, AlertOptions } from './components/AlertContext';
+export { default as AlertContext } from './components/AlertContext';
 export type { Props as BodyBackdropProps } from './components/BodyBackdrop';
 export { default as BodyBackdrop } from './components/BodyBackdrop';
 export type { Props as ButtonProps } from './components/Button';
@@ -125,3 +131,4 @@ export type { Props as TextInputProps } from './components/TextInput';
 export { default as TextInput } from './components/TextInput';
 export type { Props as TooltipProps } from './components/Tooltip';
 export { default as Tooltip } from './components/Tooltip';
+export { default as useAlert } from './hooks/useAlert';

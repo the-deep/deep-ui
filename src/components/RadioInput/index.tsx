@@ -26,8 +26,8 @@ export interface Props<N, O, V, RRP extends RadioProps<V>> {
     radioListContainerClassName?: string;
     disabled?: boolean;
     readOnly?: boolean;
-    radioRenderer: (p: RRP) => React.ReactElement;
-    radioRendererParams: (o: O) => Omit<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'>;
+    radioRenderer?: (p: RRP) => React.ReactElement;
+    radioRendererParams?: (o: O) => Omit<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'>;
 }
 
 function RadioInput<

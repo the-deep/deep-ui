@@ -19,6 +19,7 @@ function Segment<N>(props: SegmentProps<N>) {
         onClick,
         value,
         className,
+        inputName, // eslint-disable-line @typescript-eslint/no-unused-vars
         ...otherProps
     } = props;
 
@@ -37,9 +38,11 @@ function Segment<N>(props: SegmentProps<N>) {
 
 export interface Props<
     N, O, V, RRP extends RadioProps<V>
-> extends Omit<RadioInputProps<N, O, V, RRP>, 'radioRendererParams' | 'radioRenderer' | 'radioListContainerClassName'> {
-    segmentRendererParams: RadioInputProps<N, O, V, RRP>['radioRendererParams'];
-    segmentListContainerClassName: RadioInputProps<N, O, V, RRP>['radioListContainerClassName'];
+> extends Omit<RadioInputProps<N, O, V, RRP>, 'radioRendererParams' | 'radioRenderer' | 'radioListContainerClassName' | 'radioKeySelector' | 'radioLabelSelector'> {
+    segmentRendererParams?: RadioInputProps<N, O, V, RRP>['radioRendererParams'];
+    segmentListContainerClassName?: RadioInputProps<N, O, V, RRP>['radioListContainerClassName'];
+    segmentKeySelector: RadioInputProps<N, O, V, RRP>['radioKeySelector'];
+    segmentLabelSelector: RadioInputProps<N, O, V, RRP>['radioLabelSelector'];
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -53,6 +56,8 @@ function SegmentInput<
     const {
         segmentRendererParams,
         segmentListContainerClassName,
+        segmentKeySelector,
+        segmentLabelSelector,
         ...otherProps
     } = props;
     return (
@@ -61,6 +66,8 @@ function SegmentInput<
             radioRenderer={Segment}
             radioRendererParams={segmentRendererParams}
             radioListContainerClassName={segmentListContainerClassName}
+            radioKeySelector={segmentKeySelector}
+            radioLabelSelector={segmentLabelSelector}
         />
     );
 }

@@ -2,9 +2,12 @@ import React from 'react';
 import { configureActions } from '@storybook/addon-actions';
 import { useDarkMode } from 'storybook-dark-mode';
 import { themes } from '@storybook/theming';
+import { unique } from '@togglecorp/fujs';
 
 import '../src/styles.css';
 import UiModeContext from '../src/components/UiModeContext';
+import AlertContext from '../src/components/AlertContext';
+import AlertContainer from '../src/components/AlertContainer';
 
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -24,7 +27,6 @@ configureActions({
 
 const withDarkMode = (Story, context) => {
     const isDarkMode = useDarkMode();
-    const { setUiMode } = React.useContext(UiModeContext);
     const uiMode = isDarkMode ? 'dark' : 'light';
 
     const contextValue = React.useMemo(() => ({ uiMode }), [uiMode]);
@@ -37,4 +39,72 @@ const withDarkMode = (Story, context) => {
     );
 }
 
-export const decorators = [withDarkMode];
+const withAlertContext = (Story, context) => {
+    const [alerts, setAlerts] = React.useState([]);
+
+    const addAlert = React.useCallback((alert) => {
+        setAlerts((prevAlerts) => unique(
+            [...prevAlerts, alert],
+            a => a.name
+        ) ?? prevAlerts);
+    }, [setAlerts]);
+
+    const removeAlert = React.useCallback((name) => {
+        setAlerts((prevAlerts) => {
+            const i = prevAlerts.findIndex(a => a.name === name);
+            if (i === -1) {
+                return prevAlerts;
+            }
+
+            const newAlerts = [...prevAlerts];
+            newAlerts.splice(i, 1);
+
+            return newAlerts;
+        });
+    }, [setAlerts]);
+
+    const updateAlertContent = React.useCallback((name, children) => {
+        setAlerts((prevAlerts) => {
+            const i = prevAlerts.findIndex(a => a.name === name);
+            if (i === -1) {
+                return prevAlerts;
+            }
+
+            const updatedAlert = {
+                ...prevAlerts[i],
+                children,
+            };
+
+            const newAlerts = [...prevAlerts];
+            newAlerts.splice(i, 1, updatedAlert);
+
+            return newAlerts;
+        });
+    }, [setAlerts]);
+
+    const alertContextValue = React.useMemo(() => ({
+        alerts,
+        addAlert,
+        updateAlertContent,
+        removeAlert,
+    }), [alerts, addAlert, updateAlertContent, removeAlert]);
+
+    return (
+        <AlertContext.Provider value={alertContextValue}>
+            <div
+                style={{
+                    position: 'fixed',
+                    top: '0',
+                    right: '1px',
+                    width: '320px',
+                    zIndex: '11',
+                }}
+            >
+                <AlertContainer />
+            </div>
+            <Story {...context} />
+        </AlertContext.Provider>
+    );
+}
+
+export const decorators = [withDarkMode, withAlertContext];
