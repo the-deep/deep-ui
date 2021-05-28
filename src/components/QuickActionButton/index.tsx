@@ -17,7 +17,7 @@ function QuickActionButton<T extends string | number | undefined>(props: Props<T
         <Button
             className={_cs(className, styles.button, styles.roundButton)}
             childrenClassName={styles.children}
-            variant="inverted"
+            variant="secondary"
             {...otherProps}
         />
     );

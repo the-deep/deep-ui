@@ -17,7 +17,7 @@ function QuickActionLink(props: Props) {
         <ButtonLikeLink
             className={_cs(className, styles.quickActionLink)}
             childrenClassName={styles.children}
-            variant="inverted"
+            variant="secondary"
             {...otherProps}
         />
     );

@@ -13,7 +13,6 @@ const Template: Story<ContainerProps> = (args) => (
     <div
         style={{
             width: '100%',
-            border: '1px solid blue',
         }}
     >
         <div
@@ -35,7 +34,6 @@ const Template: Story<ContainerProps> = (args) => (
                 style={{
                     width: '100%',
                     height: '50vh',
-                    border: '1px solid red',
                     backgroundColor: '#e0e0e0',
                     marginTop: '500px',
                 }}

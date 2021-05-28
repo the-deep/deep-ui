@@ -60,9 +60,6 @@ export const Variants = () => (
                 <ButtonLikeLink variant="tertiary" to="https://wikipedia.org">
                     Tertiary
                 </ButtonLikeLink>
-                <ButtonLikeLink variant="inverted" to="https://wikipedia.org">
-                    Inverted
-                </ButtonLikeLink>
             </div>
         </section>
         <section>
@@ -92,13 +89,6 @@ export const Variants = () => (
                 >
                     Tertiary
                 </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="inverted"
-                    disabled
-                    to="https://wikipedia.org"
-                >
-                    Inverted
-                </ButtonLikeLink>
             </div>
         </section>
         <section>
@@ -127,13 +117,6 @@ export const Variants = () => (
                     to="https://wikipedia.org"
                 >
                     Tertiary
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="inverted"
-                    big
-                    to="https://wikipedia.org"
-                >
-                    Inverted
                 </ButtonLikeLink>
             </div>
         </section>

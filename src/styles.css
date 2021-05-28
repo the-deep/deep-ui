@@ -155,3 +155,7 @@
     --dui-duration-delay-medium: 250ms;
     --dui-duration-delay-long: 400ms;
 }
+
+* {
+    box-sizing: border-box;
+}
