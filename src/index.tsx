@@ -78,6 +78,8 @@ export type { Props as PendingMessageProps } from './components/PendingMessage';
 export { default as PendingMessage } from './components/PendingMessage';
 export type { Props as PercentageInformationCardProps } from './components/PercentageInformationCard';
 export { default as PercentageInformationCard } from './components/PercentageInformationCard';
+export type { Props as PopupProps } from './components/Popup';
+export { default as Popup } from './components/Popup';
 export type { Props as PortalProps } from './components/Portal';
 export { default as Portal } from './components/Portal';
 export type { Props as QuickActionButtonProps } from './components/QuickActionButton';

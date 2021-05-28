@@ -206,6 +206,7 @@ export interface Props {
     children: React.ReactNode;
     show?: boolean;
     tipClassName?: string;
+    freeWidth?: boolean;
 }
 
 function Popup(props: Props) {
@@ -217,6 +218,7 @@ function Popup(props: Props) {
         elementRef,
         show,
         tipClassName,
+        freeWidth = false,
     } = props;
 
     const {
@@ -230,7 +232,7 @@ function Popup(props: Props) {
         elementRef,
         show,
         tipClassName,
-        matchParentWidth: true,
+        matchParentWidth: !freeWidth,
     });
 
     const shouldUnmount = useUnmountTransition(show);
