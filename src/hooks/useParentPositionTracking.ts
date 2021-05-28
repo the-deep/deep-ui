@@ -20,8 +20,6 @@ function useParentPositionTracking(
             const { current: el } = elementRef;
             if (el && el.parentElement) {
                 const elementBCR = el.parentElement.getBoundingClientRect();
-                const s = getComputedStyle(el.parentElement);
-                console.info(s.getPropertyValue('border-width'), elementBCR.width);
                 setBcr(elementBCR);
             }
         }, { timeout: 200 });
