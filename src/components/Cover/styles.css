@@ -4,11 +4,14 @@
 }
 
 .cover {
-    pointer-events: none;
-    position: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
+    z-index: 1111;
     animation: appear var(--dui-duration-transition-medium) ease-in forwards;
-    animation-delay: var(--dui-duration-delay-short);
+    animation-delay: var(--dui-duration-delay-long);
+    pointer-events: none;
 }
 
 @keyframes appear {

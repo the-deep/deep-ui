@@ -242,7 +242,7 @@ function Pager(props: Props) {
                             onClick={() => onActivePageChange(page.index)}
                             className={_cs(styles.pageButton, styles.pageNumberButton)}
                             disabled={disabled}
-                            variant={hidePageNumberLabel ? 'inverted' : 'action'}
+                            variant={hidePageNumberLabel ? 'secondary' : 'action'}
                         >
                             {!hidePageNumberLabel && (
                                 page.index
@@ -254,7 +254,7 @@ function Pager(props: Props) {
                     return (
                         <Button
                             key={`button-${page.key}`}
-                            variant={hidePageNumberLabel ? 'primary' : 'inverted'}
+                            variant={hidePageNumberLabel ? 'primary' : 'secondary'}
                             name={undefined}
                             className={_cs(
                                 styles.pageButton,

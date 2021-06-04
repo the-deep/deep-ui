@@ -1,7 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import Portal from '../Portal';
 import useParentPositionTracking from '../../hooks/useParentPositionTracking';
 
 import styles from './styles.css';
@@ -27,16 +26,32 @@ function Cover(props: Props) {
             window.cancelIdleCallback(callbackRef.current);
         }
 
+        const { current: el } = dummyRef;
+        if (el && el.parentElement) {
+            const { style } = el.parentElement;
+            const {
+                position,
+                zIndex,
+            } = style;
+
+            if (!zIndex) {
+                styles.zIndex = '0';
+            }
+
+            if (position !== 'absolute' && position !== 'relative' && position !== 'fixed' && position !== 'sticky') {
+                el.parentElement.style.position = 'relative';
+            }
+        }
+
         callbackRef.current = window.requestIdleCallback(() => {
             if (containerRef.current) {
                 const {
-                    top,
-                    left,
                     width,
                     height,
                 } = bcr ?? {};
-                containerRef.current.style.left = `${left}px`;
-                containerRef.current.style.top = `${top}px`;
+
+                containerRef.current.style.left = '0';
+                containerRef.current.style.top = '0';
                 containerRef.current.style.width = `${width}px`;
                 containerRef.current.style.height = `${height}px`;
             }
@@ -49,14 +64,12 @@ function Cover(props: Props) {
                 ref={dummyRef}
                 className={styles.dummy}
             />
-            <Portal>
-                <div
-                    className={_cs(styles.cover, className)}
-                    ref={containerRef}
-                >
-                    { children }
-                </div>
-            </Portal>
+            <div
+                className={_cs(styles.cover, className)}
+                ref={containerRef}
+            >
+                { children }
+            </div>
         </>
     );
 }
