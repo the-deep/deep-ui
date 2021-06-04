@@ -6,7 +6,7 @@ import {
 } from 'react-icons/io5';
 
 import useBooleanState from '../../hooks/useBooleanState';
-import Container, { Props as ContainerProps } from '#components/Container';
+import Container, { Props as ContainerProps } from '../Container';
 
 import styles from './styles.css';
 
