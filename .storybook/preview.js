@@ -107,4 +107,4 @@ const withAlertContext = (Story, context) => {
     );
 }
 
-export const decorators = [withDarkMode, withAlertContext];
+export const decorators = [withDarkMode];
