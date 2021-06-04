@@ -14,6 +14,7 @@ export interface Props {
     heading?: React.ReactNode;
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
+    headingDescription?: React.ReactNode;
     headerDescription?: React.ReactNode;
     headerClassName?: string;
     headerDescriptionClassName?: string;
@@ -38,6 +39,7 @@ function Container(props: Props) {
         children,
         headerActions,
         headerIcons,
+        headingDescription,
         headerDescription,
         headerDescriptionClassName,
         headerClassName,
@@ -68,11 +70,13 @@ function Container(props: Props) {
                     actions={headerActions}
                     className={_cs(styles.header, headerClassName)}
                     heading={heading}
-                    headingSize={headingSize ?? sub ? 'medium' : 'large'}
-                    description={headerDescription}
+                    headingSize={headingSize ?? sub ? 'small' : 'medium'}
+                    description={headingDescription}
                     descriptionClassName={headerDescriptionClassName}
                     headingClassName={headingClassName}
-                />
+                >
+                    {headerDescription}
+                </Header>
             )}
             <div className={_cs(styles.content, contentClassName)}>
                 { children }

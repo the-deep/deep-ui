@@ -23,6 +23,7 @@
     .content {
         display: flex;
         align-items: center;
+        align-self: center;
     }
 
     .icon-container {
@@ -61,7 +62,6 @@
     @keyframes appear {
         from {
             position: initial;
-            transform: scaleY(0);
             visibility: visible;
             opacity: 0;
             height: 0;
@@ -69,7 +69,6 @@
 
         to {
             position: initial;
-            transform: scaleY(1);
             visibility: visible;
             opacity: 1;
             height: var(--height);

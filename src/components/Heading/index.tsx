@@ -6,7 +6,7 @@ import styles from './styles.css';
 export interface Props {
     className?: string;
     children?: React.ReactNode;
-    size?: 'extraSmall' | 'small' | 'medium' | 'large';
+    size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
 }
 
 function Heading(props: Props) {
@@ -37,6 +37,11 @@ function Heading(props: Props) {
                 <h2 className={_cs(styles.heading, styles.large, className)}>
                     { children }
                 </h2>
+            )}
+            {size === 'extraLarge' && (
+                <h1 className={_cs(styles.heading, styles.extraLarge, className)}>
+                    { children }
+                </h1>
             )}
         </>
     );

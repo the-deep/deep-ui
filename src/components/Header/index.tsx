@@ -18,6 +18,9 @@ export interface Props {
     icons?: React.ReactNode;
     actions?: React.ReactNode;
     headingSize?: 'extraSmall' | 'small' | 'medium' | 'large';
+    children?: React.ReactNode;
+    headingSectionClassName?: string;
+    childrenContainerClassName?: string;
 }
 
 function Header(props: Props) {
@@ -33,29 +36,40 @@ function Header(props: Props) {
         actions,
         icons,
         headingSize,
+        children,
+        headingSectionClassName,
+        childrenContainerClassName,
     } = props;
 
     return (
         <header className={_cs(className, styles.header)}>
-            <ElementFragments
-                icons={icons}
-                iconsContainerClassName={iconsContainerClassName}
-                actions={actions}
-                actionsContainerClassName={actionsContainerClassName}
-                childrenContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
-            >
-                <Heading
-                    size={headingSize}
-                    className={_cs(styles.heading, headingClassName)}
+            <div className={_cs(styles.headingSection, headingSectionClassName)}>
+                <ElementFragments
+                    icons={icons}
+                    iconsContainerClassName={iconsContainerClassName}
+                    actions={actions}
+                    actionsContainerClassName={actionsContainerClassName}
+                    childrenContainerClassName={_cs(
+                        styles.headingContainer,
+                        headingContainerClassName,
+                    )}
                 >
-                    { heading }
-                </Heading>
-                {description && (
-                    <div className={_cs(styles.description, descriptionClassName)}>
-                        {description}
-                    </div>
-                )}
-            </ElementFragments>
+                    <Heading
+                        size={headingSize}
+                        className={_cs(styles.heading, headingClassName)}
+                    >
+                        { heading }
+                    </Heading>
+                    {description && (
+                        <div className={_cs(styles.description, descriptionClassName)}>
+                            {description}
+                        </div>
+                    )}
+                </ElementFragments>
+            </div>
+            <div className={_cs(styles.content, childrenContainerClassName)}>
+                { children }
+            </div>
         </header>
     );
 }
