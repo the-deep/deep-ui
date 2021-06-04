@@ -22,17 +22,20 @@ Default.args = {
 
 export const Sizes = () => (
     <>
-        <Heading size="large">
-            Heading
+        <Heading size="extraLarge">
+            Extra large heading
         </Heading>
-        <Heading>
-            Heading
+        <Heading size="large">
+            Large heading
+        </Heading>
+        <Heading size="medium">
+            Medium heading
         </Heading>
         <Heading size="small">
-            Heading
+            Small heading
         </Heading>
         <Heading size="extraSmall">
-            Heading
+            Extra small heading
         </Heading>
     </>
 );

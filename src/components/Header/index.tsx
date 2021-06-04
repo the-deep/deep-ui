@@ -2,7 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import ElementFragments from '../ElementFragments';
-import Heading from '../Heading';
+import Heading, { Props as HeadingProps } from '../Heading';
 
 import styles from './styles.css';
 
@@ -17,10 +17,13 @@ export interface Props {
     description?: React.ReactNode;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
-    headingSize?: 'extraSmall' | 'small' | 'medium' | 'large';
+    headingSize?: HeadingProps['size'];
     children?: React.ReactNode;
     headingSectionClassName?: string;
     childrenContainerClassName?: string;
+
+    // Note: not to be exposed by extended components
+    elementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
 }
 
 function Header(props: Props) {
@@ -39,10 +42,14 @@ function Header(props: Props) {
         children,
         headingSectionClassName,
         childrenContainerClassName,
+        elementProps,
     } = props;
 
     return (
-        <header className={_cs(className, styles.header)}>
+        <header
+            className={_cs(className, styles.header)}
+            {...elementProps}
+        >
             <div className={_cs(styles.headingSection, headingSectionClassName)}>
                 <ElementFragments
                     icons={icons}
@@ -67,9 +74,11 @@ function Header(props: Props) {
                     )}
                 </ElementFragments>
             </div>
-            <div className={_cs(styles.content, childrenContainerClassName)}>
-                { children }
-            </div>
+            {children && (
+                <div className={_cs(styles.content, childrenContainerClassName)}>
+                    { children }
+                </div>
+            )}
         </header>
     );
 }

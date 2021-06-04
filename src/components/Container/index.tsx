@@ -6,11 +6,16 @@ import Footer from '../Footer';
 
 import styles from './styles.css';
 
+// NOTE: these props should never be exposed
+export type internalProps = 'containerElementProps' | 'headerElementProps';
+
 export interface Props {
     className?: string;
 
-    // Note: not to be exposed by extended components
+    // NOTE: not to be exposed by extended components
     containerElementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
+    headerElementProps?: HeaderProps['elementProps'];
+
     heading?: React.ReactNode;
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
@@ -27,6 +32,9 @@ export interface Props {
     footerActions?: React.ReactNode;
     footerQuickActions?: React.ReactNode;
     headingSize?: HeaderProps['headingSize'];
+    headingContainerClassName?: HeaderProps['headingContainerClassName'];
+
+    horizontallyCompactContent?: boolean;
 
     // Is sub container? (i.e. Container with small heading)
     sub?: boolean;
@@ -53,6 +61,9 @@ function Container(props: Props) {
         containerElementProps,
         headingSize,
         footerQuickActions,
+        horizontallyCompactContent,
+        headerElementProps,
+        headingContainerClassName,
     } = props;
 
     return (
@@ -60,6 +71,7 @@ function Container(props: Props) {
             className={_cs(
                 styles.container,
                 sub && styles.sub,
+                horizontallyCompactContent && styles.horizontallyCompactContent,
                 className,
             )}
             {...containerElementProps}
@@ -70,10 +82,12 @@ function Container(props: Props) {
                     actions={headerActions}
                     className={_cs(styles.header, headerClassName)}
                     heading={heading}
-                    headingSize={headingSize ?? sub ? 'small' : 'medium'}
+                    headingSize={headingSize ?? (sub ? 'small' : 'medium')}
                     description={headingDescription}
                     descriptionClassName={headerDescriptionClassName}
                     headingClassName={headingClassName}
+                    elementProps={headerElementProps}
+                    headingContainerClassName={headingContainerClassName}
                 >
                     {headerDescription}
                 </Header>
