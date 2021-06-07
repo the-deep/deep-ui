@@ -1,9 +1,10 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
+import { unique } from '@togglecorp/fujs';
 
 import AlertContainer, { Props as AlertContainerProps } from '#components/AlertContainer';
-import { AlertVariant } from '#components/AlertContext';
+import AlertContext, { AlertOptions, AlertVariant } from '#components/AlertContext';
 import Button from '#components/Button';
 import SegmentInput from '#components/SegmentInput';
 import useAlert from '#hooks/useAlert';
@@ -64,13 +65,17 @@ const Container = ({ children } : {
     </div>
 );
 
-const Template: Story<AlertContainerProps> = () => {
-    const alert = useAlert();
-    const [{ variant }, updateArgs] = useArgs();
+interface Props {
+    variant: AlertVariant;
+    onVariantChange: (newVaraint: AlertVariant) => void;
+}
 
-    const handleVariantChange = (newVariant: AlertVariant) => {
-        updateArgs({ variant: newVariant });
-    };
+function AlertControls(props: Props) {
+    const {
+        variant,
+        onVariantChange,
+    } = props;
+    const alert = useAlert();
 
     const handleShowAlertButtonClick = React.useCallback(() => {
         const i = Math.floor(Math.random() * messages.length);
@@ -87,7 +92,7 @@ const Template: Story<AlertContainerProps> = () => {
                     name=""
                     options={alertVariantOptions}
                     value={variant}
-                    onChange={handleVariantChange}
+                    onChange={onVariantChange}
                     segmentKeySelector={(d) => d.key}
                     segmentLabelSelector={(d) => d.label}
                 />
@@ -101,6 +106,82 @@ const Template: Story<AlertContainerProps> = () => {
                 </Button>
             </Container>
         </>
+    );
+}
+
+const Template: Story<AlertContainerProps> = () => {
+    const [alerts, setAlerts] = React.useState<AlertOptions[]>([]);
+
+    const addAlert = React.useCallback((alert) => {
+        setAlerts((prevAlerts) => unique(
+            [...prevAlerts, alert],
+            (a) => a.name,
+        ) ?? prevAlerts);
+    }, [setAlerts]);
+
+    const removeAlert = React.useCallback((name) => {
+        setAlerts((prevAlerts) => {
+            const i = prevAlerts.findIndex((a) => a.name === name);
+            if (i === -1) {
+                return prevAlerts;
+            }
+
+            const newAlerts = [...prevAlerts];
+            newAlerts.splice(i, 1);
+
+            return newAlerts;
+        });
+    }, [setAlerts]);
+
+    const updateAlertContent = React.useCallback((name, children) => {
+        setAlerts((prevAlerts) => {
+            const i = prevAlerts.findIndex((a) => a.name === name);
+            if (i === -1) {
+                return prevAlerts;
+            }
+
+            const updatedAlert = {
+                ...prevAlerts[i],
+                children,
+            };
+
+            const newAlerts = [...prevAlerts];
+            newAlerts.splice(i, 1, updatedAlert);
+
+            return newAlerts;
+        });
+    }, [setAlerts]);
+
+    const alertContextValue = React.useMemo(() => ({
+        alerts,
+        addAlert,
+        updateAlertContent,
+        removeAlert,
+    }), [alerts, addAlert, updateAlertContent, removeAlert]);
+    const [{ variant }, updateArgs] = useArgs();
+
+    const handleVariantChange = (newVariant: AlertVariant) => {
+        updateArgs({ variant: newVariant });
+    };
+
+    return (
+        <AlertContext.Provider value={alertContextValue}>
+            <div
+                style={{
+                    position: 'fixed',
+                    top: '0',
+                    right: '1px',
+                    width: '320px',
+                    zIndex: 11,
+                }}
+            >
+                <AlertContainer />
+            </div>
+            <AlertControls
+                variant={variant}
+                onVariantChange={handleVariantChange}
+            />
+        </AlertContext.Provider>
     );
 };
 
