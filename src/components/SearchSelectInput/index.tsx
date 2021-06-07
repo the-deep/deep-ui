@@ -115,7 +115,6 @@ function SearchSelectInput<
     const searchOptions = searchOptionsFromProps ?? (emptyList as O[]);
 
     const [searchInputValue, setSearchInputValue] = React.useState('');
-    const [showDropdown, setShowDropdown] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
     const [
         focusedKey,
@@ -191,7 +190,7 @@ function SearchSelectInput<
 
     const handleChangeDropdown = useCallback(
         (myVal: boolean) => {
-            setShowDropdown(myVal);
+            // setShowDropdown(myVal);
             if (onShowDropdownChange) {
                 onShowDropdownChange(myVal);
             }
@@ -272,7 +271,6 @@ function SearchSelectInput<
             onClear={handleClear}
             searchText={searchInputValue}
             onSearchTextChange={handleSearchValueChange}
-            dropdownShown={showDropdown}
             onDropdownShownChange={handleChangeDropdown}
             focused={focused}
             onFocusedChange={setFocused}

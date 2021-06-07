@@ -15,6 +15,10 @@ function useUnmountTransition(show: boolean | undefined) {
             setShouldUnmount(!show);
         }
         prevShow.current = show;
+
+        return () => {
+            window.clearTimeout(timeoutRef.current);
+        };
     }, [show]);
 
     return shouldUnmount;

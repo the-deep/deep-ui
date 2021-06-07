@@ -33,16 +33,18 @@ const Template: Story<SelectInputProps<string, string, Option, { containerClassN
     };
 
     return (
-        <SelectInput
-            label="Fruit"
-            {...props}
-            value={value}
-            options={options}
-            keySelector={(d) => d.key}
-            labelSelector={(d) => d.label}
-            onChange={setValue}
-            nonClearable
-        />
+        <div style={{ width: '320px' }}>
+            <SelectInput
+                label="Fruit"
+                {...props}
+                value={value}
+                options={options}
+                keySelector={(d) => d.key}
+                labelSelector={(d) => d.label}
+                onChange={setValue}
+                nonClearable
+            />
+        </div>
     );
 };
 

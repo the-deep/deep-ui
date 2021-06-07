@@ -95,12 +95,12 @@
 
 @keyframes appear-from-top {
     from {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scaleY(0.8);
         opacity: 0;
     }
 
     to {
-        transform: translateY(0);
+        transform: translateY(0) scaleY(1);
         opacity: 1;
     }
 }
