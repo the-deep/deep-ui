@@ -287,59 +287,58 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
     }
 
     return (
-        <>
-            <InputContainer
-                containerRef={containerRef}
-                inputSectionRef={inputSectionRef}
-                actions={(
-                    <>
-                        {actions}
-                        {!readOnly && !nonClearable && (
-                            <Button
-                                onClick={onClear}
-                                disabled={disabled}
-                                variant="action"
-                                name={undefined}
-                                title="Clear"
-                            >
-                                <IoMdClose />
-                            </Button>
-                        )}
-                        {!readOnly && (dropdownShown ? <IoIosArrowUp /> : <IoIosArrowDown />)}
-                    </>
-                )}
-                actionsContainerClassName={actionsContainerClassName}
-                className={className}
-                disabled={disabled}
-                error={error}
-                errorContainerClassName={errorContainerClassName}
-                hint={hint}
-                hintContainerClassName={hintContainerClassName}
-                icons={icons}
-                iconsContainerClassName={iconsContainerClassName}
-                inputSectionClassName={inputSectionClassName}
-                label={label}
-                labelContainerClassName={labelContainerClassName}
-                readOnly={readOnly}
-                uiMode={uiMode}
-                input={(
-                    <RawInput
-                        name={name}
-                        elementRef={inputElementRef}
-                        readOnly={readOnly}
-                        uiMode={uiMode}
-                        disabled={disabled}
-                        value={(dropdownShown || focused) ? searchText : valueDisplay}
-                        onChange={handleSearchInputChange}
-                        onClick={handleSearchInputClick}
-                        onFocus={() => onFocusedChange(true)}
-                        onBlur={() => onFocusedChange(false)}
-                        placeholder={valueDisplay || placeholder}
-                        autoComplete="off"
-                        onKeyDown={handleKeyDown}
-                    />
-                )}
-            />
+        <InputContainer
+            containerRef={containerRef}
+            inputSectionRef={inputSectionRef}
+            actions={(
+                <>
+                    {actions}
+                    {!readOnly && !nonClearable && (
+                        <Button
+                            onClick={onClear}
+                            disabled={disabled}
+                            variant="action"
+                            name={undefined}
+                            title="Clear"
+                        >
+                            <IoMdClose />
+                        </Button>
+                    )}
+                    {!readOnly && (dropdownShown ? <IoIosArrowUp /> : <IoIosArrowDown />)}
+                </>
+            )}
+            actionsContainerClassName={actionsContainerClassName}
+            className={className}
+            disabled={disabled}
+            error={error}
+            errorContainerClassName={errorContainerClassName}
+            hint={hint}
+            hintContainerClassName={hintContainerClassName}
+            icons={icons}
+            iconsContainerClassName={iconsContainerClassName}
+            inputSectionClassName={inputSectionClassName}
+            label={label}
+            labelContainerClassName={labelContainerClassName}
+            readOnly={readOnly}
+            uiMode={uiMode}
+            input={(
+                <RawInput
+                    name={name}
+                    elementRef={inputElementRef}
+                    readOnly={readOnly}
+                    uiMode={uiMode}
+                    disabled={disabled}
+                    value={(dropdownShown || focused) ? searchText : valueDisplay}
+                    onChange={handleSearchInputChange}
+                    onClick={handleSearchInputClick}
+                    onFocus={() => onFocusedChange(true)}
+                    onBlur={() => onFocusedChange(false)}
+                    placeholder={valueDisplay || placeholder}
+                    autoComplete="off"
+                    onKeyDown={handleKeyDown}
+                />
+            )}
+        >
             <Popup
                 elementRef={popupRef}
                 className={_cs(optionsPopupClassName, styles.popup)}
@@ -354,7 +353,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
                     totalOptionsCount={totalOptionsCount}
                 />
             </Popup>
-        </>
+        </InputContainer>
     );
 }
 
