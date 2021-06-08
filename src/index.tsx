@@ -70,6 +70,8 @@ export type { Props as ModalProps } from './components/Modal';
 export { default as Modal } from './components/Modal';
 export type { Props as MultiSelectInputProps } from './components/MultiSelectInput';
 export { default as MultiSelectInput } from './components/MultiSelectInput';
+export type { Props as NumberInputProps } from './components/NumberInput';
+export { default as NumberInput } from './components/NumberInput';
 export type { Props as NumberOutputProps } from './components/NumberOutput';
 export { default as NumberOutput } from './components/NumberOutput';
 export type { Props as PagerProps } from './components/Pager';
