@@ -22,4 +22,8 @@
             background-color: var(--dui-color-complement3);
         }
     }
+
+    .label-container {
+        font-weight: var(--dui-font-weight-bold);
+    }
 }

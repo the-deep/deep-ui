@@ -151,10 +151,10 @@
     --dui-font-size-ultra-large: 4.6rem;
 
     --dui-font-size-heading-extra-large: var(--dui-font-size-super-large);
-    --dui-font-size-heading-large: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-large: 1.5rem;
     --dui-font-size-heading-medium: var(--dui-font-size-extra-large);
-    --dui-font-size-heading-small: var(--dui-font-size-large);
-    --dui-font-size-heading-extra-small: var(--dui-font-size-medium);
+    --dui-font-size-heading-small: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-extra-small: var(--dui-font-size-large);
 
     --dui-font-weight-light: 400;
     --dui-font-weight-regular: 400;

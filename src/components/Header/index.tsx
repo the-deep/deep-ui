@@ -15,6 +15,7 @@ export interface Props {
     actionsContainerClassName?: string;
     heading?: React.ReactNode;
     description?: React.ReactNode;
+    inlineDescription?: boolean;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
     headingSize?: HeadingProps['size'];
@@ -34,6 +35,7 @@ function Header(props: Props) {
         iconsContainerClassName,
         headingContainerClassName,
         actionsContainerClassName,
+        inlineDescription,
         heading,
         description,
         actions,
@@ -45,9 +47,15 @@ function Header(props: Props) {
         elementProps,
     } = props;
 
+    const isStringHeading = (typeof heading) === 'string';
+
     return (
         <header
-            className={_cs(className, styles.header)}
+            className={_cs(
+                className,
+                styles.header,
+                inlineDescription && styles.inlineDescription,
+            )}
             {...elementProps}
         >
             <div className={_cs(styles.headingSection, headingSectionClassName)}>
@@ -63,12 +71,25 @@ function Header(props: Props) {
                 >
                     <Heading
                         size={headingSize}
-                        className={_cs(styles.heading, headingClassName)}
+                        className={_cs(
+                            styles.heading,
+                            headingClassName,
+                            isStringHeading && styles.stringHeading,
+                        )}
+                        title={isStringHeading ? 'heading' : undefined}
                     >
                         { heading }
                     </Heading>
                     {description && (
-                        <div className={_cs(styles.description, descriptionClassName)}>
+                        <div
+                            className={_cs(
+                                styles.description,
+                                descriptionClassName,
+                                !headingSize && styles.uppercase,
+                                headingSize === 'large' && styles.uppercase,
+                                headingSize === 'medium' && styles.uppercase,
+                            )}
+                        >
                             {description}
                         </div>
                     )}

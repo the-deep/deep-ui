@@ -38,6 +38,7 @@ export interface Props {
 
     // Is sub container? (i.e. Container with small heading)
     sub?: boolean;
+    inlineHeadingDescription?: boolean;
 }
 
 function Container(props: Props) {
@@ -64,6 +65,7 @@ function Container(props: Props) {
         horizontallyCompactContent,
         headerElementProps,
         headingContainerClassName,
+        inlineHeadingDescription,
     } = props;
 
     return (
@@ -88,6 +90,7 @@ function Container(props: Props) {
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
                     headingContainerClassName={headingContainerClassName}
+                    inlineDescription={inlineHeadingDescription}
                 >
                     {headerDescription}
                 </Header>

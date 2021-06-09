@@ -44,7 +44,11 @@ function CircularProgressBar(props: Props) {
     const radius = width / 2;
 
     return (
-        <svg className={_cs(styles.progressBar, className)} height={height} width={width}>
+        <svg
+            className={_cs(styles.progressBar, className)}
+            height={height}
+            width={width}
+        >
             <g transform={`translate(${radius}, ${radius})`}>
                 <path
                     className={_cs(styles.unfilledArc, unfilledArcClassName)}

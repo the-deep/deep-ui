@@ -58,6 +58,7 @@ function InformationCard(props: Props) {
                     />
                 )}
                 label={label}
+                labelContainerClassName={styles.labelContainer}
             />
         </div>
     );

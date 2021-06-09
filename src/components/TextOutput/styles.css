@@ -1,0 +1,25 @@
+.text-output {
+    padding: var(--dui-spacing-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+
+    .label {
+        padding: 0 var(--dui-spacing-extra-small);
+        color: var(--dui-color-text-label);
+    }
+
+    .value {
+        padding: 0 var(--dui-spacing-extra-small);
+        font-weight: var(--dui-font-weight-bold);
+    }
+
+    &.with-label-colon {
+        .label {
+            &:after {
+                content: ':';
+            }
+        }
+    }
+
+    &.inline {
+        display: flex;
+    }
+}
