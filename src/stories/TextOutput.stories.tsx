@@ -18,7 +18,7 @@ const Template: Story<TextOutputProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     label: 'Name',
-    value: 'Ankit Mehta',
+    value: 'John Doe',
 };
 
 export const WithoutLabelColon = Template.bind({});
@@ -44,4 +44,26 @@ DateValue.args = {
     label: 'Today',
     valueType: 'date',
     value: (new Date()).getTime(),
+};
+
+export const Nested = Template.bind({});
+Nested.args = {
+    block: true,
+    label: 'Recently Active',
+    value: (
+        <>
+            <TextOutput
+                value="Max Planck"
+                description="April 24, 1947"
+            />
+            <TextOutput
+                value="Albert Einstien"
+                description="April 18, 1955"
+            />
+            <TextOutput
+                value="Erwin Schrodinger"
+                description="January 4, 1961"
+            />
+        </>
+    ),
 };

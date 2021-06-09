@@ -13,6 +13,8 @@ interface BaseProps {
     className?: string;
     label?: React.ReactNode;
     labelContainerClassName?: string;
+    description?: React.ReactNode;
+    descriptionContainerClassName?: string;
     valueContainerClassName?: string;
     hideLabelColon?: boolean;
     block?: boolean;
@@ -27,7 +29,7 @@ export type Props = BaseProps & ({
     valueProps?: Omit<DateOutputProps, 'value'>;
     value?: DateOutputProps['value'];
 } | {
-    valueType?: 'text';
+    valueType?: 'text' | never;
     valueProps?: never | undefined;
     value?: React.ReactNode;
 });
@@ -38,6 +40,8 @@ function TextOutput(props: Props) {
         label,
         labelContainerClassName,
         valueContainerClassName,
+        description,
+        descriptionContainerClassName,
         hideLabelColon,
         block,
     } = props;
@@ -80,6 +84,11 @@ function TextOutput(props: Props) {
             <div className={_cs(styles.value, valueContainerClassName)}>
                 {value}
             </div>
+            {description && (
+                <div className={_cs(styles.description, descriptionContainerClassName)}>
+                    {description}
+                </div>
+            )}
         </div>
     );
 }

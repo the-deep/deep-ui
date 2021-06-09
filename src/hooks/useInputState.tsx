@@ -1,6 +1,9 @@
 import React from 'react';
 
-type SetterFn<T> = (oldValue: T) => T;
+type ValueOrSetterFn<T> = T | ((value: T) => T);
+function isSetterFn<T>(value: ValueOrSetterFn<T>): value is ((value: T) => T) {
+    return typeof value === 'function';
+}
 
 function useInputState<T>(initialValue: T) {
     const [value, setValue] = React.useState<T>(initialValue);
@@ -8,10 +11,8 @@ function useInputState<T>(initialValue: T) {
     type SetValue = React.Dispatch<React.SetStateAction<T>>;
     const setValueSafe: SetValue = React.useCallback((newValueOrSetter) => {
         setValue((oldValue) => (
-            // NOTE: explicit typecast is required because of
-            // https://github.com/microsoft/TypeScript/issues/37663
-            typeof newValueOrSetter === 'function'
-                ? (newValueOrSetter as SetterFn<T>)(oldValue)
+            isSetterFn(newValueOrSetter)
+                ? newValueOrSetter(oldValue)
                 : newValueOrSetter
         ));
     }, []);
