@@ -24,7 +24,7 @@ const options: Option[] = [
     { key: '5', label: 'Pear' },
 ];
 
-// eslint-disable-next-line max-len
+// eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
 const Template: Story<SegmentInputProps<Option['key'], Option, Option['label'], any>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 

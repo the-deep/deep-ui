@@ -35,6 +35,7 @@ const Option = ({ children }: OptionProps) => (
     </div>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>> = (args) => {
     const [{
         empty,
@@ -78,6 +79,7 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                     {...args}
                     pending={pending}
                     filtered={filtered}
+                    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
                     data={empty ? [] : args.data}
                 />
             </div>

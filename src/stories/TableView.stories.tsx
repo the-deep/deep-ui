@@ -71,6 +71,7 @@ const columns = [
 ];
 
 const Template: Story<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TableViewProps<Program, number, Column<Program, number, any, any>>
 > = (args) => {
     const [{
@@ -113,6 +114,7 @@ const Template: Story<
                     {...args}
                     pending={pending}
                     filtered={filtered}
+                    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
                     data={empty ? [] : args.data}
                     columns={columns}
                 />

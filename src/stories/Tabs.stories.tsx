@@ -46,6 +46,7 @@ const Template: Story<TabsProps<string>> = (args) => {
         </>
     );
 
+    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
     if (args.useHash) {
         return (
             <Tabs

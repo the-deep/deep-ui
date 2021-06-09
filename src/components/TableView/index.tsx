@@ -13,6 +13,7 @@ type MessagePropOmission = 'className' | 'message' | 'compact' | 'icon' | 'empty
 export type Props<
     D,
     K extends string | number,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     C extends Column<D, K, any, any>,
 > = TableProps<
     D,
@@ -26,6 +27,7 @@ export type Props<
 function TableView<
     D,
     K extends string | number,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     C extends Column<D, K, any, any>,
 >(props: Props<D, K, C>) {
     const {

@@ -251,7 +251,7 @@ function SearchSelectInput<
                 props.onChange(undefined, name);
             }
         },
-        // eslint-disable-next-line react/destructuring-assignment
+        // eslint-disable-next-line react/destructuring-assignment, react-hooks/exhaustive-deps
         [name, props.onChange, props.nonClearable],
     );
 
