@@ -98,6 +98,8 @@ export { default as RawButton } from './components/RawButton';
 export type { Props as RawButtonProps } from './components/RawButton';
 export { default as RawInput } from './components/RawInput';
 export type { Props as RawInputProps } from './components/RawInput';
+export type { Props as ScaleInputProps } from './components/ScaleInput';
+export { default as ScaleInput } from './components/ScaleInput';
 export { default as SearchMultiSelectInput } from './components/SearchMultiSelectInput';
 export type { Props as SearchMultiSelectInputProps } from './components/SearchMultiSelectInput';
 export { default as SearchSelectInput } from './components/SearchSelectInput';

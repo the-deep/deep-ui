@@ -1,0 +1,25 @@
+.scale-list {
+    --size-circle: 1.4rem;
+    --size-inner-circle: 0.7em;
+    padding: 0 var(--dui-spacing-medium);
+
+    .scale {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--dui-duration-transition-medium) border-color ease-in-out;
+        border: var(--dui-width-separator-thin) solid transparent;
+        border-radius: 50%;
+        background-color: #ffffff;
+        width: var(--size-circle);
+        height: var(--size-circle);
+        font-size: var(--size-circle);
+
+        .inner-circle {
+            flex-shrink: 0;
+            border-radius: 50%;
+            width: var(--size-inner-circle);
+            height: var(--size-inner-circle);
+        }
+    }
+}
