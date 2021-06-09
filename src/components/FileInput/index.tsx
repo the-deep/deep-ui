@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { MdFileUpload } from 'react-icons/md';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
@@ -13,7 +12,8 @@ export interface Props<T extends string> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     showStatus?: boolean;
-    onChange?: (files: File[]) => void;
+    labelClassName?: string;
+    onChange?: (files: File[], name: T) => void;
 }
 
 export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
@@ -62,6 +62,8 @@ function FileInput<T extends string>(props: Props<T>) {
         name,
         multiple,
         accept,
+        labelClassName,
+        children,
         ...fileInputProps
     } = props;
 
@@ -85,17 +87,17 @@ function FileInput<T extends string>(props: Props<T>) {
             const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
             if (!multiple && validFiles.length > 1) {
                 if (onChange) {
-                    onChange(validFiles.slice(0, 1));
+                    onChange(validFiles.slice(0, 1), name);
                 }
             } else {
                 const newStatus = getStatus(validFiles);
                 setStatus(newStatus);
                 if (onChange) {
-                    onChange(validFiles);
+                    onChange(validFiles, name);
                 }
             }
         }
-    }, [accept, multiple, getStatus, onChange]);
+    }, [accept, multiple, getStatus, onChange, name]);
 
     const handleChange = useCallback((
         _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
@@ -158,9 +160,9 @@ function FileInput<T extends string>(props: Props<T>) {
                         <div className={_cs(styles.dropOverlay)} />
                     )}
                     <label
-                        className={styles.label}
+                        className={_cs(styles.label, labelClassName)}
                     >
-                        <MdFileUpload />
+                        {children}
                         <RawInput<T>
                             {...fileInputProps}
                             className={styles.input}

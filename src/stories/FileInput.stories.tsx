@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
+import { MdFileUpload } from 'react-icons/md';
 import FileInput, { Props as FileInputProps } from '#components/FileInput';
 
 export default {
@@ -11,15 +12,17 @@ export default {
 const Template: Story<FileInputProps<string>> = (args) => {
     const [, setValue] = useState<File[]>();
 
-    const handleChange = (v: File[]) => {
-        setValue(v);
+    const handleChange = (files: File[]) => {
+        setValue(files);
     };
 
     return (
         <FileInput
             {...args}
             onChange={handleChange}
-        />
+        >
+            <MdFileUpload />
+        </FileInput>
     );
 };
 
