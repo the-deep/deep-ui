@@ -136,3 +136,5 @@ export { default as TextInput } from './components/TextInput';
 export type { Props as TooltipProps } from './components/Tooltip';
 export { default as Tooltip } from './components/Tooltip';
 export { default as useAlert } from './hooks/useAlert';
+export type { Props as PasswordInputProps } from './components/PasswordInput';
+export { default as PasswordInput } from './components/PasswordInput';

@@ -1,0 +1,19 @@
+.input {
+    --color: var(--dui-color-text);
+    color: var(--color);
+
+    &.errored {
+        --color: var(--dui-color-negative);
+    }
+
+    &.dark {
+        &.errored {
+            --color: var(--dui-color-negative-on-dark);
+        }
+    }
+}
+
+.show-password-toggle-button {
+    outline-offset: 0;
+    padding: 0;
+}
