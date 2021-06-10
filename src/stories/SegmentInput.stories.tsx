@@ -38,8 +38,8 @@ const Template: Story<SegmentInputProps<Option['key'], Option, Option['label'], 
             {...props}
             value={value}
             options={options}
-            segmentKeySelector={(d: Option) => d.key}
-            segmentLabelSelector={(d: Option) => d.label}
+            keySelector={(d: Option) => d.key}
+            labelSelector={(d: Option) => d.label}
             onChange={setValue}
         />
     );
@@ -49,7 +49,7 @@ export const Default = Template.bind({});
 Default.args = {
     name: 'test',
     value: '1',
-    segmentRendererParams: (o) => {
+    rendererParams: (o) => {
         if (o.key === '1') {
             return { icons: <FaApple /> };
         }
@@ -63,7 +63,7 @@ Disabled.args = {
     name: 'test',
     value: '1',
     disabled: true,
-    segmentRendererParams: (o) => {
+    rendererParams: (o) => {
         if (o.key === '1') {
             return { icons: <FaApple /> };
         }
@@ -77,7 +77,7 @@ ReadOnly.args = {
     name: 'test',
     value: '1',
     readOnly: true,
-    segmentRendererParams: (o) => {
+    rendererParams: (o) => {
         if (o.key === '1') {
             return { icons: <FaApple /> };
         }
@@ -91,7 +91,7 @@ Error.args = {
     name: 'test',
     value: '1',
     error: 'This is wrong',
-    segmentRendererParams: (o) => {
+    rendererParams: (o) => {
         if (o.key === '1') {
             return { icons: <FaApple /> };
         }

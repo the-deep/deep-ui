@@ -36,8 +36,8 @@ const Template: Story<RadioInputProps<Option['key'], Option, Option['label'], an
             {...props}
             value={value}
             options={options}
-            radioKeySelector={(d: Option) => d.key}
-            radioLabelSelector={(d: Option) => d.label}
+            keySelector={(d: Option) => d.key}
+            labelSelector={(d: Option) => d.label}
             onChange={setValue}
         />
     );

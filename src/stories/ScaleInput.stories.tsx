@@ -48,7 +48,7 @@ const options: Option[] = [
 const Template: Story<ScaleInputProps<Option['key'], Option, Option['label']>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const setValue = (e: string | number) => {
+    const setValue = (e: string) => {
         updateArgs({ value: e });
     };
 
@@ -58,9 +58,9 @@ const Template: Story<ScaleInputProps<Option['key'], Option, Option['label']>> =
             {...props}
             value={value}
             options={options}
-            scaleKeySelector={(d: Option) => d.key}
-            scaleLabelSelector={(d: Option) => d.label}
-            scaleColorSelector={(d: Option) => d.color}
+            keySelector={(d: Option) => d.key}
+            labelSelector={(d: Option) => d.label}
+            colorSelector={(d: Option) => d.color}
             onChange={setValue}
         />
     );

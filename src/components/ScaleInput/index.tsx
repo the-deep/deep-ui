@@ -55,11 +55,11 @@ interface ExtendedProps<V> extends RadioProps<V> {
 
 export interface Props<
     N, O, V
-> extends Omit<RadioInputProps<N, O, V, ExtendedProps<V>>, 'radioRendererParams' | 'radioRenderer' | 'radioListContainerClassName' | 'radioKeySelector' | 'radioLabelSelector'> {
-    scaleListContainerClassName?: RadioInputProps<N, O, V, ExtendedProps<V>>['radioListContainerClassName'];
-    scaleKeySelector: RadioInputProps<N, O, V, ExtendedProps<V>>['radioKeySelector'];
-    scaleLabelSelector: (option: O) => string;
-    scaleColorSelector: (option: O) => string;
+> extends Omit<RadioInputProps<N, O, V, ExtendedProps<V>>, 'rendererParams' | 'renderer' | 'listContainerClassName' | 'keySelector' | 'labelSelector'> {
+    listContainerClassName?: RadioInputProps<N, O, V, ExtendedProps<V>>['listContainerClassName'];
+    keySelector: RadioInputProps<N, O, V, ExtendedProps<V>>['keySelector'];
+    labelSelector: (option: O) => string;
+    colorSelector: (option: O) => string;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -70,28 +70,28 @@ function ScaleInput<
     V extends string | number,
 >(props: Props<N, O, V>) {
     const {
-        scaleListContainerClassName,
-        scaleKeySelector,
-        scaleLabelSelector,
-        scaleColorSelector,
+        listContainerClassName,
+        keySelector,
+        labelSelector,
+        colorSelector,
         ...otherProps
     } = props;
 
     const finalRendererParams = useCallback((option: O) => ({
-        color: scaleColorSelector(option),
-    }), [scaleColorSelector]);
+        color: colorSelector(option),
+    }), [colorSelector]);
 
     return (
         <RadioInput<N, O, V, ExtendedProps<V>>
             {...otherProps}
-            radioRenderer={Scale}
-            radioRendererParams={finalRendererParams}
-            radioListContainerClassName={_cs(
-                scaleListContainerClassName,
+            renderer={Scale}
+            rendererParams={finalRendererParams}
+            listContainerClassName={_cs(
+                listContainerClassName,
                 styles.scaleList,
             )}
-            radioKeySelector={scaleKeySelector}
-            radioLabelSelector={scaleLabelSelector}
+            keySelector={keySelector}
+            labelSelector={labelSelector}
         />
     );
 }
