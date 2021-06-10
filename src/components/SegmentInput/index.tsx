@@ -38,11 +38,11 @@ function Segment<N>(props: SegmentProps<N>) {
 
 export interface Props<
     N, O, V, RRP extends RadioProps<V>
-> extends Omit<RadioInputProps<N, O, V, RRP>, 'radioRendererParams' | 'radioRenderer' | 'radioListContainerClassName' | 'radioKeySelector' | 'radioLabelSelector'> {
-    segmentRendererParams?: RadioInputProps<N, O, V, RRP>['radioRendererParams'];
-    segmentListContainerClassName?: RadioInputProps<N, O, V, RRP>['radioListContainerClassName'];
-    segmentKeySelector: RadioInputProps<N, O, V, RRP>['radioKeySelector'];
-    segmentLabelSelector: RadioInputProps<N, O, V, RRP>['radioLabelSelector'];
+> extends Omit<RadioInputProps<N, O, V, RRP>, 'rendererParams' | 'renderer' | 'listContainerClassName' | 'keySelector' | 'labelSelector'> {
+    rendererParams?: RadioInputProps<N, O, V, RRP>['rendererParams'];
+    listContainerClassName?: RadioInputProps<N, O, V, RRP>['listContainerClassName'];
+    keySelector: RadioInputProps<N, O, V, RRP>['keySelector'];
+    labelSelector: RadioInputProps<N, O, V, RRP>['labelSelector'];
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -54,20 +54,20 @@ function SegmentInput<
     RRP extends RadioProps<V>,
 >(props: Props<N, O, V, RRP>) {
     const {
-        segmentRendererParams,
-        segmentListContainerClassName,
-        segmentKeySelector,
-        segmentLabelSelector,
+        rendererParams,
+        listContainerClassName,
+        keySelector,
+        labelSelector,
         ...otherProps
     } = props;
     return (
         <RadioInput
             {...otherProps}
-            radioRenderer={Segment}
-            radioRendererParams={segmentRendererParams}
-            radioListContainerClassName={segmentListContainerClassName}
-            radioKeySelector={segmentKeySelector}
-            radioLabelSelector={segmentLabelSelector}
+            renderer={Segment}
+            rendererParams={rendererParams}
+            listContainerClassName={listContainerClassName}
+            keySelector={keySelector}
+            labelSelector={labelSelector}
         />
     );
 }

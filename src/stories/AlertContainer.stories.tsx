@@ -93,8 +93,8 @@ function AlertControls(props: Props) {
                     options={alertVariantOptions}
                     value={variant}
                     onChange={onVariantChange}
-                    segmentKeySelector={(d) => d.key}
-                    segmentLabelSelector={(d) => d.label}
+                    keySelector={(d) => d.key}
+                    labelSelector={(d) => d.label}
                 />
             </Container>
             <Container>

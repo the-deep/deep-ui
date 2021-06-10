@@ -1,43 +1,66 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import RadioInput, { Props as RadioInputProps } from '#components/RadioInput';
+
+import ScaleInput, { Props as ScaleInputProps } from '#components/ScaleInput';
 
 export default {
-    title: 'Input/RadioInput',
-    component: RadioInput,
+    title: 'Input/ScaleInput',
+    component: ScaleInput,
     argTypes: {},
 };
 
 interface Option {
     key: string;
+    color: string;
     label: string;
 }
 
 const options: Option[] = [
-    { key: '1', label: 'Apple' },
-    { key: '2', label: 'Banana' },
-    { key: '3', label: 'Grapes' },
-    { key: '4', label: 'Avocado' },
-    { key: '5', label: 'Pear' },
+    {
+        key: '1',
+        color: '#b3effb',
+        label: 'Absolutely Not Severe',
+    },
+    {
+        key: '2',
+        color: '#80e4f7',
+        label: 'Not Severe',
+    },
+    {
+        key: '3',
+        color: '#00c9f0',
+        label: 'Severe',
+    },
+    {
+        key: '4',
+        color: '#00b1d3',
+        label: 'Highly Severe',
+    },
+    {
+        key: '5',
+        color: '#009ebd',
+        label: 'Extreme Highly Severe',
+    },
 ];
 
-// eslint-disable-next-line max-len, @typescript-eslint/no-explicit-any
-const Template: Story<RadioInputProps<Option['key'], Option, Option['label'], any>> = (props) => {
+// eslint-disable-next-line max-len
+const Template: Story<ScaleInputProps<Option['key'], Option, Option['label']>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const setValue = (e: string | number) => {
+    const setValue = (e: string) => {
         updateArgs({ value: e });
     };
 
     return (
-        <RadioInput
-            label="Fruit"
+        <ScaleInput
+            label="Severity"
             {...props}
             value={value}
             options={options}
             keySelector={(d: Option) => d.key}
             labelSelector={(d: Option) => d.label}
+            colorSelector={(d: Option) => d.color}
             onChange={setValue}
         />
     );
