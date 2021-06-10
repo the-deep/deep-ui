@@ -11,9 +11,9 @@ import styles from './styles.css';
 
 export interface Props<N, O, V, RRP extends RadioProps<V>> {
     className?: string;
-    options: O[];
+    options: O[] | undefined;
     name: N;
-    value: V;
+    value: V | null | undefined;
     onChange: (value: V, name: N) => void;
     keySelector: (option: O) => V;
     labelSelector: (option: O) => React.ReactNode;
