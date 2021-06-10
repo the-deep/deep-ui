@@ -1,6 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { IoEyeOff, IoEye } from 'react-icons/io5';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
@@ -67,13 +67,13 @@ function PasswordInput<T extends string>(props: Props<T>) {
                     {actions}
                     <Button
                         onClick={handleButtonClick}
-                        variant="inverted"
+                        variant="action"
                         className={styles.showPasswordToggleButton}
                         disabled={disabled}
                         name={undefined}
                         title={showPassword ? 'Hide password' : 'Show password'}
                     >
-                        {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                        {showPassword ? <IoEye /> : <IoEyeOff />}
                     </Button>
                 </>
             )}
