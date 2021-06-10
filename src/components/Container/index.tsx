@@ -98,7 +98,7 @@ function Container(props: Props) {
             <div className={_cs(styles.content, contentClassName)}>
                 { children }
             </div>
-            {(footerContent || footerActions || footerQuickActions) && (
+            {(footerIcons || footerContent || footerActions || footerQuickActions) && (
                 <Footer
                     actions={footerActions}
                     className={_cs(styles.footer, footerClassName)}

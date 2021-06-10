@@ -1,6 +1,11 @@
 .text-output {
     padding: calc(var(--dui-spacing-small) - var(--dui-spacing-super-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
+    &:not(.block) {
+        display: flex;
+        align-items: center;
+    }
+
     >.label {
         padding: var(--dui-spacing-super-small) var(--dui-spacing-extra-small);
         color: var(--dui-color-text-label);
@@ -31,10 +36,5 @@
                 content: ':';
             }
         }
-    }
-
-    &.inline {
-        display: flex;
-        align-items: center;
     }
 }

@@ -164,7 +164,8 @@
 
     --dui-width-separator-thin: 1px;
     --dui-width-separator-medium: 2px;
-    --dui-width-separator-thick: 3px;
+    --dui-width-separator-thick: 4px;
+    --dui-width-separator-dense: 7px;
 
     --dui-opacity-disabled-element: 0.4;
     --dui-saturation-disabled-element: 0.6;
@@ -173,11 +174,11 @@
     --dui-radius-blur-shadow: .2rem;
     --dui-radius-modal: .2rem;
 
-    --dui-width-popup-tip: 20px;
-    --dui-height-popup-tip: 10px;
+    --dui-width-popup-tip: 1.25rem;
+    --dui-height-popup-tip: 0.625rem;
 
     --dui-width-max-modal: 96vw;
-    --dui-width-min-modal: 360px;
+    --dui-width-min-modal: 20rem;
     --dui-height-max-modal: 96vh;
     --dui-height-navbar-icon: 3rem;
 
@@ -188,12 +189,11 @@
     --dui-duration-delay-short: .2s;
 
 
-    /* FIXME: use relative size */
-    --dui-border-radius-card: 8px;
-    --dui-border-radius-modal: 8px;
-    --dui-border-radius-tag: 25px;
-    --dui-height-progress-bar: 10px;
-    --dui-border-radius-progress-bar: 15px;
+    --dui-border-radius-card: 0.5rem;
+    --dui-border-radius-modal: 0.5rem;
+    --dui-border-radius-tag: 1.5rem;
+    --dui-height-progress-bar: 0.625rem;
+    --dui-border-radius-progress-bar: 1rem;
 
     --dui-duration-transition-medium: .2s;
     --dui-duration-delay-short: 150ms;
