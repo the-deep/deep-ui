@@ -54,7 +54,7 @@ function PercentageInformationCard(props: Props) {
                 valueContainerClassName={styles.valueContainer}
                 icon={(
                     <CircularProgressBar
-                        width={60}
+                        width={54}
                         arcWidth={4}
                         value={value}
                         className={styles.chart}

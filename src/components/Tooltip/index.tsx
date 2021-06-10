@@ -83,10 +83,12 @@ function Tooltip(props: Props) {
             tooltipRef.current.addEventListener('mouseleave', handleTooltipMouseLeave);
         }
 
+        const tooltipEl = tooltipRef.current;
+
         return () => {
-            if (tooltipRef.current) {
-                tooltipRef.current.removeEventListener('mouseenter', handleTooltipMouseEnter);
-                tooltipRef.current.removeEventListener('mouseleave', handleTooltipMouseLeave);
+            if (tooltipEl) {
+                tooltipEl.removeEventListener('mouseenter', handleTooltipMouseEnter);
+                tooltipEl.removeEventListener('mouseleave', handleTooltipMouseLeave);
             }
         };
     }, [delayedShow, tooltipRef, handleTooltipMouseEnter, handleTooltipMouseLeave]);

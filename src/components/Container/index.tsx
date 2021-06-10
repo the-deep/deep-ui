@@ -6,14 +6,20 @@ import Footer from '../Footer';
 
 import styles from './styles.css';
 
+// NOTE: these props should never be exposed
+export type internalProps = 'containerElementProps' | 'headerElementProps';
+
 export interface Props {
     className?: string;
 
-    // Note: not to be exposed by extended components
+    // NOTE: not to be exposed by extended components
     containerElementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
+    headerElementProps?: HeaderProps['elementProps'];
+
     heading?: React.ReactNode;
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
+    headingDescription?: React.ReactNode;
     headerDescription?: React.ReactNode;
     headerClassName?: string;
     headerDescriptionClassName?: string;
@@ -26,9 +32,13 @@ export interface Props {
     footerActions?: React.ReactNode;
     footerQuickActions?: React.ReactNode;
     headingSize?: HeaderProps['headingSize'];
+    headingContainerClassName?: HeaderProps['headingContainerClassName'];
+
+    horizontallyCompactContent?: boolean;
 
     // Is sub container? (i.e. Container with small heading)
     sub?: boolean;
+    inlineHeadingDescription?: boolean;
 }
 
 function Container(props: Props) {
@@ -38,6 +48,7 @@ function Container(props: Props) {
         children,
         headerActions,
         headerIcons,
+        headingDescription,
         headerDescription,
         headerDescriptionClassName,
         headerClassName,
@@ -51,6 +62,10 @@ function Container(props: Props) {
         containerElementProps,
         headingSize,
         footerQuickActions,
+        horizontallyCompactContent,
+        headerElementProps,
+        headingContainerClassName,
+        inlineHeadingDescription,
     } = props;
 
     return (
@@ -58,6 +73,7 @@ function Container(props: Props) {
             className={_cs(
                 styles.container,
                 sub && styles.sub,
+                horizontallyCompactContent && styles.horizontallyCompactContent,
                 className,
             )}
             {...containerElementProps}
@@ -68,16 +84,21 @@ function Container(props: Props) {
                     actions={headerActions}
                     className={_cs(styles.header, headerClassName)}
                     heading={heading}
-                    headingSize={headingSize ?? sub ? 'medium' : 'large'}
-                    description={headerDescription}
+                    headingSize={headingSize ?? (sub ? 'small' : 'medium')}
+                    description={headingDescription}
                     descriptionClassName={headerDescriptionClassName}
                     headingClassName={headingClassName}
-                />
+                    elementProps={headerElementProps}
+                    headingContainerClassName={headingContainerClassName}
+                    inlineDescription={inlineHeadingDescription}
+                >
+                    {headerDescription}
+                </Header>
             )}
             <div className={_cs(styles.content, contentClassName)}>
                 { children }
             </div>
-            {(footerContent || footerActions || footerQuickActions) && (
+            {(footerIcons || footerContent || footerActions || footerQuickActions) && (
                 <Footer
                     actions={footerActions}
                     className={_cs(styles.footer, footerClassName)}

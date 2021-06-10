@@ -95,7 +95,6 @@ function SearchMultiSelectInput<
     const value = valueFromProps ?? (emptyList as T[]);
 
     const [searchInputValue, setSearchInputValue] = React.useState('');
-    const [showDropdown, setShowDropdown] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
     const [
         focusedKey,
@@ -180,7 +179,6 @@ function SearchMultiSelectInput<
 
     const handleChangeDropdown = useCallback(
         (myVal: boolean) => {
-            setShowDropdown(myVal);
             if (onShowDropdownChange) {
                 onShowDropdownChange(myVal);
             }
@@ -270,7 +268,6 @@ function SearchMultiSelectInput<
             onClear={handleClear}
             searchText={searchInputValue}
             onSearchTextChange={handleSearchValueChange}
-            dropdownShown={showDropdown}
             onDropdownShownChange={handleChangeDropdown}
             focused={focused}
             onFocusedChange={setFocused}

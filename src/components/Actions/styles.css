@@ -1,7 +1,6 @@
 .actions {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
 
     >* {

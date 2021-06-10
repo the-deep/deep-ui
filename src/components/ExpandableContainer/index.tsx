@@ -6,36 +6,32 @@ import {
 } from 'react-icons/io5';
 
 import useBooleanState from '../../hooks/useBooleanState';
-import RawButton from '../RawButton';
+import Container, { Props as ContainerProps } from '../Container';
 
 import styles from './styles.css';
 
-export interface Props {
-    className?: string;
-    childrenContainerClassName?: string;
-    headerContainerClassName?: string;
-    headingClassName?: string;
-    descriptionClassName?: string;
-    description?: React.ReactNode;
-    heading?: React.ReactNode;
-    children: React.ReactNode;
+export interface Props extends Omit<ContainerProps, 'containerElementProps'>{
     defaultVisibility?: boolean;
     // NOTE: Mount will mount the child even if its not shown
-    mount?: boolean;
+    alwaysMountContent?: boolean;
 }
 
 function ExpandableContainer(props: Props) {
     const {
         className,
-        childrenContainerClassName,
-        headingClassName,
-        headerContainerClassName,
         heading,
-        description,
-        descriptionClassName,
         children,
+        headingDescription,
         defaultVisibility = false,
-        mount = true,
+        alwaysMountContent = true,
+        headerActions,
+        headingContainerClassName,
+        headingClassName,
+        contentClassName,
+        headerClassName,
+        headingSize,
+        sub,
+        ...otherProps
     } = props;
 
     const [
@@ -43,43 +39,44 @@ function ExpandableContainer(props: Props) {
         toggleContentVisibility,
     ] = useBooleanState(defaultVisibility);
 
-    const mountContent = mount || showContent;
+    const mountContent = alwaysMountContent || showContent;
 
     return (
-        <div className={_cs(className, styles.expandableContainer)}>
-            <RawButton
-                name="expandButton"
-                className={_cs(styles.sectionHeader, headerContainerClassName)}
-                onClick={toggleContentVisibility}
-            >
-                <div className={styles.leftContainer}>
-                    <div className={_cs(styles.heading, headingClassName)}>
-                        {heading}
-                    </div>
-                    {description && (
-                        <div className={_cs(styles.description, descriptionClassName)}>
-                            {description}
-                        </div>
-                    )}
-                </div>
-                {showContent ? (
-                    <IoChevronUpOutline className={styles.icon} />
-                ) : (
-                    <IoChevronDownOutline className={styles.icon} />
-                )}
-            </RawButton>
-            {mountContent && (
-                <div
-                    className={_cs(
-                        childrenContainerClassName,
-                        styles.content,
-                        showContent && styles.visible,
-                    )}
-                >
-                    {children}
-                </div>
+        <Container
+            {...otherProps}
+            className={_cs(
+                className,
+                styles.expandableContainer,
+                sub && styles.sub,
             )}
-        </div>
+            sub={sub}
+            headerElementProps={{
+                onClick: toggleContentVisibility,
+            }}
+            headerClassName={_cs(styles.header, headerClassName)}
+            headingContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
+            headingClassName={_cs(styles.heading, headingClassName)}
+            heading={heading}
+            headingSize={headingSize ?? 'small'}
+            headerActions={(
+                <>
+                    {headerActions}
+                    {showContent ? (
+                        <IoChevronUpOutline className={styles.icon} />
+                    ) : (
+                        <IoChevronDownOutline className={styles.icon} />
+                    )}
+                </>
+            )}
+            headingDescription={headingDescription}
+            contentClassName={_cs(
+                contentClassName,
+                styles.content,
+                showContent && styles.visible,
+            )}
+        >
+            {mountContent && children}
+        </Container>
     );
 }
 

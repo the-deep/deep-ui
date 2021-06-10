@@ -115,7 +115,6 @@ function SearchSelectInput<
     const searchOptions = searchOptionsFromProps ?? (emptyList as O[]);
 
     const [searchInputValue, setSearchInputValue] = React.useState('');
-    const [showDropdown, setShowDropdown] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
     const [
         focusedKey,
@@ -191,7 +190,7 @@ function SearchSelectInput<
 
     const handleChangeDropdown = useCallback(
         (myVal: boolean) => {
-            setShowDropdown(myVal);
+            // setShowDropdown(myVal);
             if (onShowDropdownChange) {
                 onShowDropdownChange(myVal);
             }
@@ -252,7 +251,7 @@ function SearchSelectInput<
                 props.onChange(undefined, name);
             }
         },
-        // eslint-disable-next-line react/destructuring-assignment
+        // eslint-disable-next-line react/destructuring-assignment, react-hooks/exhaustive-deps
         [name, props.onChange, props.nonClearable],
     );
 
@@ -272,7 +271,6 @@ function SearchSelectInput<
             onClear={handleClear}
             searchText={searchInputValue}
             onSearchTextChange={handleSearchValueChange}
-            dropdownShown={showDropdown}
             onDropdownShownChange={handleChangeDropdown}
             focused={focused}
             onFocusedChange={setFocused}

@@ -4,17 +4,18 @@
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     border-radius: var(--dui-border-radius-modal);
     background-color: var(--dui-color-background-modal);
-    padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small)) 0;
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-extra-large) - var(--dui-spacing-medium));
     min-width: var(--dui-width-min-modal);
     max-width: var(--dui-width-max-modal);
     max-height: var(--dui-height-max-modal);
     overflow: auto;
 
     .modal-header {
-        display: flex;
-        align-items: flex-start;
         flex-shrink: 0;
-        padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+
+        .close-button {
+            font-size: var(--dui-font-size-extra-large);
+        }
     }
 
     .modal-body {
@@ -24,9 +25,7 @@
     }
 
     .modal-footer {
-        display: flex;
         flex-shrink: 0;
-        padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
     }
 }
 

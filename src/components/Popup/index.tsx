@@ -207,6 +207,7 @@ export interface Props {
     show?: boolean;
     tipClassName?: string;
     freeWidth?: boolean;
+    onUnmount?: () => void;
 }
 
 function Popup(props: Props) {
@@ -219,6 +220,7 @@ function Popup(props: Props) {
         show,
         tipClassName,
         freeWidth = false,
+        onUnmount,
     } = props;
 
     const {
@@ -235,7 +237,16 @@ function Popup(props: Props) {
         matchParentWidth: !freeWidth,
     });
 
+    const unmountRef = React.useRef<boolean | undefined>();
     const shouldUnmount = useUnmountTransition(show);
+
+    React.useEffect(() => {
+        if (onUnmount && unmountRef.current === false && shouldUnmount === true) {
+            onUnmount();
+        }
+
+        unmountRef.current = shouldUnmount;
+    }, [shouldUnmount, onUnmount]);
 
     return (
         <>

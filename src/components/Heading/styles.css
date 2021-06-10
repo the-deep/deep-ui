@@ -1,15 +1,21 @@
 .heading {
-    display: flex;
-    align-items: center;
+    margin: 0;
     padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
     color: var(--dui-color-black);
     font-weight: var(--dui-font-weight-bold);
 
+    &.extra-large {
+        font-size: var(--dui-font-size-heading-extra-large);
+    }
+
     &.large {
+        text-transform: uppercase;
         font-size: var(--dui-font-size-heading-large);
     }
 
     &.medium {
+        text-transform: uppercase;
+        color: var(--dui-color-brand);
         font-size: var(--dui-font-size-heading-medium);
     }
 

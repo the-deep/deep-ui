@@ -2,7 +2,8 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { IoClose } from 'react-icons/io5';
 
-import ElementFragments from '../ElementFragments';
+import Header, { Props as HeaderProps } from '../Header';
+import Footer from '../Footer';
 import Button from '../Button';
 import BodyBackdrop from '../BodyBackdrop';
 
@@ -20,6 +21,7 @@ interface BaseProps {
     headerActions?: React.ReactNode;
     footerIcons?: React.ReactNode;
     footerActions?: React.ReactNode;
+    headingSize?: HeaderProps['headingSize'];
 }
 
 export type Props = BaseProps & ({
@@ -61,43 +63,37 @@ function Modal(props: Props) {
                 )}
             >
                 {!shouldHideHeader && (
-                    <div className={_cs(styles.modalHeader, headerClassName)}>
-                        <ElementFragments
-                            icons={headerIcons}
-                            actions={(
-                                <>
-                                    {headerActions}
-                                    {!hideCloseButton && (
-                                        <Button
-                                            className={styles.closeButton}
-                                            onClick={onCloseButtonClick}
-                                            name="close-modal"
-                                            variant="action"
-                                        >
-                                            <IoClose />
-                                        </Button>
-                                    )}
-                                </>
-                            )}
-                        >
-                            <h2 className={styles.heading}>
-                                {heading}
-                            </h2>
-                        </ElementFragments>
-                    </div>
+                    <Header
+                        className={_cs(styles.modalHeader, headerClassName)}
+                        heading={heading}
+                        actions={(
+                            <>
+                                {headerActions}
+                                {!hideCloseButton && (
+                                    <Button
+                                        className={styles.closeButton}
+                                        onClick={onCloseButtonClick}
+                                        name="close-modal"
+                                        variant="action"
+                                    >
+                                        <IoClose />
+                                    </Button>
+                                )}
+                            </>
+                        )}
+                    />
                 )}
                 <div className={_cs(styles.modalBody, bodyClassName)}>
                     {children}
                 </div>
                 {(footer || footerIcons || footerActions) && (
-                    <div className={_cs(styles.modalFooter, footerClassName)}>
-                        <ElementFragments
-                            icons={footerIcons}
-                            actions={footerActions}
-                        >
-                            {footer}
-                        </ElementFragments>
-                    </div>
+                    <Footer
+                        className={_cs(styles.modalFooter, footerClassName)}
+                        icons={footerIcons}
+                        actions={footerActions}
+                    >
+                        {footer}
+                    </Footer>
                 )}
             </div>
         </BodyBackdrop>

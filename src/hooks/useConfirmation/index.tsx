@@ -4,6 +4,7 @@ import useBooleanState from '../useBooleanState';
 import Modal, { Props as ModalProps } from '../../components/Modal';
 import Button, { Props as ButtonProps } from '../../components/Button';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T | undefined) {
     if (obj === undefined) {
         return obj;

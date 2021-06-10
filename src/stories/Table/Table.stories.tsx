@@ -70,6 +70,7 @@ const columns = [
     ),
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Template: Story<TableProps<Program, number, Column<Program, number, any, any>>> = (args) => (
     <Table
         {...args}
@@ -97,6 +98,7 @@ Large.args = {
 };
 
 export const Expandable: Story<
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
     TableProps<Program, number, Column<Program, number, any, any>>
 > = (args) => {
     const keySelector = (d: Program) => d.id;

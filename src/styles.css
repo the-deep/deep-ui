@@ -1,6 +1,30 @@
+/*
+ * NOTE: The variable should be declared in following format with the exact order:
+ * --dui-<property_type>-<target_description>-<property_description>
+ *
+ * the <property_type> is required along with one of or both <target_description> and <property_description>
+ *
+ *
+ * # property_type: What type of variable it is?
+ * example: color, color-background, radius, width, height, font-size, font-weight, duration, etc
+ *
+ * # target_description: What element or attribute does the variable target?
+ * example: text, input, modal, popup, disabled-element, etc
+ *
+ * # property_description: What is the effect (look and feel) of the variable?
+ * example: large, medium, small, thin, bold, black, etc
+ *
+ * The name itself should be meaningful within these parameters as well
+ * example: target_description `text-primary-button` doesn't make much when isolated,
+ * we should use `primary-button-text` instead.
+ */
 :root {
     --dui-font-family-sans-serif: Source Sans Pro, sans-serif;
     --dui-font-family-monospace: var(--dui-font-family-sans-serif);
+
+    /*
+     * Colors
+     */
 
     --dui-color-black: #000000;
     --dui-color-grey1: #333333;
@@ -10,82 +34,81 @@
     --dui-color-grey5: #e0e0e0;
     --dui-color-grey6: #f2f2f2;
     --dui-color-white: #ffffff;
-    --dui-color-backdrop: rgba(255, 255, 255, .9);
-    --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
-
-    --dui-radius-popup-border: .2rem;
-    --dui-radius-blur-shadow: .2rem;
-    --dui-radius-modal: .2rem;
-    --dui-color-shadow: rgba(0, 0, 0, .3);
-
-    --dui-height-popup-tip: 10px;
-    --dui-width-popup-tip: 20px;
-
-    --dui-height-max-modal: 96vh;
-    --dui-width-max-modal: 96vw;
-    --dui-width-min-modal: 360px;
-
     --dui-color-brand: #00125b;
     --dui-color-accent: #1a3ed0;
-    --dui-color-accent-hover: #1030b2;
-    --dui-color-text-on-accent: #ffffff;
-
-    --dui-color-background-primary-button: var(--dui-color-accent);
-    --dui-color-background-hover-primary-button: var(--dui-color-accent-hover);
-    --dui-color-text-primary-button: var(--dui-color-text-on-accent);
-    --dui-color-background-input-section: transparent;
-
-    --dui-color-background-dark: var(--dui-color-grey2);
-
-    --dui-color-background-tertiary-hover: #f5f8fb;
-
+    --dui-color-positive: #29bb75;
+    --dui-color-information: #3fa2f7;
+    --dui-color-negative: #ff5c52;
     --dui-color-complement1: #008eff;
     --dui-color-complement2: #00c9f0;
     --dui-color-complement3: #ffb443;
 
-    --dui-color-positive: #29bb75;
-    --dui-color-information: #3fa2f7;
-    --dui-color-negative: #ff5c52;
-
-    --dui-color-surface-positive: #d3f7f1;
-    --dui-color-surface-information: #dfe7f2;
-    --dui-color-surface-negative: #ffe7f2;
+    --dui-color-danger: var(--dui-color-negative);
+    --dui-color-success: var(--dui-color-positive);
 
     --dui-color-negative-on-dark: #ff9683;
-    --dui-color-danger: var(--dui-color-negative);
-    --dui-color-text-on-danger: var(--dui-color-text-on-dark);
 
-    --dui-color-success: var(--dui-color-positive);
-    --dui-color-text-on-success: var(--dui-color-text-on-dark);
-
-    --dui-color-background: #f6f6f6;
-    --dui-color-background-hover: #f6f6fa;
-    --dui-color-foreground: #ffffff;
-
-    --dui-color-background-dark: #383838;
-
-    --dui-color-background-information: #f5f8fb;
-    --dui-color-background-negative: #dfe7f2;
-    --dui-color-background-card: var(--dui-color-foreground);
-    --dui-color-background-modal: var(--dui-color-foreground);
+    --dui-color-accent-hover: #1030b2;
 
     --dui-color-text: var(--dui-color-grey1);
-    --dui-color-text-on-dark: var(--dui-color-white);
     --dui-color-text-label: var(--dui-color-grey2);
-    --dui-color-text-label-on-dark: var(--dui-color-grey6);
+    --dui-color-text-description: var(--dui-color-grey3);
     --dui-color-text-watermark: var(--dui-color-grey-4);
     --dui-color-text-message: rgba(0, 0, 0, .5);
 
-    --dui-color-background-disabled: var(--dui-color-grey5);
-    --dui-color-text-disabled: var(--dui-color-grey4);
+    --dui-color-text-on-dark: var(--dui-color-white);
+    --dui-color-text-label-on-dark: var(--dui-color-grey6);
+    --dui-color-text-on-accent: var(--dui-color-white);
+    --dui-color-text-on-danger: var(--dui-color-text-on-dark);
+    --dui-color-text-on-success: var(--dui-color-text-on-dark);
 
+    /* @tnagorra: should specify gradient of which color */
     --dui-color-gradient1: #cce8ff;
     --dui-color-gradient2: #99d2ff;
     --dui-color-gradient3: #66bbff;
     --dui-color-gradient4: #33a5ff;
 
-    --dui-radius-border-input-section: 0;
-    --dui-radius-border-alerts: 0.24rem;
+    --dui-color-separator: rgba(0, 0, 0, .1);
+    --dui-color-separator-info: var(--dui-color-surface-information);
+    --dui-color-label: #828282;
+    --dui-color-text-dark: #333333;
+    --dui-color-outline: rgba(0, 0, 0, .3);
+
+    --dui-color-backdrop: rgba(255, 255, 255, .9);
+    --dui-color-backdrop-dark: rgba(0, 0, 0, .6);
+    --dui-color-shadow: rgba(0, 0, 0, .3);
+
+    --dui-color-surface-positive: #d3f7f1;
+    --dui-color-surface-information: #dfe7f2;
+    --dui-color-surface-negative: #ffe7f2;
+
+    --dui-color-foreground: #ffffff;
+    --dui-color-background: #f6f6f6;
+    --dui-color-background-dark: #383838;
+    --dui-color-background-hover: #f6f6fa;
+
+    --dui-color-background-primary-button: var(--dui-color-accent);
+    --dui-color-background-hover-primary-button: var(--dui-color-accent-hover);
+    --dui-color-background-input-section: transparent;
+    --dui-color-background-dark: var(--dui-color-grey2);
+
+    /* FIXME: this color has 3 occurance */
+    --dui-color-background-tertiary-hover: #f5f8fb;
+
+    /* FIXME: should be --dui-color-primary-button-text */
+    --dui-color-text-primary-button: var(--dui-color-text-on-accent);
+
+    /* FIXME: this color has 3 occurance */
+    --dui-color-background-information: #f5f8fb;
+
+    --dui-color-background-negative: #dfe7f2;
+    --dui-color-background-card: var(--dui-color-foreground);
+    --dui-color-background-modal: var(--dui-color-foreground);
+
+    --dui-color-background-disabled: var(--dui-color-grey5);
+    --dui-color-text-disabled: var(--dui-color-grey4);
+
+    --dui-color-background-progress-bar: var(--dui-color-grey4);
 
     --dui-color-input-label: var(--dui-color-grey1);
     --dui-color-input-label-active: var(--dui-color-input-label);
@@ -93,18 +116,20 @@
     --dui-color-input-border: var(--dui-color-grey4);
     --dui-color-input-border-dark: var(--dui-color-grey3);
 
+    /* FIXME: reuse variables, fix naming order */
     --dui-border-color-card: #f2f2f2;
-    --dui-color-separator: rgba(0, 0, 0, .1);
-    --dui-color-separator-info: var(--dui-color-surface-information);
-    --dui-border-color-inner-card: #dfe7f2;
-    --dui-color-label: #828282;
-    --dui-color-text-dark: #333333;
-    --dui-color-outline: rgba(0, 0, 0, .3);
-    --dui-color-background-progress-bar: var(--dui-color-grey4);
 
+    /* FIXME: reuse variables, fix naming order */
+    --dui-border-color-inner-card: #dfe7f2;
+
+    /* FIXME: this color has 3 occurance */
     --dui-color-deep6: #f5f8fb;
 
-    --dui-height-navbar-icon: 3rem;
+
+
+    /*
+     * Dimensions
+     */
 
     --dui-spacing-super-small: 0.14rem;
     --dui-spacing-extra-small: 0.26rem;
@@ -118,44 +143,60 @@
 
     --dui-font-size-super-small: 0.5rem;
     --dui-font-size-extra-small: 0.63rem;
-    --dui-font-size-small: 0.74rem;
-    --dui-font-size-medium: 0.87rem;
-    --dui-font-size-large: 1.1rem;
-    --dui-font-size-extra-large: 1.59rem;
-    --dui-font-size-super-large: 2.2rem;
-    --dui-font-size-mega-large: 3.4rem;
-    --dui-font-size-ultra-large: 4.7rem;
+    --dui-font-size-small: 0.75rem;
+    --dui-font-size-medium: 0.875rem;
+    --dui-font-size-large: 1rem;
+    --dui-font-size-extra-large: 1.25rem;
+    --dui-font-size-super-large: 2rem;
+    --dui-font-size-mega-large: 3rem;
+    --dui-font-size-ultra-large: 4.6rem;
 
-    --dui-font-size-heading-large: var(--dui-font-size-super-large);
+    --dui-font-size-heading-extra-large: var(--dui-font-size-super-large);
+    --dui-font-size-heading-large: 1.5rem;
     --dui-font-size-heading-medium: var(--dui-font-size-extra-large);
-    --dui-font-size-heading-small: var(--dui-font-size-large);
-    --dui-font-size-heading-extra-small: var(--dui-font-size-small);
+    --dui-font-size-heading-small: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-extra-small: var(--dui-font-size-large);
 
-    --dui-font-weight-light: 300;
+    --dui-font-weight-light: 400;
     --dui-font-weight-regular: 400;
     --dui-font-weight-medium: 400;
     --dui-font-weight-bold: 600;
 
     --dui-width-separator-thin: 1px;
     --dui-width-separator-medium: 2px;
-    --dui-width-separator-thick: 3px;
+    --dui-width-separator-thick: 4px;
+    --dui-width-separator-dense: 7px;
 
     --dui-opacity-disabled-element: 0.4;
     --dui-saturation-disabled-element: 0.6;
 
-    /* FIXME: use relative size */
-    --dui-border-radius-card: 8px;
-    --dui-border-radius-modal: 8px;
-    --dui-border-radius-tag: 25px;
-    --dui-height-progress-bar: 10px;
-    --dui-border-radius-progress-bar: 15px;
+    --dui-radius-popup-border: .2rem;
+    --dui-radius-blur-shadow: .2rem;
+    --dui-radius-modal: .2rem;
+
+    --dui-width-popup-tip: 1.25rem;
+    --dui-height-popup-tip: 0.625rem;
+
+    --dui-width-max-modal: 96vw;
+    --dui-width-min-modal: 20rem;
+    --dui-height-max-modal: 96vh;
+    --dui-height-navbar-icon: 3rem;
+
+    --dui-radius-border-input-section: 0;
+    --dui-radius-border-alerts: 0.24rem;
+
+    --dui-duration-transition-medium: .2s;
+    --dui-duration-delay-short: .2s;
+
+
+    --dui-border-radius-card: 0.5rem;
+    --dui-border-radius-modal: 0.5rem;
+    --dui-border-radius-tag: 1.5rem;
+    --dui-height-progress-bar: 0.625rem;
+    --dui-border-radius-progress-bar: 1rem;
 
     --dui-duration-transition-medium: .2s;
     --dui-duration-delay-short: 150ms;
     --dui-duration-delay-medium: 250ms;
     --dui-duration-delay-long: 400ms;
-}
-
-* {
-    box-sizing: border-box;
 }

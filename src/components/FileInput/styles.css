@@ -1,10 +1,10 @@
 .input-wrapper {
-    position: relative;
     display: flex;
-    flex-grow: 1;
-    --color: var(--dui-color-text);
-    color: var(--color);
+    position: relative;
     align-items: center;
+    flex-grow: 1;
+    color: var(--color);
+    --color: var(--dui-color-text);
 
     &.errored {
         --color: var(--dui-color-negative);
@@ -41,11 +41,11 @@
 
     .label {
         display: flex;
+        border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+        background-color: var(--dui-color-background);
         cursor: pointer;
         padding: var(--dui-spacing-medium);
         text-align: center;
-        border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
-        background-color: var(--dui-color-background);
         color: var(--color);
     }
 

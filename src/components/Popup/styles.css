@@ -23,6 +23,7 @@
 
     &.top {
         animation: appear-from-top var(--dui-duration-transition-medium) ease-in forwards;
+
         .tip {
             bottom: calc(-1 * var(--dui-height-popup-tip) + 1px);
             clip-path: polygon(100% 0%, 0 0, 50% 100%);
@@ -31,6 +32,7 @@
 
     &.bottom {
         animation: appear-from-bottom var(--dui-duration-transition-medium) ease-in forwards;
+
         .tip {
             top: calc(-1 * var(--dui-height-popup-tip) + 1px);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);

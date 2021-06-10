@@ -1,40 +1,24 @@
 .expandable-container {
-    display: flex;
-    flex-direction: column;
     background-color: var(--dui-color-foreground);
+    padding: 0;
 
-    .section-header {
-        display: flex;
-        align-items: center;
-        border: var(--dui-width-separator-thin) solid var(--dui-color-surface-information);
+    .header {
+        border: var(--dui-width-separator-thin) solid var(--dui-color-accent);
         background-color: var(--dui-color-background-information);
-        padding: calc(var(--dui-spacing-large) - var(--dui-spacing-medium)) var(--dui-spacing-medium);
-        text-align: left;
-        color: var(--dui-color-text);
-        font-size: var(--dui-font-size-large);
+        cursor: pointer;
+        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
-        .left-container {
+        .heading-container {
             display: flex;
-            align-items: center;
-            flex-grow: 1;
 
             .heading {
-                padding: var(--dui-spacing-medium);
-                text-transform: none;
                 color: var(--dui-color-accent);
-                font-weight: var(--dui-font-weight-bold);
-            }
-
-            .description {
-                padding: var(--dui-spacing-medium);
             }
         }
 
         .icon {
-            flex-shrink: 0;
-            margin: var(--dui-spacing-small);
             color: var(--dui-color-accent);
-            font-weight: var(--dui-font-weight-bold);
+            font-size: 1.2em;
         }
     }
 
@@ -44,10 +28,26 @@
         border-top: none;
         border-bottom-left-radius: var(--dui-border-radius-card);
         border-bottom-right-radius: var(--dui-border-radius-card);
-        padding: var(--dui-spacing-medium);
+        padding: var(--dui-spacing-medium) var(--dui-spacing-large);
 
         &.visible {
             display: block;
+        }
+    }
+
+    &.sub {
+        background-color: initial;
+        padding: 0;
+
+        .header {
+            border: initial;
+            background-color: initial;
+            padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+        }
+
+        .content {
+            border: initial;
+            padding: var(--dui-spacing-small) var(--dui-spacing-medium);
         }
     }
 }

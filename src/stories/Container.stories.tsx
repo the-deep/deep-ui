@@ -19,7 +19,19 @@ export default {
 const Template: Story<ContainerProps> = (args) => (
     <Container
         {...args}
-    />
+        horizontallyCompactContent
+    >
+        <Container
+            {...args}
+            sub
+            horizontallyCompactContent
+        >
+            <Container
+                {...args}
+                sub
+            />
+        </Container>
+    </Container>
 );
 
 export const Default = Template.bind({});

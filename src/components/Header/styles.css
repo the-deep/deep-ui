@@ -1,23 +1,55 @@
 .header {
-    display: flex;
-    align-items: flex-start;
     padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
 
-    .heading-container {
+    .heading-section {
         display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        flex-grow: 1;
-        padding: 0;
+        align-items: center;
+        overflow: auto;
 
-        .heading {
+        .heading-container {
+            display: block;
             flex-grow: 1;
-            padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-            line-height: 1;
-        }
+            padding: 0;
+            overflow: auto;
 
-        .description {
-            padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+            .heading {
+                margin: 0;
+                padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+                width: 100%;
+                line-height: 1;
+
+                &.string-heading {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+
+            .description {
+                padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+
+                &.uppercase {
+                    text-transform: uppercase;
+                }
+            }
         }
     }
+
+    &.inline-description {
+        .heading-section {
+            .heading-container {
+                display: flex;
+                align-items: center;
+
+                .heading {
+                    width: auto;
+                }
+            }
+        }
+    }
+
+    .content {
+        padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+    }
+
 }

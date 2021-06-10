@@ -32,6 +32,7 @@ export interface Props {
     containerRef?: React.RefObject<HTMLDivElement>;
     uiMode?: UiMode;
     filled?: boolean;
+    children?: React.ReactNode;
 }
 
 function InputContainer(props: Props) {
@@ -57,6 +58,7 @@ function InputContainer(props: Props) {
         containerRef,
         uiMode,
         filled,
+        children,
     } = props;
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
@@ -101,6 +103,7 @@ function InputContainer(props: Props) {
                     className={styles.inputSectionBorder}
                     errored={!!error}
                 />
+                {children}
             </div>
             <InputError className={errorContainerClassName}>
                 {error}
