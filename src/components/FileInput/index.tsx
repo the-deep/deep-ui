@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { MdFileUpload } from 'react-icons/md';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
+import { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
 
@@ -13,7 +13,8 @@ export interface Props<T extends string> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     showStatus?: boolean;
-    onChange?: (files: File[]) => void;
+    labelClassName?: string;
+    onChange?: (files: File[], name: T) => void;
 }
 
 export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
@@ -62,6 +63,8 @@ function FileInput<T extends string>(props: Props<T>) {
         name,
         multiple,
         accept,
+        labelClassName,
+        children,
         ...fileInputProps
     } = props;
 
@@ -85,17 +88,17 @@ function FileInput<T extends string>(props: Props<T>) {
             const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
             if (!multiple && validFiles.length > 1) {
                 if (onChange) {
-                    onChange(validFiles.slice(0, 1));
+                    onChange(validFiles.slice(0, 1), name);
                 }
             } else {
                 const newStatus = getStatus(validFiles);
                 setStatus(newStatus);
                 if (onChange) {
-                    onChange(validFiles);
+                    onChange(validFiles, name);
                 }
             }
         }
-    }, [accept, multiple, getStatus, onChange]);
+    }, [accept, multiple, getStatus, onChange, name]);
 
     const handleChange = useCallback((
         _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
@@ -120,19 +123,57 @@ function FileInput<T extends string>(props: Props<T>) {
         onDrop,
     } = useDropHandler(handleDrop);
 
+    const {
+        className: buttonLabelClassName,
+        children: buttonLabelChildren,
+    } = useButtonFeatures({
+        variant: 'secondary',
+        className: labelClassName,
+        disabled,
+        readOnly,
+        children: (
+            <>
+                {children}
+                <RawInput<T>
+                    {...fileInputProps}
+                    className={styles.input}
+                    elementRef={inputElementRef}
+                    readOnly={readOnly}
+                    uiMode={uiMode}
+                    disabled={disabled}
+                    value={value}
+                    name={name}
+                    onChange={handleChange}
+                    multiple={multiple}
+                    accept={accept}
+                    type="file"
+                />
+            </>
+        ),
+    });
+
     return (
         <InputContainer
             containerRef={containerRef}
             inputSectionRef={inputSectionRef}
             actions={actions}
             actionsContainerClassName={actionsContainerClassName}
-            className={className}
+            className={_cs(className, styles.fileInput)}
             disabled={disabled}
             error={error}
             errorContainerClassName={errorContainerClassName}
             hint={hint}
             hintContainerClassName={hintContainerClassName}
-            icons={icons}
+            icons={(
+                <>
+                    {icons}
+                    <label
+                        className={buttonLabelClassName}
+                    >
+                        {buttonLabelChildren}
+                    </label>
+                </>
+            )}
             iconsContainerClassName={iconsContainerClassName}
             inputSectionClassName={inputSectionClassName}
             inputContainerClassName={inputContainerClassName}
@@ -157,29 +198,10 @@ function FileInput<T extends string>(props: Props<T>) {
                     {!disabled && (
                         <div className={_cs(styles.dropOverlay)} />
                     )}
-                    <label
-                        className={styles.label}
-                    >
-                        <MdFileUpload />
-                        <RawInput<T>
-                            {...fileInputProps}
-                            className={styles.input}
-                            elementRef={inputElementRef}
-                            readOnly={readOnly}
-                            uiMode={uiMode}
-                            disabled={disabled}
-                            value={value}
-                            name={name}
-                            onChange={handleChange}
-                            multiple={multiple}
-                            accept={accept}
-                            type="file"
-                        />
-                    </label>
                     {showStatus && (
-                        <p className={styles.status}>
+                        <div>
                             {status}
-                        </p>
+                        </div>
                     )}
                 </div>
             )}
