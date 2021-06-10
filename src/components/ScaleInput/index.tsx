@@ -21,6 +21,7 @@ function Scale<V extends string | number | undefined>(props: ScaleProps<V>) {
         className,
         color,
         inputName, // eslint-disable-line @typescript-eslint/no-unused-vars
+        disabled,
         ...otherProps
     } = props;
 
@@ -30,6 +31,7 @@ function Scale<V extends string | number | undefined>(props: ScaleProps<V>) {
             className={_cs(
                 styles.scale,
                 className,
+                disabled && styles.disabled,
             )}
             style={value ? ({
                 borderColor: color,
@@ -37,6 +39,7 @@ function Scale<V extends string | number | undefined>(props: ScaleProps<V>) {
             name={name}
             onClick={onClick}
             title={label}
+            disabled={disabled}
         >
             <div
                 className={styles.innerCircle}

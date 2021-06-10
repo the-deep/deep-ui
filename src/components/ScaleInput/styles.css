@@ -15,6 +15,10 @@
         height: var(--size-circle);
         font-size: var(--size-circle);
 
+        &.disabled {
+            opacity: var(--dui-opacity-disabled-element);
+        }
+
         .inner-circle {
             flex-shrink: 0;
             border-radius: 50%;
