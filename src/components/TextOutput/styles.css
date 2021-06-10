@@ -1,7 +1,7 @@
 .text-output {
     padding: calc(var(--dui-spacing-small) - var(--dui-spacing-super-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
-    &:not(.block) {
+    &:not(.blok) {
         display: flex;
         align-items: center;
     }

@@ -73,7 +73,10 @@ function TextOutput(props: Props) {
                 styles.textOutput,
                 className,
                 !hideLabelColon && styles.withLabelColon,
-                block && styles.block,
+                // NOTE:
+                // styles.blok is supposed to be styles.block
+                // but we encountered a strange behavior
+                block && styles.blok,
             )}
         >
             {label && (
