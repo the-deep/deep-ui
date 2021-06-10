@@ -6,27 +6,33 @@
     .page-list {
         display: flex;
         align-items: center;
-        padding: var(--dui-spacing-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+        padding: var(--dui-spacing-small) 0;
 
         .page-button {
-            margin: 0 var(--dui-spacing-extra-small);
-            padding: var(--dui-spacing-extra-small);
+            flex-shrink: 0;
+            padding: 0 var(--dui-spacing-medium);
             font-size: var(--dui-font-size-large);
             font-weight: var(--dui-font-weight-bold);
+
+            &.active {
+                background-color: var(--dui-color-background-information);
+                color: var(--dui-color-accent);
+            }
         }
 
         .page-span {
             display: flex;
             align-items: baseline;
-            margin: 0 var(--dui-spacing-extra-small);
             padding: 0 var(--dui-spacing-medium);
             color: var(--dui-color-text-label);
+            font-size: var(--dui-font-size-large);
             font-weight: var(--dui-font-weight-bold);
             user-select: none;
         }
 
         &.page-number-hidden {
             .page-number-button {
+                margin: var(--dui-spacing-extra-small);
                 padding: var(--dui-spacing-extra-small);
             }
         }

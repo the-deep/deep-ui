@@ -221,9 +221,9 @@ function Pager(props: Props) {
         >
             {!hidePrevAndNext && (
                 <Button
-                    name={undefined}
+                    name={activePage - 1}
                     className={styles.pageButton}
-                    onClick={() => onActivePageChange(activePage - 1)}
+                    onClick={onActivePageChange}
                     disabled={activePage <= 1 || disabled}
                     icons={<FaChevronLeft />}
                     variant="action"
@@ -238,8 +238,8 @@ function Pager(props: Props) {
                     return (
                         <Button
                             key={`button-${page.index}`}
-                            name={undefined}
-                            onClick={() => onActivePageChange(page.index)}
+                            name={page.index}
+                            onClick={onActivePageChange}
                             className={_cs(styles.pageButton, styles.pageNumberButton)}
                             disabled={disabled}
                             variant={hidePageNumberLabel ? 'secondary' : 'action'}
@@ -254,7 +254,7 @@ function Pager(props: Props) {
                     return (
                         <Button
                             key={`button-${page.key}`}
-                            variant={hidePageNumberLabel ? 'primary' : 'secondary'}
+                            variant={hidePageNumberLabel ? 'primary' : 'action'}
                             name={undefined}
                             className={_cs(
                                 styles.pageButton,
@@ -280,7 +280,7 @@ function Pager(props: Props) {
             {!hidePrevAndNext && (
                 <Button
                     name={activePage + 1}
-                    onClick={() => onActivePageChange(activePage + 1)}
+                    onClick={onActivePageChange}
                     disabled={activePage >= numPages || disabled}
                     className={styles.pageButton}
                     actions={<FaChevronRight />}
