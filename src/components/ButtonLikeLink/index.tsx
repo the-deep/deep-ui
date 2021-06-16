@@ -49,7 +49,12 @@ function ButtonLikeLink(props: Props) {
     });
 
     // FIXME: the typing is problematic
-    const isExternalLink = React.useMemo(() => isValidUrl(to as string), [to]);
+    const isExternalLink = React.useMemo(
+        () => (
+            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:'))
+        ),
+        [to],
+    );
 
     if (!to) {
         return null;
