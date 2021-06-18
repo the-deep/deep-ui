@@ -1,0 +1,6 @@
+.check-list-input {
+    .check-list-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
