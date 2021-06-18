@@ -16,6 +16,8 @@ export type { Props as ButtonLikeLinkProps } from './components/ButtonLikeLink';
 export { default as ButtonLikeLink } from './components/ButtonLikeLink';
 export type { Props as CardProps } from './components/Card';
 export { default as Card } from './components/Card';
+export type { Props as CheckListInputProps } from './components/CheckListInput';
+export type { default as CheckListInput } from './components/CheckListInput';
 export type { Props as CheckboxProps } from './components/Checkbox';
 export { default as Checkbox } from './components/Checkbox';
 export type { Props as CircularProgressBarProps } from './components/CircularProgressBar';
@@ -143,7 +145,6 @@ export type { Props as TextOutputProps } from './components/TextOutput';
 export { default as TextOutput } from './components/TextOutput';
 export type { Props as TooltipProps } from './components/Tooltip';
 export { default as Tooltip } from './components/Tooltip';
-
 export { default as useAlert } from './hooks/useAlert';
 export { default as useBlurEffect } from './hooks/useBlurEffect';
 export { default as useBooleanState } from './hooks/useBooleanState';
