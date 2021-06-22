@@ -29,7 +29,7 @@ export interface Column<D, K, C, H> {
     headerContainerClassName?: string;
 
     cellRenderer: React.ComponentType<C>;
-    cellRendererParams: (key: K, datum: D, index: number) => Omit<C, 'className' | 'name'>;
+    cellRendererParams: (key: K, datum: D, index: number) => Omit<C, 'className'>;
     cellRendererClassName?: string;
     cellContainerClassName?: string;
 
@@ -169,7 +169,6 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                             <Renderer
                                 {...otherProps}
                                 className={_cs(cellRendererClassName, styles.cellComponent)}
-                                name={id}
                             />
                         );
 

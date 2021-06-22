@@ -19,5 +19,4 @@ export interface BaseHeader {
 
 export interface BaseCell {
     className?: string;
-    name: string;
 }
