@@ -4,6 +4,7 @@ import SelectInput from '#components/SelectInput';
 import DateInput from '#components/DateInput';
 import Button from '#components/Button';
 import Modal, { Props as ModalProps } from '#components/Modal';
+import useInputState from '#hooks/useInputState';
 
 import styles from './styles.css';
 
@@ -45,27 +46,6 @@ const options: DateRangeOption[] = [
 const keySelector = (d: DateRangeOption) => d.key;
 const labelSelector = (d: DateRangeOption) => d.label;
 
-// TODO: move to hooks
-export function useInputValue<T>(initialValue: T | undefined): [
-    T | undefined,
-    (
-        v: T | undefined,
-        n?: string | undefined,
-        e?: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLTextAreaElement>,
-    ) => void
-] {
-    const [value, setValue] = React.useState<T | undefined>(initialValue);
-
-    const setInputValue = React.useCallback(
-        (newValue: T | undefined) => {
-            setValue(newValue);
-        },
-        [setValue],
-    );
-
-    return [value, setInputValue];
-}
-
 interface DateRangeModalProps {
     onDateRangeSelect: (startDate: string, endDate: string) => void;
     onCloseButtonClick: ModalProps['onCloseButtonClick'];
@@ -78,8 +58,8 @@ function DateRangeModal(props: DateRangeModalProps) {
         onCloseButtonClick,
     } = props;
 
-    const [startDate, setStartDate] = useInputValue('');
-    const [endDate, setEndDate] = useInputValue('');
+    const [startDate, setStartDate] = useInputState<string | undefined>('');
+    const [endDate, setEndDate] = useInputState<string | undefined>('');
 
     const handleSelectButtonClick = React.useCallback(() => {
         if (startDate && endDate) {
