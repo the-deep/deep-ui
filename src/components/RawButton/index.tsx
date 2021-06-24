@@ -7,7 +7,7 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
-export interface Props<N extends number | string | undefined> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
+export interface Props<N extends number | string> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
     /**
     * Style for the button
     */
@@ -15,13 +15,13 @@ export interface Props<N extends number | string | undefined> extends Omit<React
     /**
     * Gets called when user clicks on the button
     */
-    onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (name: N | undefined, e: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Type of the button
      */
     type?: 'button' | 'submit' | 'reset';
     uiMode?: UiMode;
-    name: N;
+    name: N | undefined;
     elementRef?: React.Ref<HTMLButtonElement>;
     focused?: boolean;
 }
@@ -34,7 +34,7 @@ export interface Props<N extends number | string | undefined> extends Omit<React
  * we use raw button as a base component for other types of buttons or
  * clickable elements
  */
-function RawButton<N extends number | string | undefined>(props: Props<N>) {
+function RawButton<N extends number | string>(props: Props<N>) {
     const {
         className,
         onClick,

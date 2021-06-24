@@ -40,6 +40,10 @@ export type { Props as DraggableContentProps } from './components/DraggableConte
 export { default as DraggableContent } from './components/DraggableContent';
 export type { Props as DropContainerProps } from './components/DropContainer';
 export { default as DropContainer } from './components/DropContainer';
+export type { Props as DropdownMenuItemProps } from './components/DropdownMenuItem';
+export { default as DropdownMenuItem } from './components/DropdownMenuItem';
+export type { Props as DropdownMenuProps } from './components/DropdownMenu';
+export { default as DropdownMenu } from './components/DropdownMenu';
 export type { Props as ElementFragmentsProps } from './components/ElementFragments';
 export { default as ElementFragments } from './components/ElementFragments';
 export type { Props as ExpandableContainerProps } from './components/ExpandableContainer';

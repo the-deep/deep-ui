@@ -37,7 +37,7 @@ export interface Props<N> extends Omit<
     readOnly?: boolean;
 }
 
-type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly';
+export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly';
 export function useButtonFeatures(
     props: Pick<Props<void>, ButtonFeatureKeys>,
 ) {
