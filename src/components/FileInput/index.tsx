@@ -8,15 +8,6 @@ import { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
-export interface Props<T extends string> extends InheritedProps<T> {
-    inputElementRef?: React.RefObject<HTMLInputElement>;
-    inputClassName?: string;
-    showStatus?: boolean;
-    labelClassName?: string;
-    onChange?: (files: File[], name: T) => void;
-}
-
 export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
     // if there is no accept string, anything is valid
     if (!acceptString) {
@@ -34,6 +25,18 @@ export const isValidFile = (fileName: string, mimeType: string, acceptString?: s
         return !!extensionMatch && extensionMatch[0].toLowerCase() === fileType.toLowerCase();
     });
 };
+
+type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
+export interface Props<T extends string> extends InheritedProps<T> {
+    inputElementRef?: React.RefObject<HTMLInputElement>;
+    inputClassName?: string;
+    showStatus?: boolean;
+    labelClassName?: string;
+    onChange?: (files: File[], name: T) => void;
+
+    overrideStatus?: boolean;
+    status?: string;
+}
 
 function FileInput<T extends string>(props: Props<T>) {
     const {
@@ -60,6 +63,8 @@ function FileInput<T extends string>(props: Props<T>) {
         value,
         onChange,
         showStatus = true,
+        overrideStatus,
+        status: statusFromProps,
         name,
         multiple,
         accept,
@@ -152,6 +157,10 @@ function FileInput<T extends string>(props: Props<T>) {
         ),
     });
 
+    const visibleStatus = overrideStatus
+        ? statusFromProps
+        : status;
+
     return (
         <InputContainer
             containerRef={containerRef}
@@ -200,7 +209,7 @@ function FileInput<T extends string>(props: Props<T>) {
                     )}
                     {showStatus && (
                         <div>
-                            {status}
+                            {visibleStatus}
                         </div>
                     )}
                 </div>
