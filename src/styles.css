@@ -19,8 +19,32 @@
  * we should use `primary-button-text` instead.
  */
 :root {
+    /*
+     * Fonts
+     */
     --dui-font-family-sans-serif: Source Sans Pro, sans-serif;
     --dui-font-family-monospace: var(--dui-font-family-sans-serif);
+
+    --dui-font-size-super-small: 0.5rem;
+    --dui-font-size-extra-small: 0.63rem;
+    --dui-font-size-small: 0.75rem;
+    --dui-font-size-medium: 0.875rem;
+    --dui-font-size-large: 1rem;
+    --dui-font-size-extra-large: 1.25rem;
+    --dui-font-size-super-large: 2rem;
+    --dui-font-size-mega-large: 3rem;
+    --dui-font-size-ultra-large: 4.6rem;
+
+    --dui-font-size-heading-extra-large: var(--dui-font-size-super-large);
+    --dui-font-size-heading-large: 1.5rem;
+    --dui-font-size-heading-medium: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-small: var(--dui-font-size-extra-large);
+    --dui-font-size-heading-extra-small: var(--dui-font-size-large);
+
+    --dui-font-weight-light: 400;
+    --dui-font-weight-regular: 400;
+    --dui-font-weight-medium: 400;
+    --dui-font-weight-bold: 600;
 
     /*
      * Colors
@@ -62,7 +86,6 @@
     --dui-color-text-on-danger: var(--dui-color-text-on-dark);
     --dui-color-text-on-success: var(--dui-color-text-on-dark);
 
-    /* @tnagorra: should specify gradient of which color */
     --dui-color-gradient1: #cce8ff;
     --dui-color-gradient2: #99d2ff;
     --dui-color-gradient3: #66bbff;
@@ -117,14 +140,15 @@
     --dui-color-input-border-dark: var(--dui-color-grey3);
 
     /* FIXME: reuse variables, fix naming order */
+    /* FIXME: shouldn't this be --dui-color-card-border */
     --dui-border-color-card: #f2f2f2;
 
     /* FIXME: reuse variables, fix naming order */
+    /* FIXME: shouldn't this be --dui-color-inner-card-border */
     --dui-border-color-inner-card: #dfe7f2;
 
     /* FIXME: this color has 3 occurance */
     --dui-color-deep6: #f5f8fb;
-
 
 
     /*
@@ -141,27 +165,6 @@
     --dui-spacing-mega-large: 4.81rem;
     --dui-spacing-ultra-large: 6.89rem;
 
-    --dui-font-size-super-small: 0.5rem;
-    --dui-font-size-extra-small: 0.63rem;
-    --dui-font-size-small: 0.75rem;
-    --dui-font-size-medium: 0.875rem;
-    --dui-font-size-large: 1rem;
-    --dui-font-size-extra-large: 1.25rem;
-    --dui-font-size-super-large: 2rem;
-    --dui-font-size-mega-large: 3rem;
-    --dui-font-size-ultra-large: 4.6rem;
-
-    --dui-font-size-heading-extra-large: var(--dui-font-size-super-large);
-    --dui-font-size-heading-large: 1.5rem;
-    --dui-font-size-heading-medium: var(--dui-font-size-extra-large);
-    --dui-font-size-heading-small: var(--dui-font-size-extra-large);
-    --dui-font-size-heading-extra-small: var(--dui-font-size-large);
-
-    --dui-font-weight-light: 400;
-    --dui-font-weight-regular: 400;
-    --dui-font-weight-medium: 400;
-    --dui-font-weight-bold: 600;
-
     --dui-width-separator-thin: 1px;
     --dui-width-separator-medium: 2px;
     --dui-width-separator-thick: 4px;
@@ -170,32 +173,40 @@
     --dui-opacity-disabled-element: 0.4;
     --dui-saturation-disabled-element: 0.6;
 
-    --dui-radius-popup-border: .2rem;
-    --dui-radius-blur-shadow: .2rem;
-    --dui-radius-modal: .2rem;
-
     --dui-width-popup-tip: 1.25rem;
     --dui-height-popup-tip: 0.625rem;
 
     --dui-width-max-modal: 96vw;
-    --dui-width-min-modal: 20rem;
     --dui-height-max-modal: 96vh;
+
+    --dui-width-min-modal: 20rem;
+
+
+    /*
     --dui-height-navbar-icon: 3rem;
+    --dui-height-progress-bar: 0.625rem;
+    */
+
+
+    /* FIXME: should either be border-radius or radius-border or radius */
+    --dui-radius-popup-border: .2rem;
+    --dui-radius-blur-shadow: .2rem;
+    --dui-radius-modal: .2rem;
 
     --dui-radius-border-input-section: 0;
     --dui-radius-border-alerts: 0.24rem;
 
-    --dui-duration-transition-medium: .2s;
-    --dui-duration-delay-short: .2s;
-
-
     --dui-border-radius-card: 0.5rem;
     --dui-border-radius-modal: 0.5rem;
     --dui-border-radius-tag: 1.5rem;
-    --dui-height-progress-bar: 0.625rem;
     --dui-border-radius-progress-bar: 1rem;
 
-    --dui-duration-transition-medium: .2s;
+
+    /*
+     * TIMING
+     */
+    --dui-duration-transition-medium: 200ms;
+
     --dui-duration-delay-short: 150ms;
     --dui-duration-delay-medium: 250ms;
     --dui-duration-delay-long: 400ms;
