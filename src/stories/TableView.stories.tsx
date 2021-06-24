@@ -114,7 +114,7 @@ const Template: Story<
                     {...args}
                     pending={pending}
                     filtered={filtered}
-                    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
+                    // eslint-disable-next-line react/destructuring-assignment
                     data={empty ? [] : args.data}
                     columns={columns}
                 />

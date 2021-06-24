@@ -9,8 +9,32 @@ export default {
     argTypes: {},
 };
 
-const Template: Story<FileInputProps<string>> = (args) => {
-    const [, setValue] = useState<File[]>();
+const SingleTemplate: Story<FileInputProps<string>> = (args) => {
+    const [value, setValue] = useState<File | undefined>();
+
+    const handleChange = (files: File | undefined) => {
+        setValue(files);
+    };
+
+    return (
+        <FileInput
+            {...args}
+            multiple={false}
+            value={value}
+            onChange={handleChange}
+        >
+            <MdFileUpload />
+        </FileInput>
+    );
+};
+
+export const Default = SingleTemplate.bind({});
+Default.args = {
+    label: 'Select a file',
+};
+
+const MultipleTemplate: Story<FileInputProps<string>> = (args) => {
+    const [value, setValue] = useState<File[]>();
 
     const handleChange = (files: File[]) => {
         setValue(files);
@@ -19,6 +43,8 @@ const Template: Story<FileInputProps<string>> = (args) => {
     return (
         <FileInput
             {...args}
+            multiple
+            value={value}
             onChange={handleChange}
         >
             <MdFileUpload />
@@ -26,18 +52,12 @@ const Template: Story<FileInputProps<string>> = (args) => {
     );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-    label: 'Select a file',
-};
-export const Multiple = Template.bind({});
+export const Multiple = MultipleTemplate.bind({});
 Multiple.args = {
     label: 'Select multiple files',
-    multiple: true,
 };
-export const AcceptPdfOnly = Template.bind({});
+export const AcceptPdfOnly = MultipleTemplate.bind({});
 AcceptPdfOnly.args = {
     label: 'Select pdf files',
-    multiple: true,
     accept: '.pdf',
 };
