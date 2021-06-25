@@ -1,3 +1,13 @@
 .dropdown-menu-item {
     display: flex;
+    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.separator {
+    margin: var(--dui-spacing-extra-small) 0;
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+    border-bottom: none;
 }

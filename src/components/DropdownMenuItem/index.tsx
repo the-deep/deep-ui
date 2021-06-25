@@ -18,6 +18,12 @@ import RawButton, {
 
 import styles from './styles.css';
 
+export function Separator({ className }: { className?: string }) {
+    return (
+        <hr className={_cs(styles.separator, className)} />
+    );
+}
+
 interface BaseProps extends ElementFragmentProps {
     className?: string;
 }

@@ -8,6 +8,7 @@ export type ButtonVariant = (
     | 'secondary'
     | 'tertiary'
     | 'action'
+    | 'transparent'
 );
 
 const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
@@ -15,6 +16,7 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
     secondary: styles.secondary,
     tertiary: styles.tertiary,
     action: styles.action,
+    transparent: styles.transparent,
 };
 
 export interface Props<N> extends Omit<
@@ -35,6 +37,7 @@ export interface Props<N> extends Omit<
     name: N;
     onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
     readOnly?: boolean;
+    elementRef?: React.RefObject<HTMLButtonElement>;
 }
 
 export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly';
@@ -106,6 +109,7 @@ function Button<N>(props: Props<N>) {
         name,
         onClick,
         readOnly,
+        elementRef,
         ...otherProps
     } = props;
 
@@ -132,6 +136,7 @@ function Button<N>(props: Props<N>) {
     // FIXME: Use raw button
     return (
         <button
+            ref={elementRef}
             type="button"
             onClick={handleButtonClick}
             {...otherProps}
