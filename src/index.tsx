@@ -60,6 +60,8 @@ export type { Props as InformationCardProps } from './components/InformationCard
 export { default as InformationCard } from './components/InformationCard';
 export type { Props as InputContainerProps } from './components/InputContainer';
 export { default as InputContainer } from './components/InputContainer';
+export { default as KeyFigure } from './components/KeyFigure';
+export type { Props as KeyFigureProps } from './components/KeyFigure';
 export type { Props as LinkProps } from './components/Link';
 export { default as Link } from './components/Link';
 export type { Props as ListProps } from './components/List';
