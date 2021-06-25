@@ -1,21 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { _cs } from '@togglecorp/fujs';
+import { IoMdClose } from 'react-icons/io';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
-import { useButtonFeatures } from '../Button';
+import Button, { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
-
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange'>);
-export interface Props<T extends string> extends InheritedProps<T> {
-    inputElementRef?: React.RefObject<HTMLInputElement>;
-    inputClassName?: string;
-    showStatus?: boolean;
-    labelClassName?: string;
-    onChange?: (files: File[], name: T) => void;
-}
 
 export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
     // if there is no accept string, anything is valid
@@ -34,6 +26,25 @@ export const isValidFile = (fileName: string, mimeType: string, acceptString?: s
         return !!extensionMatch && extensionMatch[0].toLowerCase() === fileType.toLowerCase();
     });
 };
+
+type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange' | 'value'>);
+export type Props<T extends string> = InheritedProps<T> & {
+    inputElementRef?: React.RefObject<HTMLInputElement>;
+    inputClassName?: string;
+    showStatus?: boolean;
+    labelClassName?: string;
+
+    overrideStatus?: boolean;
+    status?: string;
+} & ({
+    multiple: true;
+    value: File[] | undefined | null;
+    onChange?: (files: File[], name: T) => void;
+} | {
+    multiple?: false;
+    value: File | undefined | null;
+    onChange?: (files: File | undefined, name: T) => void;
+});
 
 function FileInput<T extends string>(props: Props<T>) {
     const {
@@ -57,9 +68,11 @@ function FileInput<T extends string>(props: Props<T>) {
         containerRef,
         inputSectionRef,
         inputClassName,
-        value,
-        onChange,
+        value, // eslint-disable-line @typescript-eslint/no-unused-vars
+        onChange, // eslint-disable-line @typescript-eslint/no-unused-vars
         showStatus = true,
+        overrideStatus,
+        status: statusFromProps,
         name,
         multiple,
         accept,
@@ -70,35 +83,28 @@ function FileInput<T extends string>(props: Props<T>) {
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
-    const [status, setStatus] = useState<string>('No file chosen');
+    const handleFiles = useCallback(
+        (files: FileList | null) => {
+            if (!files || !props.onChange) {
+                return;
+            }
 
-    const getStatus = useCallback((files: File[]) => {
-        if (!files || files.length === 0) {
-            return 'No file chosen';
-        }
-        if (files.length > 1) {
-            return `${files?.length} files selected`;
-        }
-        return files[0]?.name;
-    }, []);
-
-    const handleFiles = useCallback((files: FileList | null) => {
-        if (files) {
             const fileList = Array.from(files);
             const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
-            if (!multiple && validFiles.length > 1) {
-                if (onChange) {
-                    onChange(validFiles.slice(0, 1), name);
-                }
-            } else {
-                const newStatus = getStatus(validFiles);
-                setStatus(newStatus);
-                if (onChange) {
-                    onChange(validFiles, name);
-                }
+            if (validFiles.length <= 0) {
+                return;
             }
-        }
-    }, [accept, multiple, getStatus, onChange, name]);
+
+            if (!props.multiple) {
+                const [firstFile] = validFiles;
+                props.onChange(firstFile, name);
+            } else {
+                props.onChange(validFiles, name);
+            }
+        },
+        // eslint-disable-next-line react/destructuring-assignment
+        [accept, props.multiple, props.onChange, name],
+    );
 
     const handleChange = useCallback((
         _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
@@ -141,7 +147,7 @@ function FileInput<T extends string>(props: Props<T>) {
                     readOnly={readOnly}
                     uiMode={uiMode}
                     disabled={disabled}
-                    value={value}
+                    value={undefined}
                     name={name}
                     onChange={handleChange}
                     multiple={multiple}
@@ -152,11 +158,73 @@ function FileInput<T extends string>(props: Props<T>) {
         ),
     });
 
+    const handleClear = useCallback(
+        () => {
+            if (!props.onChange) {
+                return;
+            }
+
+            if (props.multiple) {
+                props.onChange([], name);
+            } else {
+                props.onChange(undefined, name);
+            }
+        },
+        // eslint-disable-next-line react/destructuring-assignment
+        [props.multiple, props.onChange, name],
+    );
+
+    // eslint-disable-next-line react/destructuring-assignment
+    const hasValue = props.multiple
+        // eslint-disable-next-line react/destructuring-assignment
+        ? !!props.value && props.value.length > 0
+        // eslint-disable-next-line react/destructuring-assignment
+        : !!props.value;
+
+    const status = useMemo(
+        () => {
+            if (!props.multiple) {
+                const singleFile = props.value;
+                return singleFile ? singleFile.name : 'No file chosen';
+            }
+
+            const multipleFile = props.value;
+            if (!multipleFile || multipleFile.length === 0) {
+                return 'No file chosen';
+            }
+            if (multipleFile.length > 1) {
+                return `${multipleFile.length} files selected`;
+            }
+            return multipleFile[0]?.name;
+        },
+        // eslint-disable-next-line react/destructuring-assignment
+        [props.value, props.multiple],
+    );
+
+    const visibleStatus = overrideStatus
+        ? statusFromProps
+        : status;
+
     return (
         <InputContainer
             containerRef={containerRef}
             inputSectionRef={inputSectionRef}
-            actions={actions}
+            actions={(
+                <>
+                    {actions}
+                    {!readOnly && hasValue && (
+                        <Button
+                            onClick={handleClear}
+                            disabled={disabled}
+                            variant="action"
+                            name={undefined}
+                            title="Clear"
+                        >
+                            <IoMdClose />
+                        </Button>
+                    )}
+                </>
+            )}
             actionsContainerClassName={actionsContainerClassName}
             className={_cs(className, styles.fileInput)}
             disabled={disabled}
@@ -200,7 +268,7 @@ function FileInput<T extends string>(props: Props<T>) {
                     )}
                     {showStatus && (
                         <div>
-                            {status}
+                            {visibleStatus}
                         </div>
                     )}
                 </div>

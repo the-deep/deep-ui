@@ -46,10 +46,9 @@ function TextOutput(props: Props) {
         block,
     } = props;
 
-    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
-    let value: React.ReactNode = props.value;
+    let { value } = props;
 
-    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
+    // eslint-disable-next-line react/destructuring-assignment
     if (props.valueType === 'number') {
         value = (
             <NumberOutput
@@ -57,7 +56,7 @@ function TextOutput(props: Props) {
                 {...props.valueProps}
             />
         );
-    // eslint-disable-next-line prefer-destructuring, react/destructuring-assignment
+    // eslint-disable-next-line react/destructuring-assignment
     } else if (props.valueType === 'date') {
         value = props.value ? (
             <DateOutput
