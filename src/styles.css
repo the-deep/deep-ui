@@ -189,6 +189,7 @@
 
 
     /* FIXME: should either be border-radius or radius-border or radius */
+    --dui-radius-border-medium: .2rem;
     --dui-radius-popup-border: .2rem;
     --dui-radius-blur-shadow: .2rem;
     --dui-radius-modal: .2rem;

@@ -1,0 +1,19 @@
+.key-figure {
+    border-radius: var(--dui-radius-border-medium);
+    background-color: var(--dui-color-surface-information);
+    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-extra-large) - var(--dui-spacing-small));
+
+    .value {
+        padding: var(--dui-spacing-small);
+        color: var(--dui-color-accent);
+        font-size: var(--dui-font-size-super-large);
+        font-weight: var(--dui-font-weight-bold);
+    }
+
+    .description {
+        padding: var(--dui-spacing-small);
+        color: var(--dui-color-accent);
+        font-size: var(--dui-font-size-large);
+        font-weight: var(--dui-font-weight-bold);
+    }
+}
