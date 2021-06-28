@@ -22,7 +22,7 @@ function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T 
 }
 
 export interface Options {
-    showConfirmationInitially: boolean;
+    showConfirmationInitially?: boolean;
     onConfirm?: () => void;
     onDeny?: () => void;
     onResolve?: (hasConfirmed: boolean) => void;
