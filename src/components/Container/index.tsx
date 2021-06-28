@@ -39,6 +39,11 @@ export interface Props {
     // Is sub container? (i.e. Container with small heading)
     sub?: boolean;
     inlineHeadingDescription?: boolean;
+
+    footerContentClassName?: string;
+    footerActionsContainerClassName?: string;
+    footerIconsContainerClassName?: string;
+    footerQuickActionsContainerClassName?: string;
 }
 
 function Container(props: Props) {
@@ -58,6 +63,10 @@ function Container(props: Props) {
         footerIcons,
         footerActions,
         footerClassName,
+        footerIconsContainerClassName,
+        footerActionsContainerClassName,
+        footerContentClassName,
+        footerQuickActionsContainerClassName,
         sub = false,
         containerElementProps,
         headingSize,
@@ -102,6 +111,10 @@ function Container(props: Props) {
                 <Footer
                     actions={footerActions}
                     className={_cs(styles.footer, footerClassName)}
+                    iconsContainerClassName={footerIconsContainerClassName}
+                    childrenContainerClassName={footerContentClassName}
+                    actionsContainerClassName={footerActionsContainerClassName}
+                    quickActionsContainerClassName={footerQuickActionsContainerClassName}
                     quickActions={footerQuickActions}
                     icons={footerIcons}
                 >
