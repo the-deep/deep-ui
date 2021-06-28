@@ -13,15 +13,29 @@ interface BaseProps {
     children?: React.ReactNode;
     heading?: React.ReactNode;
     footer?: React.ReactNode;
+    headingDescription?: React.ReactNode;
+    headingContainerClassName?: HeaderProps['headingContainerClassName'];
+    headingClassName?: string;
     className?: string;
     bodyClassName?: string;
+    headerDescriptionClassName?: string;
     headerClassName?: string;
     footerClassName?: string;
+    headingSectionClassName?: string;
+    closeButtonClassName?: string;
+    headingChildrenClassName?: string;
+    inlineHeadingDescription?: boolean;
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
     footerIcons?: React.ReactNode;
     footerActions?: React.ReactNode;
+    footerQuickActions?: React.ReactNode;
     headingSize?: HeaderProps['headingSize'];
+
+    footerContentClassName?: string;
+    footerActionsContainerClassName?: string;
+    footerIconsContainerClassName?: string;
+    footerQuickActionsContainerClassName?: string;
 }
 
 export type Props = BaseProps & ({
@@ -42,14 +56,28 @@ function Modal(props: Props) {
         headerClassName,
         bodyClassName,
         footerClassName,
+        headingSectionClassName,
+        headingDescription,
+        headingChildrenClassName,
+        headerDescriptionClassName,
+        closeButtonClassName,
+        footerIconsContainerClassName,
+        footerActionsContainerClassName,
+        footerContentClassName,
+        footerQuickActionsContainerClassName,
+        headingClassName,
+        inlineHeadingDescription,
+        headingContainerClassName,
 
         footerActions,
         footerIcons,
         headerActions,
         headerIcons,
+        footerQuickActions,
 
         onCloseButtonClick,
         hideCloseButton,
+        headingSize,
     } = props;
 
     const shouldHideHeader = hideCloseButton && !heading && !headerActions && !headerIcons;
@@ -66,12 +94,20 @@ function Modal(props: Props) {
                     <Header
                         className={_cs(styles.modalHeader, headerClassName)}
                         heading={heading}
+                        headingSectionClassName={headingSectionClassName}
+                        childrenContainerClassName={headingChildrenClassName}
+                        headingSize={headingSize}
+                        description={headingDescription}
+                        descriptionClassName={headerDescriptionClassName}
+                        headingClassName={headingClassName}
+                        headingContainerClassName={headingContainerClassName}
+                        inlineDescription={inlineHeadingDescription}
                         actions={(
                             <>
                                 {headerActions}
                                 {!hideCloseButton && (
                                     <Button
-                                        className={styles.closeButton}
+                                        className={_cs(styles.closeButton, closeButtonClassName)}
                                         onClick={onCloseButtonClick}
                                         name="close-modal"
                                         variant="action"
@@ -86,11 +122,16 @@ function Modal(props: Props) {
                 <div className={_cs(styles.modalBody, bodyClassName)}>
                     {children}
                 </div>
-                {(footer || footerIcons || footerActions) && (
+                {(footer || footerIcons || footerActions || footerQuickActions) && (
                     <Footer
                         className={_cs(styles.modalFooter, footerClassName)}
                         icons={footerIcons}
                         actions={footerActions}
+                        iconsContainerClassName={footerIconsContainerClassName}
+                        childrenContainerClassName={footerContentClassName}
+                        actionsContainerClassName={footerActionsContainerClassName}
+                        quickActionsContainerClassName={footerQuickActionsContainerClassName}
+                        quickActions={footerQuickActions}
                     >
                         {footer}
                     </Footer>
