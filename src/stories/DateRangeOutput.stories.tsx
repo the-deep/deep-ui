@@ -18,5 +18,5 @@ const Template: Story<DateRangeOutputProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     startDate: '1992-12-27',
-    endDate: (new Date()).toISOString(),
+    endDate: '2012-10-12',
 };

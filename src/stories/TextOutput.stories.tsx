@@ -43,7 +43,7 @@ export const DateValue = Template.bind({});
 DateValue.args = {
     label: 'Today',
     valueType: 'date',
-    value: (new Date()).getTime(),
+    value: 1624888295037,
 };
 
 export const Nested = Template.bind({});
