@@ -5,7 +5,6 @@
     .header {
         border: var(--dui-width-separator-thin) solid var(--dui-color-accent);
         background-color: var(--dui-color-background-information);
-        cursor: pointer;
         padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
 
         .heading-container {
@@ -19,6 +18,10 @@
         .icon {
             color: var(--dui-color-accent);
             font-size: 1.2em;
+        }
+
+        &.clickable-header {
+            cursor: pointer;
         }
     }
 
