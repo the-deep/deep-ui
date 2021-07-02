@@ -56,6 +56,7 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         && typeof props.href === 'string'
         && (isValidUrl(props.href)
             || props.href.startsWith('mailto:'))
+    // eslint-disable-next-line react/destructuring-assignment
     ), [props.href]);
 
     const className = _cs(styles.dropdownMenuItem, classNameFromProps);
@@ -72,6 +73,7 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         </ElementFragments>
     );
 
+    // eslint-disable-next-line react/destructuring-assignment
     if (props.href) {
         if (isExternalLink) {
             return (
@@ -96,11 +98,25 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         );
     }
 
+    // eslint-disable-next-line react/destructuring-assignment
+    if (props.name) {
+        return (
+            <RawButton
+                className={className}
+                name={props.name}
+                onClick={props.onClick}
+            >
+                {content}
+            </RawButton>
+        );
+    }
+
     return (
-        <RawButton
+        <RawButton<undefined>
             className={className}
-            name={props.name}
-            onClick={props.onClick}
+            name={undefined}
+            // eslint-disable-next-line react/destructuring-assignment
+            onClick={props.onClick as RawButtonProps<undefined>['onClick']}
         >
             {content}
         </RawButton>

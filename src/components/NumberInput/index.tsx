@@ -45,6 +45,7 @@ function NumberInput<T extends string>(props: Props<T>) {
         onChange,
         name,
         value,
+        variant,
         ...rawInputProps
     } = props;
 
@@ -126,6 +127,7 @@ function NumberInput<T extends string>(props: Props<T>) {
             readOnly={readOnly}
             uiMode={uiMode}
             invalid={isTruthyString(tempValue)}
+            variant={variant}
             input={(
                 <RawInput<T>
                     {...rawInputProps}

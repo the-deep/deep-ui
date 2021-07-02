@@ -78,6 +78,7 @@ function FileInput<T extends string>(props: Props<T>) {
         accept,
         labelClassName,
         children,
+        variant,
         ...fileInputProps
     } = props;
 
@@ -249,6 +250,7 @@ function FileInput<T extends string>(props: Props<T>) {
             labelContainerClassName={labelContainerClassName}
             readOnly={readOnly}
             uiMode={uiMode}
+            variant={variant}
             input={(
                 <div
                     className={_cs(
