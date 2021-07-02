@@ -15,8 +15,7 @@
  * example: large, medium, small, thin, bold, black, etc
  *
  * The name itself should be meaningful within these parameters as well
- * example: target_description `text-primary-button` doesn't make much when isolated,
- * we should use `primary-button-text` instead.
+ * example: target_description `text-primary-button` doesn't make much when isolated, we should use `primary-button-text` instead.
  */
 :root {
     /*

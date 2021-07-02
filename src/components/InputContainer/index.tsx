@@ -33,6 +33,7 @@ export interface Props {
     uiMode?: UiMode;
     filled?: boolean;
     children?: React.ReactNode;
+    variant?: 'form' | 'general';
 }
 
 function InputContainer(props: Props) {
@@ -59,6 +60,7 @@ function InputContainer(props: Props) {
         uiMode,
         filled,
         children,
+        variant = 'form',
     } = props;
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
@@ -74,6 +76,7 @@ function InputContainer(props: Props) {
                 readOnly && styles.readOnly,
                 (invalid || !!error) && styles.errored,
                 filled && styles.filled,
+                variant === 'general' && styles.forGeneralUse,
             )}
         >
             <InputLabel
