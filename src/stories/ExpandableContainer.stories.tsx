@@ -30,3 +30,10 @@ VisibleByDefault.args = {
     defaultVisibility: true,
     children: 'I should be visible by default',
 };
+
+export const ExpandOnArrowClick = Template.bind({});
+ExpandOnArrowClick.args = {
+    heading: 'Extended Matrixes',
+    expansionTriggerArea: 'arrow',
+    children: 'I should expand on arrow click and not the whole header.',
+};
