@@ -3,6 +3,7 @@ import {
     _cs,
     listToMap,
     unique,
+    isDefined,
 } from '@togglecorp/fujs';
 import { MdCheck } from 'react-icons/md';
 
@@ -132,7 +133,7 @@ function SearchSelectInput<
         [options, keySelector, labelSelector],
     );
 
-    const valueDisplay = value ? optionsLabelMap[value] ?? '?' : '';
+    const valueDisplay = isDefined(value) ? optionsLabelMap[value] ?? '?' : '';
 
     // NOTE: we can skip this calculation if optionsShowInitially is false
     const selectedOptions = useMemo(
@@ -190,7 +191,6 @@ function SearchSelectInput<
 
     const handleChangeDropdown = useCallback(
         (myVal: boolean) => {
-            // setShowDropdown(myVal);
             if (onShowDropdownChange) {
                 onShowDropdownChange(myVal);
             }

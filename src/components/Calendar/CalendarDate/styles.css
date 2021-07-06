@@ -1,0 +1,14 @@
+.date {
+    border-radius: 50%;
+    width: 2.4em;
+    height: 2.4em;
+
+    &.today {
+        color: var(--dui-color-accent);
+        font-weight: var(--dui-font-weight-bold);
+    }
+
+    &:hover {
+        background-color: var(--dui-color-background-information);
+    }
+}

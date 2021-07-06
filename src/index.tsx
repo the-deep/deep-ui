@@ -14,6 +14,8 @@ export type { Props as ButtonProps } from './components/Button';
 export { default as Button, useButtonFeatures } from './components/Button';
 export type { Props as ButtonLikeLinkProps } from './components/ButtonLikeLink';
 export { default as ButtonLikeLink } from './components/ButtonLikeLink';
+export type { Props as CalendarProps } from './components/Calendar';
+export { default as Calendar } from './components/Calendar';
 export type { Props as CardProps } from './components/Card';
 export { default as Card } from './components/Card';
 export type { Props as CheckListInputProps } from './components/CheckListInput';
