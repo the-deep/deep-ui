@@ -7,21 +7,21 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
-export interface Props<N extends number | string | undefined> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
+export interface Props<N extends string | number | undefined> extends Omit<React.HTMLProps<HTMLButtonElement>, 'ref' | 'onClick' | 'name'>{
     /**
     * Style for the button
     */
     className?: string;
+    name: N;
     /**
-    * Gets called when user clicks on the button
-    */
+     * Gets called when user clicks on the button
+     */
     onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
     /**
      * Type of the button
      */
     type?: 'button' | 'submit' | 'reset';
     uiMode?: UiMode;
-    name: N;
     elementRef?: React.Ref<HTMLButtonElement>;
     focused?: boolean;
 }

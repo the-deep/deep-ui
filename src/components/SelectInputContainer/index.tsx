@@ -132,6 +132,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
         onFocusedChange,
         onDropdownShownChange,
         totalOptionsCount,
+        variant,
     } = props;
 
     const options = optionsFromProps ?? (emptyList as O[]);
@@ -325,6 +326,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
             labelContainerClassName={labelContainerClassName}
             readOnly={readOnly}
             uiMode={uiMode}
+            variant={variant}
             input={(
                 <RawInput
                     name={name}

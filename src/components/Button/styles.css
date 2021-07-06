@@ -108,6 +108,13 @@
         }
     }
 
+    &.transparent {
+        --padding: 0;
+        --color-border: transparent;
+        --color-background: transparent;
+        --color-text: inherit;
+    }
+
     &.big {
         --padding-v: var(--dui-spacing-medium);
         --font-size: var(--dui-font-size-large);

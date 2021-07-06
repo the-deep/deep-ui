@@ -34,6 +34,7 @@ function DateInput<T extends string>(props: Props<T>) {
         containerRef,
         inputSectionRef,
         inputClassName,
+        variant,
         ...dateInputProps
     } = props;
 
@@ -58,6 +59,7 @@ function DateInput<T extends string>(props: Props<T>) {
             labelContainerClassName={labelContainerClassName}
             readOnly={readOnly}
             uiMode={uiMode}
+            variant={variant}
             input={(
                 <RawInput<T>
                     {...dateInputProps}
