@@ -6,14 +6,11 @@ import Container, { Props as ContainerProps } from '../Container';
 
 import styles from './styles.css';
 
-type DivElementProps = React.HTMLProps<HTMLDivElement>;
-
 export type SerializableValue = Record<string, unknown>;
 
 export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     className?: string;
     children: React.ReactNode;
-    elementRef?: DivElementProps['ref'];
     name: string;
     value: SerializableValue;
     dropEffect?: 'copy' | 'move' | 'link' | 'none';
@@ -25,7 +22,6 @@ function DraggableContent(props: Props) {
     const {
         className,
         children,
-        elementRef,
         dropEffect = 'copy',
         onDragStart,
         onDragStop,
@@ -82,7 +78,6 @@ function DraggableContent(props: Props) {
             sub={sub}
             className={_cs(styles.draggableContent, className)}
             containerElementProps={{
-                ref: elementRef,
                 draggable,
                 onDragStart: handleDragStart,
             }}

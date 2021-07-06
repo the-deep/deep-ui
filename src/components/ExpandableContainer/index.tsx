@@ -11,7 +11,7 @@ import Button from '../Button';
 
 import styles from './styles.css';
 
-export interface Props extends Omit<ContainerProps, 'containerElementProps'>{
+export interface Props extends ContainerProps {
     defaultVisibility?: boolean;
     // NOTE: Mount will mount the child even if its not shown
     alwaysMountContent?: boolean;
