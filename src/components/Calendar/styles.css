@@ -1,6 +1,9 @@
 .calendar {
+    display: flex;
+    flex-direction: column;
+
     .header {
-        background-color: var(--dui-color-background);
+        flex-shrink: 0;
 
         .info {
             display: flex;
@@ -38,6 +41,7 @@
 
     .day-list {
         display: flex;
+        flex-grow: 1;
         flex-wrap: wrap;
         padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
 
@@ -53,6 +57,7 @@
 
     .actions {
         display: flex;
+        flex-shrink: 0;
         justify-content: flex-end;
         padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
 

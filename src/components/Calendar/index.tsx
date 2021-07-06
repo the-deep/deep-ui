@@ -54,7 +54,7 @@ function getStartOfWeek(year: number, month: number) {
 }
 
 function getNumDaysInMonth(year: number, month: number) {
-    return new Date(year, month, 0).getDate();
+    return new Date(year, month + 1, 0).getDate();
 }
 
 function getDays(year: number, month: number) {
@@ -82,6 +82,7 @@ export interface Props<P extends CalendarDateProps> {
     dateRenderer?: (p: P) => React.ReactElement;
     rendererParams?: (day: number, month: number, year: number) => Omit<P, 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate'>;
     onDateClick?: (day: number, month: number, year: number) => void;
+    monthSelectionPopupClassName?: string;
 }
 
 function Calendar<P extends CalendarDateProps>(props: Props<P>) {
@@ -90,6 +91,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
         dateRenderer: DateRenderer = CalendarDate,
         rendererParams,
         onDateClick,
+        monthSelectionPopupClassName,
     } = props;
 
     const now = new Date();
@@ -145,7 +147,10 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                             keySelector={monthKeySelector}
                             labelSelector={monthLabelSelector}
                             nonClearable
-                            optionsPopupClassName={styles.monthSelectionPopup}
+                            optionsPopupClassName={_cs(
+                                monthSelectionPopupClassName,
+                                styles.monthSelectionPopup,
+                            )}
                             optionsPopupContentClassName={styles.popupContent}
                         />
                     </div>

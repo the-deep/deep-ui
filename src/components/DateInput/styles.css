@@ -12,3 +12,16 @@
         }
     }
 }
+
+.calendar-popup {
+    height: 23rem;
+
+    .popup-content {
+        width: 16rem;
+        max-height: unset!important;
+
+        .calendar {
+            height: 100%;
+        }
+    }
+}
