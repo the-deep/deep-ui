@@ -12,9 +12,9 @@ export type internalProps = 'containerElementProps' | 'headerElementProps';
 export interface Props {
     className?: string;
 
-    // NOTE: not to be exposed by extended components
     containerElementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
     headerElementProps?: HeaderProps['elementProps'];
+    elementRef?: React.RefObject<HTMLDivElement>;
 
     heading?: React.ReactNode;
     headerIcons?: React.ReactNode;
@@ -73,6 +73,7 @@ function Container(props: Props) {
         footerQuickActions,
         horizontallyCompactContent,
         headerElementProps,
+        elementRef,
         headingContainerClassName,
         inlineHeadingDescription,
     } = props;
@@ -85,6 +86,7 @@ function Container(props: Props) {
                 horizontallyCompactContent && styles.horizontallyCompactContent,
                 className,
             )}
+            ref={elementRef}
             {...containerElementProps}
         >
             {(heading || headerActions || headerIcons) && (
