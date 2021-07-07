@@ -84,6 +84,7 @@ export interface Props<P extends CalendarDateProps> {
     rendererParams?: (day: number, month: number, year: number) => Omit<P, RendererOmissions>;
     onDateClick?: (day: number, month: number, year: number) => void;
     monthSelectionPopupClassName?: string;
+    initialDate?: string;
 }
 
 function Calendar<P extends CalendarDateProps>(props: Props<P>) {
@@ -93,12 +94,15 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
         rendererParams,
         onDateClick,
         monthSelectionPopupClassName,
+        initialDate,
     } = props;
 
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth();
-    const currentDate = now.getDate();
+    const current = initialDate ? new Date(initialDate) : new Date();
+    const currentYear = current.getFullYear();
+    const currentMonth = current.getMonth();
+    const currentDate = current.getDate();
+
+    const today = new Date();
 
     const [year, setYear] = useInputState<number | undefined>(currentYear);
     const [month, setMonth] = useInputState<number>(currentMonth);
@@ -175,9 +179,9 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                             year,
                             month,
                             date,
-                            currentYear,
-                            currentMonth,
-                            currentDate,
+                            currentYear: today.getFullYear(),
+                            currentMonth: today.getMonth(),
+                            currentDate: today.getDate(),
                         };
 
                         const combinedProps = {

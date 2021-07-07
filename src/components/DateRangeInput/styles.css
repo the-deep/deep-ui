@@ -36,14 +36,30 @@
 
 
 .calendar-popup {
-    height: 23rem;
+    height: 25rem;
 
     .popup-content {
-        width: calc(var(--dui-width-calendar-date) * 7 + 2 * var(--dui-spacing-small));
+        display: flex;
+        max-width: unset!important;
         max-height: unset!important;
 
         .calendar {
+            --padding: var(--dui-spacing-medium);
+            width: calc(var(--dui-width-calendar-date) * 7 + 2 * var(--padding));
             height: 100%;
+        }
+
+        .predefined-options {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+
+            .option {
+                padding: var(--dui-spacing-small);
+                width: 100%;
+                text-align: right;
+            }
         }
     }
 }

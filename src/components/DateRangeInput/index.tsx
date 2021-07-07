@@ -11,6 +11,7 @@ import useBlurEffect from '../../hooks/useBlurEffect';
 import useBooleanState from '../../hooks/useBooleanState';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput from '../RawInput';
+import RawButton from '../RawButton';
 import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
@@ -18,6 +19,35 @@ import CalendarDate, { Props as CalendarDateProps } from '../Calendar/CalendarDa
 import { ymdToDateString } from '../../utils';
 
 import styles from './styles.css';
+
+type PredefinedDateRangeKey = 'today'
+    | 'yesterday'
+    | 'thisWeek'
+    | 'lastSevenDays'
+    | 'thisMonth'
+    | 'lastThirtyDays'
+    | 'lastThreeMonths'
+    | 'lastSixMonths'
+    | 'thisYear'
+    | 'lastYear';
+
+interface PredefinedDateRangeOption {
+    key: PredefinedDateRangeKey;
+    label: string;
+}
+
+const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
+    { key: 'today', label: 'Today' },
+    { key: 'yesterday', label: 'Yesterday' },
+    { key: 'thisWeek', label: 'This week' },
+    { key: 'lastSevenDays', label: 'Last 7 days' },
+    { key: 'thisMonth', label: 'This month' },
+    { key: 'lastThirtyDays', label: 'Last 30 days' },
+    { key: 'lastThreeMonths', label: 'Last 3 months' },
+    { key: 'lastSixMonths', label: 'Last 6 months' },
+    { key: 'thisYear', label: 'This year' },
+    { key: 'lastYear', label: 'Last year' },
+];
 
 export interface Value {
     startDate: string;
@@ -158,13 +188,23 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
                     return ymdToDateString(year, month, day);
                 }
 
-                onChange(
-                    {
-                        startDate: prevTempStartDate,
-                        endDate: ymdToDateString(year, month, day),
-                    },
-                    name,
-                );
+                if (new Date(prevTempStartDate).getTime() > new Date(year, month, day).getTime()) {
+                    onChange(
+                        {
+                            startDate: ymdToDateString(year, month, day),
+                            endDate: prevTempStartDate,
+                        },
+                        name,
+                    );
+                } else {
+                    onChange(
+                        {
+                            startDate: prevTempStartDate,
+                            endDate: ymdToDateString(year, month, day),
+                        },
+                        name,
+                    );
+                }
 
                 hideCalendar();
 
@@ -173,6 +213,73 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
         },
         [name, onChange, hideCalendar],
     );
+
+    const handlePredefinedOptionClick = React.useCallback((option: PredefinedDateRangeKey) => {
+        if (onChange) {
+            let start = new Date();
+            let end = new Date();
+
+            switch (option) {
+                case 'today':
+                    break;
+                case 'yesterday':
+                    start.setDate(start.getDate() - 1);
+                    end.setDate(end.getDate() - 1);
+                    break;
+                case 'thisWeek':
+                    start.setDate(start.getDate() - start.getDay());
+                    end.setDate(start.getDate() + 6);
+                    break;
+                case 'lastSevenDays':
+                    start.setDate(end.getDate() - 7);
+                    break;
+                case 'thisMonth':
+                    start.setDate(1);
+                    end.setMonth(end.getMonth() + 1);
+                    end.setDate(0);
+                    break;
+                case 'lastThirtyDays':
+                    start.setDate(start.getDate() - 30);
+                    break;
+                case 'lastThreeMonths':
+                    start.setMonth(start.getMonth() - 2);
+                    start.setDate(1);
+                    end.setMonth(end.getMonth() + 1);
+                    end.setDate(0);
+                    break;
+                case 'lastSixMonths':
+                    start.setMonth(start.getMonth() - 5);
+                    start.setDate(1);
+                    end.setMonth(end.getMonth() + 1);
+                    end.setDate(0);
+                    break;
+                case 'thisYear':
+                    start.setMonth(0);
+                    start.setDate(1);
+                    end.setMonth(end.getMonth() + 1);
+                    end.setDate(0);
+                    break;
+                case 'lastYear':
+                    start.setFullYear(start.getFullYear() - 1);
+                    start.setMonth(0);
+                    start.setDate(1);
+                    end.setMonth(0);
+                    end.setDate(0);
+                    break;
+                default:
+                    start = new Date();
+                    end = start;
+                    break;
+            }
+
+            onChange({
+                startDate: ymdToDateString(start.getFullYear(), start.getMonth(), start.getDate()),
+                endDate: ymdToDateString(end.getFullYear(), end.getMonth(), end.getDate()),
+            }, name);
+        }
+
+        hideCalendar();
+    }, [onChange, hideCalendar, name]);
 
     return (
         <InputContainer
@@ -258,12 +365,34 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
                     className={styles.calendarPopup}
                     contentClassName={styles.popupContent}
                 >
+                    <div className={styles.predefinedOptions}>
+                        {predefinedDateRangeOptions.map((opt) => (
+                            <RawButton
+                                className={styles.option}
+                                key={opt.key}
+                                name={opt.key}
+                                onClick={handlePredefinedOptionClick}
+                            >
+                                {opt.label}
+                            </RawButton>
+                        ))}
+                    </div>
+
                     <Calendar
                         onDateClick={handleCalendarDateClick}
                         className={styles.calendar}
                         monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
                         dateRenderer={DateRenderer}
                         rendererParams={dateRendererParams}
+                        initialDate={value?.startDate}
+                    />
+                    <Calendar
+                        onDateClick={handleCalendarDateClick}
+                        className={styles.calendar}
+                        monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
+                        dateRenderer={DateRenderer}
+                        rendererParams={dateRendererParams}
+                        initialDate={value?.endDate}
                     />
                 </Popup>
             )}
