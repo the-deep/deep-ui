@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import RawButton from '../../RawButton';
+import RawButton, { Props as RawButtonProps } from '../../RawButton';
 
 import styles from './styles.css';
 
@@ -14,6 +14,7 @@ export interface Props {
     currentMonth: number;
     currentDate: number;
     onClick?: (year: number, month: number, date: number) => void;
+    elementRef?: RawButtonProps<undefined>['elementRef'];
 }
 
 function CalendarDate(props: Props) {
@@ -26,6 +27,7 @@ function CalendarDate(props: Props) {
         currentMonth,
         currentDate,
         onClick,
+        elementRef,
     } = props;
 
     const handleClick = React.useCallback(() => {
@@ -36,6 +38,7 @@ function CalendarDate(props: Props) {
 
     return (
         <RawButton
+            elementRef={elementRef}
             name={date}
             className={_cs(
                 styles.date,

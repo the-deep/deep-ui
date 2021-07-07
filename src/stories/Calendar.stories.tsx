@@ -9,13 +9,9 @@ export default {
     argTypes: {},
 };
 
-const Template: Story<CalendarProps> = (args) => {
-    console.info('calendar');
-
-    return (
-        <Calendar {...args} />
-    );
-};
+const Template: Story<CalendarProps<never>> = (args) => (
+    <Calendar {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

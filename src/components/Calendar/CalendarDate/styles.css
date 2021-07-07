@@ -1,7 +1,7 @@
 .date {
     border-radius: 50%;
-    width: 2.4em;
-    height: 2.4em;
+    width: var(--dui-width-calendar-date);
+    height: var(--dui-width-calendar-date);
 
     &.today {
         color: var(--dui-color-accent);

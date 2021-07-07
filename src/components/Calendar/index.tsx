@@ -77,10 +77,11 @@ function getDays(year: number, month: number) {
 const monthKeySelector = (m: MonthName) => m.key;
 const monthLabelSelector = (m: MonthName) => m.label;
 
+type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick';
 export interface Props<P extends CalendarDateProps> {
     className?: string;
     dateRenderer?: (p: P) => React.ReactElement;
-    rendererParams?: (day: number, month: number, year: number) => Omit<P, 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate'>;
+    rendererParams?: (day: number, month: number, year: number) => Omit<P, RendererOmissions>;
     onDateClick?: (day: number, month: number, year: number) => void;
     monthSelectionPopupClassName?: string;
 }
@@ -169,7 +170,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
             {(year && dates) ? (
                 <div className={styles.dayList}>
                     {dates.map((date) => {
-                        const defaultProps: Pick<P, 'onClick' | 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate'> = {
+                        const defaultProps: Pick<P, RendererOmissions> = {
                             onClick: onDateClick,
                             year,
                             month,

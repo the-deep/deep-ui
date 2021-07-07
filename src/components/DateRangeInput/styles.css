@@ -1,0 +1,70 @@
+.input-container {
+    display: flex;
+
+    .input {
+        --color: var(--dui-color-text);
+        color: var(--color);
+
+        &.errored {
+            --color: var(--dui-color-negative);
+        }
+
+        &.dark {
+            &.errored {
+                --color: var(--dui-color-negative-on-dark);
+            }
+        }
+
+        &::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+    }
+
+    .separator {
+        padding: 0 var(--dui-spacing-small);
+    }
+
+    .start-date-input {
+        flex-shrink: 0;
+        width: auto;
+    }
+
+    .end-date-input {
+        flex-grow: 1;
+    }
+}
+
+
+.calendar-popup {
+    height: 23rem;
+
+    .popup-content {
+        width: calc(var(--dui-width-calendar-date) * 7 + 2 * var(--dui-spacing-small));
+        max-height: unset!important;
+
+        .calendar {
+            height: 100%;
+        }
+    }
+}
+
+.calendar-date {
+    &.start-date {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: var(--dui-color-accent);
+        color: var(--dui-color-text-on-accent);
+    }
+
+    &.end-date {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        background-color: var(--dui-color-accent);
+        color: var(--dui-color-text-on-accent);
+    }
+
+    &.in-between {
+        border-radius: 0;
+        background-color: var(--dui-color-surface-information);
+    }
+}
