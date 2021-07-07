@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type TabKey = string;
+export type TabKey = string | number;
 export type TabVariant = 'primary' | 'secondary' | 'step';
 
 interface BaseTabContextProps {
