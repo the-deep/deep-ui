@@ -4,7 +4,10 @@ import {
     randomString,
     isNotDefined,
 } from '@togglecorp/fujs';
-import { IoCalendar } from 'react-icons/io5';
+import {
+    IoCalendar,
+    IoClose,
+} from 'react-icons/io5';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import useBlurEffect from '../../hooks/useBlurEffect';
@@ -103,7 +106,7 @@ export interface Props<N extends number | string | undefined> extends InheritedP
     inputClassName?: string;
     value?: Value;
     name: N;
-    onChange: (value: Value | undefined, name: N) => void;
+    onChange?: (value: Value | undefined, name: N) => void;
 }
 
 function DateRangeInput<N extends string | number | undefined>(props: Props<N>) {
@@ -288,6 +291,12 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         hideCalendar();
     }, [onChange, hideCalendar, name]);
 
+    const handleClearButtonClick = React.useCallback(() => {
+        if (onChange) {
+            onChange(undefined, name);
+        }
+    }, [onChange, name]);
+
     return (
         <InputContainer
             containerRef={containerRef}
@@ -296,14 +305,24 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                 <>
                     { actions }
                     {!readOnly && (
-                        <Button
-                            name={undefined}
-                            variant="transparent"
-                            onClick={toggleShowCalendar}
-                            disabled={disabled}
-                        >
-                            <IoCalendar />
-                        </Button>
+                        <>
+                            <Button
+                                name={undefined}
+                                variant="transparent"
+                                onClick={handleClearButtonClick}
+                                disabled={disabled}
+                            >
+                                <IoClose />
+                            </Button>
+                            <Button
+                                name={undefined}
+                                variant="transparent"
+                                onClick={toggleShowCalendar}
+                                disabled={disabled}
+                            >
+                                <IoCalendar />
+                            </Button>
+                        </>
                     )}
                 </>
             )}

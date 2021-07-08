@@ -59,6 +59,10 @@
                 padding: var(--dui-spacing-small);
                 width: 100%;
                 text-align: right;
+
+                &:hover {
+                    background-color: var(--dui-color-background-information);
+                }
             }
         }
     }

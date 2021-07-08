@@ -3,7 +3,10 @@ import {
     _cs,
     randomString,
 } from '@togglecorp/fujs';
-import { IoCalendar } from 'react-icons/io5';
+import {
+    IoCalendar,
+    IoClose,
+} from 'react-icons/io5';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import useBlurEffect from '../../hooks/useBlurEffect';
@@ -100,6 +103,12 @@ function DateInput<T extends string>(props: Props<T>) {
         [name, onChange, setShowCalendarFalse],
     );
 
+    const handleClearButtonClick = React.useCallback(() => {
+        if (onChange) {
+            onChange(undefined, name);
+        }
+    }, [onChange, name]);
+
     return (
         <InputContainer
             containerRef={containerRef}
@@ -108,14 +117,24 @@ function DateInput<T extends string>(props: Props<T>) {
                 <>
                     { actions }
                     {!readOnly && (
-                        <Button
-                            name={undefined}
-                            variant="transparent"
-                            onClick={toggleShowCalendar}
-                            disabled={disabled}
-                        >
-                            <IoCalendar />
-                        </Button>
+                        <>
+                            <Button
+                                name={undefined}
+                                variant="transparent"
+                                onClick={handleClearButtonClick}
+                                disabled={disabled}
+                            >
+                                <IoClose />
+                            </Button>
+                            <Button
+                                name={undefined}
+                                variant="transparent"
+                                onClick={toggleShowCalendar}
+                                disabled={disabled}
+                            >
+                                <IoCalendar />
+                            </Button>
+                        </>
                     )}
                 </>
             )}
