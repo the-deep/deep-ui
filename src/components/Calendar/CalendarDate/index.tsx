@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton, { Props as RawButtonProps } from '../../RawButton';
+import { ymdToDateString } from '../../../utils';
 
 import styles from './styles.css';
 
@@ -12,6 +13,7 @@ export interface Props {
     date: number;
     currentYear: number;
     currentMonth: number;
+    activeDate?: string;
     currentDate: number;
     onClick?: (year: number, month: number, date: number) => void;
     elementRef?: RawButtonProps<undefined>['elementRef'];
@@ -28,6 +30,7 @@ function CalendarDate(props: Props) {
         currentDate,
         onClick,
         elementRef,
+        activeDate,
     } = props;
 
     const handleClick = React.useCallback(() => {
@@ -35,6 +38,8 @@ function CalendarDate(props: Props) {
             onClick(year, month, date);
         }
     }, [year, month, date, onClick]);
+
+    const dateString = ymdToDateString(year, month, date);
 
     return (
         <RawButton
@@ -46,6 +51,7 @@ function CalendarDate(props: Props) {
                 && month === currentMonth
                 && currentDate === date
                 && styles.today,
+                dateString === activeDate && styles.active,
                 className,
             )}
             onClick={handleClick}

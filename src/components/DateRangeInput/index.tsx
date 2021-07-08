@@ -106,7 +106,7 @@ export interface Props<N extends number | string | undefined> extends InheritedP
     onChange: (value: Value | undefined, name: N) => void;
 }
 
-function DateInput<N extends string | number | undefined>(props: Props<N>) {
+function DateRangeInput<N extends string | number | undefined>(props: Props<N>) {
     const {
         actions,
         actionsContainerClassName,
@@ -407,4 +407,4 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
     );
 }
 
-export default DateInput;
+export default DateRangeInput;

@@ -13,6 +13,7 @@ import RawInput, { Props as RawInputProps } from '../RawInput';
 import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
+import { ymdToDateString } from '../../utils';
 
 import styles from './styles.css';
 
@@ -46,7 +47,7 @@ function DateInput<T extends string>(props: Props<T>) {
         variant,
         onChange,
         name,
-        placeholder = 'yyyy/mm/dd',
+        value,
         ...dateInputProps
     } = props;
 
@@ -92,10 +93,7 @@ function DateInput<T extends string>(props: Props<T>) {
     const handleCalendarDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
         (year, month, day) => {
             if (onChange) {
-                const ys = String(year).padStart(4, '0');
-                const ms = String(month).padStart(2, '0');
-                const ds = String(day).padStart(2, '0');
-                onChange(`${ys}-${ms}-${ds}`, name);
+                onChange(ymdToDateString(year, month, day), name);
             }
             setShowCalendarFalse();
         },
@@ -150,7 +148,7 @@ function DateInput<T extends string>(props: Props<T>) {
                     readOnly
                     uiMode={uiMode}
                     disabled={disabled}
-                    placeholder={placeholder}
+                    value={value}
                     onFocus={setShowCalendarTrue}
                     type="date"
                 />
@@ -168,6 +166,8 @@ function DateInput<T extends string>(props: Props<T>) {
                         onDateClick={handleCalendarDateClick}
                         className={styles.calendar}
                         monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
+                        initialDate={value ?? undefined}
+                        activeDate={value ?? undefined}
                     />
                 </Popup>
             )}

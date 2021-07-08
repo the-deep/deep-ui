@@ -57,27 +57,67 @@ function getNumDaysInMonth(year: number, month: number) {
     return new Date(year, month + 1, 0).getDate();
 }
 
-function getDays(year: number, month: number) {
+function getDates(year: number, month: number) {
     const numDays = getNumDaysInMonth(year, month);
     const startOfWeek = getStartOfWeek(year, month);
 
     const dates: number[] = [];
 
     for (let i = 0; i < startOfWeek; i += 1) {
-        dates.push(-(i + 1));
+        dates.push(i - startOfWeek);
     }
 
     for (let i = 0; i < numDays; i += 1) {
         dates.push(i + 1);
     }
 
+    // 6 rows x 7 cols
+    const remainingDates = 42 - dates.length;
+
+    for (let i = 0; i < remainingDates; i += 1) {
+        dates.push(i + 100);
+    }
+
     return dates;
+}
+
+interface DummyDatePros {
+    className?: string;
+    year: number;
+    month: number;
+    date: number;
+}
+
+function DummyDate(props: DummyDatePros) {
+    const {
+        className,
+        year,
+        month,
+        date,
+    } = props;
+
+    let children: React.ReactNode = null;
+
+    if (date < 0) {
+        const lastDayOfPrevMonth = new Date(year, month, 0).getDate();
+        children = lastDayOfPrevMonth + date + 1;
+    }
+
+    if (date >= 100) {
+        children = date - 100 + 1;
+    }
+
+    return (
+        <div className={_cs(styles.dummyDate, className)}>
+            {children}
+        </div>
+    );
 }
 
 const monthKeySelector = (m: MonthName) => m.key;
 const monthLabelSelector = (m: MonthName) => m.label;
 
-type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick';
+type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick' | 'activeDate';
 export interface Props<P extends CalendarDateProps> {
     className?: string;
     dateRenderer?: (p: P) => React.ReactElement;
@@ -85,6 +125,7 @@ export interface Props<P extends CalendarDateProps> {
     onDateClick?: (day: number, month: number, year: number) => void;
     monthSelectionPopupClassName?: string;
     initialDate?: string;
+    activeDate?: string;
 }
 
 function Calendar<P extends CalendarDateProps>(props: Props<P>) {
@@ -95,19 +136,19 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
         onDateClick,
         monthSelectionPopupClassName,
         initialDate,
+        activeDate,
     } = props;
 
     const current = initialDate ? new Date(initialDate) : new Date();
     const currentYear = current.getFullYear();
     const currentMonth = current.getMonth();
-    const currentDate = current.getDate();
 
     const today = new Date();
 
     const [year, setYear] = useInputState<number | undefined>(currentYear);
     const [month, setMonth] = useInputState<number>(currentMonth);
 
-    const dates = year ? getDays(year, month) : undefined;
+    const dates = year ? getDates(year, month) : undefined;
 
     const handleGotoCurrentButtonClick = React.useCallback(() => {
         const date = new Date();
@@ -182,6 +223,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                             currentYear: today.getFullYear(),
                             currentMonth: today.getMonth(),
                             currentDate: today.getDate(),
+                            activeDate,
                         };
 
                         const combinedProps = {
@@ -191,14 +233,16 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
 
                         return (
                             <div className={styles.dayContainer}>
-                                {date > 0 ? (
+                                {(date > 0 && date < 100) ? (
                                     <DateRenderer
                                         {...combinedProps}
                                     />
                                 ) : (
-                                    <div
+                                    <DummyDate
+                                        year={year}
+                                        month={month}
+                                        date={date}
                                         key={date}
-                                        className={styles.foreignMonthDay}
                                     />
                                 )}
                             </div>

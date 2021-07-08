@@ -11,4 +11,10 @@
     &:hover {
         background-color: var(--dui-color-background-information);
     }
+
+    &.active {
+        background-color: var(--dui-color-accent);
+        color: var(--dui-color-text-on-accent);
+        pointer-events: none;
+    }
 }

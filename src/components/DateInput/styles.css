@@ -14,10 +14,11 @@
 }
 
 .calendar-popup {
-    height: 28rem;
+    height: 25rem;
 
     .popup-content {
-        width: 16rem;
+        --padding: var(--dui-spacing-medium);
+        width: calc(var(--dui-width-calendar-date) * 7 + 2 * var(--padding));
         max-height: unset!important;
 
         .calendar {
