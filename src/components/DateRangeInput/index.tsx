@@ -132,13 +132,20 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
         value,
     } = props;
 
+    const prevMonthDate = new Date();
+    prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+    const prevMonthDateString = ymdToDateString(
+        prevMonthDate.getFullYear(),
+        prevMonthDate.getMonth(),
+        1,
+    );
+
     const [tempStartDate, setTempStartDate] = React.useState<string | undefined>();
     const [calendarMonthSelectionPopupClassName] = React.useState(randomString(16));
     const createdContainerRef = React.useRef<HTMLDivElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
 
     const containerRef = containerRefFromProps ?? createdContainerRef;
-
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
     const [
         showCalendar,
@@ -384,7 +391,7 @@ function DateInput<N extends string | number | undefined>(props: Props<N>) {
                         monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
                         dateRenderer={DateRenderer}
                         rendererParams={dateRendererParams}
-                        initialDate={value?.startDate}
+                        initialDate={value?.startDate ?? prevMonthDateString}
                     />
                     <Calendar
                         onDateClick={handleCalendarDateClick}
