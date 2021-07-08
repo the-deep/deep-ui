@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    background-color: var(--dui-color-background);
+    background-color: var(--dui-color-foreground);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-medium));
     overflow: auto;
 
@@ -28,5 +28,22 @@
             padding-right: 0;
             padding-left: 0;
         }
+    }
+
+    &.auto-focused {
+        animation: get-focus var(--dui-duration-transition-long) ease-in;
+        animation-iteration-count: 3;
+    }
+}
+
+@keyframes get-focus {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
     }
 }

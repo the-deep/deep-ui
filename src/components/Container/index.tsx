@@ -44,6 +44,8 @@ export interface Props {
     footerActionsContainerClassName?: string;
     footerIconsContainerClassName?: string;
     footerQuickActionsContainerClassName?: string;
+
+    autoFocus?: boolean;
 }
 
 function Container(props: Props) {
@@ -73,21 +75,35 @@ function Container(props: Props) {
         footerQuickActions,
         horizontallyCompactContent,
         headerElementProps,
-        elementRef,
+        elementRef: elementRefFromProps,
         headingContainerClassName,
         inlineHeadingDescription,
+        autoFocus,
     } = props;
+
+    const internalRef = React.useRef<HTMLDivElement>(null);
+    const elementRef = elementRefFromProps ?? internalRef;
+
+    React.useEffect(() => {
+        if (autoFocus && elementRef.current) {
+            elementRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    }, [autoFocus, elementRef]);
 
     return (
         <div
+            {...containerElementProps}
             className={_cs(
                 styles.container,
                 sub && styles.sub,
                 horizontallyCompactContent && styles.horizontallyCompactContent,
                 className,
+                autoFocus && styles.autoFocused,
             )}
             ref={elementRef}
-            {...containerElementProps}
         >
             {(heading || headerActions || headerIcons) && (
                 <Header

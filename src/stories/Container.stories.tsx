@@ -31,6 +31,19 @@ const Template: Story<ContainerProps> = (args) => (
                 sub
             />
         </Container>
+        <Container
+            {...args}
+            sub
+        />
+        <Container
+            {...args}
+            sub
+        />
+        <Container
+            {...args}
+            sub
+            autoFocus
+        />
     </Container>
 );
 
