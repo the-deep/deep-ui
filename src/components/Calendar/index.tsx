@@ -140,11 +140,10 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
         activeDate,
     } = props;
 
-    const current = initialDate ? new Date(initialDate) : new Date();
+    const today = new Date();
+    const current = initialDate ? new Date(initialDate) : today;
     const currentYear = current.getFullYear();
     const currentMonth = current.getMonth();
-
-    const today = new Date();
 
     const [year, setYear] = useInputState<number | undefined>(currentYear);
     const [month, setMonth] = useInputState<number>(currentMonth);
@@ -221,7 +220,6 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                             children = (
                                 <DummyDate
                                     date={date.date}
-                                    key={date.date}
                                 />
                             );
                         } else {
@@ -251,7 +249,10 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                         }
 
                         return (
-                            <div className={styles.dayContainer}>
+                            <div
+                                className={styles.dayContainer}
+                                key={date.date}
+                            >
                                 {children}
                             </div>
                         );

@@ -2,7 +2,7 @@ import React from 'react';
 import {
     _cs,
     randomString,
-    isNotDefined,
+    isDefined,
 } from '@togglecorp/fujs';
 import {
     IoCalendar,
@@ -164,69 +164,71 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
 
     const dateRendererParams = React.useCallback(() => ({
         startDate: tempStartDate ?? value?.startDate,
+        // we only set end date if user hasn't set the start date
+        // i.e. to show previously selected end date)
         endDate: !tempStartDate ? value?.endDate : undefined,
     }), [tempStartDate, value]);
 
-    const handleCalendarDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
+    const handleStartDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
+        (year, month, day) => {
+            setTempStartDate(
+                ymdToDateString(year, month, day),
+            );
+        },
+        [setTempStartDate],
+    );
+
+    const handleEndDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
         (year, month, day) => {
             setTempStartDate((prevTempStartDate) => {
-                if (isNotDefined(prevTempStartDate)) {
-                    return ymdToDateString(year, month, day);
-                }
-
-                if (onChange) {
+                if (isDefined(prevTempStartDate) && onChange) {
+                    const lastDate = ymdToDateString(year, month, day);
                     const prev = new Date(prevTempStartDate).getTime();
                     const current = new Date(year, month, day).getTime();
-                    if (prev > current) {
-                        onChange(
-                            {
-                                startDate: ymdToDateString(year, month, day),
-                                endDate: prevTempStartDate,
-                            },
-                            name,
-                        );
-                    } else {
-                        onChange(
-                            {
-                                startDate: prevTempStartDate,
-                                endDate: ymdToDateString(year, month, day),
-                            },
-                            name,
-                        );
-                    }
+
+                    const startDate = prev > current ? lastDate : prevTempStartDate;
+                    const endDate = prev > current ? prevTempStartDate : lastDate;
+
+                    onChange({
+                        startDate,
+                        endDate,
+                    }, name);
                 }
 
-                hideCalendar();
                 return undefined;
             });
+
+            hideCalendar();
         },
-        [name, onChange, hideCalendar],
+        [onChange, hideCalendar, setTempStartDate, name],
     );
+
+    const handleCalendarDateClick = isDefined(tempStartDate)
+        ? handleEndDateClick : handleStartDateClick;
 
     const handlePredefinedOptionClick = React.useCallback((optionKey: PredefinedDateRangeKey) => {
         if (onChange) {
             const option = predefinedDateRangeOptions.find((d) => d.key === optionKey);
-            if (!option) {
-                return;
+
+            if (option) {
+                const {
+                    startDate,
+                    endDate,
+                } = option.getValue();
+
+                onChange({
+                    startDate: ymdToDateString(
+                        startDate.getFullYear(),
+                        startDate.getMonth(),
+                        startDate.getDate(),
+                    ),
+                    endDate: ymdToDateString(
+                        endDate.getFullYear(),
+                        endDate.getMonth(),
+                        endDate.getDate(),
+                    ),
+                }, name);
             }
-
-            const {
-                startDate,
-                endDate,
-            } = option.getValue();
-
-            onChange({
-                startDate: ymdToDateString(
-                    startDate.getFullYear(),
-                    startDate.getMonth(),
-                    startDate.getDate(),
-                ),
-                endDate: ymdToDateString(
-                    endDate.getFullYear(),
-                    endDate.getMonth(),
-                    endDate.getDate(),
-                ),
-            }, name);
         }
 
         hideCalendar();
