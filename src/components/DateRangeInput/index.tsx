@@ -21,36 +21,12 @@ import Calendar, { Props as CalendarProps } from '../Calendar';
 import CalendarDate, { Props as CalendarDateProps } from '../Calendar/CalendarDate';
 import { ymdToDateString } from '../../utils';
 
+import {
+    predefinedDateRangeOptions,
+    PredefinedDateRangeKey,
+} from './predefinedDateRange';
+
 import styles from './styles.css';
-
-type PredefinedDateRangeKey = 'today'
-    | 'yesterday'
-    | 'thisWeek'
-    | 'lastSevenDays'
-    | 'thisMonth'
-    | 'lastThirtyDays'
-    | 'lastThreeMonths'
-    | 'lastSixMonths'
-    | 'thisYear'
-    | 'lastYear';
-
-interface PredefinedDateRangeOption {
-    key: PredefinedDateRangeKey;
-    label: string;
-}
-
-const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
-    { key: 'today', label: 'Today' },
-    { key: 'yesterday', label: 'Yesterday' },
-    { key: 'thisWeek', label: 'This week' },
-    { key: 'lastSevenDays', label: 'Last 7 days' },
-    { key: 'thisMonth', label: 'This month' },
-    { key: 'lastThirtyDays', label: 'Last 30 days' },
-    { key: 'lastThreeMonths', label: 'Last 3 months' },
-    { key: 'lastSixMonths', label: 'Last 6 months' },
-    { key: 'thisYear', label: 'This year' },
-    { key: 'lastYear', label: 'Last year' },
-];
 
 export interface Value {
     startDate: string;
@@ -198,93 +174,58 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                     return ymdToDateString(year, month, day);
                 }
 
-                if (new Date(prevTempStartDate).getTime() > new Date(year, month, day).getTime()) {
-                    onChange(
-                        {
-                            startDate: ymdToDateString(year, month, day),
-                            endDate: prevTempStartDate,
-                        },
-                        name,
-                    );
-                } else {
-                    onChange(
-                        {
-                            startDate: prevTempStartDate,
-                            endDate: ymdToDateString(year, month, day),
-                        },
-                        name,
-                    );
+                if (onChange) {
+                    const prev = new Date(prevTempStartDate).getTime();
+                    const current = new Date(year, month, day).getTime();
+                    if (prev > current) {
+                        onChange(
+                            {
+                                startDate: ymdToDateString(year, month, day),
+                                endDate: prevTempStartDate,
+                            },
+                            name,
+                        );
+                    } else {
+                        onChange(
+                            {
+                                startDate: prevTempStartDate,
+                                endDate: ymdToDateString(year, month, day),
+                            },
+                            name,
+                        );
+                    }
                 }
 
                 hideCalendar();
-
                 return undefined;
             });
         },
         [name, onChange, hideCalendar],
     );
 
-    const handlePredefinedOptionClick = React.useCallback((option: PredefinedDateRangeKey) => {
+    const handlePredefinedOptionClick = React.useCallback((optionKey: PredefinedDateRangeKey) => {
         if (onChange) {
-            let start = new Date();
-            let end = new Date();
-
-            switch (option) {
-                case 'today':
-                    break;
-                case 'yesterday':
-                    start.setDate(start.getDate() - 1);
-                    end.setDate(end.getDate() - 1);
-                    break;
-                case 'thisWeek':
-                    start.setDate(start.getDate() - start.getDay());
-                    end.setDate(start.getDate() + 6);
-                    break;
-                case 'lastSevenDays':
-                    start.setDate(end.getDate() - 7);
-                    break;
-                case 'thisMonth':
-                    start.setDate(1);
-                    end.setMonth(end.getMonth() + 1);
-                    end.setDate(0);
-                    break;
-                case 'lastThirtyDays':
-                    start.setDate(start.getDate() - 30);
-                    break;
-                case 'lastThreeMonths':
-                    start.setMonth(start.getMonth() - 2);
-                    start.setDate(1);
-                    end.setMonth(end.getMonth() + 1);
-                    end.setDate(0);
-                    break;
-                case 'lastSixMonths':
-                    start.setMonth(start.getMonth() - 5);
-                    start.setDate(1);
-                    end.setMonth(end.getMonth() + 1);
-                    end.setDate(0);
-                    break;
-                case 'thisYear':
-                    start.setMonth(0);
-                    start.setDate(1);
-                    end.setMonth(end.getMonth() + 1);
-                    end.setDate(0);
-                    break;
-                case 'lastYear':
-                    start.setFullYear(start.getFullYear() - 1);
-                    start.setMonth(0);
-                    start.setDate(1);
-                    end.setMonth(0);
-                    end.setDate(0);
-                    break;
-                default:
-                    start = new Date();
-                    end = start;
-                    break;
+            const option = predefinedDateRangeOptions.find((d) => d.key === optionKey);
+            if (!option) {
+                return;
             }
 
+            const {
+                startDate,
+                endDate,
+            } = option.getValue();
+
             onChange({
-                startDate: ymdToDateString(start.getFullYear(), start.getMonth(), start.getDate()),
-                endDate: ymdToDateString(end.getFullYear(), end.getMonth(), end.getDate()),
+                startDate: ymdToDateString(
+                    startDate.getFullYear(),
+                    startDate.getMonth(),
+                    startDate.getDate(),
+                ),
+                endDate: ymdToDateString(
+                    endDate.getFullYear(),
+                    endDate.getMonth(),
+                    endDate.getDate(),
+                ),
             }, name);
         }
 

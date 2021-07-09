@@ -54,28 +54,44 @@ function getStartOfWeek(year: number, month: number) {
 }
 
 function getNumDaysInMonth(year: number, month: number) {
+    // Setting date to 0 will switch the date to last day of previous month
     return new Date(year, month + 1, 0).getDate();
+}
+
+interface RenderDate {
+    type: 'prevMonth' | 'currentMonth' | 'nextMonth';
+    date: number;
 }
 
 function getDates(year: number, month: number) {
     const numDays = getNumDaysInMonth(year, month);
+    const numDayInPrevMonth = getNumDaysInMonth(year, month - 1);
     const startOfWeek = getStartOfWeek(year, month);
 
-    const dates: number[] = [];
+    const dates: RenderDate[] = [];
 
     for (let i = 0; i < startOfWeek; i += 1) {
-        dates.push(i - startOfWeek);
+        dates.push({
+            type: 'prevMonth',
+            date: numDayInPrevMonth - startOfWeek,
+        });
     }
 
     for (let i = 0; i < numDays; i += 1) {
-        dates.push(i + 1);
+        dates.push({
+            type: 'currentMonth',
+            date: i + 1,
+        });
     }
 
     // 6 rows x 7 cols
     const remainingDates = 42 - dates.length;
 
     for (let i = 0; i < remainingDates; i += 1) {
-        dates.push(i + 100);
+        dates.push({
+            type: 'nextMonth',
+            date: i + 1,
+        });
     }
 
     return dates;
@@ -83,33 +99,18 @@ function getDates(year: number, month: number) {
 
 interface DummyDatePros {
     className?: string;
-    year: number;
-    month: number;
     date: number;
 }
 
 function DummyDate(props: DummyDatePros) {
     const {
         className,
-        year,
-        month,
         date,
     } = props;
 
-    let children: React.ReactNode = null;
-
-    if (date < 0) {
-        const lastDayOfPrevMonth = new Date(year, month, 0).getDate();
-        children = lastDayOfPrevMonth + date + 1;
-    }
-
-    if (date >= 100) {
-        children = date - 100 + 1;
-    }
-
     return (
         <div className={_cs(styles.dummyDate, className)}>
-            {children}
+            {date}
         </div>
     );
 }
@@ -120,7 +121,7 @@ const monthLabelSelector = (m: MonthName) => m.label;
 type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick' | 'activeDate';
 export interface Props<P extends CalendarDateProps> {
     className?: string;
-    dateRenderer?: (p: P) => React.ReactElement;
+    dateRenderer?: (props: P) => React.ReactElement;
     rendererParams?: (day: number, month: number, year: number) => Omit<P, RendererOmissions>;
     onDateClick?: (day: number, month: number, year: number) => void;
     monthSelectionPopupClassName?: string;
@@ -215,36 +216,43 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
             {(year && dates) ? (
                 <div className={styles.dayList}>
                     {dates.map((date) => {
-                        const defaultProps: Pick<P, RendererOmissions> = {
-                            onClick: onDateClick,
-                            year,
-                            month,
-                            date,
-                            currentYear: today.getFullYear(),
-                            currentMonth: today.getMonth(),
-                            currentDate: today.getDate(),
-                            activeDate,
-                        };
+                        let children: React.ReactNode = null;
+                        if (date.type === 'prevMonth' || date.type === 'nextMonth') {
+                            children = (
+                                <DummyDate
+                                    date={date.date}
+                                    key={date.date}
+                                />
+                            );
+                        } else {
+                            const defaultProps: Pick<P, RendererOmissions> = {
+                                onClick: onDateClick,
+                                year,
+                                month,
+                                date: date.date,
+                                currentYear: today.getFullYear(),
+                                currentMonth: today.getMonth(),
+                                currentDate: today.getDate(),
+                                activeDate,
+                            };
 
-                        const combinedProps = {
-                            ...(rendererParams ? rendererParams(date, month, year) : undefined),
-                            ...defaultProps,
-                        } as P;
+                            const combinedProps = {
+                                ...(rendererParams ? rendererParams(
+                                    date.date, month, year,
+                                ) : undefined),
+                                ...defaultProps,
+                            } as P;
+
+                            children = (
+                                <DateRenderer
+                                    {...combinedProps}
+                                />
+                            );
+                        }
 
                         return (
                             <div className={styles.dayContainer}>
-                                {(date > 0 && date < 100) ? (
-                                    <DateRenderer
-                                        {...combinedProps}
-                                    />
-                                ) : (
-                                    <DummyDate
-                                        year={year}
-                                        month={month}
-                                        date={date}
-                                        key={date}
-                                    />
-                                )}
+                                {children}
                             </div>
                         );
                     })}
