@@ -119,7 +119,10 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         1,
     );
 
-    const [tempStartDate, setTempStartDate] = React.useState<string | undefined>();
+    const [tempDate, setTempDate] = React.useState<Partial<Value>>({
+        startDate: undefined,
+        endDate: undefined,
+    });
     const [calendarMonthSelectionPopupClassName] = React.useState(randomString(16));
     const createdContainerRef = React.useRef<HTMLDivElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
@@ -134,7 +137,10 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
     ] = useBooleanState(false);
 
     const hideCalendar = React.useCallback(() => {
-        setTempStartDate(undefined);
+        setTempDate({
+            startDate: undefined,
+            endDate: undefined,
+        });
         setShowCalendarFalse();
     }, [setShowCalendarFalse]);
 
@@ -163,48 +169,47 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
     );
 
     const dateRendererParams = React.useCallback(() => ({
-        startDate: tempStartDate ?? value?.startDate,
+        startDate: tempDate.startDate ?? value?.startDate,
         // we only set end date if user hasn't set the start date
         // i.e. to show previously selected end date)
-        endDate: !tempStartDate ? value?.endDate : undefined,
-    }), [tempStartDate, value]);
+        endDate: !tempDate.startDate ? value?.endDate : undefined,
+    }), [tempDate.startDate, value]);
 
-    const handleStartDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
+    const handleCalendarDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
         (year, month, day) => {
-            setTempStartDate(
-                ymdToDateString(year, month, day),
-            );
-        },
-        [setTempStartDate],
-    );
-
-    const handleEndDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
-        (year, month, day) => {
-            setTempStartDate((prevTempStartDate) => {
-                if (isDefined(prevTempStartDate) && onChange) {
+            setTempDate((prevTempDate) => {
+                if (isDefined(prevTempDate.startDate)) {
                     const lastDate = ymdToDateString(year, month, day);
-                    const prev = new Date(prevTempStartDate).getTime();
+
+                    const prev = new Date(prevTempDate.startDate).getTime();
                     const current = new Date(year, month, day).getTime();
 
-                    const startDate = prev > current ? lastDate : prevTempStartDate;
-                    const endDate = prev > current ? prevTempStartDate : lastDate;
+                    const startDate = prev > current ? lastDate : prevTempDate.startDate;
+                    const endDate = prev > current ? prevTempDate.startDate : lastDate;
 
-                    onChange({
+                    return {
                         startDate,
                         endDate,
-                    }, name);
+                    };
                 }
 
-                return undefined;
+                return {
+                    startDate: ymdToDateString(year, month, day),
+                    endDate: undefined,
+                };
             });
-
-            hideCalendar();
         },
-        [onChange, hideCalendar, setTempStartDate, name],
+        [],
     );
 
-    const handleCalendarDateClick = isDefined(tempStartDate)
-        ? handleEndDateClick : handleStartDateClick;
+    React.useEffect(() => {
+        if (isDefined(tempDate.endDate)) {
+            if (onChange) {
+                onChange(tempDate as Value, name);
+            }
+            hideCalendar();
+        }
+    }, [tempDate, hideCalendar, onChange, name]);
 
     const handlePredefinedOptionClick = React.useCallback((optionKey: PredefinedDateRangeKey) => {
         if (onChange) {
@@ -295,7 +300,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                             !!error && styles.errored,
                             inputClassName,
                         )}
-                        value={tempStartDate ?? value?.startDate}
+                        value={tempDate.startDate ?? value?.startDate}
                         elementRef={inputElementRef}
                         readOnly
                         uiMode={uiMode}
