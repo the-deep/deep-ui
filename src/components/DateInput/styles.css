@@ -12,3 +12,17 @@
         }
     }
 }
+
+.calendar-popup {
+    height: 25rem;
+
+    .popup-content {
+        --padding: var(--dui-spacing-medium);
+        width: calc(var(--dui-width-calendar-date) * 7 + 2 * var(--padding));
+        max-height: unset!important;
+
+        .calendar {
+            height: 100%;
+        }
+    }
+}

@@ -72,6 +72,7 @@ export type Props<
     optionsPending?: boolean;
     optionsFiltered?: boolean;
     optionsPopupClassName?: string;
+    optionsPopupContentClassName?: string;
     persistentOptionPopup?: boolean;
     placeholder?: string;
     valueDisplay: string;
@@ -117,6 +118,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
         optionRendererParams,
         options: optionsFromProps,
         optionsPopupClassName,
+        optionsPopupContentClassName,
         persistentOptionPopup,
         readOnly,
         placeholder,
@@ -265,10 +267,10 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
         handleOptionClick,
     );
 
-    let popup: React.ReactNode | null;
+    let popupContent: React.ReactNode | null;
     // eslint-disable-next-line react/destructuring-assignment
     if (props.grouped) {
-        popup = (
+        popupContent = (
             <List
                 data={options}
                 keySelector={optionKeySelector}
@@ -281,7 +283,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
             />
         );
     } else {
-        popup = (
+        popupContent = (
             <List
                 data={options}
                 keySelector={optionKeySelector}
@@ -348,11 +350,11 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
             <Popup
                 elementRef={popupRef}
                 className={_cs(optionsPopupClassName, styles.popup)}
-                contentClassName={styles.popupContent}
+                contentClassName={_cs(styles.popupContent, optionsPopupContentClassName)}
                 show={showDropdown}
                 onUnmount={handlePopupUnmount}
             >
-                {popup}
+                {popupContent}
                 <EmptyOptions
                     filtered={optionsFiltered}
                     pending={optionsPending}

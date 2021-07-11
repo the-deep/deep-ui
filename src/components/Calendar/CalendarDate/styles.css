@@ -1,0 +1,20 @@
+.date {
+    border-radius: 50%;
+    width: var(--dui-width-calendar-date);
+    height: var(--dui-width-calendar-date);
+
+    &.today {
+        color: var(--dui-color-accent);
+        font-weight: var(--dui-font-weight-bold);
+    }
+
+    &:hover {
+        background-color: var(--dui-color-background-information);
+    }
+
+    &.active {
+        background-color: var(--dui-color-accent);
+        color: var(--dui-color-text-on-accent);
+        pointer-events: none;
+    }
+}

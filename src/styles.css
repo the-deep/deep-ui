@@ -149,6 +149,8 @@
     /* FIXME: this color has 3 occurance */
     --dui-color-deep6: #f5f8fb;
 
+    --dui-color-background-scrollbar: transparent;
+    --dui-color-foreground-scrollbar: #cccccc;
 
     /*
      * Dimensions
@@ -179,6 +181,9 @@
     --dui-height-max-modal: 96vh;
 
     --dui-width-min-modal: 20rem;
+    --dui-width-scrollbar: 0.5rem;
+
+    --dui-width-calendar-date: 2.4rem;
 
 
     /*
@@ -195,6 +200,8 @@
 
     --dui-radius-border-input-section: 0;
     --dui-radius-border-alerts: 0.24rem;
+
+    --dui-radius-scrollbar-border: 0.25rem;
 
     --dui-border-radius-card: 0.5rem;
     --dui-border-radius-modal: 0.5rem;
