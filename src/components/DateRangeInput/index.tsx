@@ -109,6 +109,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         onChange,
         name,
         value,
+        variant,
     } = props;
 
     const prevMonthDate = new Date();
@@ -287,6 +288,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
             inputContainerClassName={styles.inputContainer}
             label={label}
             labelContainerClassName={labelContainerClassName}
+            variant={variant}
             readOnly={readOnly}
             uiMode={uiMode}
             input={(
