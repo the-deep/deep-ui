@@ -73,7 +73,7 @@ function getDates(year: number, month: number) {
     for (let i = 0; i < startOfWeek; i += 1) {
         dates.push({
             type: 'prevMonth',
-            date: numDayInPrevMonth - startOfWeek,
+            date: numDayInPrevMonth - startOfWeek + i + 1,
         });
     }
 
@@ -251,7 +251,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                         return (
                             <div
                                 className={styles.dayContainer}
-                                key={date.date}
+                                key={`${date.type}-${date.date}`}
                             >
                                 {children}
                             </div>
