@@ -27,7 +27,7 @@ export const isValidFile = (fileName: string, mimeType: string, acceptString?: s
     });
 };
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange' | 'value'>);
+type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange' | 'value' | 'label'>);
 export type Props<T extends string> = InheritedProps<T> & {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
