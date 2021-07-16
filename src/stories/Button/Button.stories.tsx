@@ -92,6 +92,12 @@ export const Variants: Story = () => (
                 >
                     Transparent
                 </Button>
+                <Button
+                    variant="general"
+                    name="general"
+                >
+                    General
+                </Button>
             </div>
         </section>
         <section>
@@ -137,6 +143,12 @@ export const Variants: Story = () => (
                     name="transparent"
                 >
                     Transparent
+                </Button>
+                <Button
+                    variant="general"
+                    name="general"
+                >
+                    General
                 </Button>
             </div>
         </section>
@@ -184,6 +196,12 @@ export const Variants: Story = () => (
                 >
                     Transparent
                 </Button>
+                <Button
+                    variant="general"
+                    name="general"
+                >
+                    General
+                </Button>
             </div>
         </section>
         <section>
@@ -229,6 +247,12 @@ export const Variants: Story = () => (
                     big
                 >
                     Transparent
+                </Button>
+                <Button
+                    variant="general"
+                    name="general"
+                >
+                    General
                 </Button>
             </div>
         </section>

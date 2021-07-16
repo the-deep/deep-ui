@@ -22,7 +22,7 @@ export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick' | 'name
 function DropdownMenu(props: Props) {
     const {
         className,
-        variant = 'transparent',
+        variant = 'general',
         children,
         label,
         actions,

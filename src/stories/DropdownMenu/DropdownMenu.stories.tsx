@@ -189,6 +189,30 @@ export const Variants: Story = () => (
                         Goto Togglecorp
                     </DropdownMenuItem>
                 </DropdownMenu>
+                <DropdownMenu
+                    variant="general"
+                    label="general"
+                >
+                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                        Home
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                        Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                        Projects
+                    </DropdownMenuItem>
+                    <Separator />
+                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                        Logout
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                        href="https://togglecorp.com"
+                        actions={<IoExitOutline />}
+                    >
+                        Goto Togglecorp
+                    </DropdownMenuItem>
+                </DropdownMenu>
             </div>
         </section>
     </div>
