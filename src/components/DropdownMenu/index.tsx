@@ -9,7 +9,7 @@ import useBlurEffect from '../../hooks/useBlurEffect';
 
 import styles from './styles.css';
 
-export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick'> & {
+export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick' | 'name'> & {
     className?: string;
     children?: React.ReactNode;
     label?: React.ReactNode;
@@ -42,6 +42,7 @@ function DropdownMenu(props: Props) {
     return (
         <Button
             {...buttonProps}
+            name={undefined}
             variant={variant}
             elementRef={buttonRef}
             className={_cs(styles.dropdownMenu, className)}
