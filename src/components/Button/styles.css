@@ -87,7 +87,24 @@
 
         &:not(:disabled) {
             &:hover {
-                --color-background: var(--dui-color-background-tertiary-hover);
+                --color-background: var(--dui-color-background-negative);
+            }
+        }
+    }
+
+    &.general {
+        --color-background: var(--dui-color-background-information);
+        --color-text: var(--dui-color-text);
+        --color-border: var(--dui-color-separator);
+
+        &:disabled {
+            --color-border: var(--dui-color-text-disabled);
+            --color-text: var(--dui-color-text);
+        }
+
+        &:not(:disabled) {
+            &:hover {
+                --color-background: var(--dui-color-background-negative);
             }
         }
     }
