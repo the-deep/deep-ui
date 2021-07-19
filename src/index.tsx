@@ -155,6 +155,8 @@ export type { Props as TextOutputProps } from './components/TextOutput';
 export { default as TextOutput } from './components/TextOutput';
 export type { Props as TimeInputProps } from './components/TimeInput';
 export { default as TimeInput } from './components/TimeInput';
+export type { Props as TimeRangeInputProps } from './components/TimeRangeInput';
+export { default as TimeRangeInput } from './components/TimeRangeInput';
 export type { Props as TooltipProps } from './components/Tooltip';
 export { default as Tooltip } from './components/Tooltip';
 export { default as useAlert } from './hooks/useAlert';

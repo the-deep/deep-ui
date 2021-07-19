@@ -1,25 +1,28 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import { IoTimer } from 'react-icons/io5';
+import { IoText } from 'react-icons/io5';
 
-import TimeInput, { Props as TimeInputProps } from '#components/TimeInput';
+import TimeRangeInput, {
+    Props as TimeRangeInputProps,
+    Value,
+} from '#components/TimeRangeInput';
 
 export default {
-    title: 'Input/TimeInput',
-    component: TimeInput,
+    title: 'Input/TimeRangeInput',
+    component: TimeRangeInput,
     argTypes: {},
 };
 
-const Template: Story<TimeInputProps<string>> = (args) => {
+const Template: Story<TimeRangeInputProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const handleChange = (e: string | undefined) => {
+    const handleChange = (e: Value | undefined) => {
         updateArgs({ value: e });
     };
 
     return (
-        <TimeInput
+        <TimeRangeInput
             {...args}
             value={value}
             onChange={handleChange}
@@ -34,21 +37,27 @@ Default.args = {
 
 export const WithIcon = Template.bind({});
 WithIcon.args = {
-    icons: <IoTimer />,
+    icons: <IoText />,
     label: 'Name',
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     label: 'Name',
-    value: '14:20',
+    value: {
+        startTime: '10:10',
+        endTime: '20:20',
+    },
     disabled: true,
 };
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
     label: 'Name',
-    value: '10:22',
+    value: {
+        startTime: '10:10',
+        endTime: '20:20',
+    },
     readOnly: true,
 };
 
