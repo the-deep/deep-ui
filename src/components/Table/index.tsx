@@ -1,5 +1,8 @@
 import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import {
+    _cs,
+    isDefined,
+} from '@togglecorp/fujs';
 
 import { BaseHeader } from './types';
 
@@ -27,6 +30,9 @@ export interface Column<D, K, C, H> {
     headerCellRendererParams: Omit<H, keyof BaseHeader>;
     headerCellRendererClassName?: string;
     headerContainerClassName?: string;
+    columnClassName?: string;
+    columnStyle?: React.CSSProperties;
+    columnWidth?: number | string;
 
     cellRenderer: React.ComponentType<C>;
     cellRendererParams: (key: K, datum: D, index: number) => Omit<C, 'className'>;
@@ -34,7 +40,6 @@ export interface Column<D, K, C, H> {
     cellContainerClassName?: string;
 
     cellAsHeader?: boolean;
-    uiMode?: UiMode;
 }
 
 type VerifyColumn<T, D, K> = unknown extends (
@@ -105,12 +110,33 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
             )}
         >
             {caption && (
-                <caption
-                    className={captionClassName}
-                >
+                <caption className={captionClassName}>
                     {caption}
                 </caption>
             )}
+            <colgroup>
+                {columns.map((column) => {
+                    const {
+                        id,
+                        columnClassName,
+                        columnStyle,
+                        columnWidth,
+                    } = column;
+
+                    const style = {
+                        ...columnStyle,
+                        width: isDefined(columnWidth) ? columnWidth : columnStyle?.width,
+                    };
+
+                    return (
+                        <col
+                            style={style}
+                            key={id}
+                            className={columnClassName}
+                        />
+                    );
+                })}
+            </colgroup>
             <thead>
                 <tr className={_cs(styles.headerRow, headerRowClassName)}>
                     {columns.map((column, index) => {
