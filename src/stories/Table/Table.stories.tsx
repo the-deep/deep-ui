@@ -57,11 +57,13 @@ const columns = [
         'id',
         'ID',
         (item) => item.id,
+        { columnWidth: 'var(--dui-spacing-super-large)' },
     ),
     createStringColumn<Program, number>(
         'name',
         'Name',
         (item) => item.name,
+        { columnClassName: styles.name },
     ),
     createNumberColumn<Program, number>(
         'budget',

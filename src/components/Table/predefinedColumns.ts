@@ -21,6 +21,9 @@ export function createStringColumn<D, K>(
         filterType?: FilterType,
         orderable?: boolean;
         hideable?: boolean;
+        columnClassName?: string;
+        columnWidth?: Column<D, K, CellProps<string>, HeaderCellProps>['columnWidth'];
+        columnStyle?: Column<D, K, CellProps<string>, HeaderCellProps>['columnStyle'];
     },
 ) {
     const item: Column<D, K, CellProps<string>, HeaderCellProps> & {
@@ -43,6 +46,9 @@ export function createStringColumn<D, K>(
         }),
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareString(accessor(foo), accessor(bar)),
+        columnClassName: options?.columnClassName,
+        columnWidth: options?.columnWidth,
+        columnStyle: options?.columnStyle,
     };
     return item;
 }
@@ -58,6 +64,9 @@ export function createNumberColumn<D, K>(
         filterType?: FilterType,
         orderable?: boolean;
         hideable?: boolean;
+        columnClassName?: string;
+        columnWidth?: Column<D, K, CellProps<string>, HeaderCellProps>['columnWidth'];
+        columnStyle?: Column<D, K, CellProps<string>, HeaderCellProps>['columnStyle'];
     },
 ) {
     const item: Column<D, K, NumberOutputProps, HeaderCellProps> & {
@@ -81,6 +90,9 @@ export function createNumberColumn<D, K>(
         }),
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareNumber(accessor(foo), accessor(bar)),
+        columnClassName: options?.columnClassName,
+        columnWidth: options?.columnWidth,
+        columnStyle: options?.columnStyle,
     };
     return item;
 }
