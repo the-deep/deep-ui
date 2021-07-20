@@ -9,6 +9,21 @@ import useBlurEffect from '../../hooks/useBlurEffect';
 
 import styles from './styles.css';
 
+export function useDropdownFeature() {
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const popupRef = React.useRef<HTMLDivElement>(null);
+    const [showPopup, setShowPopupTrue, setShowPopupFalse] = useBooleanState(false);
+
+    useBlurEffect(showPopup, setShowPopupFalse, popupRef, buttonRef);
+
+    return {
+        buttonRef,
+        popupRef,
+        showPopup,
+        handleButtonClick: setShowPopupTrue,
+    };
+}
+
 export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick' | 'name'> & {
     className?: string;
     children?: React.ReactNode;
@@ -33,11 +48,12 @@ function DropdownMenu(props: Props) {
         ...buttonProps
     } = props;
 
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const popupRef = React.useRef<HTMLDivElement>(null);
-    const [showPopup, setShowPopupTrue, setShowPopupFalse] = useBooleanState(false);
-
-    useBlurEffect(showPopup, setShowPopupFalse, popupRef, buttonRef);
+    const {
+        buttonRef,
+        popupRef,
+        showPopup,
+        handleButtonClick,
+    } = useDropdownFeature();
 
     return (
         <Button
@@ -46,7 +62,7 @@ function DropdownMenu(props: Props) {
             variant={variant}
             elementRef={buttonRef}
             className={_cs(styles.dropdownMenu, className)}
-            onClick={setShowPopupTrue}
+            onClick={handleButtonClick}
             actions={(
                 <>
                     {actions}

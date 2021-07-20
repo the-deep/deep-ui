@@ -41,13 +41,13 @@
 
     &.left {
         .tip {
-            right: var(--dui-width-popup-tip);
+            right: var(--dui-offset-popup-tip);
         }
     }
 
     &.right {
         .tip {
-            left: var(--dui-width-popup-tip);
+            left: var(--dui-offset-popup-tip);
         }
     }
 

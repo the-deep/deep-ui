@@ -23,7 +23,7 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
 
 export interface Props<N> extends Omit<
     React.HTMLProps<HTMLButtonElement>,
-    'ref' | 'onClick' | 'name' | 'type'
+    'ref' | 'onClick' | 'name' | 'type' | 'label'
 > {
     type?: 'button' | 'submit' | 'reset';
     variant?: ButtonVariant;
@@ -62,7 +62,6 @@ export function useButtonFeatures(
 
     const buttonClassName = _cs(
         styles.button,
-        variant,
         buttonVariantToStyleMap[variant] ?? styles.primary,
         readOnly && styles.readOnly,
         big && styles.big,

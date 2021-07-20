@@ -174,7 +174,8 @@
     --dui-opacity-disabled-element: 0.4;
     --dui-saturation-disabled-element: 0.6;
 
-    --dui-width-popup-tip: 1.25rem;
+    --dui-width-popup-tip: 1rem;
+    --dui-offset-popup-tip: 0.625rem;
     --dui-height-popup-tip: 0.625rem;
 
     --dui-width-max-modal: 96vw;
