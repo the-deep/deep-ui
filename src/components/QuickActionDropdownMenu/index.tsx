@@ -41,7 +41,6 @@ function QuickActionDropdownMenu(props: Props) {
             name={undefined}
             elementRef={buttonRef}
             className={className}
-            childrenClassName={styles.children}
             variant={variant}
             onClick={handleButtonClick}
             {...otherProps}
