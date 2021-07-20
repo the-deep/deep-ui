@@ -28,7 +28,7 @@ type InheritedProps = Omit<InputContainerProps, 'input'>;
 export interface Props<N extends string> extends InheritedProps {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
-    value?: Value;
+    value: Value | undefined | null;
     name: N;
     onChange?: (value: Value | undefined, name: N) => void;
 }
