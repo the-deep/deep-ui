@@ -10,13 +10,14 @@ export type Props <T extends string | number | undefined> = Omit<ButtonProps<T>,
 function QuickActionButton<T extends string | number | undefined>(props: Props<T>) {
     const {
         className,
+        childrenClassName,
         ...otherProps
     } = props;
 
     return (
         <Button
             className={_cs(className, styles.button, styles.roundButton)}
-            childrenClassName={styles.children}
+            childrenClassName={_cs(styles.children, childrenClassName)}
             variant="secondary"
             {...otherProps}
         />

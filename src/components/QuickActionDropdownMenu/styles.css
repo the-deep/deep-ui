@@ -1,0 +1,4 @@
+.popup {
+    padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small)) 0;
+    min-width: 10rem;
+}

@@ -102,6 +102,8 @@ export type { Props as QuickActionButtonProps } from './components/QuickActionBu
 export { default as QuickActionButton } from './components/QuickActionButton';
 export type { Props as QuickActionConfirmButtonProps } from './components/QuickActionConfirmButton';
 export { default as QuickActionConfirmButton } from './components/QuickActionConfirmButton';
+export type { Props as QuickActionDropdownMenuProps } from './components/QuickActionDropdownMenu';
+export { default as QuickActionDropdownMenu } from './components/QuickActionDropdownMenu';
 export { default as QuickActionLink } from './components/QuickActionLink';
 export type { Props as QuickActionLinkProps } from './components/QuickActionLink';
 export { default as RadioInput } from './components/RadioInput';

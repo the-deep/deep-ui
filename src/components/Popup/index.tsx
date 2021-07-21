@@ -42,6 +42,7 @@ function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacem
     let verticalPosition: 'bottom' | 'top' | undefined;
     let contentWidth = 'auto';
     let maxHeight = 'auto';
+    const offsetX = 0;
 
     if (bcr) {
         const { x, y, width, height } = bcr;
@@ -53,9 +54,9 @@ function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacem
         verticalPosition = (cY - bcr.y) > 0 ? 'bottom' : 'top';
 
         if (horizontalPosition === 'left') {
-            placement.right = `${window.innerWidth - x - width}px`;
+            placement.right = `${Math.min(window.innerWidth, window.innerWidth - x - width - offsetX)}px`;
         } else if (horizontalPosition === 'right') {
-            placement.left = `${x}px`;
+            placement.left = `${Math.max(0, x + offsetX)}px`;
         }
 
         if (verticalPosition === 'top') {
