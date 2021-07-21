@@ -55,6 +55,23 @@
         }
     }
 
+    .empty-day-list {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        padding: var(--dui-spacing-large);
+        text-align: center;
+        color: var(--dui-color-text-message);
+
+        .icon {
+            opacity: var(--dui-opacity-watermark);
+            margin: var(--dui-spacing-medium);
+            font-size: var(--dui-font-size-ultra-large);
+        }
+    }
+
     .actions {
         display: flex;
         flex-shrink: 0;
