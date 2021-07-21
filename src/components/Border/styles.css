@@ -1,0 +1,37 @@
+.border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--dui-color-separator);
+    width: 100%;
+    height: var(--dui-width-separator-medium);
+
+    &.active {
+        display: flex;
+        justify-content: center;
+
+        .active-border {
+            background-color: var(--dui-color-accent);
+            height: 100%;
+            animation: grow var(--dui-duration-transition-medium) ease-in forwards;
+        }
+
+        &.disabled {
+            .active-border {
+                opacity: var(--dui-opacity-disabled-element);
+                filter: saturate(var(--dui-saturation-disabled-element));
+            }
+        }
+    }
+
+}
+
+@keyframes grow {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--dui-width-active-border);
+    }
+}

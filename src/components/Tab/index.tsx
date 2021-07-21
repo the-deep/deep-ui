@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import RawButton, { Props as RawButtonProps } from '../RawButton';
 
+import Border from '../Border';
 import { TabKey, TabContext, TabVariant } from '../TabContext';
 import { setHashToBrowser } from '../../utils';
 
@@ -35,6 +36,7 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
         name,
         disabled: disabledFromProps,
         borderWrapperClassName,
+        children,
         ...otherProps
     } = props;
 
@@ -63,7 +65,15 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
             role="tab"
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}
-        />
+        >
+            {variant === 'primary' && (
+                <Border
+                    active={isActive}
+                    disabled={disabled}
+                />
+            )}
+            {children}
+        </RawButton>
     );
 
     // The clip path used for step tab does not support border

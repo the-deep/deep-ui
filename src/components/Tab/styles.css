@@ -2,6 +2,7 @@
     --text-color: var(--dui-color-text);
     --active-text-color: transparent;
     --font-weight-bold: var(--dui-font-weight-bold);
+    position: relative;
 
     border: 0;
     border-radius: 0;
@@ -14,17 +15,12 @@
     }
 
     &.primary {
-        --color-separator: var(--dui-color-separator);
-        border-bottom: var(--dui-width-separator-medium) solid var(--color-separator);
-
         &.active {
-            --color-separator: var(--dui-color-accent);
             --text-color: var(--dui-color-accent);
         }
 
         &.disabled {
             --text-color: var(--dui-color-text-disabled);
-            --color-separator: var(--dui-color-separator);
         }
     }
 
