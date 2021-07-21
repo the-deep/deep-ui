@@ -171,8 +171,11 @@
     --dui-width-separator-thick: 4px;
     --dui-width-separator-dense: 7px;
 
+    --dui-width-active-border: 1.5625rem;
+
+    --dui-opacity-watermark: 0.3;
     --dui-opacity-disabled-element: 0.4;
-    --dui-saturation-disabled-element: 0.6;
+    --dui-saturation-disabled-element: 0.4;
 
     --dui-width-popup-tip: 1rem;
     --dui-offset-popup-tip: 0.625rem;

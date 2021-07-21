@@ -8,6 +8,7 @@ import {
     IoTime,
     IoChevronForward,
     IoChevronBack,
+    IoCalendar,
 } from 'react-icons/io5';
 
 import Button from '../Button';
@@ -172,6 +173,18 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
         }
     }, [year, month, setMonth, setYear]);
 
+    const isValidYear = React.useMemo(() => {
+        if (isNotDefined(year)) {
+            return false;
+        }
+
+        if (year < 1900) {
+            return false;
+        }
+
+        return true;
+    }, [year]);
+
     return (
         <div className={_cs(styles.calendar, className)}>
             <div className={styles.header}>
@@ -212,7 +225,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                     ))}
                 </div>
             </div>
-            {(year && dates) ? (
+            {(isValidYear && isDefined(year) && dates) ? (
                 <div className={styles.dayList}>
                     {dates.map((date) => {
                         let children: React.ReactNode = null;
@@ -260,7 +273,8 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                 </div>
             ) : (
                 <div className={styles.emptyDayList}>
-                    Please select a year and month to view the dates
+                    <IoCalendar className={styles.icon} />
+                    Please select a valid year and month to view the dates
                 </div>
             )}
             <div className={styles.actions}>
