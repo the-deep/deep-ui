@@ -9,12 +9,20 @@ import useBlurEffect from '../../hooks/useBlurEffect';
 
 import styles from './styles.css';
 
-export function useDropdownFeature() {
+export function useDropdownFeature(persistant = false) {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
     const [showPopup, setShowPopupTrue, setShowPopupFalse] = useBooleanState(false);
 
-    useBlurEffect(showPopup, setShowPopupFalse, popupRef, buttonRef);
+    const handleBlur = React.useCallback((clickedWithin: boolean) => {
+        if (persistant && clickedWithin) {
+            return;
+        }
+
+        setShowPopupFalse();
+    }, [persistant, setShowPopupFalse]);
+
+    useBlurEffect(showPopup, handleBlur, popupRef, buttonRef);
 
     return {
         buttonRef,

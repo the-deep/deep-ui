@@ -18,6 +18,8 @@ export type { Props as CalendarProps } from './components/Calendar';
 export { default as Calendar } from './components/Calendar';
 export type { Props as CardProps } from './components/Card';
 export { default as Card } from './components/Card';
+export type { Props as ColorInputProps } from './components/ColorInput';
+export { default as ColorInput } from './components/ColorInput';
 export type { Props as CheckListInputProps } from './components/CheckListInput';
 export type { default as CheckListInput } from './components/CheckListInput';
 export type { Props as CheckboxProps } from './components/Checkbox';

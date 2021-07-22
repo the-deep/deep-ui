@@ -42,8 +42,10 @@
         "@babel/runtime-corejs3": "^7.11.2",
         "@storybook/client-api": "^6.0.21",
         "@togglecorp/fujs": "^1.9.2-beta.0",
+        "@types/react-color": "^3.0.5",
         "@types/requestidlecallback": "^0.3.1",
         "d3-shape": "^2.1.0",
+        "react-color": "^2.19.3",
         "react-icons": "^4.2.0",
         "react-zoom-pan-pinch": "^1.6.1",
         "resize-observer-polyfill": "^1.5.1"
