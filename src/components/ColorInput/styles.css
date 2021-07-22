@@ -1,4 +1,5 @@
 .color-input {
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     border-radius: var(--dui-radius-border-medium);
     width: calc(var(--dui-font-size-medium) + 2 * var(--dui-spacing-small));
     height: calc(var(--dui-font-size-medium) + 2 * var(--dui-spacing-small));
@@ -11,8 +12,8 @@
 }
 
 .color-picker-popup {
-    width: 16rem;
-    height: 21rem;
+    width: 14rem;
+    height: 18rem;
 
     .content {
         max-height: unset!important;

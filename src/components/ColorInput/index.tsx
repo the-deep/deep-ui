@@ -11,18 +11,24 @@ import Popup from '../Popup';
 
 import styles from './styles.css';
 
-export interface Props {
+export interface Props<N extends number | string | undefined> {
     className?: string;
+    value?: string;
+    onChange: (newValue: string, name: N) => void;
+    name: N,
 }
 
-function ColorInput(props: Props) {
-    const { className } = props;
-
-    const [value, setValue] = React.useState<string | undefined>();
+function ColorInput<N extends number | string | undefined>(props: Props<N>) {
+    const {
+        className,
+        value,
+        onChange,
+        name,
+    } = props;
 
     const handleColorChange = React.useCallback((newValue: ColorResult) => {
-        setValue(newValue.hex);
-    }, [setValue]);
+        onChange(newValue.hex, name);
+    }, [onChange, name]);
 
     const {
         buttonRef,
@@ -53,6 +59,7 @@ function ColorInput(props: Props) {
                 <SketchPicker
                     color={value}
                     onChange={handleColorChange}
+                    disableAlpha
                 />
             </Popup>
         </RawButton>
