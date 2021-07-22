@@ -1,0 +1,29 @@
+.color-input {
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+    border-radius: var(--dui-radius-border-medium);
+    width: calc(var(--dui-font-size-medium) + 2 * var(--dui-spacing-small));
+    height: calc(var(--dui-font-size-medium) + 2 * var(--dui-spacing-small));
+
+    &.empty {
+        background-image: linear-gradient(45deg, var(--dui-color-grey4) 25%, transparent 25%), linear-gradient(-45deg, var(--dui-color-grey4) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--dui-color-grey4) 75%), linear-gradient(-45deg, transparent 75%, var(--dui-color-grey4) 75%);
+        background-position: 0 0, 0 .25rem, .25rem -.25rem, -.25rem 0;
+        background-size: .5rem .5rem;
+    }
+}
+
+.color-picker-popup {
+    width: 14rem;
+
+    .content {
+        min-height: 288px;
+        max-height: unset!important;
+
+        :global {
+            .sketch-picker {
+                box-sizing: border-box!important;
+                width: 100%!important;
+                height: 100%!important;
+            }
+        }
+    }
+}

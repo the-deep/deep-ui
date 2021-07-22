@@ -178,7 +178,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
             return false;
         }
 
-        if (year < 1900) {
+        if (year < 1900 || year > 9999) {
             return false;
         }
 

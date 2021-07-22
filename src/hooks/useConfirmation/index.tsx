@@ -2,7 +2,7 @@ import React from 'react';
 
 import useBooleanState from '../useBooleanState';
 import Modal, { Props as ModalProps } from '../../components/Modal';
-import Button, { Props as ButtonProps } from '../../components/Button';
+import Button from '../../components/Button';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T | undefined) {
@@ -50,10 +50,7 @@ const defaultOptions: Partial<Options> = {
     denyButtonContent: 'No',
 };
 
-function useConfirmation(options?: Options, extraProps?: ExtraProps): [
-    React.ReactNode,
-    ButtonProps<string | undefined>['onClick'],
-] {
+function useConfirmation(options?: Options, extraProps?: ExtraProps) {
     const {
         showConfirmationInitially = false,
         onConfirm,
@@ -164,7 +161,7 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps): [
         confirmButtonClassName,
     ]);
 
-    return [modal, setShowModalTrue];
+    return [modal, setShowModalTrue] as const;
 }
 
 export default useConfirmation;
