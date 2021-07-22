@@ -13,9 +13,9 @@
 
 .color-picker-popup {
     width: 14rem;
-    height: 18rem;
 
     .content {
+        min-height: 288px;
         max-height: unset!important;
 
         :global {
