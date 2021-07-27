@@ -126,7 +126,7 @@ function getFloatPlacementOnMousePosition(
     };
 }
 
-type PopupFeatureKeys = 'show' | 'elementRef' | 'className' | 'contentClassName' | 'contentRef' | 'children' | 'tipClassName';
+type PopupFeatureKeys = 'show' | 'elementRef' | 'className' | 'contentClassName' | 'contentRef' | 'parentRef' | 'children' | 'tipClassName';
 export function usePopupFeatures(
     props: Pick<Props, PopupFeatureKeys> & {
         matchParentWidth?: boolean;
@@ -143,11 +143,15 @@ export function usePopupFeatures(
         tipClassName,
         matchParentWidth,
         useMousePosition,
+        parentRef,
     } = props;
+
     const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
     const dummyRef = React.useRef<HTMLDivElement>(null);
-    const parentBCR = useParentPositionTracking(dummyRef, delayedShow && !useMousePosition);
-    const [mouseX, mouseY] = useMousePositionTracking(useMousePosition && delayedShow);
+    const parentBCR = useParentPositionTracking(
+        parentRef ?? dummyRef, delayedShow && !useMousePosition,
+    );
+    const [mouseX, mouseY] = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
     const {
         placement,
         width,
@@ -204,6 +208,7 @@ export interface Props {
     contentClassName?: string;
     elementRef?: React.RefObject<HTMLDivElement>;
     contentRef?: React.RefObject<HTMLDivElement>;
+    parentRef?: React.RefObject<HTMLElement>;
     children: React.ReactNode;
     show?: boolean;
     tipClassName?: string;
@@ -222,6 +227,7 @@ function Popup(props: Props) {
         tipClassName,
         freeWidth = false,
         onUnmount,
+        parentRef,
     } = props;
 
     const {
@@ -236,6 +242,7 @@ function Popup(props: Props) {
         show,
         tipClassName,
         matchParentWidth: !freeWidth,
+        parentRef,
     });
 
     const unmountRef = React.useRef<boolean | undefined>();
@@ -251,10 +258,12 @@ function Popup(props: Props) {
 
     return (
         <>
-            <div
-                ref={dummyRef}
-                className={styles.dummy}
-            />
+            {!parentRef && (
+                <div
+                    ref={dummyRef}
+                    className={styles.dummy}
+                />
+            )}
             {!shouldUnmount && popupChildren }
         </>
     );

@@ -47,6 +47,7 @@ function QuickActionDropdownMenu(props: Props) {
         >
             {label}
             <Popup
+                parentRef={buttonRef}
                 className={_cs(styles.popup, popupClassName)}
                 contentClassName={popupContentClassName}
                 show={showPopup}

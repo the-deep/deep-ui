@@ -7,6 +7,8 @@ import Popup from '../Popup';
 import useBooleanState from '../../hooks/useBooleanState';
 import useBlurEffect from '../../hooks/useBlurEffect';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
 export function useDropdownFeature(persistant = false) {
@@ -87,6 +89,7 @@ function DropdownMenu(props: Props) {
                 show={showPopup}
                 elementRef={popupRef}
                 freeWidth={!popupMatchesParentWidth}
+                parentRef={buttonRef}
             >
                 { children }
             </Popup>
@@ -94,4 +97,4 @@ function DropdownMenu(props: Props) {
     );
 }
 
-export default DropdownMenu;
+export default genericMemo(DropdownMenu);
