@@ -76,7 +76,7 @@ function Header(props: Props) {
                             headingClassName,
                             isStringHeading && styles.stringHeading,
                         )}
-                        title={isStringHeading ? 'heading' : undefined}
+                        title={isStringHeading ? (heading as string) : undefined}
                     >
                         { heading }
                     </Heading>
