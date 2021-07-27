@@ -71,15 +71,27 @@
     &.start-date {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        background-color: var(--dui-color-accent);
-        color: var(--dui-color-text-on-accent);
+
+        &:not(.ghost) {
+            background-color: var(--dui-color-accent);
+            color: var(--dui-color-text-on-accent);
+        }
+        &.ghost {
+            background-color: var(--dui-color-surface-information);
+        }
     }
 
     &.end-date {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        background-color: var(--dui-color-accent);
-        color: var(--dui-color-text-on-accent);
+
+        &:not(.ghost) {
+            background-color: var(--dui-color-accent);
+            color: var(--dui-color-text-on-accent);
+        }
+        &.ghost {
+            background-color: var(--dui-color-surface-information);
+        }
     }
 
     &.in-between {

@@ -119,94 +119,96 @@ function TimeRangeInput<T extends string>(props: Props<T>) {
     }, [tempTime, name, onChange, hideTimePicker]);
 
     return (
-        <InputContainer
-            containerRef={containerRef}
-            inputSectionRef={inputSectionRef}
-            actions={(
-                <>
-                    { actions }
-                    {!readOnly && (
-                        <>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={handleClearButtonClick}
-                                disabled={disabled}
-                            >
-                                <IoClose />
-                            </Button>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={toggleShowTimePicker}
-                                disabled={disabled}
-                            >
-                                <IoTimeOutline />
-                            </Button>
-                        </>
-                    )}
-                </>
-            )}
-            actionsContainerClassName={actionsContainerClassName}
-            className={className}
-            disabled={disabled}
-            inputContainerClassName={styles.inputContainer}
-            error={error}
-            errorContainerClassName={errorContainerClassName}
-            hint={hint}
-            hintContainerClassName={hintContainerClassName}
-            icons={icons}
-            iconsContainerClassName={iconsContainerClassName}
-            inputSectionClassName={inputSectionClassName}
-            label={label}
-            labelContainerClassName={labelContainerClassName}
-            readOnly={readOnly}
-            uiMode={uiMode}
-            variant={variant}
-            input={(
-                <>
-                    <RawInput<string>
-                        name="startTime"
-                        className={_cs(
-                            styles.input,
-                            styles.startTimeInput,
-                            uiModeClassName,
-                            !!error && styles.errored,
-                            inputClassName,
+        <>
+            <InputContainer
+                containerRef={containerRef}
+                inputSectionRef={inputSectionRef}
+                actions={(
+                    <>
+                        { actions }
+                        {!readOnly && (
+                            <>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={handleClearButtonClick}
+                                    disabled={disabled}
+                                >
+                                    <IoClose />
+                                </Button>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={toggleShowTimePicker}
+                                    disabled={disabled}
+                                >
+                                    <IoTimeOutline />
+                                </Button>
+                            </>
                         )}
-                        elementRef={inputElementRef}
-                        onFocus={setShowTimePickerTrue}
-                        readOnly
-                        uiMode={uiMode}
-                        disabled={disabled}
-                        type="time"
-                        value={value?.startTime}
-                    />
-                    <div className={styles.separator}>
-                        to
-                    </div>
-                    <RawInput<string>
-                        name="endTime"
-                        className={_cs(
-                            styles.input,
-                            styles.endTimeInput,
-                            uiModeClassName,
-                            !!error && styles.errored,
-                            inputClassName,
-                        )}
-                        elementRef={inputElementRef}
-                        onFocus={setShowTimePickerTrue}
-                        readOnly
-                        uiMode={uiMode}
-                        disabled={disabled}
-                        type="time"
-                        value={value?.endTime}
-                    />
-                </>
-            )}
-        >
+                    </>
+                )}
+                actionsContainerClassName={actionsContainerClassName}
+                className={className}
+                disabled={disabled}
+                inputContainerClassName={styles.inputContainer}
+                error={error}
+                errorContainerClassName={errorContainerClassName}
+                hint={hint}
+                hintContainerClassName={hintContainerClassName}
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                inputSectionClassName={inputSectionClassName}
+                label={label}
+                labelContainerClassName={labelContainerClassName}
+                readOnly={readOnly}
+                uiMode={uiMode}
+                variant={variant}
+                input={(
+                    <>
+                        <RawInput<string>
+                            name="startTime"
+                            className={_cs(
+                                styles.input,
+                                styles.startTimeInput,
+                                uiModeClassName,
+                                !!error && styles.errored,
+                                inputClassName,
+                            )}
+                            elementRef={inputElementRef}
+                            onFocus={setShowTimePickerTrue}
+                            readOnly
+                            uiMode={uiMode}
+                            disabled={disabled}
+                            type="time"
+                            value={value?.startTime}
+                        />
+                        <div className={styles.separator}>
+                            to
+                        </div>
+                        <RawInput<string>
+                            name="endTime"
+                            className={_cs(
+                                styles.input,
+                                styles.endTimeInput,
+                                uiModeClassName,
+                                !!error && styles.errored,
+                                inputClassName,
+                            )}
+                            elementRef={inputElementRef}
+                            onFocus={setShowTimePickerTrue}
+                            readOnly
+                            uiMode={uiMode}
+                            disabled={disabled}
+                            type="time"
+                            value={value?.endTime}
+                        />
+                    </>
+                )}
+            />
             {!readOnly && (
                 <Popup
+                    parentRef={containerRef}
                     elementRef={popupRef}
                     show={showTimePicker}
                     freeWidth
@@ -240,7 +242,7 @@ function TimeRangeInput<T extends string>(props: Props<T>) {
                     </div>
                 </Popup>
             )}
-        </InputContainer>
+        </>
     );
 }
 

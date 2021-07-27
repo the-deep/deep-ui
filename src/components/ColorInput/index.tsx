@@ -38,19 +38,21 @@ function ColorInput<N extends number | string | undefined>(props: Props<N>) {
     } = useDropdownFeature(true);
 
     return (
-        <RawButton
-            elementRef={buttonRef}
-            name={undefined}
-            className={_cs(
-                styles.colorInput,
-                !value && styles.empty,
-                className,
-            )}
-            style={value ? { backgroundColor: value } : undefined}
-            onClick={handleButtonClick}
-        >
+        <>
+            <RawButton
+                elementRef={buttonRef}
+                name={undefined}
+                className={_cs(
+                    styles.colorInput,
+                    !value && styles.empty,
+                    className,
+                )}
+                style={value ? { backgroundColor: value } : undefined}
+                onClick={handleButtonClick}
+            />
             <Popup
                 elementRef={popupRef}
+                parentRef={buttonRef}
                 show={showPopup}
                 freeWidth
                 className={styles.colorPickerPopup}
@@ -62,7 +64,7 @@ function ColorInput<N extends number | string | undefined>(props: Props<N>) {
                     disableAlpha
                 />
             </Popup>
-        </RawButton>
+        </>
     );
 }
 

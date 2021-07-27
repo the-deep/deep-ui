@@ -52,15 +52,17 @@ function QuickActionDropdownMenu(props: Props) {
     }, [componentRef, setShowPopup]);
 
     return (
-        <QuickActionButton
-            name={undefined}
-            elementRef={buttonRef}
-            className={className}
-            variant={variant}
-            onClick={handleButtonClick}
-            {...otherProps}
-        >
-            {label}
+        <>
+            <QuickActionButton
+                name={undefined}
+                elementRef={buttonRef}
+                className={className}
+                variant={variant}
+                onClick={handleButtonClick}
+                {...otherProps}
+            >
+                {label}
+            </QuickActionButton>
             <Popup
                 parentRef={buttonRef}
                 className={_cs(styles.popup, popupClassName)}
@@ -71,7 +73,7 @@ function QuickActionDropdownMenu(props: Props) {
             >
                 {children}
             </Popup>
-        </QuickActionButton>
+        </>
     );
 }
 

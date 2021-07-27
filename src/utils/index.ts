@@ -42,3 +42,7 @@ export function ymdToDateString(year: number, month: number, day: number) {
 
     return `${ys}-${ms}-${ds}`;
 }
+
+export function dateStringToDate(value: string) {
+    return new Date(`${value}T00:00`);
+}

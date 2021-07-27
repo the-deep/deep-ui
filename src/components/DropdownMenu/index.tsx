@@ -87,34 +87,36 @@ function DropdownMenu(props: Props) {
     }, [componentRef, setShowPopup]);
 
     return (
-        <Button
-            {...buttonProps}
-            name={undefined}
-            variant={variant}
-            elementRef={buttonRef}
-            className={_cs(styles.dropdownMenu, className)}
-            onClick={handleButtonClick}
-            actions={(
-                <>
-                    {actions}
-                    {!hideDropdownIcon && (
-                        <IoChevronDown />
-                    )}
-                </>
-            )}
-        >
-            { label }
+        <>
+            <Button
+                {...buttonProps}
+                name={undefined}
+                variant={variant}
+                elementRef={buttonRef}
+                className={_cs(styles.dropdownMenu, className)}
+                onClick={handleButtonClick}
+                actions={(
+                    <>
+                        {actions}
+                        {!hideDropdownIcon && (
+                            <IoChevronDown />
+                        )}
+                    </>
+                )}
+            >
+                { label }
+            </Button>
             <Popup
+                elementRef={popupRef}
+                parentRef={buttonRef}
                 className={_cs(styles.popup, popupClassName)}
                 contentClassName={popupContentClassName}
                 show={showPopup}
-                elementRef={popupRef}
                 freeWidth={!popupMatchesParentWidth}
-                parentRef={buttonRef}
             >
                 { children }
             </Popup>
-        </Button>
+        </>
     );
 }
 

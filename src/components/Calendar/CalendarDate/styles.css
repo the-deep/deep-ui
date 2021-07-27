@@ -17,4 +17,8 @@
         color: var(--dui-color-text-on-accent);
         pointer-events: none;
     }
+
+    &.ghost {
+        opacity: 0.5;
+    }
 }

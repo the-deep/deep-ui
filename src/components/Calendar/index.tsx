@@ -98,28 +98,10 @@ function getDates(year: number, month: number) {
     return dates;
 }
 
-interface DummyDatePros {
-    className?: string;
-    date: number;
-}
-
-function DummyDate(props: DummyDatePros) {
-    const {
-        className,
-        date,
-    } = props;
-
-    return (
-        <div className={_cs(styles.dummyDate, className)}>
-            {date}
-        </div>
-    );
-}
-
 const monthKeySelector = (m: MonthName) => m.key;
 const monthLabelSelector = (m: MonthName) => m.label;
 
-type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick' | 'activeDate';
+type RendererOmissions = 'year' | 'month' | 'date' | 'currentYear' | 'currentMonth' | 'currentDate' | 'onClick' | 'activeDate' | 'ghost';
 export interface Props<P extends CalendarDateProps> {
     className?: string;
     dateRenderer?: (props: P) => React.ReactElement;
@@ -228,38 +210,38 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
             {(isValidYear && isDefined(year) && dates) ? (
                 <div className={styles.dayList}>
                     {dates.map((date) => {
-                        let children: React.ReactNode = null;
-                        if (date.type === 'prevMonth' || date.type === 'nextMonth') {
-                            children = (
-                                <DummyDate
-                                    date={date.date}
-                                />
-                            );
-                        } else {
-                            const defaultProps: Pick<P, RendererOmissions> = {
-                                onClick: onDateClick,
-                                year,
-                                month,
-                                date: date.date,
-                                currentYear: today.getFullYear(),
-                                currentMonth: today.getMonth(),
-                                currentDate: today.getDate(),
-                                activeDate,
-                            };
-
-                            const combinedProps = {
-                                ...(rendererParams ? rendererParams(
-                                    date.date, month, year,
-                                ) : undefined),
-                                ...defaultProps,
-                            } as P;
-
-                            children = (
-                                <DateRenderer
-                                    {...combinedProps}
-                                />
-                            );
+                        let newMonth = month;
+                        if (date.type === 'prevMonth') {
+                            newMonth -= 1;
+                        } else if (date.type === 'nextMonth') {
+                            newMonth += 1;
                         }
+                        const ymd = new Date(year, newMonth, date.date);
+
+                        const defaultProps: Pick<P, RendererOmissions> = {
+                            onClick: onDateClick,
+                            year: ymd.getFullYear(),
+                            month: ymd.getMonth(),
+                            date: ymd.getDate(),
+                            currentYear: today.getFullYear(),
+                            currentMonth: today.getMonth(),
+                            currentDate: today.getDate(),
+                            activeDate,
+                            ghost: date.type === 'prevMonth' || date.type === 'nextMonth',
+                        };
+
+                        const combinedProps = {
+                            ...(rendererParams ? rendererParams(
+                                date.date, month, year,
+                            ) : undefined),
+                            ...defaultProps,
+                        } as P;
+
+                        const children = (
+                            <DateRenderer
+                                {...combinedProps}
+                            />
+                        );
 
                         return (
                             <div
