@@ -13,12 +13,13 @@ const positionToStyleMap: {
     left: styles.left,
 };
 
-interface Props {
+export interface Props {
     className?: string;
     active?: boolean;
     errored?: boolean;
     position?: Position;
     disabled?: boolean;
+    transparent?: boolean;
 }
 
 function Border(props: Props) {
@@ -28,6 +29,7 @@ function Border(props: Props) {
         errored,
         position = 'bottom',
         disabled,
+        transparent,
     } = props;
 
     return (
@@ -38,6 +40,7 @@ function Border(props: Props) {
                 errored && styles.errored,
                 positionToStyleMap[position] ?? styles.bottom,
                 disabled && styles.disabled,
+                transparent && styles.transparent,
                 className,
             )}
         >

@@ -10,6 +10,8 @@ export type { AlertContextParams, AlertOptions } from './components/AlertContext
 export { default as AlertContext } from './components/AlertContext';
 export type { Props as BodyBackdropProps } from './components/BodyBackdrop';
 export { default as BodyBackdrop } from './components/BodyBackdrop';
+export type { Props as BorderProps } from './components/Border';
+export { default as Border } from './components/Border';
 export type { Props as ButtonProps } from './components/Button';
 export { default as Button, useButtonFeatures } from './components/Button';
 export type { Props as ButtonLikeLinkProps } from './components/ButtonLikeLink';

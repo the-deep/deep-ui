@@ -20,6 +20,7 @@ export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClic
     name: T;
     activeClassName?: string;
     borderWrapperClassName?: string;
+    transparentBorder?: boolean;
 }
 
 export default function Tab<T extends TabKey>(props: Props<T>) {
@@ -37,6 +38,7 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
         disabled: disabledFromProps,
         borderWrapperClassName,
         children,
+        transparentBorder,
         ...otherProps
     } = props;
 
@@ -70,6 +72,7 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
                 <Border
                     active={isActive}
                     disabled={disabled}
+                    transparent={transparentBorder}
                 />
             )}
             {children}

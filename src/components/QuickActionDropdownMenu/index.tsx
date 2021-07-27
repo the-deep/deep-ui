@@ -15,6 +15,10 @@ export type Props = Omit<QuickActionButtonProps<undefined>, 'onClick' | 'name'> 
     popupClassName?: string;
     popupContentClassName?: string;
     popupMatchesParentWidth?: boolean;
+    persistent?: boolean;
+    componentRef?: React.MutableRefObject<{
+        setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+    } | null>;
 };
 
 function QuickActionDropdownMenu(props: Props) {
@@ -26,6 +30,8 @@ function QuickActionDropdownMenu(props: Props) {
         popupClassName,
         popupContentClassName,
         popupMatchesParentWidth,
+        persistent = false,
+        componentRef,
         ...otherProps
     } = props;
 
@@ -33,8 +39,17 @@ function QuickActionDropdownMenu(props: Props) {
         buttonRef,
         popupRef,
         showPopup,
+        setShowPopup,
         handleButtonClick,
-    } = useDropdownFeature();
+    } = useDropdownFeature(persistent);
+
+    React.useEffect(() => {
+        if (componentRef) {
+            componentRef.current = {
+                setShowPopup,
+            };
+        }
+    }, [componentRef, setShowPopup]);
 
     return (
         <QuickActionButton
