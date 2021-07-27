@@ -5,7 +5,7 @@ import {
 } from '@togglecorp/fujs';
 
 import Portal from '../Portal';
-import useParentPositionTracking from '../../hooks/useParentPositionTracking';
+import usePositionTracking from '../../hooks/usePositionTracking';
 import useMousePositionTracking from '../../hooks/useMousePositionTracking';
 import useUnmountTransition from '../../hooks/useUnmountTransition';
 
@@ -148,8 +148,10 @@ export function usePopupFeatures(
 
     const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
     const dummyRef = React.useRef<HTMLDivElement>(null);
-    const parentBCR = useParentPositionTracking(
-        parentRef ?? dummyRef, delayedShow && !useMousePosition,
+    const parentBCR = usePositionTracking(
+        parentRef ?? dummyRef,
+        delayedShow && !useMousePosition,
+        false,
     );
     const [mouseX, mouseY] = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
     const {

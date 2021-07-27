@@ -171,5 +171,5 @@ export { default as useBooleanState } from './hooks/useBooleanState';
 export { default as useConfirmation } from './hooks/useConfirmation';
 export { default as useHash } from './hooks/useHash';
 export { default as useInputState } from './hooks/useInputState';
-export { default as useParentPositionTracking } from './hooks/useParentPositionTracking';
+export { default as usePositionTracking } from './hooks/usePositionTracking';
 export { default as useUnmountTransition } from './hooks/useUnmountTransition';
