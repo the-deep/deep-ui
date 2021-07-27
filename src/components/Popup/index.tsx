@@ -208,6 +208,11 @@ export interface Props {
     contentClassName?: string;
     elementRef?: React.RefObject<HTMLDivElement>;
     contentRef?: React.RefObject<HTMLDivElement>;
+
+    /**
+     * ref of element where the popup should be attached
+     * NOTE: if not provided, popup will attach to it's DOM parent node
+     */
     parentRef?: React.RefObject<HTMLElement>;
     children: React.ReactNode;
     show?: boolean;
@@ -258,6 +263,11 @@ function Popup(props: Props) {
 
     return (
         <>
+            {/*
+                A dummy element is used to track parent DOM element
+                in the case where parentRef is not provided
+                since popup is mounted in body and not parent
+            */}
             {!parentRef && (
                 <div
                     ref={dummyRef}

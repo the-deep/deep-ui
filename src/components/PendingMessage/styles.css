@@ -3,11 +3,14 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    opacity: 0;
     background-color: var(--dui-color-backdrop);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
-    animation: appear var(--dui-duration-transition-medium) linear forwards;
-    animation-delay: var(--dui-duration-delay-long);
+    animation: appear var(--dui-duration-transition-medium) ease-in forwards;
+    animation-delay: var(--dui-duration-delay-medium);
+
+    &.no-debouncing {
+        animation-delay: unset;
+    }
 
     .icon {
         padding: var(--dui-spacing-small);
@@ -27,4 +30,3 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-
