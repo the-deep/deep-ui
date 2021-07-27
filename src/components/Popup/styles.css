@@ -22,7 +22,7 @@
     }
 
     &.top {
-        animation: appear-from-top var(--dui-duration-transition-medium) ease-in forwards;
+        animation: appear-from-top var(--dui-duration-transition-short) ease-in forwards;
 
         .tip {
             bottom: calc(-1 * var(--dui-height-popup-tip) + 1px);
@@ -31,7 +31,7 @@
     }
 
     &.bottom {
-        animation: appear-from-bottom var(--dui-duration-transition-medium) ease-in forwards;
+        animation: appear-from-bottom var(--dui-duration-transition-short) ease-in forwards;
 
         .tip {
             top: calc(-1 * var(--dui-height-popup-tip) + 1px);
@@ -61,11 +61,11 @@
         transform-origin: 0 0;
 
         &.top {
-            animation: hide-from-top var(--dui-duration-transition-medium) ease-in forwards;
+            animation: hide-from-top var(--dui-duration-transition-short) ease-in forwards;
         }
 
         &.bottom {
-            animation: hide-from-bottom var(--dui-duration-transition-medium) ease-in forwards;
+            animation: hide-from-bottom var(--dui-duration-transition-short) ease-in forwards;
         }
     }
 

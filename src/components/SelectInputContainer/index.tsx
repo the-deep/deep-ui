@@ -348,6 +348,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
             )}
         >
             <Popup
+                parentRef={containerRef}
                 elementRef={popupRef}
                 className={_cs(optionsPopupClassName, styles.popup)}
                 contentClassName={_cs(styles.popupContent, optionsPopupContentClassName)}

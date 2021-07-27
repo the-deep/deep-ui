@@ -7,20 +7,27 @@ import Popup from '../Popup';
 import useBooleanState from '../../hooks/useBooleanState';
 import useBlurEffect from '../../hooks/useBlurEffect';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
-export function useDropdownFeature(persistant = false) {
+export function useDropdownFeature(persistent = false) {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
-    const [showPopup, setShowPopupTrue, setShowPopupFalse] = useBooleanState(false);
+    const [
+        showPopup,
+        setShowPopupTrue,
+        setShowPopupFalse,
+        setShowPopup,
+    ] = useBooleanState(false);
 
     const handleBlur = React.useCallback((clickedWithin: boolean) => {
-        if (persistant && clickedWithin) {
+        if (persistent && clickedWithin) {
             return;
         }
 
         setShowPopupFalse();
-    }, [persistant, setShowPopupFalse]);
+    }, [persistent, setShowPopupFalse]);
 
     useBlurEffect(showPopup, handleBlur, popupRef, buttonRef);
 
@@ -28,6 +35,7 @@ export function useDropdownFeature(persistant = false) {
         buttonRef,
         popupRef,
         showPopup,
+        setShowPopup,
         handleButtonClick: setShowPopupTrue,
     };
 }
@@ -40,6 +48,10 @@ export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick' | 'name
     popupContentClassName?: string;
     popupMatchesParentWidth?: boolean;
     hideDropdownIcon?: boolean;
+    persistent?: boolean;
+    componentRef?: React.MutableRefObject<{
+        setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+    } | null>;
 }
 
 function DropdownMenu(props: Props) {
@@ -53,6 +65,8 @@ function DropdownMenu(props: Props) {
         popupContentClassName,
         popupMatchesParentWidth,
         hideDropdownIcon,
+        persistent = false,
+        componentRef,
         ...buttonProps
     } = props;
 
@@ -60,38 +74,50 @@ function DropdownMenu(props: Props) {
         buttonRef,
         popupRef,
         showPopup,
+        setShowPopup,
         handleButtonClick,
-    } = useDropdownFeature();
+    } = useDropdownFeature(persistent);
+
+    React.useEffect(() => {
+        if (componentRef) {
+            componentRef.current = {
+                setShowPopup,
+            };
+        }
+    }, [componentRef, setShowPopup]);
 
     return (
-        <Button
-            {...buttonProps}
-            name={undefined}
-            variant={variant}
-            elementRef={buttonRef}
-            className={_cs(styles.dropdownMenu, className)}
-            onClick={handleButtonClick}
-            actions={(
-                <>
-                    {actions}
-                    {!hideDropdownIcon && (
-                        <IoChevronDown />
-                    )}
-                </>
-            )}
-        >
-            { label }
+        <>
+            <Button
+                {...buttonProps}
+                name={undefined}
+                variant={variant}
+                elementRef={buttonRef}
+                className={_cs(styles.dropdownMenu, className)}
+                onClick={handleButtonClick}
+                actions={(
+                    <>
+                        {actions}
+                        {!hideDropdownIcon && (
+                            <IoChevronDown />
+                        )}
+                    </>
+                )}
+            >
+                { label }
+            </Button>
             <Popup
+                elementRef={popupRef}
+                parentRef={buttonRef}
                 className={_cs(styles.popup, popupClassName)}
                 contentClassName={popupContentClassName}
                 show={showPopup}
-                elementRef={popupRef}
                 freeWidth={!popupMatchesParentWidth}
             >
                 { children }
             </Popup>
-        </Button>
+        </>
     );
 }
 
-export default DropdownMenu;
+export default genericMemo(DropdownMenu);

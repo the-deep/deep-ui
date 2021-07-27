@@ -110,71 +110,73 @@ function DateInput<T extends string>(props: Props<T>) {
     }, [onChange, name]);
 
     return (
-        <InputContainer
-            containerRef={containerRef}
-            inputSectionRef={inputSectionRef}
-            actions={(
-                <>
-                    { actions }
-                    {!readOnly && (
-                        <>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={handleClearButtonClick}
-                                disabled={disabled}
-                            >
-                                <IoClose />
-                            </Button>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={toggleShowCalendar}
-                                disabled={disabled}
-                            >
-                                <IoCalendar />
-                            </Button>
-                        </>
-                    )}
-                </>
-            )}
-            actionsContainerClassName={actionsContainerClassName}
-            className={className}
-            disabled={disabled}
-            error={error}
-            errorContainerClassName={errorContainerClassName}
-            hint={hint}
-            hintContainerClassName={hintContainerClassName}
-            icons={icons}
-            iconsContainerClassName={iconsContainerClassName}
-            inputSectionClassName={inputSectionClassName}
-            label={label}
-            labelContainerClassName={labelContainerClassName}
-            readOnly={readOnly}
-            uiMode={uiMode}
-            variant={variant}
-            input={(
-                <RawInput<T>
-                    {...dateInputProps}
-                    name={name}
-                    className={_cs(
-                        styles.input,
-                        uiModeClassName,
-                        !!error && styles.errored,
-                        inputClassName,
-                    )}
-                    elementRef={inputElementRef}
-                    readOnly
-                    uiMode={uiMode}
-                    disabled={disabled}
-                    value={value}
-                    onFocus={setShowCalendarTrue}
-                    type="date"
-                />
-            )}
-        >
+        <>
+            <InputContainer
+                containerRef={containerRef}
+                inputSectionRef={inputSectionRef}
+                actions={(
+                    <>
+                        { actions }
+                        {!readOnly && (
+                            <>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={handleClearButtonClick}
+                                    disabled={disabled}
+                                >
+                                    <IoClose />
+                                </Button>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={toggleShowCalendar}
+                                    disabled={disabled}
+                                >
+                                    <IoCalendar />
+                                </Button>
+                            </>
+                        )}
+                    </>
+                )}
+                actionsContainerClassName={actionsContainerClassName}
+                className={className}
+                disabled={disabled}
+                error={error}
+                errorContainerClassName={errorContainerClassName}
+                hint={hint}
+                hintContainerClassName={hintContainerClassName}
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                inputSectionClassName={inputSectionClassName}
+                label={label}
+                labelContainerClassName={labelContainerClassName}
+                readOnly={readOnly}
+                uiMode={uiMode}
+                variant={variant}
+                input={(
+                    <RawInput<T>
+                        {...dateInputProps}
+                        name={name}
+                        className={_cs(
+                            styles.input,
+                            uiModeClassName,
+                            !!error && styles.errored,
+                            inputClassName,
+                        )}
+                        elementRef={inputElementRef}
+                        readOnly
+                        uiMode={uiMode}
+                        disabled={disabled}
+                        value={value}
+                        onFocus={setShowCalendarTrue}
+                        type="date"
+                    />
+                )}
+            />
             {!readOnly && (
                 <Popup
+                    parentRef={containerRef}
                     elementRef={popupRef}
                     show={showCalendar}
                     freeWidth
@@ -190,7 +192,7 @@ function DateInput<T extends string>(props: Props<T>) {
                     />
                 </Popup>
             )}
-        </InputContainer>
+        </>
     );
 }
 

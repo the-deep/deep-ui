@@ -17,6 +17,8 @@ export interface Props {
     currentDate: number;
     onClick?: (year: number, month: number, date: number) => void;
     elementRef?: RawButtonProps<undefined>['elementRef'];
+
+    ghost?: boolean;
 }
 
 function CalendarDate(props: Props) {
@@ -31,6 +33,7 @@ function CalendarDate(props: Props) {
         onClick,
         elementRef,
         activeDate,
+        ghost,
     } = props;
 
     const handleClick = React.useCallback(() => {
@@ -52,6 +55,7 @@ function CalendarDate(props: Props) {
                 && currentDate === date
                 && styles.today,
                 dateString === activeDate && styles.active,
+                ghost && styles.ghost,
                 className,
             )}
             onClick={handleClick}

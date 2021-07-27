@@ -6,6 +6,10 @@
     width: 100%;
     height: var(--dui-width-separator-medium);
 
+    &.transparent {
+        background-color: transparent;
+    }
+
     &.active {
         display: flex;
         justify-content: center;

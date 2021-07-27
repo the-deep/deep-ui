@@ -10,6 +10,8 @@ export type { AlertContextParams, AlertOptions } from './components/AlertContext
 export { default as AlertContext } from './components/AlertContext';
 export type { Props as BodyBackdropProps } from './components/BodyBackdrop';
 export { default as BodyBackdrop } from './components/BodyBackdrop';
+export type { Props as BorderProps } from './components/Border';
+export { default as Border } from './components/Border';
 export type { Props as ButtonProps } from './components/Button';
 export { default as Button, useButtonFeatures } from './components/Button';
 export type { Props as ButtonLikeLinkProps } from './components/ButtonLikeLink';
@@ -169,5 +171,5 @@ export { default as useBooleanState } from './hooks/useBooleanState';
 export { default as useConfirmation } from './hooks/useConfirmation';
 export { default as useHash } from './hooks/useHash';
 export { default as useInputState } from './hooks/useInputState';
-export { default as useParentPositionTracking } from './hooks/useParentPositionTracking';
+export { default as usePositionTracking } from './hooks/usePositionTracking';
 export { default as useUnmountTransition } from './hooks/useUnmountTransition';

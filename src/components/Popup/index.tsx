@@ -5,7 +5,7 @@ import {
 } from '@togglecorp/fujs';
 
 import Portal from '../Portal';
-import useParentPositionTracking from '../../hooks/useParentPositionTracking';
+import usePositionTracking from '../../hooks/usePositionTracking';
 import useMousePositionTracking from '../../hooks/useMousePositionTracking';
 import useUnmountTransition from '../../hooks/useUnmountTransition';
 
@@ -126,7 +126,7 @@ function getFloatPlacementOnMousePosition(
     };
 }
 
-type PopupFeatureKeys = 'show' | 'elementRef' | 'className' | 'contentClassName' | 'contentRef' | 'children' | 'tipClassName';
+type PopupFeatureKeys = 'show' | 'elementRef' | 'className' | 'contentClassName' | 'contentRef' | 'parentRef' | 'children' | 'tipClassName';
 export function usePopupFeatures(
     props: Pick<Props, PopupFeatureKeys> & {
         matchParentWidth?: boolean;
@@ -143,11 +143,17 @@ export function usePopupFeatures(
         tipClassName,
         matchParentWidth,
         useMousePosition,
+        parentRef,
     } = props;
+
     const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
     const dummyRef = React.useRef<HTMLDivElement>(null);
-    const parentBCR = useParentPositionTracking(dummyRef, delayedShow && !useMousePosition);
-    const [mouseX, mouseY] = useMousePositionTracking(useMousePosition && delayedShow);
+    const parentBCR = usePositionTracking(
+        parentRef ?? dummyRef,
+        delayedShow && !useMousePosition,
+        !parentRef,
+    );
+    const [mouseX, mouseY] = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
     const {
         placement,
         width,
@@ -204,6 +210,12 @@ export interface Props {
     contentClassName?: string;
     elementRef?: React.RefObject<HTMLDivElement>;
     contentRef?: React.RefObject<HTMLDivElement>;
+
+    /**
+     * ref of element where the popup should be attached
+     * NOTE: if not provided, popup will attach to it's DOM parent node
+     */
+    parentRef?: React.RefObject<HTMLElement>;
     children: React.ReactNode;
     show?: boolean;
     tipClassName?: string;
@@ -222,6 +234,7 @@ function Popup(props: Props) {
         tipClassName,
         freeWidth = false,
         onUnmount,
+        parentRef,
     } = props;
 
     const {
@@ -236,6 +249,7 @@ function Popup(props: Props) {
         show,
         tipClassName,
         matchParentWidth: !freeWidth,
+        parentRef,
     });
 
     const unmountRef = React.useRef<boolean | undefined>();
@@ -251,10 +265,17 @@ function Popup(props: Props) {
 
     return (
         <>
-            <div
-                ref={dummyRef}
-                className={styles.dummy}
-            />
+            {/*
+                A dummy element is used to track parent DOM element
+                in the case where parentRef is not provided
+                since popup is mounted in body and not parent
+            */}
+            {!parentRef && (
+                <div
+                    ref={dummyRef}
+                    className={styles.dummy}
+                />
+            )}
             {!shouldUnmount && popupChildren }
         </>
     );

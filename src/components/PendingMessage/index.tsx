@@ -9,6 +9,7 @@ export interface Props {
     className?: string;
     message?: React.ReactNode;
     compact?: boolean;
+    noDebouncing?: boolean;
 }
 
 function PendingMessage(props: Props) {
@@ -16,6 +17,7 @@ function PendingMessage(props: Props) {
         className,
         message = 'Please wait...',
         compact,
+        noDebouncing,
     } = props;
 
     return (
@@ -24,6 +26,7 @@ function PendingMessage(props: Props) {
                 styles.pendingMessage,
                 className,
                 compact && styles.compact,
+                noDebouncing && styles.noDebouncing,
             )}
         >
             <PendingAnimation className={styles.icon} />

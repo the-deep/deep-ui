@@ -1,9 +1,10 @@
 import React from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
-function useParentPositionTracking(
+function usePositionTracking(
     elementRef: React.RefObject<HTMLElement>,
     shouldTrack = true,
+    trackParent = false,
 ) {
     const [bcr, setBcr] = React.useState<DOMRect | undefined>(undefined);
     const callbackRef = React.useRef<number | undefined>();
@@ -18,12 +19,14 @@ function useParentPositionTracking(
 
         callbackRef.current = window.requestIdleCallback(() => {
             const { current: el } = elementRef;
-            if (el && el.parentElement) {
-                const elementBCR = el.parentElement.getBoundingClientRect();
+            const trackingTarget = trackParent ? el?.parentElement : el;
+
+            if (trackingTarget) {
+                const elementBCR = trackingTarget.getBoundingClientRect();
                 setBcr(elementBCR);
             }
         }, { timeout: 200 });
-    }, [elementRef, setBcr]);
+    }, [elementRef, setBcr, trackParent]);
 
     const handleResize = queueSync;
 
@@ -35,11 +38,14 @@ function useParentPositionTracking(
 
     const handleScroll = React.useCallback((e: Event) => {
         const el = e.target as HTMLElement;
+        const trackingTarget = (trackParent
+            ? (elementRef?.current?.parentElement)
+            : (elementRef?.current)) ?? null;
 
-        if (el.contains(elementRef?.current?.parentElement ?? null)) {
+        if (el.contains(trackingTarget)) {
             queueSync();
         }
-    }, [queueSync, elementRef]);
+    }, [queueSync, elementRef, trackParent]);
 
     React.useEffect(() => {
         if (!shouldTrack) {
@@ -53,15 +59,17 @@ function useParentPositionTracking(
             return undefined;
         }
 
-        if (!el.parentElement) {
+        const { parentElement } = el;
+        if (trackParent && !parentElement) {
             console.error('useParentPositionTracking: Cannot find parent element');
             return undefined;
         }
 
         document.addEventListener('scroll', handleScroll, true);
+        const targetElement = trackParent ? parentElement as HTMLElement : el;
 
         resizeObserverRef.current = new ResizeObserver(handleResize);
-        resizeObserverRef.current.observe(el.parentElement);
+        resizeObserverRef.current.observe(targetElement);
 
         mutationObserverRef.current = new MutationObserver(handleAttributeMutation);
         mutationObserverRef.current.observe(
@@ -84,9 +92,9 @@ function useParentPositionTracking(
                 mutationObserverRef.current.disconnect();
             }
         };
-    }, [elementRef, handleResize, handleAttributeMutation, handleScroll, shouldTrack]);
+    }, [elementRef, handleResize, handleAttributeMutation, handleScroll, shouldTrack, trackParent]);
 
     return bcr;
 }
 
-export default useParentPositionTracking;
+export default usePositionTracking;

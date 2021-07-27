@@ -19,7 +19,7 @@ import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
 import CalendarDate, { Props as CalendarDateProps } from '../Calendar/CalendarDate';
-import { ymdToDateString } from '../../utils';
+import { ymdToDateString, dateStringToDate } from '../../utils';
 
 import {
     predefinedDateRangeOptions,
@@ -27,6 +27,15 @@ import {
 } from './predefinedDateRange';
 
 import styles from './styles.css';
+
+function prevMonth(date: Date) {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() - 1);
+    return newDate;
+}
+function sameMonth(foo: Date, bar: Date) {
+    return foo.getFullYear() === bar.getFullYear() && foo.getMonth() === bar.getMonth();
+}
 
 export interface Value {
     startDate: string;
@@ -46,18 +55,20 @@ const DateRenderer = (props: DateRendererProps) => {
         date,
         startDate,
         endDate,
+        ghost,
         ...otherProps
     } = props;
 
-    const start = startDate ? new Date(startDate).getTime() : undefined;
-    const end = endDate ? new Date(endDate).getTime() : undefined;
+    const start = startDate ? dateStringToDate(startDate).getTime() : undefined;
+    const end = endDate ? dateStringToDate(endDate).getTime() : undefined;
     const current = new Date(year, month, date).getTime();
 
+    const inBetween = isDefined(start) && isDefined(end) && current > start && current < end;
+
     const dateString = ymdToDateString(year, month, date);
-    const inBetween = (start && end) ? (
-        current > start && current < end
-    ) : false;
+
     const isEndDate = dateString === endDate;
+    const isStartDate = dateString === startDate;
 
     return (
         <CalendarDate
@@ -65,13 +76,15 @@ const DateRenderer = (props: DateRendererProps) => {
             className={_cs(
                 styles.calendarDate,
                 dateClassName,
-                dateString === startDate && styles.startDate,
+                isStartDate && styles.startDate,
                 isEndDate && styles.endDate,
-                (!isEndDate && inBetween) && styles.inBetween,
+                inBetween && styles.inBetween,
+                ghost && styles.ghost,
             )}
             year={year}
             month={month}
             date={date}
+            ghost={ghost}
         />
     );
 };
@@ -111,14 +124,6 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         value,
         variant,
     } = props;
-
-    const prevMonthDate = new Date();
-    prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-    const prevMonthDateString = ymdToDateString(
-        prevMonthDate.getFullYear(),
-        prevMonthDate.getMonth(),
-        1,
-    );
 
     const [tempDate, setTempDate] = React.useState<Partial<Value>>({
         startDate: undefined,
@@ -182,7 +187,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                 if (isDefined(prevTempDate.startDate)) {
                     const lastDate = ymdToDateString(year, month, day);
 
-                    const prev = new Date(prevTempDate.startDate).getTime();
+                    const prev = dateStringToDate(prevTempDate.startDate).getTime();
                     const current = new Date(year, month, day).getTime();
 
                     const startDate = prev > current ? lastDate : prevTempDate.startDate;
@@ -246,95 +251,122 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         }
     }, [onChange, name]);
 
+    const endDate = value?.endDate;
+    const endDateDate = endDate
+        ? dateStringToDate(endDate)
+        : new Date();
+
+    const startDate = value?.startDate;
+    let startDateDate = startDate
+        ? dateStringToDate(startDate)
+        : new Date();
+
+    if (sameMonth(endDateDate, startDateDate)) {
+        startDateDate = prevMonth(startDateDate);
+    }
+
+    const firstInitialDate = ymdToDateString(
+        startDateDate.getFullYear(),
+        startDateDate.getMonth(),
+        1,
+    );
+    const secondInitialDate = ymdToDateString(
+        endDateDate.getFullYear(),
+        endDateDate.getMonth(),
+        1,
+    );
+
     return (
-        <InputContainer
-            containerRef={containerRef}
-            inputSectionRef={inputSectionRef}
-            actions={(
-                <>
-                    { actions }
-                    {!readOnly && (
-                        <>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={handleClearButtonClick}
-                                disabled={disabled}
-                            >
-                                <IoClose />
-                            </Button>
-                            <Button
-                                name={undefined}
-                                variant="transparent"
-                                onClick={toggleShowCalendar}
-                                disabled={disabled}
-                            >
-                                <IoCalendar />
-                            </Button>
-                        </>
-                    )}
-                </>
-            )}
-            actionsContainerClassName={actionsContainerClassName}
-            className={className}
-            disabled={disabled}
-            error={error}
-            errorContainerClassName={errorContainerClassName}
-            hint={hint}
-            hintContainerClassName={hintContainerClassName}
-            icons={icons}
-            iconsContainerClassName={iconsContainerClassName}
-            inputSectionClassName={inputSectionClassName}
-            inputContainerClassName={styles.inputContainer}
-            label={label}
-            labelContainerClassName={labelContainerClassName}
-            variant={variant}
-            readOnly={readOnly}
-            uiMode={uiMode}
-            input={(
-                <>
-                    <RawInput<string>
-                        name="startDate"
-                        className={_cs(
-                            styles.input,
-                            styles.startDateInput,
-                            uiModeClassName,
-                            !!error && styles.errored,
-                            inputClassName,
+        <>
+            <InputContainer
+                containerRef={containerRef}
+                inputSectionRef={inputSectionRef}
+                actions={(
+                    <>
+                        { actions }
+                        {!readOnly && (
+                            <>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={handleClearButtonClick}
+                                    disabled={disabled}
+                                >
+                                    <IoClose />
+                                </Button>
+                                <Button
+                                    name={undefined}
+                                    variant="transparent"
+                                    onClick={toggleShowCalendar}
+                                    disabled={disabled}
+                                >
+                                    <IoCalendar />
+                                </Button>
+                            </>
                         )}
-                        value={tempDate.startDate ?? value?.startDate}
-                        elementRef={inputElementRef}
-                        readOnly
-                        uiMode={uiMode}
-                        disabled={disabled}
-                        onFocus={setShowCalendarTrue}
-                        type="date"
-                    />
-                    <div className={styles.separator}>
-                        to
-                    </div>
-                    <RawInput<string>
-                        name="startDate"
-                        className={_cs(
-                            styles.input,
-                            styles.endDateInput,
-                            uiModeClassName,
-                            !!error && styles.errored,
-                            inputClassName,
-                        )}
-                        elementRef={inputElementRef}
-                        readOnly
-                        value={value?.endDate}
-                        uiMode={uiMode}
-                        disabled={disabled}
-                        onFocus={setShowCalendarTrue}
-                        type="date"
-                    />
-                </>
-            )}
-        >
+                    </>
+                )}
+                actionsContainerClassName={actionsContainerClassName}
+                className={className}
+                disabled={disabled}
+                error={error}
+                errorContainerClassName={errorContainerClassName}
+                hint={hint}
+                hintContainerClassName={hintContainerClassName}
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                inputSectionClassName={inputSectionClassName}
+                inputContainerClassName={styles.inputContainer}
+                label={label}
+                labelContainerClassName={labelContainerClassName}
+                variant={variant}
+                readOnly={readOnly}
+                uiMode={uiMode}
+                input={(
+                    <>
+                        <RawInput<string>
+                            name="startDate"
+                            className={_cs(
+                                styles.input,
+                                styles.startDateInput,
+                                uiModeClassName,
+                                !!error && styles.errored,
+                                inputClassName,
+                            )}
+                            value={tempDate.startDate ?? value?.startDate}
+                            elementRef={inputElementRef}
+                            readOnly
+                            uiMode={uiMode}
+                            disabled={disabled}
+                            onFocus={setShowCalendarTrue}
+                            type="date"
+                        />
+                        <div className={styles.separator}>
+                            to
+                        </div>
+                        <RawInput<string>
+                            name="startDate"
+                            className={_cs(
+                                styles.input,
+                                styles.endDateInput,
+                                uiModeClassName,
+                                !!error && styles.errored,
+                                inputClassName,
+                            )}
+                            elementRef={inputElementRef}
+                            readOnly
+                            value={value?.endDate}
+                            uiMode={uiMode}
+                            disabled={disabled}
+                            onFocus={setShowCalendarTrue}
+                            type="date"
+                        />
+                    </>
+                )}
+            />
             {!readOnly && (
                 <Popup
+                    parentRef={containerRef}
                     elementRef={popupRef}
                     show={showCalendar}
                     freeWidth
@@ -360,7 +392,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                         monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
                         dateRenderer={DateRenderer}
                         rendererParams={dateRendererParams}
-                        initialDate={value?.startDate ?? prevMonthDateString}
+                        initialDate={firstInitialDate}
                     />
                     <Calendar
                         onDateClick={handleCalendarDateClick}
@@ -368,11 +400,11 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                         monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
                         dateRenderer={DateRenderer}
                         rendererParams={dateRendererParams}
-                        initialDate={value?.endDate}
+                        initialDate={secondInitialDate}
                     />
                 </Popup>
             )}
-        </InputContainer>
+        </>
     );
 }
 

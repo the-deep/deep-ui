@@ -29,9 +29,9 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'Yesterday',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setDate(startDate.getDate() - 1);
+
+            const endDate = new Date();
             endDate.setDate(endDate.getDate() - 1);
 
             return {
@@ -45,9 +45,10 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'This week',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setDate(startDate.getDate() - startDate.getDay());
+
+            const endDate = new Date();
+            // NOTE: this will give us sunday
             endDate.setDate(startDate.getDate() + 6);
 
             return {
@@ -60,9 +61,9 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         key: 'lastSevenDays',
         label: 'Last 7 days',
         getValue: () => {
-            const startDate = new Date();
             const endDate = new Date();
 
+            const startDate = new Date();
             startDate.setDate(endDate.getDate() - 7);
 
             return {
@@ -76,9 +77,9 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'This month',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setDate(1);
+
+            const endDate = new Date();
             endDate.setMonth(endDate.getMonth() + 1);
             endDate.setDate(0);
 
@@ -92,9 +93,9 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         key: 'lastThirtyDays',
         label: 'Last 30 days',
         getValue: () => {
-            const startDate = new Date();
             const endDate = new Date();
 
+            const startDate = new Date();
             startDate.setDate(endDate.getDate() - 30);
 
             return {
@@ -108,10 +109,10 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'Last 3 months',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setMonth(startDate.getMonth() - 2);
             startDate.setDate(1);
+
+            const endDate = new Date();
             endDate.setMonth(endDate.getMonth() + 1);
             endDate.setDate(0);
 
@@ -126,10 +127,10 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'Last 6 months',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setMonth(startDate.getMonth() - 5);
             startDate.setDate(1);
+
+            const endDate = new Date();
             endDate.setMonth(endDate.getMonth() + 1);
             endDate.setDate(0);
 
@@ -144,11 +145,12 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'This year',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setMonth(0);
             startDate.setDate(1);
-            endDate.setMonth(endDate.getMonth() + 1);
+
+            const endDate = new Date();
+            endDate.setFullYear(startDate.getFullYear() + 1);
+            endDate.setMonth(0);
             endDate.setDate(0);
 
             return {
@@ -162,11 +164,11 @@ export const predefinedDateRangeOptions: PredefinedDateRangeOption[] = [
         label: 'Last year',
         getValue: () => {
             const startDate = new Date();
-            const endDate = new Date();
-
             startDate.setFullYear(startDate.getFullYear() - 1);
             startDate.setMonth(0);
             startDate.setDate(1);
+
+            const endDate = new Date();
             endDate.setMonth(0);
             endDate.setDate(0);
 

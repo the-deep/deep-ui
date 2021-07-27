@@ -217,6 +217,7 @@
     /*
      * TIMING
      */
+    --dui-duration-transition-short: 100ms;
     --dui-duration-transition-medium: 200ms;
     --dui-duration-transition-long: 400ms;
 

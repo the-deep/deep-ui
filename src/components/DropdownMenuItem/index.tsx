@@ -16,6 +16,8 @@ import RawButton, {
     Props as RawButtonProps,
 } from '../RawButton';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
 export function Separator({ className }: { className?: string }) {
@@ -123,4 +125,4 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
     );
 }
 
-export default DropdownMenuItem;
+export default genericMemo(DropdownMenuItem);

@@ -16,31 +16,41 @@ const handleMenuItemClick = () => {
     console.info('Dropdown menu clicked');
 };
 
-const Template: Story<DropdownMenuProps> = (args) => (
-    <DropdownMenu
-        {...args}
-    >
-        <DropdownMenuItem onClick={handleMenuItemClick}>
-            Home
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleMenuItemClick}>
-            Profile
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleMenuItemClick}>
-            Projects
-        </DropdownMenuItem>
-        <Separator />
-        <DropdownMenuItem onClick={handleMenuItemClick}>
-            Logout
-        </DropdownMenuItem>
-        <DropdownMenuItem
-            href="https://togglecorp.com"
-            actions={<IoExitOutline />}
-        >
-            Goto Togglecorp
-        </DropdownMenuItem>
-    </DropdownMenu>
-);
+const Template: Story<DropdownMenuProps> = () => {
+    const children = [];
+    for (let i = 0; i < 5; i += 1) {
+        children.push(
+            <DropdownMenu
+                key={i}
+            >
+                <DropdownMenuItem onClick={handleMenuItemClick}>
+                    {i}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleMenuItemClick}>
+                    Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleMenuItemClick}>
+                    Projects
+                </DropdownMenuItem>
+                <Separator />
+                <DropdownMenuItem onClick={handleMenuItemClick}>
+                    Logout
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    href="https://togglecorp.com"
+                    actions={<IoExitOutline />}
+                >
+                    Goto Togglecorp
+                </DropdownMenuItem>
+            </DropdownMenu>,
+        );
+    }
+    return (
+        <div>
+            {children}
+        </div>
+    );
+};
 
 export const Default = Template.bind({});
 
