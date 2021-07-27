@@ -151,7 +151,7 @@ export function usePopupFeatures(
     const parentBCR = usePositionTracking(
         parentRef ?? dummyRef,
         delayedShow && !useMousePosition,
-        false,
+        !parentRef,
     );
     const [mouseX, mouseY] = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
     const {
