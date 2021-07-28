@@ -11,7 +11,7 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
-export function useDropdownFeature(persistent = false) {
+export function useDropdownFeatures(persistent = false) {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
     const [
@@ -76,7 +76,7 @@ function DropdownMenu(props: Props) {
         showPopup,
         setShowPopup,
         handleButtonClick,
-    } = useDropdownFeature(persistent);
+    } = useDropdownFeatures(persistent);
 
     React.useEffect(() => {
         if (componentRef) {

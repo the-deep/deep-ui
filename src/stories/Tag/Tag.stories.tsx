@@ -2,6 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag, IoClose } from 'react-icons/io5';
 
+import PendingAnimation from '#components/PendingAnimation';
 import Tag, { Props as TagProps } from '#components/Tag';
 
 import styles from './styles.css';
@@ -54,7 +55,10 @@ export const Variants = () => (
                 <Tag variant="complement1">
                     Complement #1
                 </Tag>
-                <Tag variant="complement2">
+                <Tag
+                    variant="complement2"
+                    actions={<PendingAnimation inheritColor />}
+                >
                     Complement #2
                 </Tag>
             </div>

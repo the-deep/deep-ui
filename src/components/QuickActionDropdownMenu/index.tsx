@@ -1,7 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import { useDropdownFeature } from '../DropdownMenu';
+import { useDropdownFeatures } from '../DropdownMenu';
 import Popup from '../Popup';
 import QuickActionButton, {
     Props as QuickActionButtonProps,
@@ -41,7 +41,7 @@ function QuickActionDropdownMenu(props: Props) {
         showPopup,
         setShowPopup,
         handleButtonClick,
-    } = useDropdownFeature(persistent);
+    } = useDropdownFeatures(persistent);
 
     React.useEffect(() => {
         if (componentRef) {

@@ -13,15 +13,23 @@ function Circle() {
 
 export interface Props {
     className?: string;
+    inheritColor?: boolean;
 }
 
 function PendingAnimation(props: Props) {
     const {
         className,
+        inheritColor,
     } = props;
 
     return (
-        <div className={_cs(styles.pendingAnimation, className)}>
+        <div
+            className={_cs(
+                styles.pendingAnimation,
+                inheritColor && styles.inheritColor,
+                className,
+            )}
+        >
             <Circle />
             <Circle />
             <Circle />
