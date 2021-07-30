@@ -286,17 +286,19 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                         { actions }
                         {!readOnly && (
                             <>
+                                {value && (
+                                    <Button
+                                        name={undefined}
+                                        variant="action"
+                                        onClick={handleClearButtonClick}
+                                        disabled={disabled}
+                                    >
+                                        <IoClose />
+                                    </Button>
+                                )}
                                 <Button
                                     name={undefined}
-                                    variant="transparent"
-                                    onClick={handleClearButtonClick}
-                                    disabled={disabled}
-                                >
-                                    <IoClose />
-                                </Button>
-                                <Button
-                                    name={undefined}
-                                    variant="transparent"
+                                    variant="action"
                                     onClick={toggleShowCalendar}
                                     disabled={disabled}
                                 >
