@@ -78,6 +78,7 @@ export type Props<
         | 'onFocusedChange'
         | 'focusedKey'
         | 'onFocusedKeyChange'
+        | 'hasValue'
     >
 ) & (
     { nonClearable: true; onChange: (newValue: T, name: K) => void }
@@ -276,6 +277,7 @@ function SearchSelectInput<
             onFocusedChange={setFocused}
             focusedKey={focusedKey}
             onFocusedKeyChange={setFocusedKey}
+            hasValue={isDefined(value)}
             persistentOptionPopup={false}
         />
     );

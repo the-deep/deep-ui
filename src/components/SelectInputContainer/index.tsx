@@ -76,6 +76,7 @@ export type Props<
     persistentOptionPopup?: boolean;
     placeholder?: string;
     valueDisplay: string;
+    hasValue?: boolean;
     nonClearable?: boolean;
     onClear: () => void;
 }, OMISSION> & Omit<InputContainerProps, 'input'> & ({
@@ -135,6 +136,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
         onDropdownShownChange,
         totalOptionsCount,
         variant,
+        hasValue,
     } = props;
 
     const options = optionsFromProps ?? (emptyList as O[]);
@@ -300,7 +302,7 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
             actions={(
                 <>
                     {actions}
-                    {!readOnly && !nonClearable && (
+                    {!readOnly && !nonClearable && hasValue && (
                         <Button
                             onClick={onClear}
                             disabled={disabled}
