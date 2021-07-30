@@ -119,17 +119,19 @@ function DateInput<T extends string>(props: Props<T>) {
                         { actions }
                         {!readOnly && (
                             <>
+                                {value && (
+                                    <Button
+                                        name={undefined}
+                                        variant="action"
+                                        onClick={handleClearButtonClick}
+                                        disabled={disabled}
+                                    >
+                                        <IoClose />
+                                    </Button>
+                                )}
                                 <Button
                                     name={undefined}
-                                    variant="transparent"
-                                    onClick={handleClearButtonClick}
-                                    disabled={disabled}
-                                >
-                                    <IoClose />
-                                </Button>
-                                <Button
-                                    name={undefined}
-                                    variant="transparent"
+                                    variant="action"
                                     onClick={toggleShowCalendar}
                                     disabled={disabled}
                                 >

@@ -121,7 +121,8 @@
         .icons,
         .children,
         .actions {
-            font-size: 1.27em;
+            padding: 0;
+            font-size: calc(1em + calc(var(--dui-spacing-extra-small) / 2));
         }
     }
 
