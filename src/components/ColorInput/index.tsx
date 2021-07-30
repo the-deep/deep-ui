@@ -5,7 +5,7 @@ import {
     ColorResult,
 } from 'react-color';
 
-import { useDropdownFeature } from '../DropdownMenu';
+import { useDropdownFeatures } from '../DropdownMenu';
 import RawButton from '../RawButton';
 import Popup from '../Popup';
 
@@ -35,7 +35,7 @@ function ColorInput<N extends number | string | undefined>(props: Props<N>) {
         popupRef,
         showPopup,
         handleButtonClick,
-    } = useDropdownFeature(true);
+    } = useDropdownFeatures(true);
 
     return (
         <>
