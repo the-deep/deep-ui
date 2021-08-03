@@ -83,9 +83,11 @@ function Checkbox<N extends OptionKey>(props: Props<N>) {
                 disabled={disabled || readOnly}
                 {...otherProps}
             />
-            <div className={_cs(styles.label, labelContainerClassName)}>
-                { label }
-            </div>
+            {label && (
+                <div className={_cs(styles.label, labelContainerClassName)}>
+                    { label }
+                </div>
+            )}
         </label>
     );
 }

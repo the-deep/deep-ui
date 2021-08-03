@@ -16,6 +16,7 @@ export interface Props extends ContainerProps {
     // NOTE: Mount will mount the child even if its not shown
     alwaysMountContent?: boolean;
     expansionTriggerArea?: 'header' | 'arrow';
+    disabled?: boolean;
 }
 
 function ExpandableContainer(props: Props) {
@@ -33,6 +34,7 @@ function ExpandableContainer(props: Props) {
         headerClassName,
         headingSize,
         sub,
+        disabled = false,
         expansionTriggerArea = 'header',
         ...otherProps
     } = props;
@@ -42,7 +44,7 @@ function ExpandableContainer(props: Props) {
         toggleContentVisibility,
     ] = useBooleanState(defaultVisibility);
 
-    const mountContent = alwaysMountContent || showContent;
+    const mountContent = alwaysMountContent || showContent || !disabled;
 
     return (
         <Container
@@ -68,18 +70,20 @@ function ExpandableContainer(props: Props) {
             headerActions={(
                 <>
                     {headerActions}
-                    <Button
-                        className={styles.expandButton}
-                        name={undefined}
-                        onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
-                        variant="action"
-                    >
-                        {showContent ? (
-                            <IoChevronUpOutline className={styles.icon} />
-                        ) : (
-                            <IoChevronDownOutline className={styles.icon} />
-                        )}
-                    </Button>
+                    {!disabled && (
+                        <Button
+                            className={styles.expandButton}
+                            name={undefined}
+                            onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
+                            variant="action"
+                        >
+                            {showContent ? (
+                                <IoChevronUpOutline className={styles.icon} />
+                            ) : (
+                                <IoChevronDownOutline className={styles.icon} />
+                            )}
+                        </Button>
+                    )}
                 </>
             )}
             headingDescription={headingDescription}
