@@ -17,6 +17,7 @@ export interface Props extends ContainerProps {
     alwaysMountContent?: boolean;
     expansionTriggerArea?: 'header' | 'arrow';
     disabled?: boolean;
+    expansionButtonClassName?: string;
 }
 
 function ExpandableContainer(props: Props) {
@@ -36,6 +37,7 @@ function ExpandableContainer(props: Props) {
         sub,
         disabled = false,
         expansionTriggerArea = 'header',
+        expansionButtonClassName,
         ...otherProps
     } = props;
 
@@ -56,7 +58,7 @@ function ExpandableContainer(props: Props) {
             )}
             sub={sub}
             headerElementProps={{
-                onClick: expansionTriggerArea === 'header' ? toggleContentVisibility : undefined,
+                onClick: (expansionTriggerArea === 'header' && !disabled) ? toggleContentVisibility : undefined,
             }}
             headerClassName={_cs(
                 styles.header,
@@ -72,7 +74,7 @@ function ExpandableContainer(props: Props) {
                     {headerActions}
                     {!disabled && (
                         <Button
-                            className={styles.expandButton}
+                            className={_cs(styles.expandButton, expansionButtonClassName)}
                             name={undefined}
                             onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
                             variant="action"

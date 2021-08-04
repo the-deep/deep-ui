@@ -37,3 +37,10 @@ ExpandOnArrowClick.args = {
     expansionTriggerArea: 'arrow',
     children: 'I should expand on arrow click and not the whole header.',
 };
+
+export const DisabledExpandableContainer = Template.bind({});
+DisabledExpandableContainer.args = {
+    heading: 'Extended Matrixes',
+    children: 'I should expand on arrow click and not the whole header.',
+    disabled: true,
+};
