@@ -46,7 +46,7 @@ function ExpandableContainer(props: Props) {
         toggleContentVisibility,
     ] = useBooleanState(defaultVisibility);
 
-    const mountContent = alwaysMountContent || showContent || !disabled;
+    const mountContent = alwaysMountContent || showContent;
 
     return (
         <Container
@@ -58,12 +58,14 @@ function ExpandableContainer(props: Props) {
             )}
             sub={sub}
             headerElementProps={{
-                onClick: (expansionTriggerArea === 'header' && !disabled) ? toggleContentVisibility : undefined,
+                onClick: expansionTriggerArea === 'header' && !disabled
+                    ? toggleContentVisibility
+                    : undefined,
             }}
             headerClassName={_cs(
                 styles.header,
                 headerClassName,
-                expansionTriggerArea === 'header' && styles.clickableHeader,
+                expansionTriggerArea === 'header' && !disabled && styles.clickableHeader,
             )}
             headingContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
             headingClassName={_cs(styles.heading, headingClassName)}
@@ -72,20 +74,19 @@ function ExpandableContainer(props: Props) {
             headerActions={(
                 <>
                     {headerActions}
-                    {!disabled && (
-                        <Button
-                            className={_cs(styles.expandButton, expansionButtonClassName)}
-                            name={undefined}
-                            onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
-                            variant="action"
-                        >
-                            {showContent ? (
-                                <IoChevronUpOutline className={styles.icon} />
-                            ) : (
-                                <IoChevronDownOutline className={styles.icon} />
-                            )}
-                        </Button>
-                    )}
+                    <Button
+                        className={_cs(styles.expandButton, expansionButtonClassName)}
+                        name={undefined}
+                        onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
+                        variant="action"
+                        disabled={disabled}
+                    >
+                        {showContent ? (
+                            <IoChevronUpOutline className={styles.icon} />
+                        ) : (
+                            <IoChevronDownOutline className={styles.icon} />
+                        )}
+                    </Button>
                 </>
             )}
             headingDescription={headingDescription}
