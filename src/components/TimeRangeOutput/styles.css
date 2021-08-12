@@ -1,0 +1,11 @@
+.time-range-output {
+    display: inline;
+
+    >* {
+        display: inline;
+    }
+
+    .separator {
+        margin: 0 var(--dui-spacing-extra-small);
+    }
+}
