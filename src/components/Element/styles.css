@@ -1,0 +1,23 @@
+.element {
+    --spacing: var(--dui-spacing-medium);
+    display: flex;
+    width: fit-content;
+    gap: var(--spacing);
+
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
+    }
+}

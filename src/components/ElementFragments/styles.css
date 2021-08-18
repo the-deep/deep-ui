@@ -3,10 +3,27 @@
 }
 
 .children {
+    --spacing: var(--dui-spacing-small);
+
     display: flex;
     align-items: center;
     flex-grow: 1;
-    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
 }
 
 .actions {
