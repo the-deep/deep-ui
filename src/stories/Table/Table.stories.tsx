@@ -30,7 +30,7 @@ interface Program {
 const data: Program[] = [
     {
         id: 1,
-        name: 'Program A : 150 Somali migrants return home after detention in Libya',
+        name: 'Program A : 150 Somali migrants return home after detention in Libya and one reallyreallyreallyreallyreallyreallyreallylongsinglewordwhichshouldbreakthetable',
         budget: 123123,
         date: '2012-10-12T12:00:00',
     },
@@ -171,6 +171,7 @@ export const ManualRowExpansion = () => {
             columns={columnsWithAction}
             data={data}
             rowModifier={rowModifier}
+            variant="large"
         />
     );
 };
