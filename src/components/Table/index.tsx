@@ -8,6 +8,9 @@ import { BaseHeader } from './types';
 
 import { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import TableData from './TableData';
 import styles from './styles.css';
 
 export type TableVariant = (
@@ -74,7 +77,7 @@ export interface Props<D, K extends string | number, C extends Column<D, K, any,
     cellClassName?: string;
     uiMode?: UiMode;
     variant?: TableVariant;
-    rowModifier?: (rowOptions: RowOptions<D, K>) => React.ReactElement;
+    rowModifier?: (rowOptions: RowOptions<D, K>) => React.ReactNode;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,7 +141,7 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                 })}
             </colgroup>
             <thead>
-                <tr className={_cs(styles.headerRow, headerRowClassName)}>
+                <TableRow className={_cs(styles.headerRow, headerRowClassName)}>
                     {columns.map((column, index) => {
                         const {
                             id,
@@ -160,7 +163,7 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                             />
                         );
                         return (
-                            <th
+                            <TableHeader
                                 key={id}
                                 scope="col"
                                 className={_cs(
@@ -171,10 +174,10 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                                 )}
                             >
                                 {children}
-                            </th>
+                            </TableHeader>
                         );
                     })}
-                </tr>
+                </TableRow>
             </thead>
             <tbody>
                 {data?.map((datum, index) => {
@@ -200,7 +203,7 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
 
                         if (cellAsHeader) {
                             return (
-                                <th
+                                <TableHeader
                                     key={id}
                                     className={_cs(
                                         styles.rowHeaderCell,
@@ -210,11 +213,11 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                                     scope="row"
                                 >
                                     {children}
-                                </th>
+                                </TableHeader>
                             );
                         }
                         return (
-                            <td
+                            <TableData
                                 key={id}
                                 className={_cs(
                                     styles.cell,
@@ -223,17 +226,17 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
                                 )}
                             >
                                 {children}
-                            </td>
+                            </TableData>
                         );
                     });
 
                     const row = (
-                        <tr
+                        <TableRow
                             key={key}
                             className={_cs(styles.row, rowClassName)}
                         >
                             { cells }
-                        </tr>
+                        </TableRow>
                     );
 
                     let modifiedRow: React.ReactNode = row;

@@ -154,6 +154,11 @@ export { HideContext } from './components/Table/useHiding';
 export { default as useOrdering, useOrderState, OrderContext } from './components/Table/useOrdering';
 export { default as useRowExpansion } from './components/Table/useRowExpansion';
 export type { ExpansionOptions, ExpansionRowChildrenProps } from './components/Table/useRowExpansion';
+export { default as useRowExpansionOnClick } from './components/Table/useRowExpansionOnClick';
+export type {
+    ExpansionOptions as RowClickExpansionOptions,
+    ExpansionRowChildrenProps as RowClickExpansionRowChildrenProps,
+} from './components/Table/useRowExpansionOnClick';
 export { default as useSorting, useSortState, SortContext } from './components/Table/useSorting';
 export type { Props as TableViewProps } from './components/TableView';
 export { default as TableView } from './components/TableView';

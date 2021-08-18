@@ -13,11 +13,10 @@ export interface ExpansionOptions {
     expansionCellClassName?: string;
 }
 
-function useRowExpansion<D, K>(
-    expandedRowKey: K | undefined,
+function useRowExpansionOnClick<D, K>(
     expansionRowChildren: ExpansionRowChildrenProps<D, K>,
     options: ExpansionOptions = {},
-) : (rowOptions: RowOptions<D, K>) => React.ReactNode {
+) {
     const {
         expandedRowClassName,
         expandedCellClassName,
@@ -25,6 +24,7 @@ function useRowExpansion<D, K>(
         expansionRowClassName,
     } = options;
 
+    const [expandedRow, setExpandedRow] = React.useState<K | undefined>();
     const rowModifier: (
         o: RowOptions<D, K>
     ) => React.ReactNode = React.useCallback((rowOptions) => {
@@ -34,11 +34,16 @@ function useRowExpansion<D, K>(
             columns,
         } = rowOptions;
 
-        const isActive = rowKey === expandedRowKey;
+        const isActive = rowKey === expandedRow;
 
         return (
             <>
                 {React.cloneElement(row, {
+                    onClick: () => {
+                        setExpandedRow((oldValue) => (
+                            oldValue === rowKey ? undefined : rowKey
+                        ));
+                    },
                     className: _cs(
                         row.props.className,
                         isActive && expandedRowClassName,
@@ -68,7 +73,8 @@ function useRowExpansion<D, K>(
             </>
         );
     }, [
-        expandedRowKey,
+        expandedRow,
+        setExpandedRow,
         expansionRowChildren,
         expandedRowClassName,
         expandedCellClassName,
@@ -76,7 +82,7 @@ function useRowExpansion<D, K>(
         expansionCellClassName,
     ]);
 
-    return rowModifier;
+    return [rowModifier, !!expandedRow] as const;
 }
 
-export default useRowExpansion;
+export default useRowExpansionOnClick;

@@ -1,0 +1,4 @@
+.td {
+    border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-table-border);
+    padding: var(--dui-spacing-medium);
+}

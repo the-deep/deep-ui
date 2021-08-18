@@ -1,8 +1,14 @@
+import React from 'react';
 import {
     compareString,
     compareNumber,
 } from '@togglecorp/fujs';
+import {
+    IoChevronDown,
+    IoChevronForward,
+} from 'react-icons/io5';
 
+import Button, { Props as ButtonProps } from '../Button';
 import HeaderCell, { HeaderCellProps } from './HeaderCell';
 import Cell, { CellProps } from './Cell';
 import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
@@ -91,6 +97,46 @@ export function createNumberColumn<D, K>(
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareNumber(accessor(foo), accessor(bar)),
         columnClassName: options?.columnClassName,
+        columnWidth: options?.columnWidth,
+        columnStyle: options?.columnStyle,
+    };
+    return item;
+}
+
+export function createExpandColumn<D, K extends number | string | undefined>(
+    id: string,
+    title: string,
+    onClick: (rowId: K) => void,
+    expandedRowId: K | undefined,
+    options?: {
+        columnClassName?: string;
+        headerCellRendererClassName?: string;
+        headerContainerClassName?: string;
+        cellRendererClassName?: string;
+        cellContainerClassName?: string;
+        columnWidth?: Column<D, K, ButtonProps<K>, HeaderCellProps>['columnWidth'];
+        columnStyle?: Column<D, K, ButtonProps<K>, HeaderCellProps>['columnStyle'];
+    },
+) {
+    const item: Column<D, K, ButtonProps<K>, HeaderCellProps> = {
+        id,
+        title,
+        headerCellRenderer: HeaderCell,
+        headerCellRendererParams: {
+            sortable: false,
+        },
+        columnClassName: options?.columnClassName,
+        headerCellRendererClassName: options?.headerCellRendererClassName,
+        headerContainerClassName: options?.headerContainerClassName,
+        cellRendererClassName: options?.cellRendererClassName,
+        cellContainerClassName: options?.cellContainerClassName,
+        cellRenderer: Button,
+        cellRendererParams: (rowId: K) => ({
+            name: rowId,
+            children: (rowId === expandedRowId) ? <IoChevronDown /> : <IoChevronForward />,
+            onClick,
+            variant: 'action',
+        }),
         columnWidth: options?.columnWidth,
         columnStyle: options?.columnStyle,
     };

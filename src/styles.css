@@ -152,6 +152,9 @@
     --dui-color-background-scrollbar: transparent;
     --dui-color-foreground-scrollbar: #cccccc;
 
+    --dui-color-table-border: var(--dui-color-separator);
+    --dui-color-background-table-header: var(--dui-color-background);
+
     /*
      * Dimensions
      */

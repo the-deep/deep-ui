@@ -1,14 +1,16 @@
 import React from 'react';
-
+import { useArgs } from '@storybook/client-api';
 import { Story } from '@storybook/react/types-6-0';
 import Table, {
     Props as TableProps,
     Column,
 } from '#components/Table';
+import useRowExpansionOnClick from '#components/Table/useRowExpansionOnClick';
 import useRowExpansion from '#components/Table/useRowExpansion';
 import {
     createStringColumn,
     createNumberColumn,
+    createExpandColumn,
 } from '#components/Table/predefinedColumns';
 
 import styles from './styles.css';
@@ -99,13 +101,12 @@ Large.args = {
     variant: 'large',
 };
 
+const programKeySelector = (d: Program) => d.id;
 export const Expandable: Story<
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TableProps<Program, number, Column<Program, number, any, any>>
 > = (args) => {
-    const keySelector = (d: Program) => d.id;
-
-    const [rowModifier] = useRowExpansion<Program, number>(
+    const [rowModifier] = useRowExpansionOnClick<Program, number>(
         ({ datum }) => (
             <div className={styles.expandedRow}>
                 {datum.name}
@@ -125,7 +126,50 @@ export const Expandable: Story<
             columns={columns}
             data={data}
             className={styles.table}
-            keySelector={keySelector}
+            keySelector={programKeySelector}
+            rowModifier={rowModifier}
+        />
+    );
+};
+
+export const ManualRowExpansion = () => {
+    const [{ expandedRow }, updateArgs] = useArgs();
+
+    const handleClick = React.useCallback((rowId: number) => {
+        updateArgs({ expandedRow: expandedRow === rowId ? undefined : rowId });
+    }, [expandedRow, updateArgs]);
+
+    const rowModifier = useRowExpansion<Program, number>(
+        expandedRow,
+        ({ datum }) => (
+            <div key={`expanded-${datum.id}`}>
+                {datum.name}
+            </div>
+        ),
+        {
+            expandedRowClassName: styles.expandedRow,
+            expandedCellClassName: styles.expandedCell,
+            expansionCellClassName: styles.expansionCell,
+            expansionRowClassName: styles.expansionRow,
+        },
+    );
+
+    const columnsWithAction = [
+        createExpandColumn<Program, number>(
+            'expand-button',
+            '',
+            handleClick,
+            expandedRow,
+        ),
+        ...columns,
+    ];
+
+    return (
+        <Table
+            className={styles.table}
+            keySelector={programKeySelector}
+            columns={columnsWithAction}
+            data={data}
             rowModifier={rowModifier}
         />
     );

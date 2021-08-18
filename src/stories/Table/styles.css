@@ -2,8 +2,6 @@
     width: 42rem;
 
     .expanded-row {
-        padding: var(--dui-spacing-large);
-
         .expanded-cell {
             border-bottom: 0;
         }
