@@ -4,7 +4,17 @@ import { _cs } from '@togglecorp/fujs';
 import Icons from '../Icons';
 import Actions from '../Actions';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export interface Props {
     children?: React.ReactNode;
@@ -13,6 +23,13 @@ export interface Props {
     iconsContainerClassName?: string;
     childrenContainerClassName?: string;
     actionsContainerClassName?: string;
+
+    wrapActions?: boolean;
+    wrapIcons?: boolean;
+
+    allowIconsShrink?: boolean;
+    allowActionsShrink?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function ElementFragments(props: Props) {
@@ -23,20 +40,41 @@ function ElementFragments(props: Props) {
         children,
         icons,
         actions,
+        wrapIcons,
+        wrapActions,
+        allowActionsShrink,
+        allowIconsShrink,
+        spacing = 'comfortable',
     } = props;
 
     return (
         <>
             {icons && (
-                <Icons className={_cs(iconsContainerClassName, styles.icons)}>
+                <Icons
+                    wrap={wrapIcons}
+                    allowShrink={allowIconsShrink}
+                    className={_cs(iconsContainerClassName, styles.icons)}
+                    spacing={spacing}
+                >
                     {icons}
                 </Icons>
             )}
-            <div className={_cs(childrenContainerClassName, styles.children)}>
+            <div
+                className={_cs(
+                    styles.children,
+                    childrenContainerClassName,
+                    spacingToStyleMap[spacing],
+                )}
+            >
                 {children}
             </div>
             {actions && (
-                <Actions className={actionsContainerClassName}>
+                <Actions
+                    wrap={wrapActions}
+                    allowShrink={allowActionsShrink}
+                    className={actionsContainerClassName}
+                    spacing={spacing}
+                >
                     {actions}
                 </Actions>
             )}

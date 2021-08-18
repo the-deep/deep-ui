@@ -84,6 +84,8 @@ function DropdownMenu(props: Props) {
         }
     }, [componentRef, setShowPopup]);
 
+    console.info(label);
+
     return (
         <>
             <Button

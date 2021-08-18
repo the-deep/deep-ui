@@ -52,6 +52,8 @@ export type { Props as DropdownMenuProps } from './components/DropdownMenu';
 export { default as DropdownMenu, useDropdownFeatures } from './components/DropdownMenu';
 export type { Props as DropdownMenuItemProps } from './components/DropdownMenuItem';
 export { default as DropdownMenuItem } from './components/DropdownMenuItem';
+export type { Props as ElementProps } from './components/Element';
+export { default as Element } from './components/Element';
 export type { Props as ElementFragmentsProps } from './components/ElementFragments';
 export { default as ElementFragments } from './components/ElementFragments';
 export type { Props as ExpandableContainerProps } from './components/ExpandableContainer';

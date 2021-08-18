@@ -16,12 +16,13 @@ const handleMenuItemClick = () => {
     console.info('Dropdown menu clicked');
 };
 
-const Template: Story<DropdownMenuProps> = () => {
+const Template: Story<DropdownMenuProps> = (props) => {
     const children = [];
     for (let i = 0; i < 5; i += 1) {
         children.push(
             <DropdownMenu
                 key={i}
+                {...props}
             >
                 <DropdownMenuItem onClick={handleMenuItemClick}>
                     {i}
@@ -45,6 +46,7 @@ const Template: Story<DropdownMenuProps> = () => {
             </DropdownMenu>,
         );
     }
+
     return (
         <div>
             {children}
