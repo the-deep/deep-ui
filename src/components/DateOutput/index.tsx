@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import {
     populateFormat,
-    isNotDefined,
     breakFormat,
+    isDefined,
+    isNotDefined,
     _cs,
 } from '@togglecorp/fujs';
 
@@ -13,28 +14,40 @@ export interface Props {
     value: string | number | undefined | null;
     format?: string;
     invalidText?: React.ReactNode;
+    emptyComponent?: React.ReactNode;
 }
 
 function DateOutput(props: Props) {
     const {
         value,
         format = 'dd MMM, yyyy',
-        invalidText = '-',
         className,
+        emptyComponent = '-',
     } = props;
 
-    const formattedDate = React.useMemo(() => {
+    const formattedValueList = React.useMemo(() => {
         if (isNotDefined(value)) {
-            return invalidText;
+            return undefined;
         }
+
         const date = new Date(value);
-        const formattedValueList = populateFormat(breakFormat(format), date);
-        return formattedValueList.find((d) => d.type === 'date')?.value;
-    }, [format, value, invalidText]);
+
+        if (Number.isNaN(date.getTime())) {
+            return undefined;
+        }
+
+        return populateFormat(breakFormat(format), date);
+    }, [format, value]);
+
+    const formattedDate = formattedValueList?.find((d) => d.type === 'date');
 
     return (
         <div className={_cs(styles.dateOutput, className)}>
-            {formattedDate}
+            { isDefined(formattedDate) ? (
+                formattedDate.value
+            ) : (
+                emptyComponent
+            )}
         </div>
     );
 }
