@@ -19,3 +19,8 @@ export const Default = Template.bind({});
 Default.args = {
     value: '1992-12-20',
 };
+
+export const NoValue = Template.bind({});
+NoValue.args = {
+    value: undefined,
+};
