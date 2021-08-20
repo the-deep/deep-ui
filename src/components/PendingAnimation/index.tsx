@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
@@ -37,4 +37,4 @@ function PendingAnimation(props: Props) {
     );
 }
 
-export default PendingAnimation;
+export default memo(PendingAnimation);

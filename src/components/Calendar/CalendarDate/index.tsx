@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton, { Props as RawButtonProps } from '../../RawButton';
@@ -66,4 +66,4 @@ function CalendarDate(props: Props) {
     );
 }
 
-export default CalendarDate;
+export default memo(CalendarDate);

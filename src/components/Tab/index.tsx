@@ -4,9 +4,13 @@ import RawButton, { Props as RawButtonProps } from '../RawButton';
 
 import Border from '../Border';
 import { TabKey, TabContext, TabVariant } from '../TabContext';
-import { setHashToBrowser } from '../../utils';
+import { setHashToBrowser, genericMemo } from '../../utils';
 
 import styles from './styles.css';
+
+export interface TabListProps extends React.HTMLProps<HTMLDivElement> {
+    children: React.ReactNode;
+}
 
 const tabVariantToStyleMap: {
     [key in TabVariant]: string;
@@ -23,7 +27,7 @@ export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClic
     transparentBorder?: boolean;
 }
 
-export default function Tab<T extends TabKey>(props: Props<T>) {
+function Tab<T extends TabKey>(props: Props<T>) {
     const context = React.useContext(TabContext);
 
     const {
@@ -98,6 +102,4 @@ export default function Tab<T extends TabKey>(props: Props<T>) {
     return button;
 }
 
-export interface TabListProps extends React.HTMLProps<HTMLDivElement> {
-    children: React.ReactNode;
-}
+export default genericMemo(Tab);

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -361,4 +361,4 @@ function Pager(props: Props) {
         </div>
     );
 }
-export default Pager;
+export default memo(Pager);

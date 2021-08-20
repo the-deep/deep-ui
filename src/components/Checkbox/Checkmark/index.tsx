@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
     MdCheckBox,
     MdCheckBoxOutlineBlank,
@@ -42,4 +42,4 @@ function Checkmark(props: CheckmarkProps) {
     );
 }
 
-export default Checkmark;
+export default memo(Checkmark);

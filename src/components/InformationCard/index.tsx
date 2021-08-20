@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import NumberOutput from '../NumberOutput';
@@ -64,4 +64,4 @@ function InformationCard(props: Props) {
     );
 }
 
-export default InformationCard;
+export default memo(InformationCard);

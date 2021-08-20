@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { UiMode } from '../UiModeContext';
@@ -40,4 +40,4 @@ function InputHint(props: Props) {
     );
 }
 
-export default InputHint;
+export default memo(InputHint);

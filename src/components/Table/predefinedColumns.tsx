@@ -1,14 +1,56 @@
+import React, { useContext, useCallback } from 'react';
 import {
     compareString,
     compareNumber,
 } from '@togglecorp/fujs';
+import {
+    IoChevronDown,
+    IoChevronForward,
+} from 'react-icons/io5';
 
+import Button from '../Button';
 import HeaderCell, { HeaderCellProps } from './HeaderCell';
 import Cell, { CellProps } from './Cell';
 import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 
 import { Column } from './index';
 import { SortDirection, FilterType } from './types';
+import { RowExpansionContext } from './useRowExpansion';
+import { genericMemo } from '../../utils';
+
+interface ExpandButtonProps<T extends string | number | undefined> {
+    id: T,
+}
+function ExpandButton<T extends string | number | undefined>(props: ExpandButtonProps<T>) {
+    const {
+        id,
+    } = props;
+    const {
+        expandedRowKey,
+        setExpandedRowKey,
+    } = useContext(RowExpansionContext);
+
+    const handleClick = useCallback(
+        () => {
+            const rowKey = id as string | number | undefined;
+            setExpandedRowKey(
+                (oldValue) => (oldValue === rowKey ? undefined : rowKey),
+            );
+        },
+        [setExpandedRowKey, id],
+    );
+
+    return (
+        <Button
+            name={undefined}
+            variant="action"
+            onClick={handleClick}
+        >
+            {id === expandedRowKey ? <IoChevronDown /> : <IoChevronForward />}
+        </Button>
+    );
+}
+const ExpandButtonMemoized = genericMemo(ExpandButton);
 
 export function createStringColumn<D, K>(
     id: string,
@@ -91,6 +133,41 @@ export function createNumberColumn<D, K>(
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareNumber(accessor(foo), accessor(bar)),
         columnClassName: options?.columnClassName,
+        columnWidth: options?.columnWidth,
+        columnStyle: options?.columnStyle,
+    };
+    return item;
+}
+
+export function createExpandColumn<D, K extends number | string | undefined>(
+    id: string,
+    title: string,
+    options?: {
+        columnClassName?: string;
+        headerCellRendererClassName?: string;
+        headerContainerClassName?: string;
+        cellRendererClassName?: string;
+        cellContainerClassName?: string;
+        columnWidth?: Column<D, K, ExpandButtonProps<K>, HeaderCellProps>['columnWidth'];
+        columnStyle?: Column<D, K, ExpandButtonProps<K>, HeaderCellProps>['columnStyle'];
+    },
+) {
+    const item: Column<D, K, ExpandButtonProps<K>, HeaderCellProps> = {
+        id,
+        title,
+        headerCellRenderer: HeaderCell,
+        headerCellRendererParams: {
+            sortable: false,
+        },
+        columnClassName: options?.columnClassName,
+        headerCellRendererClassName: options?.headerCellRendererClassName,
+        headerContainerClassName: options?.headerContainerClassName,
+        cellRendererClassName: options?.cellRendererClassName,
+        cellContainerClassName: options?.cellContainerClassName,
+        cellRenderer: ExpandButtonMemoized,
+        cellRendererParams: (rowId: K) => ({
+            id: rowId,
+        }),
         columnWidth: options?.columnWidth,
         columnStyle: options?.columnStyle,
     };

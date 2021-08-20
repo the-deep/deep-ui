@@ -1,6 +1,8 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
 export type ButtonVariant = (
@@ -146,4 +148,4 @@ function Button<N>(props: Props<N>) {
     );
 }
 
-export default Button;
+export default genericMemo(Button);

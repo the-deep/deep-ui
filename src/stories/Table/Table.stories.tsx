@@ -1,14 +1,14 @@
 import React from 'react';
-
 import { Story } from '@storybook/react/types-6-0';
 import Table, {
     Props as TableProps,
     Column,
 } from '#components/Table';
-import useRowExpansion from '#components/Table/useRowExpansion';
+import useRowExpansion, { RowExpansionContext } from '#components/Table/useRowExpansion';
 import {
     createStringColumn,
     createNumberColumn,
+    createExpandColumn,
 } from '#components/Table/predefinedColumns';
 
 import styles from './styles.css';
@@ -28,7 +28,7 @@ interface Program {
 const data: Program[] = [
     {
         id: 1,
-        name: 'Program A : 150 Somali migrants return home after detention in Libya',
+        name: 'Program A : 150 Somali migrants return home after detention in Libya and one reallyreallyreallyreallyreallyreallyreallylongsinglewordwhichshouldbreakthetable',
         budget: 123123,
         date: '2012-10-12T12:00:00',
     },
@@ -99,13 +99,16 @@ Large.args = {
     variant: 'large',
 };
 
+const programKeySelector = (d: Program) => d.id;
 export const Expandable: Story<
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TableProps<Program, number, Column<Program, number, any, any>>
 > = (args) => {
-    const keySelector = (d: Program) => d.id;
-
-    const [rowModifier] = useRowExpansion<Program, number>(
+    const [
+        rowModifier,
+        expandedRowKey,
+        setExpandedRowKey,
+    ] = useRowExpansion<Program, number>(
         ({ datum }) => (
             <div className={styles.expandedRow}>
                 {datum.name}
@@ -117,16 +120,64 @@ export const Expandable: Story<
             expansionCellClassName: styles.expansionCell,
             expansionRowClassName: styles.expansionRow,
         },
+        true,
     );
 
     return (
-        <Table
-            {...args}
-            columns={columns}
-            data={data}
-            className={styles.table}
-            keySelector={keySelector}
-            rowModifier={rowModifier}
-        />
+        <RowExpansionContext.Provider
+            value={{ expandedRowKey, setExpandedRowKey }}
+        >
+            <Table
+                {...args}
+                columns={columns}
+                data={data}
+                className={styles.table}
+                keySelector={programKeySelector}
+                rowModifier={rowModifier}
+            />
+        </RowExpansionContext.Provider>
+    );
+};
+
+export const ManualRowExpansion = () => {
+    const [
+        rowModifier,
+        expandedRowKey,
+        setExpandedRowKey,
+    ] = useRowExpansion<Program, number>(
+        ({ datum }) => (
+            <div key={`expanded-${datum.id}`}>
+                {datum.name}
+            </div>
+        ),
+        {
+            expandedRowClassName: styles.expandedRow,
+            expandedCellClassName: styles.expandedCell,
+            expansionCellClassName: styles.expansionCell,
+            expansionRowClassName: styles.expansionRow,
+        },
+    );
+
+    const columnsWithAction = [
+        createExpandColumn<Program, number>(
+            'expand-button',
+            '',
+        ),
+        ...columns,
+    ];
+
+    return (
+        <RowExpansionContext.Provider
+            value={{ expandedRowKey, setExpandedRowKey }}
+        >
+            <Table
+                className={styles.table}
+                keySelector={programKeySelector}
+                columns={columnsWithAction}
+                data={data}
+                rowModifier={rowModifier}
+                variant="large"
+            />
+        </RowExpansionContext.Provider>
     );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
@@ -81,4 +81,4 @@ function PercentageInformationCard(props: Props) {
     );
 }
 
-export default PercentageInformationCard;
+export default memo(PercentageInformationCard);

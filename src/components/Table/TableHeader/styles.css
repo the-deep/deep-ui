@@ -1,0 +1,29 @@
+.th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-table-border);
+    background-color: var(--dui-color-background-table-header);
+
+    .resize-handle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        border-right: var(--dui-width-separator-medium) solid transparent;
+        cursor: col-resize;
+        width: var(--dui-width-separator-dense);
+        height: calc(100% - var(--dui-spacing-small));
+
+    }
+
+    &:hover {
+        .resize-handle {
+            border-right-color: var(--dui-color-separator);
+
+            &:hover {
+                border-right-color: var(--dui-color-accent);
+            }
+        }
+    }
+}

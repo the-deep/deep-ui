@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { isValidUrl, _cs } from '@togglecorp/fujs';
 import {
     Link as RouterLink,
@@ -86,4 +86,4 @@ function ButtonLikeLink(props: Props) {
     );
 }
 
-export default ButtonLikeLink;
+export default memo(ButtonLikeLink);

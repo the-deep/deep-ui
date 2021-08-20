@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
     populateFormat,
     isNotDefined,
@@ -39,4 +39,4 @@ function DateOutput(props: Props) {
     );
 }
 
-export default DateOutput;
+export default memo(DateOutput);

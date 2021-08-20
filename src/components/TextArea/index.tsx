@@ -5,7 +5,7 @@ import InputContainer, { Props as InputContainerProps } from '../InputContainer'
 
 import styles from './styles.css';
 
-interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>, 'ref' | 'onChange' | 'value' | 'name'> {
+interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>, 'ref' | 'onChange' | 'value' | 'name' | 'label'> {
     className?: string;
     name: K;
     value: string | undefined | null;

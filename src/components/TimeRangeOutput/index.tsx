@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import TimeOutput, { Props as TimeOutputProps } from '../TimeOutput';
@@ -36,4 +36,4 @@ function TimeRangeOutput(props: Props) {
     );
 }
 
-export default TimeRangeOutput;
+export default memo(TimeRangeOutput);

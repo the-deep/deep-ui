@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
@@ -50,4 +50,4 @@ function Spinner(props: Props) {
     );
 }
 
-export default Spinner;
+export default memo(Spinner);

@@ -5,6 +5,7 @@ import useConfirmation, {
     Options as ConfirmOptions,
     ExtraProps as ConfirmExtraProps,
 } from '../../hooks/useConfirmation';
+import { genericMemo } from '../../utils';
 
 export interface Props<
     N extends string | number | undefined
@@ -64,4 +65,4 @@ function QuickActionConfirmButton<N extends string | number | undefined>(props: 
     );
 }
 
-export default QuickActionConfirmButton;
+export default genericMemo(QuickActionConfirmButton);

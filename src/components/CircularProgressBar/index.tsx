@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { arc } from 'd3-shape';
 import { _cs } from '@togglecorp/fujs';
 
@@ -73,4 +73,4 @@ function CircularProgressBar(props: Props) {
     );
 }
 
-export default CircularProgressBar;
+export default memo(CircularProgressBar);
