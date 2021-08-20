@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { RowOptions } from './index';
 import TableRow from './TableRow';
 import TableData from './TableData';
+
+interface RowExpansionContextInterface {
+    expandedRowKey: string | number | undefined;
+    setExpandedRowKey: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+}
+const initialValue: RowExpansionContextInterface = {
+    expandedRowKey: undefined,
+    setExpandedRowKey: (value: unknown) => {
+        console.warn('Trying to set to ', value);
+    },
+};
+export const RowExpansionContext = createContext<RowExpansionContextInterface>(initialValue);
 
 export type ExpansionRowChildrenProps<D, K> = (rowOptions: RowOptions<D, K>) => React.ReactNode;
 export interface ExpansionOptions {
@@ -13,11 +25,13 @@ export interface ExpansionOptions {
     expansionCellClassName?: string;
 }
 
-function useRowExpansion<D, K>(
-    expandedRowKey: K | undefined,
+function useRowExpansion<D, K extends string | number>(
     expansionRowChildren: ExpansionRowChildrenProps<D, K>,
     options: ExpansionOptions = {},
-) : (rowOptions: RowOptions<D, K>) => React.ReactNode {
+    expandOnRowClick?: boolean,
+) {
+    const [expandedRowKey, setExpandedRowKey] = useState<string | number | undefined>();
+
     const {
         expandedRowClassName,
         expandedCellClassName,
@@ -34,24 +48,40 @@ function useRowExpansion<D, K>(
             columns,
         } = rowOptions;
 
-        const isActive = rowKey === expandedRowKey;
+        const isActive = rowKey === expandedRowKey as (K | undefined);
+
+        const newRowProps = {
+            className: _cs(
+                row.props.className,
+                isActive && expandedRowClassName,
+            ),
+            children: row.props.children.map((cell: React.ReactElement) => (
+                React.cloneElement(cell, {
+                    className: _cs(
+                        cell.props.className,
+                        isActive && expandedCellClassName,
+                    ),
+                })
+            )),
+        };
+
+        let newRow;
+        if (expandOnRowClick) {
+            newRow = React.cloneElement(row, {
+                ...newRowProps,
+                onClick: () => {
+                    setExpandedRowKey((oldValue) => (
+                        oldValue === rowKey ? undefined : rowKey
+                    ));
+                },
+            });
+        } else {
+            newRow = React.cloneElement(row, newRowProps);
+        }
 
         return (
             <>
-                {React.cloneElement(row, {
-                    className: _cs(
-                        row.props.className,
-                        isActive && expandedRowClassName,
-                    ),
-                    children: row.props.children.map((cell: React.ReactElement) => (
-                        React.cloneElement(cell, {
-                            className: _cs(
-                                cell.props.className,
-                                isActive && expandedCellClassName,
-                            ),
-                        })
-                    )),
-                })}
+                {newRow}
                 {isActive && (
                     <TableRow
                         key={`${rowKey}-expanded`}
@@ -69,14 +99,16 @@ function useRowExpansion<D, K>(
         );
     }, [
         expandedRowKey,
+        setExpandedRowKey,
         expansionRowChildren,
         expandedRowClassName,
         expandedCellClassName,
         expansionRowClassName,
         expansionCellClassName,
+        expandOnRowClick,
     ]);
 
-    return rowModifier;
+    return [rowModifier, expandedRowKey, setExpandedRowKey] as const;
 }
 
 export default useRowExpansion;

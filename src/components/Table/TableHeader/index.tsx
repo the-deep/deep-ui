@@ -51,6 +51,7 @@ function TableHeader<N extends string | number>(props: Props<N>) {
     React.useEffect(() => {
         const handleMouseUp = () => {
             mouseDownXOnResizeHandleRef.current = undefined;
+            headingWidthRef.current = undefined;
             if (onResizeComplete && isDefined(finalHeadingWidthRef.current)) {
                 onResizeComplete(finalHeadingWidthRef.current, name);
             }

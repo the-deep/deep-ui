@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useCallback } from 'react';
 import {
     compareString,
     compareNumber,
@@ -8,13 +8,47 @@ import {
     IoChevronForward,
 } from 'react-icons/io5';
 
-import Button, { Props as ButtonProps } from '../Button';
+import Button from '../Button';
 import HeaderCell, { HeaderCellProps } from './HeaderCell';
 import Cell, { CellProps } from './Cell';
 import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 
 import { Column } from './index';
 import { SortDirection, FilterType } from './types';
+import { RowExpansionContext } from './useRowExpansion';
+
+interface ExpandButtonProps<T extends string | number | undefined> {
+    id: T,
+}
+function ExpandButton<T extends string | number | undefined>(props: ExpandButtonProps<T>) {
+    const {
+        id,
+    } = props;
+    const {
+        expandedRowKey,
+        setExpandedRowKey,
+    } = useContext(RowExpansionContext);
+
+    const handleClick = useCallback(
+        () => {
+            const rowKey = id as string | number | undefined;
+            setExpandedRowKey(
+                (oldValue) => (oldValue === rowKey ? undefined : rowKey),
+            );
+        },
+        [setExpandedRowKey, id],
+    );
+
+    return (
+        <Button
+            name={undefined}
+            variant="action"
+            onClick={handleClick}
+        >
+            {id === expandedRowKey ? <IoChevronDown /> : <IoChevronForward />}
+        </Button>
+    );
+}
 
 export function createStringColumn<D, K>(
     id: string,
@@ -106,19 +140,17 @@ export function createNumberColumn<D, K>(
 export function createExpandColumn<D, K extends number | string | undefined>(
     id: string,
     title: string,
-    onClick: (rowId: K) => void,
-    expandedRowId: K | undefined,
     options?: {
         columnClassName?: string;
         headerCellRendererClassName?: string;
         headerContainerClassName?: string;
         cellRendererClassName?: string;
         cellContainerClassName?: string;
-        columnWidth?: Column<D, K, ButtonProps<K>, HeaderCellProps>['columnWidth'];
-        columnStyle?: Column<D, K, ButtonProps<K>, HeaderCellProps>['columnStyle'];
+        columnWidth?: Column<D, K, ExpandButtonProps<K>, HeaderCellProps>['columnWidth'];
+        columnStyle?: Column<D, K, ExpandButtonProps<K>, HeaderCellProps>['columnStyle'];
     },
 ) {
-    const item: Column<D, K, ButtonProps<K>, HeaderCellProps> = {
+    const item: Column<D, K, ExpandButtonProps<K>, HeaderCellProps> = {
         id,
         title,
         headerCellRenderer: HeaderCell,
@@ -130,12 +162,9 @@ export function createExpandColumn<D, K extends number | string | undefined>(
         headerContainerClassName: options?.headerContainerClassName,
         cellRendererClassName: options?.cellRendererClassName,
         cellContainerClassName: options?.cellContainerClassName,
-        cellRenderer: Button,
+        cellRenderer: ExpandButton,
         cellRendererParams: (rowId: K) => ({
-            name: rowId,
-            children: (rowId === expandedRowId) ? <IoChevronDown /> : <IoChevronForward />,
-            onClick,
-            variant: 'action',
+            id: rowId,
         }),
         columnWidth: options?.columnWidth,
         columnStyle: options?.columnStyle,
