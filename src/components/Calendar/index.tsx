@@ -15,6 +15,7 @@ import Button from '../Button';
 import NumberInput from '../NumberInput';
 import SelectInput from '../SelectInput';
 import useInputState from '../../hooks/useInputState';
+import { genericMemo } from '../../utils';
 
 import CalendarDate, { Props as CalendarDateProps } from './CalendarDate';
 
@@ -291,4 +292,4 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
     );
 }
 
-export default Calendar;
+export default genericMemo(Calendar);

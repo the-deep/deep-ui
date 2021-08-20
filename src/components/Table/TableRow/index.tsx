@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export interface Props extends Omit<React.HTMLProps<HTMLTableRowElement>, 'ref'> {
 }
@@ -20,4 +20,4 @@ function TableRow(props: Props) {
     );
 }
 
-export default TableRow;
+export default memo(TableRow);

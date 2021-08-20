@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
     TransformWrapper,
     TransformComponent,
@@ -140,4 +140,4 @@ function ImagePreview(props: Props) {
     return children;
 }
 
-export default ImagePreview;
+export default memo(ImagePreview);

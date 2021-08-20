@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import NumberOutput from '../NumberOutput';
@@ -95,4 +95,4 @@ function TextOutput(props: Props) {
     );
 }
 
-export default TextOutput;
+export default memo(TextOutput);

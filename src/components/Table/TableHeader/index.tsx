@@ -4,6 +4,8 @@ import {
     isDefined,
 } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../../utils';
+
 import styles from './styles.css';
 
 export interface Props<N extends string | number> extends Omit<React.HTMLProps<HTMLTableHeaderCellElement>, 'ref' | 'name'> {
@@ -87,4 +89,4 @@ function TableHeader<N extends string | number>(props: Props<N>) {
     );
 }
 
-export default TableHeader;
+export default genericMemo(TableHeader);

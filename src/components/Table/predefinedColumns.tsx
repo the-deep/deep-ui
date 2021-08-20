@@ -16,6 +16,7 @@ import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 import { Column } from './index';
 import { SortDirection, FilterType } from './types';
 import { RowExpansionContext } from './useRowExpansion';
+import { genericMemo } from '../../utils';
 
 interface ExpandButtonProps<T extends string | number | undefined> {
     id: T,
@@ -49,6 +50,7 @@ function ExpandButton<T extends string | number | undefined>(props: ExpandButton
         </Button>
     );
 }
+const ExpandButtonMemoized = genericMemo(ExpandButton);
 
 export function createStringColumn<D, K>(
     id: string,
@@ -162,7 +164,7 @@ export function createExpandColumn<D, K extends number | string | undefined>(
         headerContainerClassName: options?.headerContainerClassName,
         cellRendererClassName: options?.cellRendererClassName,
         cellContainerClassName: options?.cellContainerClassName,
-        cellRenderer: ExpandButton,
+        cellRenderer: ExpandButtonMemoized,
         cellRendererParams: (rowId: K) => ({
             id: rowId,
         }),

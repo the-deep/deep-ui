@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
@@ -23,4 +23,4 @@ function TableData(props: Props) {
     );
 }
 
-export default TableData;
+export default memo(TableData);

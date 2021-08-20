@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import DateOutput, { Props as DateOutputProps } from '../DateOutput';
@@ -40,4 +40,4 @@ function DateRangeOutput(props: Props) {
     );
 }
 
-export default DateRangeOutput;
+export default memo(DateRangeOutput);

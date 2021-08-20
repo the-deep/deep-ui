@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import Cover from '../Cover';
@@ -37,4 +37,4 @@ function PendingMessage(props: Props) {
     );
 }
 
-export default PendingMessage;
+export default memo(PendingMessage);

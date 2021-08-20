@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { UiMode } from '../UiModeContext';
@@ -40,4 +40,4 @@ function InputError(props: Props) {
     );
 }
 
-export default InputError;
+export default memo(InputError);

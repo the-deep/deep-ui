@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { _cs } from '@togglecorp/fujs';
 import {
     IoList,
@@ -87,4 +87,4 @@ function Message(props: Props) {
     );
 }
 
-export default Message;
+export default memo(Message);

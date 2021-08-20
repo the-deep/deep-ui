@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
     _cs,
     isValidUrl,
@@ -74,4 +74,4 @@ function Link(props: Props) {
     );
 }
 
-export default Link;
+export default memo(Link);

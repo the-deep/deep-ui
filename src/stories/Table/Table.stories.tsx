@@ -1,5 +1,4 @@
 import React from 'react';
-import { useArgs } from '@storybook/client-api';
 import { Story } from '@storybook/react/types-6-0';
 import Table, {
     Props as TableProps,
