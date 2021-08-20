@@ -6,7 +6,7 @@ import useUiModeClassName from '../../hooks/useUiModeClassName';
 
 import styles from './styles.css';
 
-interface Props {
+export interface Props {
     className?: string;
     children?: React.ReactNode;
     uiMode?: UiMode;

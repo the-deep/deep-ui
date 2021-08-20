@@ -16,6 +16,8 @@ export interface Props extends ContainerProps {
     // NOTE: Mount will mount the child even if its not shown
     alwaysMountContent?: boolean;
     expansionTriggerArea?: 'header' | 'arrow';
+    disabled?: boolean;
+    expansionButtonClassName?: string;
 }
 
 function ExpandableContainer(props: Props) {
@@ -33,7 +35,9 @@ function ExpandableContainer(props: Props) {
         headerClassName,
         headingSize,
         sub,
+        disabled = false,
         expansionTriggerArea = 'header',
+        expansionButtonClassName,
         ...otherProps
     } = props;
 
@@ -54,12 +58,14 @@ function ExpandableContainer(props: Props) {
             )}
             sub={sub}
             headerElementProps={{
-                onClick: expansionTriggerArea === 'header' ? toggleContentVisibility : undefined,
+                onClick: expansionTriggerArea === 'header' && !disabled
+                    ? toggleContentVisibility
+                    : undefined,
             }}
             headerClassName={_cs(
                 styles.header,
                 headerClassName,
-                expansionTriggerArea === 'header' && styles.clickableHeader,
+                expansionTriggerArea === 'header' && !disabled && styles.clickableHeader,
             )}
             headingContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
             headingClassName={_cs(styles.heading, headingClassName)}
@@ -69,10 +75,11 @@ function ExpandableContainer(props: Props) {
                 <>
                     {headerActions}
                     <Button
-                        className={styles.expandButton}
+                        className={_cs(styles.expandButton, expansionButtonClassName)}
                         name={undefined}
                         onClick={expansionTriggerArea === 'arrow' ? toggleContentVisibility : undefined}
                         variant="action"
+                        disabled={disabled}
                     >
                         {showContent ? (
                             <IoChevronUpOutline className={styles.icon} />
