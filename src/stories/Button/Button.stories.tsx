@@ -13,7 +13,9 @@ export default {
 };
 
 const Template: Story<ButtonProps<string>> = (args) => (
-    <Button {...args} />
+    <Button
+        {...args}
+    />
 );
 
 export const Default = Template.bind({});

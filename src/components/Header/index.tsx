@@ -3,26 +3,37 @@ import { _cs } from '@togglecorp/fujs';
 
 import Element from '../Element';
 import Heading, { Props as HeadingProps } from '../Heading';
+import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
+
 export interface Props {
-    className?: string;
-    headingClassName?: string;
-    descriptionClassName?: string;
-    headingContainerClassName?: string;
-    iconsContainerClassName?: string;
-    actionsContainerClassName?: string;
-    heading?: React.ReactNode;
-    description?: React.ReactNode;
-    inlineDescription?: boolean;
-    icons?: React.ReactNode;
     actions?: React.ReactNode;
-    headingSize?: HeadingProps['size'];
+    actionsContainerClassName?: string;
     children?: React.ReactNode;
-    headingSectionClassName?: string;
     childrenContainerClassName?: string;
+    className?: string;
+    description?: React.ReactNode;
+    descriptionClassName?: string;
     elementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
+    heading?: React.ReactNode;
+    headingClassName?: string;
+    headingContainerClassName?: string;
+    headingSectionClassName?: string;
+    headingSize?: HeadingProps['size'];
+    icons?: React.ReactNode;
+    iconsContainerClassName?: string;
+    inlineHeadingDescription?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Header(props: Props) {
@@ -33,7 +44,7 @@ function Header(props: Props) {
         iconsContainerClassName,
         headingContainerClassName,
         actionsContainerClassName,
-        inlineDescription,
+        inlineHeadingDescription,
         heading,
         description,
         actions,
@@ -43,6 +54,7 @@ function Header(props: Props) {
         headingSectionClassName,
         childrenContainerClassName,
         elementProps,
+        spacing = 'comfortable',
     } = props;
 
     const isStringHeading = (typeof heading) === 'string';
@@ -50,9 +62,9 @@ function Header(props: Props) {
     return (
         <header
             className={_cs(
-                className,
                 styles.header,
-                inlineDescription && styles.inlineDescription,
+                spacingToStyleMap[spacing],
+                className,
             )}
             {...elementProps}
         >
@@ -62,8 +74,10 @@ function Header(props: Props) {
                 iconsContainerClassName={iconsContainerClassName}
                 actions={actions}
                 actionsContainerClassName={actionsContainerClassName}
+                spacing={spacing}
                 childrenContainerClassName={_cs(
                     styles.headingContainer,
+                    inlineHeadingDescription && styles.inlineDescription,
                     headingContainerClassName,
                 )}
             >
@@ -93,7 +107,7 @@ function Header(props: Props) {
                 )}
             </Element>
             {children && (
-                <div className={_cs(styles.content, childrenContainerClassName)}>
+                <div className={childrenContainerClassName}>
                     { children }
                 </div>
             )}

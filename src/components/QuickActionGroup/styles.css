@@ -1,11 +1,25 @@
 .quick-action-group {
+    --spacing: var(--dui-spacing-small);
     display: flex;
     align-items: center;
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator-info);
     border-radius: calc(1em + 2 * var(--dui-spacing-extra-small));
-    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
+    padding: calc(var(--spacing) / 2) var(--spacing);
+    gap: calc(var(--spacing) / 2);
 
-    >* {
-        margin: 0 var(--dui-spacing-extra-small);
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

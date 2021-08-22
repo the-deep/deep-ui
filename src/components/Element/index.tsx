@@ -19,12 +19,16 @@ const spacingToStyleMap: {
 
 export interface Props extends ElementFragmentProps {
     className?: string;
+    fitContent?: boolean;
+    elementRef?: React.RefObject<HTMLDivElement>;
 }
 
 function Element(props: Props) {
     const {
         className,
         spacing = 'comfortable',
+        fitContent,
+        elementRef,
         ...elementFragmentProps
     } = props;
 
@@ -33,8 +37,10 @@ function Element(props: Props) {
             className={_cs(
                 styles.element,
                 spacingToStyleMap[spacing],
+                fitContent && styles.fitContent,
                 className,
             )}
+            ref={elementRef}
         >
             <ElementFragments
                 spacing={spacing}
