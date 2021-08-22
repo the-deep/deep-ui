@@ -11,7 +11,7 @@ interface BaseTabContextProps {
 export type TabContextProps = BaseTabContextProps & (
     {
         useHash?: false;
-        activeTab: TabKey;
+        activeTab: TabKey | undefined;
         setActiveTab: (key: TabKey) => void;
     } | {
         useHash: true;
@@ -21,7 +21,7 @@ export type TabContextProps = BaseTabContextProps & (
 
 export const TabContext = React.createContext<TabContextProps>({
     disabled: false,
-    activeTab: '',
+    activeTab: undefined,
     variant: 'primary',
     setActiveTab: () => { console.warn('setActiveTab called before it was initialized'); },
 });
