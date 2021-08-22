@@ -1,20 +1,18 @@
 .button {
-    --padding-internal-h: var(--dui-spacing-extra-small);
-    --padding-h: var(--dui-spacing-large);
-    --padding-v: var(--dui-spacing-small);
     --color-border: transparent;
     --color-text: transparent;
     --color-background: transparent;
-    --padding: var(--padding-v) calc(var(--padding-h) - var(--padding-internal-h));
     --font-size: var(--dui-font-size-medium);
     --border-radius: calc(var(--font-size) + var(--dui-spacing-medium));
     --text-transform: none;
     --cursor: default;
+    --spacing: var(--dui-spacing-medium);
+    --padding: calc(var(--spacing) / 2) calc(var(--spacing) * 2);
+    gap: var(--spacing);
 
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: space-around;
     border: var(--dui-width-separator-thin) solid var(--color-border);
     border-radius: var(--border-radius);
     background-color: var(--color-background);
@@ -26,26 +24,7 @@
     color: var(--color-text);
     font-family: inherit;
     font-size: var(--font-size);
-    font-weight: var(--font-weight-bold);
-
-    .icons {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--padding-internal-h);
-    }
-
-    .actions {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--padding-internal-h);
-    }
-
-    .children {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--padding-internal-h);
-    }
-
+    font-weight: var(--dui-font-weight-bold);
 
     &.primary {
         --text-transform: uppercase;
@@ -111,30 +90,29 @@
 
     &.action {
         --padding: 0;
-        --padding-internal-h: 0;
-        --padding-h: 0;
-        --padding-v: 0;
         --color-border: transparent;
         --color-background: transparent;
         --color-text: inherit;
+        --border-radius: 0;
+        border: none;
 
         .icons,
         .children,
         .actions {
-            padding: 0;
-            font-size: calc(1em + calc(var(--dui-spacing-extra-small) / 2));
+            font-size: calc(1em + var(--spacing));
         }
     }
 
     &.transparent {
-        --padding: 0;
+        --padding: calc(var(--spacing) / 2) var(--spacing);
         --color-border: transparent;
         --color-background: transparent;
         --color-text: inherit;
+        --border-radius: 0;
+        border: none;
     }
 
     &.big {
-        --padding-v: var(--dui-spacing-medium);
         --font-size: var(--dui-font-size-large);
 
         &.action {
@@ -150,19 +128,27 @@
         --cursor: not-allowed;
         opacity: var(--dui-opacity-disabled-element);
         filter: saturate(var(--dui-saturation-disabled-element));
-
-        &.action {
-            --padding: 0;
-            --padding-h: 0;
-            --padding-v: 0;
-            --color-border: transparent;
-            --color-background: transparent;
-        }
     }
 
     &:not(&.read-only) {
         &:not(:disabled) {
             --cursor: pointer;
         }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }

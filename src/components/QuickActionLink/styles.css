@@ -1,5 +1,5 @@
 .quick-action-link {
-    padding: var(--dui-spacing-small);
+    padding: var(--dui-spacing-extra-small);
 
     .children {
         display: flex;

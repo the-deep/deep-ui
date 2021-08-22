@@ -1,6 +1,5 @@
 .heading {
     margin: 0;
-    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
     color: var(--dui-color-black);
     font-weight: var(--dui-font-weight-bold);
 

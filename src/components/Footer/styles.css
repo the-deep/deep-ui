@@ -1,5 +1,22 @@
 .footer {
+    --spacing: var(--dui-spacing-medium);
     display: flex;
     align-items: center;
-    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+    gap: var(--spacing);
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
+    }
 }

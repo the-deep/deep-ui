@@ -1,9 +1,11 @@
 .element {
     --spacing: var(--dui-spacing-medium);
     display: flex;
-    width: fit-content;
     gap: var(--spacing);
 
+    &.fit-content {
+        width: fit-content;
+    }
 
     &.no-spacing {
         --spacing: 0;

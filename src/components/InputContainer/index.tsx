@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import Element from '../Element';
 import InputLabel from '../InputLabel';
 import InputError from '../InputError';
 import InputHint from '../InputHint';
@@ -85,29 +86,21 @@ function InputContainer(props: Props) {
             >
                 {label}
             </InputLabel>
-            <div
-                ref={inputSectionRef}
+            <Element
+                elementRef={inputSectionRef}
                 className={_cs(styles.inputSection, inputSectionClassName)}
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                actionsContainerClassName={actionsContainerClassName}
+                actions={actions}
+                childrenContainerClassName={_cs(styles.inputContainer, inputContainerClassName)}
             >
-                {icons && (
-                    <div className={_cs(styles.icons, iconsContainerClassName)}>
-                        {icons}
-                    </div>
-                )}
-                <div className={_cs(styles.input, inputContainerClassName)}>
-                    {input}
-                </div>
-                {actions && (
-                    <div className={_cs(styles.actions, actionsContainerClassName)}>
-                        {actions}
-                    </div>
-                )}
-                <InputBorder
-                    className={styles.inputSectionBorder}
-                    errored={!!error}
-                />
-                {children}
-            </div>
+                {input}
+            </Element>
+            <InputBorder
+                className={styles.inputSectionBorder}
+                errored={!!error}
+            />
             <InputError className={errorContainerClassName}>
                 {error}
             </InputError>

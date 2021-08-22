@@ -13,8 +13,13 @@
     --opacity: 1;
 
     --disabled-opacity: var(--dui-opacity-disabled-element);
+    --spacing: var(--dui-spacing-small);
+
+    display: flex;
+    flex-direction: column;
     opacity: var(--opacity);
     color: var(--color-text);
+    gap: var(--spacing);
 
     &.light {
         --color-text: var(--dui-color-text);
@@ -83,42 +88,17 @@
         position: relative;
         align-items: center;
         background-color: var(--color-background-input-section);
-        padding: var(--dui-spacing-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
 
-        .icons {
+        .input-container {
             display: flex;
-            align-items: center;
-            flex-shrink: 0;
-            padding: 0 var(--dui-spacing-extra-small);
-        }
-
-        .input {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-
-            input {
-                padding: 0 var(--dui-spacing-extra-small);
-            }
-        }
-
-        .actions {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-            padding: 0 calc(var(--dui-spacing-extra-small) - var(--dui-spacing-extra-small));
 
             >* {
-                margin: 0 var(--dui-spacing-extra-small);
+                flex-grow: 1;
             }
         }
 
         .input-section-border {
-            position: absolute;
-            bottom: 0;
-            left: 0;
             background-color: var(--color-input-section-border);
-            width: 100%;
             height: var(--height-border);
         }
     }
@@ -132,6 +112,7 @@
             border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
             border-radius: 2em;
             background-color: var(--dui-color-background-information);
+            padding: calc(var(--spacing) / 2) var(--spacing);
         }
 
         &:focus-within {
@@ -139,5 +120,21 @@
                 border-color: var(--dui-color-accent);
             }
         }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

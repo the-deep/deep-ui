@@ -19,30 +19,25 @@ export default {
 const Template: Story<ContainerProps> = (args) => (
     <Container
         {...args}
-        horizontallyCompactContent
     >
         <Container
             {...args}
-            sub
-            horizontallyCompactContent
+            headingSize="small"
         >
             <Container
                 {...args}
-                sub
+                headingSize="extraSmall"
             />
         </Container>
         <Container
             {...args}
-            sub
         />
         <Container
             {...args}
-            sub
         />
         <Container
             {...args}
-            sub
-            autoFocus
+            // autoFocus
         />
     </Container>
 );
@@ -85,4 +80,5 @@ Default.args = {
         </>
     ),
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed convallis quam, quis molestie nisi. Integer fringilla maximus tellus at aliquam. Nunc ac turpis non elit placerat luctus. Mauris vehicula, dui vitae feugiat malesuada, diam elit porttitor tellus, ut ultricies nibh est at ante. Maecenas congue congue nulla quis feugiat. Etiam porta volutpat mollis. Morbi libero eros, malesuada nec metus ac, varius cursus purus. Proin metus tellus, fermentum vel tellus et, tristique mattis urna. Nunc sapien sapien, malesuada posuere nulla in, imperdiet placerat orci. Phasellus dapibus magna sit amet neque sollicitudin laoreet.',
+    headingDescription: 'Heading Description',
 };

@@ -7,7 +7,17 @@ import InputHint from '../InputHint';
 import List from '../List';
 import Radio, { Props as RadioProps } from './Radio';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export interface Props<N, O, V, RRP extends RadioProps<V>> {
     className?: string;
@@ -28,6 +38,7 @@ export interface Props<N, O, V, RRP extends RadioProps<V>> {
     readOnly?: boolean;
     renderer?: (p: RRP) => React.ReactElement;
     rendererParams?: (o: O) => Omit<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value'>;
+    spacing?: SpacingTypes;
 }
 
 function RadioInput<
@@ -56,6 +67,7 @@ function RadioInput<
         rendererParams: rendererParamsFromProps,
         disabled,
         readOnly,
+        spacing = 'comfortable',
     } = props;
 
     const handleRadioClick = React.useCallback((radioKey) => {
@@ -101,6 +113,7 @@ function RadioInput<
             className={_cs(
                 styles.radioInput,
                 disabled && styles.disabled,
+                spacingToStyleMap[spacing],
                 className,
             )}
         >
