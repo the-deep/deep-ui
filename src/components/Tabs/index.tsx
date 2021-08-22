@@ -19,7 +19,7 @@ export interface BaseProps {
 export type Props<T extends TabKey> = BaseProps & (
     {
         useHash?: false;
-        value: T;
+        value: T | undefined;
         onChange: (key: T) => void;
     } | {
         useHash: true;
