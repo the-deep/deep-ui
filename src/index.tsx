@@ -56,6 +56,8 @@ export type { Props as ElementProps } from './components/Element';
 export { default as Element } from './components/Element';
 export type { Props as ElementFragmentsProps } from './components/ElementFragments';
 export { default as ElementFragments } from './components/ElementFragments';
+export type { Props as ControlledExpandableContainerProps } from './components/ControlledExpandableContainer';
+export { default as ControlledExpandableContainer } from './components/ControlledExpandableContainer';
 export type { Props as ExpandableContainerProps } from './components/ExpandableContainer';
 export { default as ExpandableContainer } from './components/ExpandableContainer';
 export type { Props as FileInputProps } from './components/FileInput';
