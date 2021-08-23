@@ -15,9 +15,9 @@ export interface Props extends RouterLinkProps {
     className?: string;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
-    iconsClassName?: string;
+    iconsContainerClassName?: string;
     linkElementClassName?: string;
-    actionsClassName?: string;
+    actionsContainerClassName?: string;
     disabled?: boolean;
 }
 
@@ -25,8 +25,8 @@ function Link(props: Props) {
     const {
         disabled,
         className,
-        actionsClassName,
-        iconsClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
         linkElementClassName,
         icons,
         actions,
@@ -44,7 +44,7 @@ function Link(props: Props) {
     return (
         <div className={_cs(className, styles.link, disabled && styles.disabled)}>
             {icons && (
-                <div className={_cs(iconsClassName, styles.icons)}>
+                <div className={_cs(iconsContainerClassName, styles.icons)}>
                     { icons }
                 </div>
             )}
@@ -65,7 +65,7 @@ function Link(props: Props) {
                 />
             )}
             {(actions || isExternalLink) && (
-                <div className={_cs(actionsClassName, styles.actions)}>
+                <div className={_cs(actionsContainerClassName, styles.actions)}>
                     { actions }
                     { isExternalLink && <IoChevronForward /> }
                 </div>

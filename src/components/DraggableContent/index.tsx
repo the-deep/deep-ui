@@ -28,7 +28,6 @@ function DraggableContent(props: Props) {
         value,
         name,
         headerActions,
-        sub = true,
         ...containerProps
     } = props;
 
@@ -75,7 +74,6 @@ function DraggableContent(props: Props) {
     return (
         <Container
             {...containerProps}
-            sub={sub}
             className={_cs(styles.draggableContent, className)}
             containerElementProps={{
                 draggable,

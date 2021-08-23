@@ -16,7 +16,7 @@ function QuickActionLink(props: Props) {
     return (
         <ButtonLikeLink
             className={_cs(className, styles.quickActionLink)}
-            childrenClassName={styles.children}
+            childrenContainerClassName={styles.children}
             variant="secondary"
             {...otherProps}
         />

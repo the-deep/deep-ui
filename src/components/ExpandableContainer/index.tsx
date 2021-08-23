@@ -34,7 +34,6 @@ function ExpandableContainer(props: Props) {
         contentClassName,
         headerClassName,
         headingSize,
-        sub,
         disabled = false,
         expansionTriggerArea = 'header',
         expansionButtonClassName,
@@ -54,9 +53,7 @@ function ExpandableContainer(props: Props) {
             className={_cs(
                 className,
                 styles.expandableContainer,
-                sub && styles.sub,
             )}
-            sub={sub}
             headerElementProps={{
                 onClick: expansionTriggerArea === 'header' && !disabled
                     ? toggleContentVisibility

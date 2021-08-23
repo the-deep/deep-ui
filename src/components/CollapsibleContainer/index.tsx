@@ -78,7 +78,7 @@ function CollapsibleContainer(props: Props) {
                         <Button
                             variant="action"
                             className={_cs(styles.collapseButton, collapseButtonClassName)}
-                            childrenClassName={styles.children}
+                            childrenContainerClassName={styles.children}
                             onClick={setIsCollapsedTrue}
                             name={undefined}
                         >
