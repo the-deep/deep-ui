@@ -6,6 +6,10 @@
         --color: var(--dui-color-text);
         color: var(--color);
 
+        &.empty {
+            --color: var(--dui-color-input-placeholder);
+        }
+
         &.errored {
             --color: var(--dui-color-negative);
         }

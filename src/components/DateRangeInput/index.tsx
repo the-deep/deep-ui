@@ -333,6 +333,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                                 styles.startDateInput,
                                 uiModeClassName,
                                 !!error && styles.errored,
+                                !(tempDate.startDate ?? value?.startDate) && styles.empty,
                                 inputClassName,
                             )}
                             value={tempDate.startDate ?? value?.startDate}
@@ -353,6 +354,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                                 styles.endDateInput,
                                 uiModeClassName,
                                 !!error && styles.errored,
+                                !(tempDate.endDate ?? value?.endDate) && styles.empty,
                                 inputClassName,
                             )}
                             elementRef={inputElementRef}
