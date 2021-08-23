@@ -164,6 +164,7 @@ function DateInput<T extends string>(props: Props<T>) {
                             styles.input,
                             uiModeClassName,
                             !!error && styles.errored,
+                            !value && styles.empty,
                             inputClassName,
                         )}
                         elementRef={inputElementRef}
