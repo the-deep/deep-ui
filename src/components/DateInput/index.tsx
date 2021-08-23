@@ -168,6 +168,8 @@ function DateInput<T extends string>(props: Props<T>) {
                             inputClassName,
                         )}
                         elementRef={inputElementRef}
+                        // NOTE: Make this required to hide clear button on firefox
+                        required={!!value}
                         readOnly
                         uiMode={uiMode}
                         disabled={disabled}
