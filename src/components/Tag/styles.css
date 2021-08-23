@@ -4,16 +4,17 @@
     --font-size: var(--dui-font-size-medium);
     --padding-v: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
     --border-radius: calc(var(--font-size) + var(--padding-v));
+    --padding: calc(var(--spacing) / 2) calc(var(--spacing) * 2);
 
     display: flex;
     align-items: center;
     border-radius: var(--border-radius);
     background-color: var(--background-color);
-    padding: var(--padding-v) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
-    width: fit-content;
+    padding: var(--padding);
     text-align: center;
     color: var(--color);
     font-size: var(--font-size);
+    gap: var(--spacing);
 
     &.default {
         --background-color: var(--dui-color-background);

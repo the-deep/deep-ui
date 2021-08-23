@@ -97,6 +97,7 @@ function InputContainer(props: Props) {
             >
                 {input}
             </Element>
+            { children }
             <InputBorder
                 className={styles.inputSectionBorder}
                 errored={!!error}

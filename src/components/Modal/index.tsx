@@ -7,7 +7,18 @@ import Footer from '../Footer';
 import Button from '../Button';
 import BodyBackdrop from '../BodyBackdrop';
 
+import { SpacingTypes } from '../../types';
+
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 interface BaseProps {
     children?: React.ReactNode;
@@ -36,6 +47,7 @@ interface BaseProps {
     footerActionsContainerClassName?: string;
     footerIconsContainerClassName?: string;
     footerQuickActionsContainerClassName?: string;
+    spacing?: SpacingTypes;
 }
 
 export type Props = BaseProps & ({
@@ -78,6 +90,7 @@ function Modal(props: Props) {
         onCloseButtonClick,
         hideCloseButton,
         headingSize,
+        spacing = 'comfortable',
     } = props;
 
     const shouldHideHeader = hideCloseButton && !heading && !headerActions && !headerIcons;
@@ -86,12 +99,14 @@ function Modal(props: Props) {
         <BodyBackdrop>
             <div
                 className={_cs(
-                    className,
                     styles.modal,
+                    spacingToStyleMap[spacing],
+                    className,
                 )}
             >
                 {!shouldHideHeader && (
                     <Header
+                        spacing={spacing}
                         className={_cs(styles.modalHeader, headerClassName)}
                         heading={heading}
                         headingSectionClassName={headingSectionClassName}
@@ -107,7 +122,7 @@ function Modal(props: Props) {
                                 {headerActions}
                                 {!hideCloseButton && (
                                     <Button
-                                        className={_cs(styles.closeButton, closeButtonClassName)}
+                                        className={closeButtonClassName}
                                         onClick={onCloseButtonClick}
                                         name="close-modal"
                                         variant="action"
@@ -124,6 +139,7 @@ function Modal(props: Props) {
                 </div>
                 {(footer || footerIcons || footerActions || footerQuickActions) && (
                     <Footer
+                        spacing={spacing}
                         className={_cs(styles.modalFooter, footerClassName)}
                         icons={footerIcons}
                         actions={footerActions}

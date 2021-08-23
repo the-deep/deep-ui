@@ -8,7 +8,17 @@ import InputHint from '../InputHint';
 import List from '../List';
 import Checkbox from '../Checkbox';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 type OptionKey = string | number;
 
@@ -37,6 +47,8 @@ export interface Props<
     listContainerClassName?: string;
     disabled?: boolean;
     readOnly?: boolean;
+    spacing?: SpacingTypes;
+    direction?: 'horizontal' | 'vertical';
 }
 
 function CheckListInput<
@@ -64,6 +76,8 @@ function CheckListInput<
         labelSelector,
         checkboxClassName,
         listContainerClassName,
+        spacing = 'comfortable',
+        direction = 'horizontal',
     } = props;
 
     const handleCheck = useCallback((isSelected: boolean, key: T) => {
@@ -82,6 +96,7 @@ function CheckListInput<
         uiMode,
         disabled,
         readOnly,
+        spacing,
     }), [
         value,
         handleCheck,
@@ -89,6 +104,7 @@ function CheckListInput<
         uiMode,
         disabled,
         readOnly,
+        spacing,
     ]);
 
     return (
@@ -96,6 +112,9 @@ function CheckListInput<
             className={_cs(
                 styles.checkListInput,
                 className,
+                spacingToStyleMap[spacing],
+                direction === 'horizontal' && styles.horizontal,
+                direction === 'vertical' && styles.vertical,
             )}
         >
             <InputLabel

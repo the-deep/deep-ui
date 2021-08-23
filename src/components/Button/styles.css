@@ -99,7 +99,7 @@
         .icons,
         .children,
         .actions {
-            font-size: calc(1em + var(--spacing));
+            font-size: calc(1em + calc(var(--spacing) / 2));
         }
     }
 

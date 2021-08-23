@@ -1,31 +1,28 @@
 .text-output {
-    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-super-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+    --spacing: var(--dui-spacing-medium);
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing);
 
-    &:not(.blok) {
-        display: flex;
-        align-items: center;
+    &.blok {
+        align-items: initial;
+        flex-direction: column;
     }
 
     >.label {
-        padding: var(--dui-spacing-super-small) var(--dui-spacing-extra-small);
         color: var(--dui-color-text-label);
     }
 
     >.value {
-        padding: var(--dui-spacing-super-small) var(--dui-spacing-extra-small);
         font-weight: var(--dui-font-weight-bold);
 
         /* Useful for nested text outputs */
         .text-output {
-            margin: 0 calc(-1 * var(--dui-spacing-medium));
-            padding-top: 0;
-            padding-bottom: 0;
             font-weight: var(--dui-font-weight-medium);
         }
     }
 
     >.description {
-        padding: 0 var(--dui-spacing-extra-small);
         color: var(--dui-color-text-description);
         font-size: var(--dui-font-size-small);
     }
@@ -36,5 +33,21 @@
                 content: ':';
             }
         }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

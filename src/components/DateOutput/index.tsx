@@ -13,7 +13,6 @@ export interface Props {
     className?: string;
     value: string | number | undefined | null;
     format?: string;
-    invalidText?: React.ReactNode;
     emptyComponent?: React.ReactNode;
 }
 

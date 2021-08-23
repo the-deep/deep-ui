@@ -1,5 +1,6 @@
 .pending-animation {
     display: flex;
+    width: fit-content;
 
     .circle {
         margin: .2em;
