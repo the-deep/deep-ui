@@ -1,12 +1,4 @@
 .container-card {
     border-radius: var(--dui-border-radius-card);
     background-color: var(--dui-color-background-card);
-
-    .header {
-        border-bottom: var(--dui-width-separator-thin) solid var(--dui-color-separator);
-    }
-
-    .container {
-        background-color: transparent;
-    }
 }

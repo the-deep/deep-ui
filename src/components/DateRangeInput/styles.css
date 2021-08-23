@@ -1,5 +1,6 @@
 .input-container {
     display: flex;
+    flex-direction: row;
 
     .input {
         --color: var(--dui-color-text);
