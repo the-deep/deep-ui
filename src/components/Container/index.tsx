@@ -117,7 +117,7 @@ function Container(props: Props) {
                     heading={heading}
                     headingSize={headingSize}
                     description={headingDescription}
-                    descriptionClassName={headerDescriptionClassName}
+                    descriptionClassName={_cs(styles.headerDescription, headerDescriptionClassName)}
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
                     headingContainerClassName={headingContainerClassName}
