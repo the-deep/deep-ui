@@ -101,7 +101,7 @@ function Modal(props: Props) {
                         descriptionClassName={headerDescriptionClassName}
                         headingClassName={headingClassName}
                         headingContainerClassName={headingContainerClassName}
-                        inlineDescription={inlineHeadingDescription}
+                        inlineHeadingDescription={inlineHeadingDescription}
                         actions={(
                             <>
                                 {headerActions}

@@ -37,21 +37,5 @@
             display: block;
         }
     }
-
-    &.sub {
-        background-color: initial;
-        padding: 0;
-
-        .header {
-            border: initial;
-            background-color: initial;
-            padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
-        }
-
-        .content {
-            border: initial;
-            padding: var(--dui-spacing-small) var(--dui-spacing-medium);
-        }
-    }
 }
 
