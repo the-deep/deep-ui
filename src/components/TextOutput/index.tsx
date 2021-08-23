@@ -7,7 +7,17 @@ import DateOutput from '../DateOutput';
 import type { Props as NumberOutputProps } from '../NumberOutput';
 import type { Props as DateOutputProps } from '../DateOutput';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 interface BaseProps {
     className?: string;
@@ -18,6 +28,7 @@ interface BaseProps {
     valueContainerClassName?: string;
     hideLabelColon?: boolean;
     block?: boolean;
+    spacing?: SpacingTypes;
 }
 
 export type Props = BaseProps & ({
@@ -44,6 +55,7 @@ function TextOutput(props: Props) {
         descriptionContainerClassName,
         hideLabelColon,
         block,
+        spacing = 'comfortable',
     } = props;
 
     let { value } = props;
@@ -70,12 +82,13 @@ function TextOutput(props: Props) {
         <div
             className={_cs(
                 styles.textOutput,
-                className,
                 !hideLabelColon && styles.withLabelColon,
                 // NOTE:
                 // styles.blok is supposed to be styles.block
                 // but we encountered a strange behavior
                 block && styles.blok,
+                spacingToStyleMap[spacing],
+                className,
             )}
         >
             {label && (

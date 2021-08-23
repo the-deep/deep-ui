@@ -1,10 +1,37 @@
 .icons {
+    --spacing: var(--dui-spacing-small);
+
     display: flex;
     align-items: center;
-    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small));
+    gap: var(--spacing);
 
     >* {
         flex-shrink: 0;
-        margin: 0 var(--dui-spacing-extra-small);
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
+    &.allow-shrink {
+        >* {
+            flex-shrink: initial;
+        }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

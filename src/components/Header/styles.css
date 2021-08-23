@@ -1,22 +1,30 @@
 .header {
-    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+    --spacing: var(--dui-spacing-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
 
     .heading-section {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         overflow: auto;
 
         .heading-container {
-            display: block;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
             flex-grow: 1;
             padding: 0;
             overflow: auto;
+            gap: var(--spacing);
+
+            &.inline-description {
+                align-items: center;
+                flex-direction: row;
+            }
 
             .heading {
-                margin: 0;
-                padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-                width: 100%;
-                line-height: 1;
+                min-width: 3rem;
 
                 &.string-heading {
                     overflow: hidden;
@@ -26,8 +34,6 @@
             }
 
             .description {
-                padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-
                 &.uppercase {
                     text-transform: uppercase;
                 }
@@ -35,21 +41,19 @@
         }
     }
 
-    &.inline-description {
-        .heading-section {
-            .heading-container {
-                display: flex;
-                align-items: center;
-
-                .heading {
-                    width: auto;
-                }
-            }
-        }
+    &.no-spacing {
+        --spacing: 0;
     }
 
-    .content {
-        padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
     }
 
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
+    }
 }

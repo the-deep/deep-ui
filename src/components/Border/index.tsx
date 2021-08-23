@@ -3,9 +3,10 @@ import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
 
-type Position = 'top' | 'right' | 'bottom' | 'left';
+type PositionTypes = 'top' | 'right' | 'bottom' | 'left';
+type WidthTypes = 'thin' | 'medium' | 'thick' | 'dense';
 const positionToStyleMap: {
-    [key in Position]: string;
+    [key in PositionTypes]: string;
 } = {
     top: styles.top,
     right: styles.right,
@@ -13,13 +14,24 @@ const positionToStyleMap: {
     left: styles.left,
 };
 
+const widthToStyleMap: {
+    [key in WidthTypes]: string;
+} = {
+    thin: styles.thin,
+    medium: styles.medium,
+    thick: styles.thick,
+    dense: styles.dense,
+};
+
 export interface Props {
     className?: string;
     active?: boolean;
     errored?: boolean;
-    position?: Position;
+    position?: PositionTypes;
     disabled?: boolean;
     transparent?: boolean;
+    fullWidthActiveBorder?: boolean;
+    width?: WidthTypes;
 }
 
 function Border(props: Props) {
@@ -30,6 +42,8 @@ function Border(props: Props) {
         position = 'bottom',
         disabled,
         transparent,
+        fullWidthActiveBorder,
+        width = 'medium',
     } = props;
 
     return (
@@ -41,6 +55,8 @@ function Border(props: Props) {
                 positionToStyleMap[position] ?? styles.bottom,
                 disabled && styles.disabled,
                 transparent && styles.transparent,
+                fullWidthActiveBorder && styles.fullWidthActiveBorder,
+                widthToStyleMap[width],
                 className,
             )}
         >

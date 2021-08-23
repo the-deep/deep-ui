@@ -1,10 +1,15 @@
 .border {
+    --border-width: var(--dui-width-separator-medium);
+
     position: absolute;
+    top: unset;
+    right: unset;
     bottom: 0;
     left: 0;
     background-color: var(--dui-color-separator);
     width: 100%;
-    height: var(--dui-width-separator-medium);
+    height: var(--border-width);
+    --animation-name: grow-h;
 
     &.transparent {
         background-color: transparent;
@@ -12,12 +17,22 @@
 
     &.active {
         display: flex;
+        align-items: center;
         justify-content: center;
 
         .active-border {
             background-color: var(--dui-color-accent);
+            width: 100%;
+            max-width: 100%;
             height: 100%;
-            animation: grow var(--dui-duration-transition-medium) ease-in forwards;
+            max-height: 100%;
+            animation: var(--animation-name) var(--dui-duration-transition-medium) ease-in forwards;
+        }
+
+        &.full-width-active-border {
+            .active-border {
+                --animation-name: grow-h-full-width;
+            }
         }
 
         &.disabled {
@@ -28,14 +43,95 @@
         }
     }
 
+
+    &.top {
+        top: 0;
+        right: unset;
+        bottom: unset;
+        left: 0;
+    }
+
+    &.left {
+        top: 0;
+        right: unset;
+        bottom: unset;
+        left: 0;
+        width: var(--border-width);
+        height: 100%;
+        --animation-name: grow-v;
+
+        &.full-width-active-border {
+            --animation-name: grow-v-full-width;
+        }
+    }
+
+    &.right {
+        top: 0;
+        right: 0;
+        bottom: unset;
+        left: unset;
+        width: var(--border-width);
+        height: 100%;
+        --animation-name: grow-v;
+
+        &.full-width-active-border {
+            --animation-name: grow-v-full-width;
+        }
+    }
+
+    &.thin {
+        --border-width: var(--dui-width-separator-thin);
+    }
+
+    &.medium {
+        --border-width: var(--dui-width-separator-medium);
+    }
+
+    &.thick {
+        --border-width: var(--dui-width-separator-thick);
+    }
+
+    &.dense {
+        --border-width: var(--dui-width-separator-dense);
+    }
 }
 
-@keyframes grow {
+@keyframes grow-h {
     from {
         width: 0;
     }
 
     to {
         width: var(--dui-width-active-border);
+    }
+}
+
+@keyframes grow-h-full-width {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes grow-v {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: var(--dui-width-active-border);
+    }
+}
+
+@keyframes grow-v-full-width {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 100%;
     }
 }

@@ -1,28 +1,24 @@
 .checkbox {
     --color-text: transparent;
     --color-checkmark: transparent;
+    --spacing: var(--dui-spacing-small);
 
     display: flex;
     position: relative;
     align-items: center;
     cursor: pointer;
-    padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
     color: var(--color-text);
     user-select: none;
+    gap: var(--spacing);
 
     .checkmark {
         flex-shrink: 0;
-        margin: 0 var(--dui-spacing-extra-small);
         color: var(--color-checkmark);
         font-size: 1.11em;
     }
 
     .input {
         display: none;
-    }
-
-    .label {
-        padding: var(--dui-spacing-extra-small);
     }
 
     &.light {
@@ -55,5 +51,21 @@
     &.disabled {
         opacity: var(--dui-opacity-disabled-element);
         cursor: not-allowed;
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

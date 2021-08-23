@@ -1,6 +1,10 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import ElementFragments, {
+    Props as ElementFragmentProps,
+} from '../ElementFragments';
+
 import { SpacingTypes } from '../../types';
 import styles from './styles.css';
 
@@ -13,36 +17,37 @@ const spacingToStyleMap: {
     loose: styles.looseSpacing,
 };
 
-export interface Props {
+export interface Props extends ElementFragmentProps {
     className?: string;
-    children?: React.ReactNode;
-    wrap?: boolean;
-    allowShrink?: boolean;
-    spacing?: SpacingTypes;
+    fitContent?: boolean;
+    elementRef?: React.RefObject<HTMLDivElement>;
 }
 
-function Actions(props: Props) {
+function Element(props: Props) {
     const {
         className,
-        children,
-        wrap,
-        allowShrink,
         spacing = 'comfortable',
+        fitContent,
+        elementRef,
+        ...elementFragmentProps
     } = props;
 
     return (
         <div
             className={_cs(
-                styles.actions,
-                wrap && styles.wrap,
-                allowShrink && styles.allowShrink,
+                styles.element,
                 spacingToStyleMap[spacing],
+                fitContent && styles.fitContent,
                 className,
             )}
+            ref={elementRef}
         >
-            { children }
+            <ElementFragments
+                spacing={spacing}
+                {...elementFragmentProps}
+            />
         </div>
     );
 }
 
-export default Actions;
+export default Element;

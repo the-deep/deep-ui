@@ -1,30 +1,39 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import ElementFragments from '../ElementFragments';
+import Element from '../Element';
 import Heading, { Props as HeadingProps } from '../Heading';
+import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
-export interface Props {
-    className?: string;
-    headingClassName?: string;
-    descriptionClassName?: string;
-    headingContainerClassName?: string;
-    iconsContainerClassName?: string;
-    actionsContainerClassName?: string;
-    heading?: React.ReactNode;
-    description?: React.ReactNode;
-    inlineDescription?: boolean;
-    icons?: React.ReactNode;
-    actions?: React.ReactNode;
-    headingSize?: HeadingProps['size'];
-    children?: React.ReactNode;
-    headingSectionClassName?: string;
-    childrenContainerClassName?: string;
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
-    // Note: not to be exposed by extended components
+export interface Props {
+    actions?: React.ReactNode;
+    actionsContainerClassName?: string;
+    children?: React.ReactNode;
+    childrenContainerClassName?: string;
+    className?: string;
+    description?: React.ReactNode;
+    descriptionClassName?: string;
     elementProps?: Omit<React.HTMLProps<HTMLDivElement>, 'className'>;
+    heading?: React.ReactNode;
+    headingClassName?: string;
+    headingContainerClassName?: string;
+    headingSectionClassName?: string;
+    headingSize?: HeadingProps['size'];
+    icons?: React.ReactNode;
+    iconsContainerClassName?: string;
+    inlineHeadingDescription?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Header(props: Props) {
@@ -35,7 +44,7 @@ function Header(props: Props) {
         iconsContainerClassName,
         headingContainerClassName,
         actionsContainerClassName,
-        inlineDescription,
+        inlineHeadingDescription,
         heading,
         description,
         actions,
@@ -45,6 +54,7 @@ function Header(props: Props) {
         headingSectionClassName,
         childrenContainerClassName,
         elementProps,
+        spacing = 'comfortable',
     } = props;
 
     const isStringHeading = (typeof heading) === 'string';
@@ -52,51 +62,52 @@ function Header(props: Props) {
     return (
         <header
             className={_cs(
-                className,
                 styles.header,
-                inlineDescription && styles.inlineDescription,
+                spacingToStyleMap[spacing],
+                className,
             )}
             {...elementProps}
         >
-            <div className={_cs(styles.headingSection, headingSectionClassName)}>
-                <ElementFragments
-                    icons={icons}
-                    iconsContainerClassName={iconsContainerClassName}
-                    actions={actions}
-                    actionsContainerClassName={actionsContainerClassName}
-                    childrenContainerClassName={_cs(
-                        styles.headingContainer,
-                        headingContainerClassName,
+            <Element
+                className={_cs(styles.headingSection, headingSectionClassName)}
+                icons={icons}
+                iconsContainerClassName={iconsContainerClassName}
+                actions={actions}
+                actionsContainerClassName={actionsContainerClassName}
+                spacing={spacing}
+                childrenContainerClassName={_cs(
+                    styles.headingContainer,
+                    inlineHeadingDescription && styles.inlineDescription,
+                    headingContainerClassName,
+                )}
+            >
+                <Heading
+                    size={headingSize}
+                    className={_cs(
+                        styles.heading,
+                        headingClassName,
+                        isStringHeading && styles.stringHeading,
                     )}
+                    title={isStringHeading ? (heading as string) : undefined}
                 >
-                    <Heading
-                        size={headingSize}
+                    { heading }
+                </Heading>
+                {description && (
+                    <div
                         className={_cs(
-                            styles.heading,
-                            headingClassName,
-                            isStringHeading && styles.stringHeading,
+                            styles.description,
+                            descriptionClassName,
+                            !headingSize && styles.uppercase,
+                            headingSize === 'large' && styles.uppercase,
+                            headingSize === 'medium' && styles.uppercase,
                         )}
-                        title={isStringHeading ? (heading as string) : undefined}
                     >
-                        { heading }
-                    </Heading>
-                    {description && (
-                        <div
-                            className={_cs(
-                                styles.description,
-                                descriptionClassName,
-                                !headingSize && styles.uppercase,
-                                headingSize === 'large' && styles.uppercase,
-                                headingSize === 'medium' && styles.uppercase,
-                            )}
-                        >
-                            {description}
-                        </div>
-                    )}
-                </ElementFragments>
-            </div>
+                        {description}
+                    </div>
+                )}
+            </Element>
             {children && (
-                <div className={_cs(styles.content, childrenContainerClassName)}>
+                <div className={childrenContainerClassName}>
                     { children }
                 </div>
             )}

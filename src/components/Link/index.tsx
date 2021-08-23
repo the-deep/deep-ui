@@ -9,28 +9,44 @@ import {
 } from 'react-router-dom';
 import { IoChevronForward } from 'react-icons/io5';
 
+import Actions from '../Actions';
+import Icons from '../Icons';
+
+import { SpacingTypes } from '../../types';
+
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export interface Props extends RouterLinkProps {
     className?: string;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
-    iconsClassName?: string;
+    iconsContainerClassName?: string;
     linkElementClassName?: string;
-    actionsClassName?: string;
+    actionsContainerClassName?: string;
     disabled?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Link(props: Props) {
     const {
         disabled,
         className,
-        actionsClassName,
-        iconsClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
         linkElementClassName,
         icons,
         actions,
         to,
+        spacing = 'comfortable',
         ...otherProps
     } = props;
 
@@ -42,11 +58,18 @@ function Link(props: Props) {
     );
 
     return (
-        <div className={_cs(className, styles.link, disabled && styles.disabled)}>
+        <div
+            className={_cs(
+                className,
+                styles.link,
+                spacingToStyleMap[spacing],
+                disabled && styles.disabled,
+            )}
+        >
             {icons && (
-                <div className={_cs(iconsClassName, styles.icons)}>
+                <Icons className={_cs(iconsContainerClassName, styles.icons)}>
                     { icons }
-                </div>
+                </Icons>
             )}
             {isExternalLink ? (
                 // eslint-disable-next-line jsx-a11y/anchor-has-content
@@ -65,10 +88,10 @@ function Link(props: Props) {
                 />
             )}
             {(actions || isExternalLink) && (
-                <div className={_cs(actionsClassName, styles.actions)}>
+                <Actions className={_cs(actionsContainerClassName, styles.actions)}>
                     { actions }
                     { isExternalLink && <IoChevronForward /> }
-                </div>
+                </Actions>
             )}
         </div>
     );

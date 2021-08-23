@@ -6,7 +6,17 @@ import { UiMode } from '../UiModeContext';
 
 import DefaultCheckmark, { CheckmarkProps } from './Checkmark';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 type OptionKey = string | number;
 
@@ -24,6 +34,7 @@ export interface Props<N extends OptionKey> {
     value: boolean | undefined | null;
     onChange: (value: boolean, name: N) => void;
     name: N;
+    spacing?: SpacingTypes;
 }
 
 function Checkbox<N extends OptionKey>(props: Props<N>) {
@@ -41,6 +52,7 @@ function Checkbox<N extends OptionKey>(props: Props<N>) {
         indeterminate,
         uiMode,
         name,
+        spacing = 'comfortable',
         ...otherProps
     } = props;
 
@@ -61,6 +73,7 @@ function Checkbox<N extends OptionKey>(props: Props<N>) {
         !indeterminate && value && styles.checked,
         disabled && styles.disabled,
         readOnly && styles.readOnly,
+        spacingToStyleMap[spacing],
         themeClassName,
     );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import RawButton, { Props as RawButtonProps } from '../RawButton';
 
-import Border from '../Border';
+import Border, { Props as BorderProps } from '../Border';
 import { TabKey, TabContext, TabVariant } from '../TabContext';
 import { setHashToBrowser, genericMemo } from '../../utils';
 
@@ -25,6 +25,9 @@ export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClic
     activeClassName?: string;
     borderWrapperClassName?: string;
     transparentBorder?: boolean;
+    fullWidthActiveBorder?: boolean;
+    borderPosition?: BorderProps['position'];
+    borderWidth?: BorderProps['width'];
 }
 
 function Tab<T extends TabKey>(props: Props<T>) {
@@ -43,6 +46,9 @@ function Tab<T extends TabKey>(props: Props<T>) {
         borderWrapperClassName,
         children,
         transparentBorder,
+        borderPosition = 'bottom',
+        borderWidth,
+        fullWidthActiveBorder,
         ...otherProps
     } = props;
 
@@ -77,6 +83,9 @@ function Tab<T extends TabKey>(props: Props<T>) {
                     active={isActive}
                     disabled={disabled}
                     transparent={transparentBorder}
+                    fullWidthActiveBorder={fullWidthActiveBorder}
+                    width={borderWidth}
+                    position={borderPosition}
                 />
             )}
             {children}

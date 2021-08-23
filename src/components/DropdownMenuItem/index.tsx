@@ -18,7 +18,17 @@ import RawButton, {
 
 import { genericMemo } from '../../utils';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export function Separator({ className }: { className?: string }) {
     return (
@@ -51,6 +61,7 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         iconsContainerClassName,
         childrenContainerClassName,
         actionsContainerClassName,
+        spacing = 'comfortable',
     } = props;
 
     const isExternalLink = React.useMemo(() => (
@@ -61,7 +72,11 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
     // eslint-disable-next-line react/destructuring-assignment
     ), [props.href]);
 
-    const className = _cs(styles.dropdownMenuItem, classNameFromProps);
+    const className = _cs(
+        styles.dropdownMenuItem,
+        spacingToStyleMap[spacing],
+        classNameFromProps,
+    );
 
     const content = (
         <ElementFragments

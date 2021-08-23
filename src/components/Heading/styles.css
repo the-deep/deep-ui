@@ -1,7 +1,8 @@
 .heading {
+    --color: var(--dui-color-black);
+
     margin: 0;
-    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
-    color: var(--dui-color-black);
+    color: var(--color);
     font-weight: var(--dui-font-weight-bold);
 
     &.extra-large {
@@ -14,8 +15,8 @@
     }
 
     &.medium {
+        --color: var(--dui-color-brand);
         text-transform: uppercase;
-        color: var(--dui-color-brand);
         font-size: var(--dui-font-size-heading-medium);
     }
 
@@ -25,5 +26,17 @@
 
     &.extra-small {
         font-size: var(--dui-font-size-heading-extra-small);
+    }
+
+    &.brand {
+        --color: var(--dui-color-brand);
+    }
+
+    &.accent {
+        --color: var(--dui-color-accent);
+    }
+
+    &.default {
+        --color: var(--dui-color-black);
     }
 }

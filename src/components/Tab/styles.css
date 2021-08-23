@@ -52,6 +52,12 @@
             --text-color: var(--dui-color-text-disabled);
         }
     }
+
+    &:hover {
+        &:not(.disabled) {
+            background-color: var(--dui-color-background-hover);
+        }
+    }
 }
 
 .border-wrapper {

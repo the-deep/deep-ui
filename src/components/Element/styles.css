@@ -1,8 +1,11 @@
-.footer {
+.element {
     --spacing: var(--dui-spacing-medium);
     display: flex;
-    align-items: center;
     gap: var(--spacing);
+
+    &.fit-content {
+        width: fit-content;
+    }
 
     &.no-spacing {
         --spacing: 0;

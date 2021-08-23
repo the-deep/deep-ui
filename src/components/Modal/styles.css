@@ -1,31 +1,45 @@
 .modal {
+    --spacing: var(--dui-spacing-medium);
+
     display: flex;
     flex-direction: column;
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
     border-radius: var(--dui-border-radius-modal);
     background-color: var(--dui-color-background-modal);
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-extra-large) - var(--dui-spacing-medium));
+    padding: var(--spacing);
     min-width: var(--dui-width-min-modal);
     max-width: var(--dui-width-max-modal);
     max-height: var(--dui-height-max-modal);
+    gap: var(--spacing);
     overflow: auto;
 
     .modal-header {
         flex-shrink: 0;
-
-        .close-button {
-            font-size: var(--dui-font-size-extra-large);
-        }
     }
 
     .modal-body {
         flex-grow: 1;
-        padding: var(--dui-spacing-medium);
         overflow: auto;
     }
 
     .modal-footer {
         flex-shrink: 0;
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }
 

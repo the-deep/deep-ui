@@ -3,11 +3,22 @@ import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
 
+type ColorVariantTypes = 'brand' | 'accent' | 'default';
+
+const colorVariantToStyleMap: {
+    [key in ColorVariantTypes]: string;
+} = {
+    brand: styles.brand,
+    accent: styles.brand,
+    default: styles.default,
+};
+
 export interface Props {
     className?: string;
     children?: React.ReactNode;
     size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
     title?: string;
+    colorVariant?: ColorVariantTypes;
 }
 
 function Heading(props: Props) {
@@ -16,13 +27,19 @@ function Heading(props: Props) {
         children,
         size = 'medium',
         title,
+        colorVariant = 'default',
     } = props;
 
     return (
         <>
             {size === 'extraSmall' && (
                 <h5
-                    className={_cs(styles.heading, styles.extraSmall, className)}
+                    className={_cs(
+                        styles.heading,
+                        styles.extraSmall,
+                        colorVariantToStyleMap[colorVariant],
+                        className,
+                    )}
                     title={title}
                 >
                     { children }

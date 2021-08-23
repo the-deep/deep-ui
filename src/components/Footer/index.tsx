@@ -4,18 +4,29 @@ import { _cs } from '@togglecorp/fujs';
 import ElementFragments from '../ElementFragments';
 import QuickActionGroup from '../QuickActionGroup';
 
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
 
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
+
 export interface Props {
-    className?: string;
-    iconsContainerClassName?: string;
-    actionsContainerClassName?: string;
-    icons?: React.ReactNode;
     actions?: React.ReactNode;
+    actionsContainerClassName?: string;
     children?: React.ReactNode;
     childrenContainerClassName?: string;
+    className?: string;
+    icons?: React.ReactNode;
+    iconsContainerClassName?: string;
     quickActions?: React.ReactNode;
     quickActionsContainerClassName?: string;
+    spacing?: SpacingTypes;
 }
 
 function Footer(props: Props) {
@@ -29,10 +40,17 @@ function Footer(props: Props) {
         icons,
         quickActions,
         quickActionsContainerClassName,
+        spacing = 'comfortable',
     } = props;
 
     return (
-        <footer className={_cs(className, styles.footer)}>
+        <footer
+            className={_cs(
+                className,
+                styles.footer,
+                spacingToStyleMap[spacing],
+            )}
+        >
             <ElementFragments
                 icons={icons}
                 iconsContainerClassName={iconsContainerClassName}
@@ -40,7 +58,9 @@ function Footer(props: Props) {
                     <>
                         {actions}
                         {quickActions && (
-                            <QuickActionGroup className={quickActionsContainerClassName}>
+                            <QuickActionGroup
+                                className={quickActionsContainerClassName}
+                            >
                                 {quickActions}
                             </QuickActionGroup>
                         )}
@@ -48,6 +68,7 @@ function Footer(props: Props) {
                 )}
                 actionsContainerClassName={actionsContainerClassName}
                 childrenContainerClassName={childrenContainerClassName}
+                spacing={spacing}
             >
                 { children }
             </ElementFragments>

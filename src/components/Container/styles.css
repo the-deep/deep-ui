@@ -1,9 +1,12 @@
 .container {
+    --spacing: var(--dui-spacing-medium);
+
     display: flex;
     flex-direction: column;
     background-color: var(--dui-color-background);
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-medium));
+    padding: var(--spacing);
     overflow: auto;
+    gap: var(--spacing);
 
     .header {
         flex-shrink: 0;
@@ -11,7 +14,6 @@
 
     .content {
         flex-grow: 1;
-        padding: var(--dui-spacing-small) var(--dui-spacing-medium);
         overflow: auto;
     }
 
@@ -19,20 +21,25 @@
         flex-shrink: 0;
     }
 
-    &.sub {
-        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small)) 0;
-    }
-
-    &.horizontally-compact-content {
-        >.content {
-            padding-right: 0;
-            padding-left: 0;
-        }
-    }
-
     &.auto-focused {
         animation: get-focus var(--dui-duration-transition-long) ease-in;
         animation-iteration-count: 3;
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }
 

@@ -3,10 +3,19 @@ import { _cs } from '@togglecorp/fujs';
 
 import Header, { Props as HeaderProps } from '../Header';
 import Footer from '../Footer';
+import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
-// NOTE: these props should never be exposed
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
+
 export type internalProps = 'containerElementProps' | 'headerElementProps';
 
 export interface Props {
@@ -34,10 +43,6 @@ export interface Props {
     headingSize?: HeaderProps['headingSize'];
     headingContainerClassName?: HeaderProps['headingContainerClassName'];
 
-    horizontallyCompactContent?: boolean;
-
-    // Is sub container? (i.e. Container with small heading)
-    sub?: boolean;
     inlineHeadingDescription?: boolean;
 
     footerContentClassName?: string;
@@ -46,6 +51,7 @@ export interface Props {
     footerQuickActionsContainerClassName?: string;
 
     autoFocus?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Container(props: Props) {
@@ -69,16 +75,15 @@ function Container(props: Props) {
         footerActionsContainerClassName,
         footerContentClassName,
         footerQuickActionsContainerClassName,
-        sub = false,
         containerElementProps,
         headingSize,
         footerQuickActions,
-        horizontallyCompactContent,
         headerElementProps,
         elementRef: elementRefFromProps,
         headingContainerClassName,
         inlineHeadingDescription,
         autoFocus,
+        spacing = 'comfortable',
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -98,10 +103,9 @@ function Container(props: Props) {
             {...containerElementProps}
             className={_cs(
                 styles.container,
-                sub && styles.sub,
-                horizontallyCompactContent && styles.horizontallyCompactContent,
                 className,
                 autoFocus && styles.autoFocused,
+                spacingToStyleMap[spacing],
             )}
             ref={elementRef}
         >
@@ -111,13 +115,14 @@ function Container(props: Props) {
                     actions={headerActions}
                     className={_cs(styles.header, headerClassName)}
                     heading={heading}
-                    headingSize={headingSize ?? (sub ? 'small' : 'medium')}
+                    headingSize={headingSize}
                     description={headingDescription}
-                    descriptionClassName={headerDescriptionClassName}
+                    descriptionClassName={_cs(styles.headerDescription, headerDescriptionClassName)}
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
                     headingContainerClassName={headingContainerClassName}
-                    inlineDescription={inlineHeadingDescription}
+                    inlineHeadingDescription={inlineHeadingDescription}
+                    spacing={spacing}
                 >
                     {headerDescription}
                 </Header>

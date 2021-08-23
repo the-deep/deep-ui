@@ -3,7 +3,18 @@ import { _cs } from '@togglecorp/fujs';
 
 import { genericMemo } from '../../utils';
 
+import ElementFragments from '../ElementFragments';
+import { SpacingTypes } from '../../types';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export type ButtonVariant = (
     'primary'
@@ -33,61 +44,57 @@ export interface Props<N> extends Omit<
     className?: string;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
-    iconsClassName?: string;
-    childrenClassName?: string;
-    actionsClassName?: string;
+    iconsContainerClassName?: string;
+    childrenContainerClassName?: string;
+    actionsContainerClassName?: string;
     disabled?: boolean;
     big?: boolean;
     name: N;
     onClick?: (name: N, e: React.MouseEvent<HTMLButtonElement>) => void;
     readOnly?: boolean;
     elementRef?: React.RefObject<HTMLButtonElement>;
+    spacing?: SpacingTypes;
 }
 
-export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsClassName' | 'iconsClassName' | 'childrenClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly';
+export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsContainerClassName' | 'iconsContainerClassName' | 'childrenContainerClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly' | 'spacing';
 export function useButtonFeatures(
     props: Pick<Props<void>, ButtonFeatureKeys>,
 ) {
     const {
         variant = 'primary',
         className,
-        actionsClassName,
-        iconsClassName,
-        childrenClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
+        childrenContainerClassName,
         disabled,
         children,
         icons,
         actions,
         big,
         readOnly,
+        spacing = 'comfortable',
     } = props;
 
     const buttonClassName = _cs(
         styles.button,
-        buttonVariantToStyleMap[variant] ?? styles.primary,
-        readOnly && styles.readOnly,
         big && styles.big,
+        readOnly && styles.readOnly,
+        buttonVariantToStyleMap[variant] ?? styles.primary,
+        spacingToStyleMap[spacing],
         className,
     );
 
     const buttonChildren = (
-        <>
-            {icons && (
-                <div className={_cs(iconsClassName, styles.icons)}>
-                    {icons}
-                </div>
-            )}
-            {children && (
-                <div className={_cs(childrenClassName, styles.children)}>
-                    {children}
-                </div>
-            )}
-            {actions && (
-                <div className={_cs(actionsClassName, styles.actions)}>
-                    {actions}
-                </div>
-            )}
-        </>
+        <ElementFragments
+            icons={icons}
+            iconsContainerClassName={_cs(styles.icons, iconsContainerClassName)}
+            actions={actions}
+            actionsContainerClassName={_cs(styles.actions, actionsContainerClassName)}
+            childrenContainerClassName={_cs(styles.children, childrenContainerClassName)}
+            spacing={spacing}
+        >
+            {children}
+        </ElementFragments>
     );
 
     return {
@@ -101,9 +108,9 @@ function Button<N>(props: Props<N>) {
     const {
         variant,
         className,
-        actionsClassName,
-        iconsClassName,
-        childrenClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
+        childrenContainerClassName,
         children,
         icons,
         actions,
@@ -113,6 +120,7 @@ function Button<N>(props: Props<N>) {
         onClick,
         readOnly,
         elementRef,
+        spacing,
         ...otherProps
     } = props;
 
@@ -125,15 +133,16 @@ function Button<N>(props: Props<N>) {
     const buttonProps = useButtonFeatures({
         variant,
         className,
-        actionsClassName,
-        iconsClassName,
-        childrenClassName,
+        actionsContainerClassName,
+        iconsContainerClassName,
+        childrenContainerClassName,
         children,
         icons,
         actions,
         disabled,
         big,
         readOnly,
+        spacing,
     });
 
     // FIXME: Use raw button

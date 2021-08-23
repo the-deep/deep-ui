@@ -333,9 +333,12 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                                 styles.startDateInput,
                                 uiModeClassName,
                                 !!error && styles.errored,
+                                !(tempDate.startDate ?? value?.startDate) && styles.empty,
                                 inputClassName,
                             )}
                             value={tempDate.startDate ?? value?.startDate}
+                            // NOTE: Make this required to hide clear button on firefox
+                            required={!!(tempDate.startDate ?? value?.startDate)}
                             elementRef={inputElementRef}
                             readOnly
                             uiMode={uiMode}
@@ -353,10 +356,13 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                                 styles.endDateInput,
                                 uiModeClassName,
                                 !!error && styles.errored,
+                                !value?.endDate && styles.empty,
                                 inputClassName,
                             )}
                             elementRef={inputElementRef}
                             readOnly
+                            // NOTE: Make this required to hide clear button on firefox
+                            required={!!value?.endDate}
                             value={value?.endDate}
                             uiMode={uiMode}
                             disabled={disabled}
