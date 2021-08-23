@@ -1,9 +1,9 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
-import ElementFragments, {
-    Props as ElementFragmentsProps,
-} from '../ElementFragments';
+import Element, {
+    Props as ElementProps,
+} from '../Element';
 
 import styles from './styles.css';
 
@@ -31,7 +31,7 @@ const tagVariantToClassName: {
     gradient4: styles.gradient4,
 };
 
-export interface Props extends ElementFragmentsProps {
+export interface Props extends ElementProps {
     className?: string;
     variant?: TagVariant;
 }
@@ -44,17 +44,15 @@ function Tag(props: Props) {
     } = props;
 
     return (
-        <div
+        <Element
             className={_cs(
                 className,
                 styles.tag,
                 tagVariantToClassName[variant],
             )}
-        >
-            <ElementFragments
-                {...otherProps}
-            />
-        </div>
+            fitContent
+            {...otherProps}
+        />
     );
 }
 

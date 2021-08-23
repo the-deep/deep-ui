@@ -9,7 +9,7 @@ import {
 } from 'react-icons/io5';
 
 import { AlertVariant } from '../AlertContext';
-import ElementFragments from '../ElementFragments';
+import Element from '../Element';
 import Button from '../Button';
 
 import { genericMemo } from '../../utils';
@@ -104,37 +104,32 @@ function Alert<N extends string>(props: Props<N>) {
     }, [onCloseButtonClick, name]);
 
     return (
-        <div
-            ref={alertElementRef}
+        <Element
+            elementRef={alertElementRef}
             className={_cs(
                 styles.alert,
                 className,
                 alertVariantToClassNameMap[variant],
                 hidden && styles.hidden,
             )}
-        >
-            {!hidden && (
-                <ElementFragments
-                    icons={!hideIcon && icon[variant]}
-                    childrenContainerClassName={styles.content}
-                    iconsContainerClassName={styles.iconContainer}
-                    actionsContainerClassName={styles.actionContainer}
-                    actions={!nonDismissable && (
-                        <Button
-                            className={styles.closeButton}
-                            name={undefined}
-                            onClick={handleCloseButtonClick}
-                            variant="action"
-                            disabled={hidden}
-                        >
-                            <IoClose className={styles.icon} />
-                        </Button>
-                    )}
+            icons={!hideIcon && icon[variant]}
+            childrenContainerClassName={styles.content}
+            iconsContainerClassName={styles.iconContainer}
+            actionsContainerClassName={styles.actionContainer}
+            actions={!nonDismissable && (
+                <Button
+                    className={styles.closeButton}
+                    name={undefined}
+                    onClick={handleCloseButtonClick}
+                    variant="action"
+                    disabled={hidden}
                 >
-                    { children }
-                </ElementFragments>
+                    <IoClose className={styles.icon} />
+                </Button>
             )}
-        </div>
+        >
+            { children }
+        </Element>
     );
 }
 

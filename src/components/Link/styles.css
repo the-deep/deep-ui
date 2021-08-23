@@ -1,18 +1,15 @@
 .link {
     --color: transparent;
     --decoration: none;
-    --padding-internal-h: var(--dui-spacing-small);
-    --padding-h: var(--dui-spacing-extra-large);
-    --padding-v: var(--dui-spacing-medium);
-    --padding: var(--padding-v) calc(var(--padding-h) - var(--padding-internal-h));
+    --spacing: var(--dui-spacing-small);
 
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: var(--padding);
     width: fit-content;
     text-decoration: var(--decoration);
     color: var(--color);
+    gap: var(--spacing);
 
     &:not(.disabled) {
         --color: var(--dui-color-accent);
@@ -29,21 +26,35 @@
     }
 
     .icons {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--padding-internal-h);
+        flex-shrink: 0;
     }
 
     .actions {
-        display: flex;
-        align-items: center;
-        padding: 0 var(--padding-internal-h);
+        flex-shrink: 0;
     }
 
     .link-element {
         display: flex;
         align-items: center;
-        padding: 0 var(--padding-internal-h);
+        flex-grow: 1;
         text-transform: none;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
     }
 }

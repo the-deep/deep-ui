@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { _cs } from '@togglecorp/fujs';
 
 import { Props as ContainerProps } from '../Container';
 import ControlledExpandableContainer from '../ControlledExpandableContainer';
