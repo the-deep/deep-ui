@@ -20,7 +20,7 @@ export type Props<T extends TabKey> = BaseProps & (
     {
         useHash?: false;
         value: T | undefined;
-        onChange: (key: T) => void;
+        onChange: (key: T | undefined) => void | undefined;
     } | {
         useHash: true;
         // defaultHash will not override already existing hash
@@ -64,7 +64,7 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
             variant,
             disabled,
             activeTab: props.value,
-            setActiveTab: props.onChange as (key: TabKey) => void,
+            setActiveTab: props.onChange as (key: TabKey) => void | undefined,
         };
         // eslint-disable-next-line react/destructuring-assignment
     }, [props.value, props.onChange, variant, disabled, props.useHash, hash]);
