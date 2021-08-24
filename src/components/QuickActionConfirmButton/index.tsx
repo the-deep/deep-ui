@@ -6,13 +6,13 @@ import useConfirmation, {
     ExtraProps as ConfirmExtraProps,
 } from '../../hooks/useConfirmation';
 
-export interface Props<
-    N extends string | number | undefined
-> extends QuickActionButtonProps<N>, ConfirmOptions {
+// eslint-disable-next-line
+export interface Props<N extends string | number | undefined, T = string> extends QuickActionButtonProps<N>, ConfirmOptions<T> {
     confirmModalProps?: ConfirmExtraProps,
 }
 
-function QuickActionConfirmButton<N extends string | number | undefined>(props: Props<N>) {
+// eslint-disable-next-line
+function QuickActionConfirmButton<N extends string | number | undefined, T = string>(props: Props<N, T>) {
     const {
         confirmButtonActions,
         confirmButtonClassName,

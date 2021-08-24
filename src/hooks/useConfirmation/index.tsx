@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useBooleanState from '../useBooleanState';
+import useModalState from '../useModalState';
 import Modal, { Props as ModalProps } from '../../components/Modal';
 import Button from '../../components/Button';
 
@@ -21,11 +21,11 @@ function removeElementsWithUndefinedValue<T extends Record<string, any>>(obj: T 
     return newObj;
 }
 
-export interface Options {
+export interface Options<T> {
     showConfirmationInitially?: boolean;
-    onConfirm?: () => void;
-    onDeny?: () => void;
-    onResolve?: (hasConfirmed: boolean) => void;
+    onConfirm?: (ctx: T | undefined) => void;
+    onDeny?: (ctx: T | undefined) => void;
+    onResolve?: (hasConfirmed: boolean, ctx: T | undefined) => void;
 
     heading?: React.ReactNode;
     message?: React.ReactNode;
@@ -43,14 +43,14 @@ export interface Options {
 
 export type ExtraProps = Omit<ModalProps, 'onCloseButtonClick' | 'heading'>;
 
-const defaultOptions: Partial<Options> = {
+const defaultOptions = {
     message: 'Are you sure?',
     heading: 'Confirmation',
     confirmButtonContent: 'Yes',
     denyButtonContent: 'No',
 };
 
-function useConfirmation(options?: Options, extraProps?: ExtraProps) {
+function useConfirmation<T = string>(options?: Options<T>, extraProps?: ExtraProps) {
     const {
         showConfirmationInitially = false,
         onConfirm,
@@ -75,29 +75,30 @@ function useConfirmation(options?: Options, extraProps?: ExtraProps) {
         showModal,
         setShowModalTrue,
         setShowModalFalse,
-    ] = useBooleanState(showConfirmationInitially);
+        ctx,
+    ] = useModalState<T>(showConfirmationInitially);
 
     const handleCancelButtonClick = React.useCallback(() => {
         setShowModalFalse();
         if (onDeny) {
-            onDeny();
+            onDeny(ctx);
         }
 
         if (onResolve) {
-            onResolve(false);
+            onResolve(false, ctx);
         }
-    }, [setShowModalFalse, onDeny, onResolve]);
+    }, [setShowModalFalse, onDeny, onResolve, ctx]);
 
     const handleConfirmButtonClick = React.useCallback(() => {
         setShowModalFalse();
         if (onConfirm) {
-            onConfirm();
+            onConfirm(ctx);
         }
 
         if (onResolve) {
-            onResolve(true);
+            onResolve(true, ctx);
         }
-    }, [setShowModalFalse, onResolve, onConfirm]);
+    }, [setShowModalFalse, onResolve, onConfirm, ctx]);
 
     const modal = React.useMemo(() => {
         if (!showModal) {

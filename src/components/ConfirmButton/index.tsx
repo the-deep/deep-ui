@@ -7,13 +7,13 @@ import useConfirmation, {
 } from '../../hooks/useConfirmation';
 import { genericMemo } from '../../utils';
 
-export interface Props<
-    N extends string | number | undefined
-> extends ButtonProps<N>, ConfirmOptions {
+// eslint-disable-next-line max-len
+export interface Props<N extends string | number | undefined, T = string> extends ButtonProps<N>, ConfirmOptions<T> {
     confirmModalProps?: ConfirmExtraProps,
 }
 
-function QuickActionConfirmButton<N extends string | number | undefined>(props: Props<N>) {
+// eslint-disable-next-line max-len
+function QuickActionConfirmButton<N extends string | number | undefined, T = string>(props: Props<N, T>) {
     const {
         confirmButtonActions,
         confirmButtonClassName,

@@ -16,7 +16,7 @@ export default {
 const Template: Story<TabsProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
 
-    const handleChange = (e: string) => {
+    const handleChange = (e: string | undefined) => {
         updateArgs({ value: e });
     };
 
@@ -92,7 +92,7 @@ Step.args = {
 };
 
 export function DisabledTab() {
-    const [value, setValue] = useState('tab-one');
+    const [value, setValue] = useState<string | undefined>('tab-one');
     return (
         <Tabs
             value={value}

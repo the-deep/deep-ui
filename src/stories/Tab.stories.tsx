@@ -11,7 +11,7 @@ export default {
 };
 
 const Template: Story<TabProps<string>> = (args) => {
-    const [value, setValue] = useState('new-tab');
+    const [value, setValue] = useState<string | undefined>('new-tab');
 
     return (
         <Tabs
