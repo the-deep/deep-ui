@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import { MdFileUpload } from 'react-icons/md';
+import { IoCloudUpload } from 'react-icons/io5';
 import FileInput, { Props as FileInputProps } from '#components/FileInput';
 
 export default {
@@ -23,7 +23,7 @@ const SingleTemplate: Story<FileInputProps<string>> = (args) => {
             value={value}
             onChange={handleChange}
         >
-            <MdFileUpload />
+            <IoCloudUpload />
         </FileInput>
     );
 };
@@ -47,7 +47,7 @@ const MultipleTemplate: Story<FileInputProps<string>> = (args) => {
             value={value}
             onChange={handleChange}
         >
-            <MdFileUpload />
+            <IoCloudUpload />
         </FileInput>
     );
 };

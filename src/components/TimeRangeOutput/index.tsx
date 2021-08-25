@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import TimeOutput, { Props as TimeOutputProps } from '../TimeOutput';
 import styles from './styles.css';
 
@@ -36,4 +37,4 @@ function TimeRangeOutput(props: Props) {
     );
 }
 
-export default memo(TimeRangeOutput);
+export default genericMemo(TimeRangeOutput);

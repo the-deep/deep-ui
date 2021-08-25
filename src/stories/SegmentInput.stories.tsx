@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import { FaApple } from 'react-icons/fa';
+import { IoLogoApple } from 'react-icons/io5';
 
 import SegmentInput, { Props as SegmentInputProps } from '#components/SegmentInput';
 
@@ -51,7 +51,7 @@ Default.args = {
     value: '1',
     rendererParams: (o) => {
         if (o.key === '1') {
-            return { icons: <FaApple /> };
+            return { icons: <IoLogoApple /> };
         }
 
         return {};
@@ -65,7 +65,7 @@ Disabled.args = {
     disabled: true,
     rendererParams: (o) => {
         if (o.key === '1') {
-            return { icons: <FaApple /> };
+            return { icons: <IoLogoApple /> };
         }
 
         return {};
@@ -79,7 +79,7 @@ ReadOnly.args = {
     readOnly: true,
     rendererParams: (o) => {
         if (o.key === '1') {
-            return { icons: <FaApple /> };
+            return { icons: <IoLogoApple /> };
         }
 
         return {};
@@ -93,7 +93,7 @@ Error.args = {
     error: 'This is wrong',
     rendererParams: (o) => {
         if (o.key === '1') {
-            return { icons: <FaApple /> };
+            return { icons: <IoLogoApple /> };
         }
 
         return {};

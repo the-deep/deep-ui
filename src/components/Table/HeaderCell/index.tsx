@@ -1,5 +1,4 @@
 import React, {
-    memo,
     useCallback,
     useState,
     useRef,
@@ -11,13 +10,11 @@ import {
     FaSortUp,
     FaSortDown,
     FaSort,
-    FaSearch,
-    FaGripVertical,
 } from 'react-icons/fa';
-import {
-    IoMdEyeOff,
-} from 'react-icons/io';
+import { IoSearch, IoEyeOffOutline } from 'react-icons/io5';
+import { GrDrag } from 'react-icons/gr';
 
+import { genericMemo } from '../../../utils';
 import { UiMode } from '../../UiModeContext';
 import Button from '../../Button';
 import TextInput from '../../TextInput';
@@ -250,7 +247,7 @@ function HeaderCell(props: HeaderCellProps) {
                         // uiMode={uiMode}
                         variant="action"
                     >
-                        <IoMdEyeOff />
+                        <IoEyeOffOutline />
                     </Button>
                 )}
                 {orderable && (
@@ -261,7 +258,7 @@ function HeaderCell(props: HeaderCellProps) {
                         onDragStart={handleDragStart}
                         onDragEnd={handleDragEnd}
                     >
-                        <FaGripVertical />
+                        <GrDrag />
                     </div>
                 )}
             </div>
@@ -270,7 +267,7 @@ function HeaderCell(props: HeaderCellProps) {
                     {filterType === FilterType.string && (
                         <TextInput
                             name="textFilter"
-                            icons={<FaSearch className={styles.icon} />}
+                            icons={<IoSearch className={styles.icon} />}
                             className={styles.textInput}
                             inputContainerClassName={styles.rawInputContainer}
                             value={filterValue?.subMatch}
@@ -285,4 +282,4 @@ function HeaderCell(props: HeaderCellProps) {
     );
 }
 
-export default memo(HeaderCell);
+export default genericMemo(HeaderCell);

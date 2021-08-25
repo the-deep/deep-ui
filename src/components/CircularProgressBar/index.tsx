@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { arc } from 'd3-shape';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 const arcGenerator = arc().cornerRadius(5);
@@ -73,4 +74,4 @@ function CircularProgressBar(props: Props) {
     );
 }
 
-export default memo(CircularProgressBar);
+export default genericMemo(CircularProgressBar);

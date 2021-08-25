@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 type PositionTypes = 'top' | 'right' | 'bottom' | 'left';
@@ -65,4 +66,4 @@ function Border(props: Props) {
     );
 }
 
-export default memo(Border);
+export default genericMemo(Border);

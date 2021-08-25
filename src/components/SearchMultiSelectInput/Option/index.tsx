@@ -1,5 +1,8 @@
 import React from 'react';
-import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
+import {
+    IoCheckbox,
+    IoSquareOutline,
+} from 'react-icons/io5';
 
 import styles from './styles.css';
 
@@ -17,7 +20,7 @@ function Option(props: Props) {
     return (
         <>
             <div className={styles.icon}>
-                { isActive ? <MdCheckBox /> : <MdCheckBoxOutlineBlank /> }
+                { isActive ? <IoCheckbox /> : <IoSquareOutline /> }
             </div>
             <div className={styles.label}>
                 { children }

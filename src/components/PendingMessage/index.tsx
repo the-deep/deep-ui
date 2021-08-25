@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import Cover from '../Cover';
 import PendingAnimation from '../PendingAnimation';
 import styles from './styles.css';
@@ -37,4 +38,4 @@ function PendingMessage(props: Props) {
     );
 }
 
-export default memo(PendingMessage);
+export default genericMemo(PendingMessage);

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { IoMdClose } from 'react-icons/io';
+import { IoClose } from 'react-icons/io5';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
@@ -221,7 +221,7 @@ function FileInput<T extends string>(props: Props<T>) {
                             name={undefined}
                             title="Clear"
                         >
-                            <IoMdClose />
+                            <IoClose />
                         </Button>
                     )}
                 </>

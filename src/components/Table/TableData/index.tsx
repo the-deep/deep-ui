@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../../utils';
 import styles from './styles.css';
 
 export interface Props extends Omit<React.HTMLProps<HTMLTableCellElement>, 'ref'> {
@@ -23,4 +24,4 @@ function TableData(props: Props) {
     );
 }
 
-export default memo(TableData);
+export default genericMemo(TableData);

@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import NumberOutput from '../NumberOutput';
 import InformationCardFragments, {
     InformationVariant,
@@ -64,4 +65,4 @@ function InformationCard(props: Props) {
     );
 }
 
-export default memo(InformationCard);
+export default genericMemo(InformationCard);

@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from 'react-icons/io';
+import { IoChevronDown, IoChevronUp, IoClose } from 'react-icons/io5';
 
 import GenericSelectOption, {
     ContentBaseProps,
@@ -310,10 +310,10 @@ function SelectInputContainer<OK extends OptionKey, N extends string, O extends 
                             name={undefined}
                             title="Clear"
                         >
-                            <IoMdClose />
+                            <IoClose />
                         </Button>
                     )}
-                    {!readOnly && (showDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />)}
+                    {!readOnly && (showDropdown ? <IoChevronUp /> : <IoChevronDown />)}
                 </>
             )}
             actionsContainerClassName={actionsContainerClassName}

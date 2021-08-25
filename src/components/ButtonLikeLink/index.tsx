@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { isValidUrl, _cs } from '@togglecorp/fujs';
 import {
     Link as RouterLink,
     LinkProps as RouterLinkProps,
 } from 'react-router-dom';
-import {
-    useButtonFeatures,
-} from '../Button';
+
+import { genericMemo } from '../../utils';
+import { useButtonFeatures } from '../Button';
 import styles from './styles.css';
 
 type PropsFromButton = Parameters<typeof useButtonFeatures>[0];
@@ -86,4 +86,4 @@ function ButtonLikeLink(props: Props) {
     );
 }
 
-export default memo(ButtonLikeLink);
+export default genericMemo(ButtonLikeLink);

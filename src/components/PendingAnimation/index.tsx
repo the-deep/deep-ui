@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 function Circle() {
@@ -37,4 +38,4 @@ function PendingAnimation(props: Props) {
     );
 }
 
-export default memo(PendingAnimation);
+export default genericMemo(PendingAnimation);

@@ -4,7 +4,7 @@ import {
     randomString,
 } from '@togglecorp/fujs';
 import {
-    IoCalendar,
+    IoCalendarOutline,
     IoClose,
 } from 'react-icons/io5';
 
@@ -135,7 +135,7 @@ function DateInput<T extends string>(props: Props<T>) {
                                     onClick={toggleShowCalendar}
                                     disabled={disabled}
                                 >
-                                    <IoCalendar />
+                                    <IoCalendarOutline />
                                 </Button>
                             </>
                         )}
