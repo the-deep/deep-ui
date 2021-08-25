@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import RawButton, { Props as RawButtonProps } from '../../RawButton';
-import { ymdToDateString } from '../../../utils';
+import { ymdToDateString, genericMemo } from '../../../utils';
 
 import styles from './styles.css';
 
@@ -66,4 +66,4 @@ function CalendarDate(props: Props) {
     );
 }
 
-export default memo(CalendarDate);
+export default genericMemo(CalendarDate);

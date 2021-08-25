@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import {
     _cs,
     isValidUrl,
@@ -9,10 +9,10 @@ import {
 } from 'react-router-dom';
 import { IoChevronForward } from 'react-icons/io5';
 
+import { genericMemo } from '../../utils';
+import { SpacingTypes } from '../../types';
 import Actions from '../Actions';
 import Icons from '../Icons';
-
-import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
@@ -97,4 +97,4 @@ function Link(props: Props) {
     );
 }
 
-export default memo(Link);
+export default genericMemo(Link);

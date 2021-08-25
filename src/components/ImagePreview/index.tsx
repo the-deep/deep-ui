@@ -1,17 +1,18 @@
-import React, { memo } from 'react';
+import React from 'react';
 import {
     TransformWrapper,
     TransformComponent,
 } from 'react-zoom-pan-pinch';
 import { _cs } from '@togglecorp/fujs';
 import {
-    AiOutlineZoomIn,
-    AiOutlineZoomOut,
-    AiOutlineExpand,
-    AiOutlineExpandAlt,
-    AiOutlineClose,
-} from 'react-icons/ai';
+    IoAdd,
+    IoRemove,
+    IoTabletPortraitSharp,
+    IoResize,
+    IoClose,
+} from 'react-icons/io5';
 
+import { genericMemo } from '../../utils';
 import { useButtonFeatures } from '../Button';
 import Modal from '../Modal';
 import PendingMessage from '../PendingMessage';
@@ -79,9 +80,9 @@ function ImagePreview(props: Props) {
                                     type="button"
                                 >
                                     { expanded ? (
-                                        <AiOutlineClose />
+                                        <IoClose />
                                     ) : (
-                                        <AiOutlineExpandAlt />
+                                        <IoResize />
                                     )}
                                 </button>
                                 <button
@@ -90,7 +91,7 @@ function ImagePreview(props: Props) {
                                     title="Zoom in"
                                     type="button"
                                 >
-                                    <AiOutlineZoomIn />
+                                    <IoAdd />
                                 </button>
                                 <button
                                     {...buttonProps}
@@ -98,7 +99,7 @@ function ImagePreview(props: Props) {
                                     title="Zoom in"
                                     type="button"
                                 >
-                                    <AiOutlineZoomOut />
+                                    <IoRemove />
                                 </button>
                                 <button
                                     {...buttonProps}
@@ -106,7 +107,7 @@ function ImagePreview(props: Props) {
                                     title="Reset zoom"
                                     type="button"
                                 >
-                                    <AiOutlineExpand />
+                                    <IoTabletPortraitSharp />
                                 </button>
                             </div>
                         )}
@@ -140,4 +141,4 @@ function ImagePreview(props: Props) {
     return children;
 }
 
-export default memo(ImagePreview);
+export default genericMemo(ImagePreview);

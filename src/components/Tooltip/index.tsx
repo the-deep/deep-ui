@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import { usePopupFeatures } from '../Popup';
 import useUnmountTransition from '../../hooks/useUnmountTransition';
 
@@ -121,4 +122,4 @@ function Tooltip(props: Props) {
     );
 }
 
-export default memo(Tooltip);
+export default genericMemo(Tooltip);

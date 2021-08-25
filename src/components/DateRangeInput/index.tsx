@@ -5,7 +5,7 @@ import {
     isDefined,
 } from '@togglecorp/fujs';
 import {
-    IoCalendar,
+    IoCalendarOutline,
     IoClose,
 } from 'react-icons/io5';
 
@@ -302,7 +302,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
                                     onClick={toggleShowCalendar}
                                     disabled={disabled}
                                 >
-                                    <IoCalendar />
+                                    <IoCalendarOutline />
                                 </Button>
                             </>
                         )}

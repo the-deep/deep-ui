@@ -3,7 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import {
     IoInformationCircle,
-    IoWarning,
+    IoWarningOutline,
     IoCheckmarkCircle,
     IoClose,
 } from 'react-icons/io5';
@@ -30,7 +30,7 @@ const icon: {
     [key in AlertVariant]: React.ReactNode;
 } = {
     success: <IoCheckmarkCircle className={styles.icon} />,
-    error: <IoWarning className={styles.icon} />,
+    error: <IoWarningOutline className={styles.icon} />,
     info: <IoInformationCircle className={styles.icon} />,
 };
 

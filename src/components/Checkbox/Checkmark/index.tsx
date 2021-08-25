@@ -1,11 +1,12 @@
-import React, { memo } from 'react';
+import React from 'react';
 import {
-    MdCheckBox,
-    MdCheckBoxOutlineBlank,
-    MdIndeterminateCheckBox,
-} from 'react-icons/md';
+    IoCheckbox,
+    IoSquare,
+    IoSquareOutline,
+} from 'react-icons/io5';
 
 import { UiMode } from '../../UiModeContext';
+import { genericMemo } from '../../../utils';
 
 export interface CheckmarkProps {
     className?: string;
@@ -24,17 +25,17 @@ function Checkmark(props: CheckmarkProps) {
     return (
         <>
             {indeterminate && (
-                <MdIndeterminateCheckBox
+                <IoSquare
                     className={className}
                 />
             )}
             {value && !indeterminate && (
-                <MdCheckBox
+                <IoCheckbox
                     className={className}
                 />
             )}
             {!value && !indeterminate && (
-                <MdCheckBoxOutlineBlank
+                <IoSquareOutline
                     className={className}
                 />
             )}
@@ -42,4 +43,4 @@ function Checkmark(props: CheckmarkProps) {
     );
 }
 
-export default memo(Checkmark);
+export default genericMemo(Checkmark);

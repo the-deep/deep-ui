@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import {
     populateFormat,
     breakFormat,
@@ -7,6 +7,7 @@ import {
     _cs,
 } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 export interface Props {
@@ -51,4 +52,4 @@ function DateOutput(props: Props) {
     );
 }
 
-export default memo(DateOutput);
+export default genericMemo(DateOutput);

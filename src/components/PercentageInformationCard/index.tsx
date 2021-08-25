@@ -1,11 +1,10 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import NumberOutput, { Props as NumberOutputProps } from '../NumberOutput';
 import CircularProgressBar from '../CircularProgressBar';
-import InformationCardFragments, {
-    InformationVariant,
-} from '../InformationCardFragments';
+import InformationCardFragments, { InformationVariant } from '../InformationCardFragments';
 
 import styles from './styles.css';
 
@@ -81,4 +80,4 @@ function PercentageInformationCard(props: Props) {
     );
 }
 
-export default memo(PercentageInformationCard);
+export default genericMemo(PercentageInformationCard);

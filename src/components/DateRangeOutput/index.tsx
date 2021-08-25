@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import DateOutput, { Props as DateOutputProps } from '../DateOutput';
 import styles from './styles.css';
 
@@ -40,4 +41,4 @@ function DateRangeOutput(props: Props) {
     );
 }
 
-export default memo(DateRangeOutput);
+export default genericMemo(DateRangeOutput);

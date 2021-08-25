@@ -1,7 +1,8 @@
-import React, { useMemo, memo } from 'react';
+import React, { useMemo } from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
+import { genericMemo } from '../../utils';
 import SelectInput from '../SelectInput';
 import Button from '../Button';
 
@@ -225,7 +226,7 @@ function Pager(props: Props) {
                     className={styles.pageButton}
                     onClick={onActivePageChange}
                     disabled={activePage <= 1 || disabled}
-                    icons={<FaChevronLeft />}
+                    icons={<IoChevronBack />}
                     variant="action"
                 >
                     {showPrevAndNextLabel && (
@@ -283,7 +284,7 @@ function Pager(props: Props) {
                     onClick={onActivePageChange}
                     disabled={activePage >= numPages || disabled}
                     className={styles.pageButton}
-                    actions={<FaChevronRight />}
+                    actions={<IoChevronForward />}
                     variant="action"
                 >
                     {showPrevAndNextLabel && (
@@ -361,4 +362,4 @@ function Pager(props: Props) {
         </div>
     );
 }
-export default memo(Pager);
+export default genericMemo(Pager);

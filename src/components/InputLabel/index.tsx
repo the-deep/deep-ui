@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 
@@ -43,4 +44,4 @@ function InputLabel(props: Props) {
     );
 }
 
-export default memo(InputLabel);
+export default genericMemo(InputLabel);

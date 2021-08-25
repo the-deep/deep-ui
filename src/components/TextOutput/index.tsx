@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import NumberOutput from '../NumberOutput';
 import DateOutput from '../DateOutput';
 
@@ -108,4 +109,4 @@ function TextOutput(props: Props) {
     );
 }
 
-export default memo(TextOutput);
+export default genericMemo(TextOutput);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
-import { BsCheckAll } from 'react-icons/bs';
+import { IoCheckmarkDone } from 'react-icons/io5';
 import SelectInputContainer, { Props as SelectInputContainerProps } from '#components/SelectInputContainer';
 import Button from '#components/Button';
 
@@ -70,7 +70,7 @@ WithAction.args = {
             name="check-all"
             variant="action"
         >
-            <BsCheckAll />
+            <IoCheckmarkDone />
         </Button>
     ),
 };

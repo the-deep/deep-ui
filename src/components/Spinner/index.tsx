@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 const points = [
@@ -50,4 +51,4 @@ function Spinner(props: Props) {
     );
 }
 
-export default memo(Spinner);
+export default genericMemo(Spinner);

@@ -1,8 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { IoChevronDown } from 'react-icons/io5';
 
 import Button, { Props as ButtonProps } from '../Button';
+import { genericMemo } from '../../utils';
 import Popup from '../Popup';
 import useBooleanState from '../../hooks/useBooleanState';
 import useBlurEffect from '../../hooks/useBlurEffect';
@@ -118,4 +119,4 @@ function DropdownMenu(props: Props) {
     );
 }
 
-export default memo(DropdownMenu);
+export default genericMemo(DropdownMenu);

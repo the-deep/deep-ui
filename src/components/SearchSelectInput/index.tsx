@@ -5,7 +5,7 @@ import {
     unique,
     isDefined,
 } from '@togglecorp/fujs';
-import { MdCheck } from 'react-icons/md';
+import { IoCheckmark } from 'react-icons/io5';
 
 import ElementFragments from '../ElementFragments';
 import SelectInputContainer, {
@@ -23,7 +23,7 @@ function Option(props: OptionProps) {
 
     return (
         <ElementFragments
-            icons={<MdCheck className={styles.icon} />}
+            icons={<IoCheckmark className={styles.icon} />}
             childrenContainerClassName={styles.label}
         >
             <div className={styles.text}>

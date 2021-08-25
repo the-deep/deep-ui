@@ -5,10 +5,10 @@ import {
     isDefined,
 } from '@togglecorp/fujs';
 import {
-    IoTime,
+    IoTimeOutline,
     IoChevronForward,
     IoChevronBack,
-    IoCalendar,
+    IoCalendarOutline,
 } from 'react-icons/io5';
 
 import Button from '../Button';
@@ -256,7 +256,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                 </div>
             ) : (
                 <div className={styles.emptyDayList}>
-                    <IoCalendar className={styles.icon} />
+                    <IoCalendarOutline className={styles.icon} />
                     Please select a valid year and month to view the dates
                 </div>
             )}
@@ -267,7 +267,7 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                     title="Go to current year / month"
                     onClick={handleGotoCurrentButtonClick}
                 >
-                    <IoTime />
+                    <IoTimeOutline />
                 </Button>
                 <Button
                     name={undefined}

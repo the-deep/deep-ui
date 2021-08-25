@@ -1,10 +1,11 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import {
     IoList,
     IoSearch,
 } from 'react-icons/io5';
 
+import { genericMemo } from '../../utils';
 import PendingMessage from '../PendingMessage';
 
 import styles from './styles.css';
@@ -87,4 +88,4 @@ function Message(props: Props) {
     );
 }
 
-export default memo(Message);
+export default genericMemo(Message);
