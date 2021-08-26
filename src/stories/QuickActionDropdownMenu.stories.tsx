@@ -21,17 +21,17 @@ const Template: Story<QuickActionDropdownMenuProps> = (args) => (
     <QuickActionDropdownMenu
         {...args}
     >
-        <DropdownMenuItem onClick={handleMenuItemClick}>
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
             Home
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleMenuItemClick}>
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
             Profile
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleMenuItemClick}>
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
             Projects
         </DropdownMenuItem>
         <Separator />
-        <DropdownMenuItem onClick={handleMenuItemClick}>
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
             Logout
         </DropdownMenuItem>
         <DropdownMenuItem

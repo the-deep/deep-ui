@@ -41,8 +41,7 @@ export type Props = BaseProps & ({
     valueProps?: Omit<DateOutputProps, 'value'>;
     value?: DateOutputProps['value'];
 } | {
-    valueType?: 'text' | never;
-    valueProps?: never | undefined;
+    valueType?: 'text';
     value?: React.ReactNode;
 });
 

@@ -55,7 +55,6 @@ export type Props = BaseProps & ({
     onCloseButtonClick: () => void;
 } | {
     hideCloseButton: true;
-    onCloseButtonClick?: never;
 })
 
 function Modal(props: Props) {
@@ -87,13 +86,11 @@ function Modal(props: Props) {
         headerIcons,
         footerQuickActions,
 
-        onCloseButtonClick,
-        hideCloseButton,
         headingSize,
         spacing = 'comfortable',
     } = props;
 
-    const shouldHideHeader = hideCloseButton && !heading && !headerActions && !headerIcons;
+    const shouldHideHeader = props.hideCloseButton && !heading && !headerActions && !headerIcons;
 
     return (
         <BodyBackdrop>
@@ -120,10 +117,10 @@ function Modal(props: Props) {
                         actions={(
                             <>
                                 {headerActions}
-                                {!hideCloseButton && (
+                                {!props.hideCloseButton && (
                                     <Button
                                         className={closeButtonClassName}
-                                        onClick={onCloseButtonClick}
+                                        onClick={props.onCloseButtonClick}
                                         name="close-modal"
                                         variant="action"
                                     >
