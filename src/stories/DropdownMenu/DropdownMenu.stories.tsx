@@ -24,17 +24,17 @@ const Template: Story<DropdownMenuProps> = (props) => {
                 key={i}
                 {...props}
             >
-                <DropdownMenuItem onClick={handleMenuItemClick}>
+                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                     {i}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleMenuItemClick}>
+                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                     Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleMenuItemClick}>
+                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                     Projects
                 </DropdownMenuItem>
                 <Separator />
-                <DropdownMenuItem onClick={handleMenuItemClick}>
+                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                     Logout
                 </DropdownMenuItem>
                 <DropdownMenuItem
@@ -81,17 +81,17 @@ export const Variants: Story = () => (
                     variant="primary"
                     label="primary"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -106,17 +106,17 @@ export const Variants: Story = () => (
                     variant="action"
                     label="action"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -131,17 +131,17 @@ export const Variants: Story = () => (
                     variant="secondary"
                     label="secondary"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -156,17 +156,17 @@ export const Variants: Story = () => (
                     variant="tertiary"
                     label="tertiary"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -181,17 +181,17 @@ export const Variants: Story = () => (
                     variant="transparent"
                     label="transparent"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -205,17 +205,17 @@ export const Variants: Story = () => (
                     variant="general"
                     label="general"
                 >
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Home
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Profile
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Projects
                     </DropdownMenuItem>
                     <Separator />
-                    <DropdownMenuItem onClick={handleMenuItemClick}>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
                         Logout
                     </DropdownMenuItem>
                     <DropdownMenuItem
