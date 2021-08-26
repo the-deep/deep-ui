@@ -16,6 +16,7 @@ import RawInput, { Props as RawInputProps } from '../RawInput';
 import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
+import { Props as CalendarDateProps } from '../Calendar/CalendarDate';
 import { ymdToDateString } from '../../utils';
 
 import styles from './styles.css';
@@ -93,7 +94,7 @@ function DateInput<T extends string>(props: Props<T>) {
         containerRef,
     );
 
-    const handleCalendarDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
+    const handleCalendarDateClick: CalendarProps<CalendarDateProps>['onDateClick'] = React.useCallback(
         (year, month, day) => {
             if (onChange) {
                 onChange(ymdToDateString(year, month, day), name);
