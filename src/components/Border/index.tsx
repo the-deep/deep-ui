@@ -33,6 +33,7 @@ export interface Props {
     transparent?: boolean;
     fullWidthActiveBorder?: boolean;
     width?: WidthTypes;
+    inline?: boolean;
 }
 
 function Border(props: Props) {
@@ -45,6 +46,7 @@ function Border(props: Props) {
         transparent,
         fullWidthActiveBorder,
         width = 'medium',
+        inline,
     } = props;
 
     return (
@@ -58,6 +60,7 @@ function Border(props: Props) {
                 transparent && styles.transparent,
                 fullWidthActiveBorder && styles.fullWidthActiveBorder,
                 widthToStyleMap[width],
+                !inline && styles.absolutelyPositioned,
                 className,
             )}
         >

@@ -1,15 +1,53 @@
 .border {
     --border-width: var(--dui-width-separator-medium);
 
-    position: absolute;
-    top: unset;
-    right: unset;
-    bottom: 0;
-    left: 0;
     background-color: var(--dui-color-separator);
     width: 100%;
     height: var(--border-width);
     --animation-name: grow-h;
+
+    &.absolutely-positioned {
+        position: absolute;
+        top: unset;
+        right: unset;
+        bottom: 0;
+        left: 0;
+
+        &.top {
+            top: 0;
+            right: unset;
+            bottom: unset;
+            left: 0;
+        }
+
+        &.left {
+            top: 0;
+            right: unset;
+            bottom: unset;
+            left: 0;
+            width: var(--border-width);
+            height: 100%;
+            --animation-name: grow-v;
+
+            &.full-width-active-border {
+                --animation-name: grow-v-full-width;
+            }
+        }
+
+        &.right {
+            top: 0;
+            right: 0;
+            bottom: unset;
+            left: unset;
+            width: var(--border-width);
+            height: 100%;
+            --animation-name: grow-v;
+
+            &.full-width-active-border {
+                --animation-name: grow-v-full-width;
+            }
+        }
+    }
 
     &.transparent {
         background-color: transparent;
@@ -44,40 +82,6 @@
     }
 
 
-    &.top {
-        top: 0;
-        right: unset;
-        bottom: unset;
-        left: 0;
-    }
-
-    &.left {
-        top: 0;
-        right: unset;
-        bottom: unset;
-        left: 0;
-        width: var(--border-width);
-        height: 100%;
-        --animation-name: grow-v;
-
-        &.full-width-active-border {
-            --animation-name: grow-v-full-width;
-        }
-    }
-
-    &.right {
-        top: 0;
-        right: 0;
-        bottom: unset;
-        left: unset;
-        width: var(--border-width);
-        height: 100%;
-        --animation-name: grow-v;
-
-        &.full-width-active-border {
-            --animation-name: grow-v-full-width;
-        }
-    }
 
     &.thin {
         --border-width: var(--dui-width-separator-thin);

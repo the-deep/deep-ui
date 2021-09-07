@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import Header, { Props as HeaderProps } from '../Header';
 import Footer from '../Footer';
+import Border, { Props as BorderProps } from '../Border';
 import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
@@ -52,6 +53,8 @@ export interface Props {
 
     autoFocus?: boolean;
     spacing?: SpacingTypes;
+    borderBelowHeader?: boolean;
+    borderBelowHeaderWidth?: BorderProps['width'];
 }
 
 function Container(props: Props) {
@@ -84,6 +87,8 @@ function Container(props: Props) {
         inlineHeadingDescription,
         autoFocus,
         spacing = 'comfortable',
+        borderBelowHeader,
+        borderBelowHeaderWidth,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -126,6 +131,12 @@ function Container(props: Props) {
                 >
                     {headerDescription}
                 </Header>
+            )}
+            {borderBelowHeader && (
+                <Border
+                    width={borderBelowHeaderWidth}
+                    inline
+                />
             )}
             <div className={_cs(styles.content, contentClassName)}>
                 { children }
