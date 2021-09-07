@@ -181,7 +181,7 @@ function DateRangeInput<N extends string | number | undefined>(props: Props<N>) 
         endDate: !tempDate.startDate ? value?.endDate : undefined,
     }), [tempDate.startDate, value]);
 
-    const handleCalendarDateClick: CalendarProps<never>['onDateClick'] = React.useCallback(
+    const handleCalendarDateClick: CalendarProps<CalendarDateProps>['onDateClick'] = React.useCallback(
         (year, month, day) => {
             setTempDate((prevTempDate) => {
                 if (isDefined(prevTempDate.startDate)) {

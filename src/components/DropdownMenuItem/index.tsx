@@ -40,19 +40,16 @@ interface BaseProps extends ElementFragmentProps {
     className?: string;
 }
 
-export type Props<N extends string | number> = BaseProps & ({
-    name?: N;
+export type Props<N extends string | number | undefined> = BaseProps & ({
+    href?: undefined;
+    name: N;
     onClick: RawButtonProps<N>['onClick'];
-    href?: never;
-    linkProps?: never;
 } | {
     href: string;
-    onClick?: never;
-    name?: never;
     linkProps?: LinkProps;
 })
 
-function DropdownMenuItem<N extends string | number>(props: Props<N>) {
+function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>) {
     const {
         className: classNameFromProps,
         icons,
@@ -63,14 +60,6 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         actionsContainerClassName,
         spacing = 'comfortable',
     } = props;
-
-    const isExternalLink = React.useMemo(() => (
-        props.href
-        && typeof props.href === 'string'
-        && (isValidUrl(props.href)
-            || props.href.startsWith('mailto:'))
-    // eslint-disable-next-line react/destructuring-assignment
-    ), [props.href]);
 
     const className = _cs(
         styles.dropdownMenuItem,
@@ -91,7 +80,11 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
     );
 
     // eslint-disable-next-line react/destructuring-assignment
-    if (props.href) {
+    if (props.href !== undefined) {
+        const isExternalLink = props.href
+            && typeof props.href === 'string'
+            && (isValidUrl(props.href) || props.href.startsWith('mailto:'));
+
         if (isExternalLink) {
             return (
                 <a
@@ -115,25 +108,13 @@ function DropdownMenuItem<N extends string | number>(props: Props<N>) {
         );
     }
 
-    // eslint-disable-next-line react/destructuring-assignment
-    if (props.name) {
-        return (
-            <RawButton
-                className={className}
-                name={props.name}
-                onClick={props.onClick}
-            >
-                {content}
-            </RawButton>
-        );
-    }
-
     return (
-        <RawButton<undefined>
+        <RawButton
             className={className}
-            name={undefined}
             // eslint-disable-next-line react/destructuring-assignment
-            onClick={props.onClick as RawButtonProps<undefined>['onClick']}
+            name={props.name}
+            // eslint-disable-next-line react/destructuring-assignment
+            onClick={props.onClick}
         >
             {content}
         </RawButton>
