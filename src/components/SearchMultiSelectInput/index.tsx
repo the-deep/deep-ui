@@ -8,6 +8,8 @@ import {
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
+import GenericSelectOption from '../GenericSelectOption';
+import List from '../List';
 import { rankedSearchOnList } from '../../utils';
 import Option from './Option';
 
@@ -39,6 +41,8 @@ export type Props<
     sortFunction?: (options: O[], search: string, labelSelector: (option: O) => string) => O[];
     onSearchValueChange?: (value: string) => void;
     onShowDropdownChange?: (value: boolean) => void;
+    selectedOptionContainerClassName?: string;
+    selectionListShown?: boolean;
 }, OMISSION> & (
     SelectInputContainerProps<T, K, O, P,
         'name'
@@ -89,6 +93,10 @@ function SearchMultiSelectInput<
         searchOptions: searchOptionsFromProps,
         onSearchValueChange,
         onShowDropdownChange,
+        selectedOptionContainerClassName,
+        selectionListShown,
+        disabled,
+        readOnly,
         ...otherProps
     } = props;
 
@@ -254,31 +262,66 @@ function SearchMultiSelectInput<
         [name, onChange],
     );
 
+    const optionListRendererParams = useCallback(
+        (key, option) => ({
+            contentRendererParam: optionRendererParams,
+            option,
+            optionKey: key,
+            focusedKey,
+            contentRenderer: Option,
+            onClick: handleOptionClick,
+            onFocus: setFocusedKey,
+            readOnly,
+            disabled,
+            optionContainerClassName: _cs(selectedOptionContainerClassName, styles.selectedItem),
+        }),
+        [
+            readOnly,
+            disabled,
+            focusedKey,
+            handleOptionClick,
+            optionRendererParams,
+            selectedOptionContainerClassName,
+        ],
+    );
+
     return (
-        <SelectInputContainer
-            {...otherProps}
-            name={name}
-            options={realOptions}
-            optionsPending={optionsPending}
-            optionsFiltered={searchInputValue?.length > 0}
-            optionKeySelector={keySelector}
-            optionRenderer={Option}
-            optionRendererParams={optionRendererParams}
-            optionContainerClassName={styles.optionContainer}
-            onOptionClick={handleOptionClick}
-            valueDisplay={valueDisplay}
-            onClear={handleClear}
-            searchText={searchInputValue}
-            onSearchTextChange={handleSearchValueChange}
-            onDropdownShownChange={handleChangeDropdown}
-            focused={focused}
-            onFocusedChange={setFocused}
-            focusedKey={focusedKey}
-            onFocusedKeyChange={setFocusedKey}
-            persistentOptionPopup
-            nonClearable={false}
-            hasValue={isDefined(value) && value.length > 0}
-        />
+        <>
+            <SelectInputContainer
+                {...otherProps}
+                name={name}
+                options={realOptions}
+                optionsPending={optionsPending}
+                optionsFiltered={searchInputValue?.length > 0}
+                optionKeySelector={keySelector}
+                optionRenderer={Option}
+                optionRendererParams={optionRendererParams}
+                optionContainerClassName={styles.optionContainer}
+                onOptionClick={handleOptionClick}
+                valueDisplay={valueDisplay}
+                onClear={handleClear}
+                searchText={searchInputValue}
+                onSearchTextChange={handleSearchValueChange}
+                onDropdownShownChange={handleChangeDropdown}
+                focused={focused}
+                onFocusedChange={setFocused}
+                focusedKey={focusedKey}
+                onFocusedKeyChange={setFocusedKey}
+                persistentOptionPopup
+                nonClearable={false}
+                hasValue={isDefined(value) && value.length > 0}
+                disabled={disabled}
+                readOnly={readOnly}
+            />
+            { selectionListShown && (
+                <List
+                    data={selectedOptions}
+                    keySelector={keySelector}
+                    renderer={GenericSelectOption}
+                    rendererParams={optionListRendererParams}
+                />
+            )}
+        </>
     );
 }
 

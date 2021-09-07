@@ -9,3 +9,7 @@
         background-color: var(--dui-color-background-information);
     }
 }
+
+.selected-item {
+    display: flex;
+}

@@ -88,3 +88,20 @@ ReadOnly.args = {
     value: ['1', '3'],
     readOnly: true,
 };
+export const SelectedListShown = Template.bind({});
+SelectedListShown.args = {
+    value: ['1', '3'],
+    selectionListShown: true,
+};
+export const SelectedListShownDisabled = Template.bind({});
+SelectedListShownDisabled.args = {
+    value: ['1', '3'],
+    selectionListShown: true,
+    disabled: true,
+};
+export const SelectedListShownReadOnly = Template.bind({});
+SelectedListShownReadOnly.args = {
+    value: ['1', '3'],
+    selectionListShown: true,
+    readOnly: true,
+};
