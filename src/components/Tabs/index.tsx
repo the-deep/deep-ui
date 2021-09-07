@@ -20,7 +20,7 @@ export type Props<T extends TabKey> = BaseProps & (
     {
         useHash?: false;
         value: T | undefined;
-        onChange: (key: T | undefined) => void | undefined | undefined;
+        onChange: ((key: T | undefined) => void) | undefined;
     } | {
         useHash: true;
         // defaultHash will not override already existing hash
