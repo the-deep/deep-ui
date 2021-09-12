@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { listToGroupList } from '@togglecorp/fujs';
+import { listToGroupList, isNotDefined } from '@togglecorp/fujs';
 
 import { genericMemo } from '../utils';
 
@@ -15,18 +15,18 @@ export interface GroupCommonProps {
 interface BaseProps<D, P, K extends OptionKey> {
     data: D[] | undefined;
     keySelector(datum: D, index: number): K;
-    renderer: (props: P) => JSX.Element;
+    renderer: (props: P) => JSX.Element | null;
     rendererClassName?: string;
-    rendererParams: (key: K, datum: D, index: number, data: D[]) => P;
+    rendererParams: (key: K, datum: D, index: number, data: D[]) => (P | undefined);
 }
 
 interface GroupOptions<D, GP, GK extends OptionKey> {
     groupComparator?: (a: GK, b: GK) => number;
     groupKeySelector(datum: D): GK;
 
-    groupRenderer: (props: GP) => JSX.Element;
+    groupRenderer: (props: GP) => JSX.Element | null;
     groupRendererClassName?: string;
-    groupRendererParams: (key: GK, index: number, data: D[]) => Omit<GP, 'children' | 'className'>;
+    groupRendererParams: (key: GK, index: number, data: D[]) => (Omit<GP, 'children' | 'className'> | undefined);
     grouped: true;
 }
 
@@ -72,6 +72,10 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         const key = keySelector(datum, i);
         const extraProps = rendererParams(key, datum, i, data);
 
+        if (isNotDefined(extraProps)) {
+            return null;
+        }
+
         return (
             <Renderer
                 key={key}
@@ -88,6 +92,10 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         children: React.ReactNode,
     ) => {
         const extraProps = groupRendererParams(groupKey, index, groupData);
+
+        if (isNotDefined(extraProps)) {
+            return null;
+        }
 
         const finalProps = {
             ...extraProps,
@@ -149,6 +157,10 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
     const renderListItem = useCallback((datum: D, i: number) => {
         const key = keySelector(datum, i);
         const extraProps = rendererParams(key, datum, i, data);
+
+        if (isNotDefined(extraProps)) {
+            return null;
+        }
 
         return (
             <Renderer
