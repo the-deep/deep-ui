@@ -25,12 +25,6 @@
 
             .heading {
                 min-width: 3rem;
-
-                &.string-heading {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
             }
 
             .description {

@@ -11,6 +11,7 @@ import {
 import { AlertVariant } from '../AlertContext';
 import Element from '../Element';
 import Button from '../Button';
+import type { SpacingTypes } from '../../types';
 
 import { genericMemo } from '../../utils';
 
@@ -23,6 +24,15 @@ const alertVariantToClassNameMap: {
     success: styles.success,
     error: styles.error,
     info: styles.info,
+};
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
 };
 
 const icon: {
@@ -49,6 +59,7 @@ export interface Props<N> {
     onCloseButtonClick?: (name: N, removalDelay: number) => void;
     onTimeout?: (name: N, removalDelay: number) => void;
     hideIcon?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Alert<N extends string>(props: Props<N>) {
@@ -62,6 +73,7 @@ function Alert<N extends string>(props: Props<N>) {
         duration = 0,
         onTimeout,
         hideIcon,
+        spacing = 'loose',
     } = props;
 
     const alertElementRef = React.useRef<HTMLDivElement>(null);
@@ -72,6 +84,7 @@ function Alert<N extends string>(props: Props<N>) {
         const { current: el } = alertElementRef;
         if (el) {
             const bcr = el.getBoundingClientRect();
+            console.info(bcr.height);
             el.style.setProperty(
                 '--height',
                 `${bcr.height}px`,
@@ -110,6 +123,7 @@ function Alert<N extends string>(props: Props<N>) {
                 styles.alert,
                 className,
                 alertVariantToClassNameMap[variant],
+                spacingToStyleMap[spacing],
                 hidden && styles.hidden,
             )}
             icons={!hideIcon && icon[variant]}
@@ -127,6 +141,7 @@ function Alert<N extends string>(props: Props<N>) {
                     <IoClose className={styles.icon} />
                 </Button>
             )}
+            spacing={spacing}
         >
             { children }
         </Element>
