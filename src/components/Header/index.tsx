@@ -33,6 +33,7 @@ export interface Props {
     icons?: React.ReactNode;
     iconsContainerClassName?: string;
     inlineHeadingDescription?: boolean;
+    ellipsizeHeading?: boolean;
     spacing?: SpacingTypes;
 }
 
@@ -55,9 +56,8 @@ function Header(props: Props) {
         childrenContainerClassName,
         elementProps,
         spacing = 'comfortable',
+        ellipsizeHeading,
     } = props;
-
-    const isStringHeading = (typeof heading) === 'string';
 
     return (
         <header
@@ -86,9 +86,8 @@ function Header(props: Props) {
                     className={_cs(
                         styles.heading,
                         headingClassName,
-                        isStringHeading && styles.stringHeading,
                     )}
-                    title={isStringHeading ? (heading as string) : undefined}
+                    ellipsize={ellipsizeHeading}
                 >
                     { heading }
                 </Heading>

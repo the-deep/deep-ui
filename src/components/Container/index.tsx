@@ -55,6 +55,7 @@ export interface Props {
     spacing?: SpacingTypes;
     borderBelowHeader?: boolean;
     borderBelowHeaderWidth?: BorderProps['width'];
+    ellipsizeHeading?: boolean;
 }
 
 function Container(props: Props) {
@@ -89,6 +90,7 @@ function Container(props: Props) {
         spacing = 'comfortable',
         borderBelowHeader,
         borderBelowHeaderWidth,
+        ellipsizeHeading,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -128,6 +130,7 @@ function Container(props: Props) {
                     headingContainerClassName={headingContainerClassName}
                     inlineHeadingDescription={inlineHeadingDescription}
                     spacing={spacing}
+                    ellipsizeHeading={ellipsizeHeading}
                 >
                     {headerDescription}
                 </Header>

@@ -1,7 +1,7 @@
 .list-view {
     &.empty {
         &.pending {
-            min-height: 4em;
+            min-height: calc(1em + var(--dui-spacing-medium) * 2);
         }
     }
 }

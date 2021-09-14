@@ -39,4 +39,15 @@
     &.default {
         --color: var(--dui-color-black);
     }
+
+    &.ellipsize {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.ellipsize-container {
+    width: 100%;
+    overflow: auto;
 }

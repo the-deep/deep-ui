@@ -4,6 +4,8 @@ import {
     IoSquareOutline,
 } from 'react-icons/io5';
 
+import ElementFragments from '../../ElementFragments';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -18,14 +20,17 @@ function Option(props: Props) {
     } = props;
 
     return (
-        <>
-            <div className={styles.icon}>
-                { isActive ? <IoCheckbox /> : <IoSquareOutline /> }
-            </div>
-            <div className={styles.label}>
+        <ElementFragments
+            icons={isActive ? <IoCheckbox /> : <IoSquareOutline />}
+            childrenContainerClassName={styles.labelContainer}
+        >
+            <div
+                className={styles.label}
+                title={typeof children === 'string' ? children : undefined}
+            >
                 { children }
             </div>
-        </>
+        </ElementFragments>
     );
 }
 

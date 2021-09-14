@@ -1,9 +1,13 @@
 import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import {
+    _cs,
+    isNotDefined,
+} from '@togglecorp/fujs';
 
 import styles from './styles.css';
 
 type ColorVariantTypes = 'brand' | 'accent' | 'default';
+type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
 
 const colorVariantToStyleMap: {
     [key in ColorVariantTypes]: string;
@@ -13,33 +17,60 @@ const colorVariantToStyleMap: {
     default: styles.default,
 };
 
+const sizeToStyleMap: {
+    [key in SizeTypes]: string;
+} = {
+    extraSmall: styles.extraSmall,
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large,
+    extraLarge: styles.extraLarge,
+};
+
+function isString(d: unknown): d is string {
+    return (typeof d) === 'string';
+}
+
 export interface Props {
     className?: string;
     children?: React.ReactNode;
     size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
     title?: string;
     colorVariant?: ColorVariantTypes;
+    ellipsize?: boolean;
+    ellipsizeContainerClassName?: string;
 }
 
 function Heading(props: Props) {
     const {
-        className,
+        className: classNameFromProps,
         children,
         size = 'medium',
-        title,
+        title: titleFromProps,
         colorVariant = 'default',
+        ellipsize,
+        ellipsizeContainerClassName,
     } = props;
 
-    return (
+    let title = titleFromProps;
+
+    if (ellipsize && isNotDefined(titleFromProps) && isString(children)) {
+        title = children;
+    }
+
+    const className = _cs(
+        styles.heading,
+        ellipsize && styles.ellipsize,
+        sizeToStyleMap[size],
+        colorVariantToStyleMap[colorVariant],
+        classNameFromProps,
+    );
+
+    const heading = (
         <>
             {size === 'extraSmall' && (
                 <h5
-                    className={_cs(
-                        styles.heading,
-                        styles.extraSmall,
-                        colorVariantToStyleMap[colorVariant],
-                        className,
-                    )}
+                    className={className}
                     title={title}
                 >
                     { children }
@@ -47,7 +78,7 @@ function Heading(props: Props) {
             )}
             {size === 'small' && (
                 <h4
-                    className={_cs(styles.heading, styles.small, className)}
+                    className={className}
                     title={title}
                 >
                     { children }
@@ -55,7 +86,7 @@ function Heading(props: Props) {
             )}
             {size === 'medium' && (
                 <h3
-                    className={_cs(styles.heading, styles.medium, className)}
+                    className={className}
                     title={title}
                 >
                     { children }
@@ -63,7 +94,7 @@ function Heading(props: Props) {
             )}
             {size === 'large' && (
                 <h2
-                    className={_cs(styles.heading, styles.large, className)}
+                    className={className}
                     title={title}
                 >
                     { children }
@@ -71,7 +102,7 @@ function Heading(props: Props) {
             )}
             {size === 'extraLarge' && (
                 <h1
-                    className={_cs(styles.heading, styles.extraLarge, className)}
+                    className={className}
                     title={title}
                 >
                     { children }
@@ -79,6 +110,16 @@ function Heading(props: Props) {
             )}
         </>
     );
+
+    if (ellipsize) {
+        return (
+            <div className={_cs(styles.ellipsizeContainer, ellipsizeContainerClassName)}>
+                {heading}
+            </div>
+        );
+    }
+
+    return heading;
 }
 
 export default Heading;

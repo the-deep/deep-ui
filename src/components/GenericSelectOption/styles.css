@@ -1,6 +1,9 @@
 .generic-select-option {
-    padding: var(--dui-spacing-extra-small) var(--dui-spacing-small);
+    display: flex;
+    align-items: center;
+    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
     text-align: left;
+    gap: var(--dui-spacing-medium);
 
     &.focused {
         background-color: var(--dui-color-background-hover-light);

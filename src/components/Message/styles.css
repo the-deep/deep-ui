@@ -2,29 +2,24 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
+    padding: var(--dui-spacing-medium);
     text-align: center;
     color: var(--dui-color-text-message);
+    gap: var(--dui-spacing-medium);
 
     .icon-container {
         display: flex;
         align-items: center;
-        padding: var(--dui-spacing-small);
         font-size: 3em;
-    }
-
-    .content {
-        padding: var(--dui-spacing-small);
     }
 
     &.compact {
         align-items: initial;
         flex-direction: row;
-        justify-content: center;
-        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
+        justify-content: flex-start;
 
         .icon-container {
-            font-size: 1.3em;
+            font-size: 1em;
         }
     }
 }

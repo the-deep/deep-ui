@@ -26,6 +26,7 @@ const messages: React.ReactNode[] = [
         You should visit
         &nbsp;
         <a
+            style={{ color: 'inherit' }}
             href="https://togglecorp.com"
             target="_blank"
             rel="noopener noreferrer"

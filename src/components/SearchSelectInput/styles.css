@@ -1,8 +1,9 @@
 .option {
     display: flex;
     align-items: center;
-    padding: calc(var(--dui-spacing-small) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+    padding: var(--dui-spacing-small) var(--dui-spacing-medium);
     overflow: auto;
+    gap: var(--dui-spacing-medium);
 
     .icon {
         display: flex;

@@ -22,6 +22,8 @@ export type Props<
 > & Omit<MessageProps, MessagePropOmission> & {
     className?: string;
     contentClassName?: string,
+    compactEmptyMessage?: boolean;
+    compactPendingMessage?: boolean;
 };
 
 function TableView<
@@ -43,6 +45,8 @@ function TableView<
 
         data,
         contentClassName,
+        compactEmptyMessage,
+        compactPendingMessage,
         ...otherTableProps
     } = props;
 
@@ -71,7 +75,8 @@ function TableView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
-                compact={empty && pending}
+                compactPendingMessage={empty || compactPendingMessage}
+                compactEmptyMessage={compactEmptyMessage}
             />
         </div>
     );
