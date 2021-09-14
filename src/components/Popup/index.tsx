@@ -174,6 +174,7 @@ export function usePopupFeatures(
                 style={{
                     ...placement,
                     width: matchParentWidth ? width : undefined,
+                    maxHeight,
                 }}
                 ref={elementRef}
                 className={_cs(
@@ -188,10 +189,6 @@ export function usePopupFeatures(
                 <div
                     ref={contentRef}
                     className={_cs(styles.content, contentClassName)}
-                    style={{
-                        width: matchParentWidth ? width : undefined,
-                        maxHeight,
-                    }}
                 >
                     { children }
                 </div>

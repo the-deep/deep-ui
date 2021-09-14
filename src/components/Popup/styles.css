@@ -4,11 +4,13 @@
 }
 
 .popup {
+    display: flex;
     position: fixed;
+    flex-direction: column;
     border-radius: var(--dui-radius-popup-border);
     background-color: var(--dui-color-foreground);
-    filter: drop-shadow(0 0 var(--dui-radius-blur-shadow) var(--dui-color-shadow));
     max-width: calc(100vw - 2 * var(--dui-spacing-large));
+    filter: drop-shadow(0 0 var(--dui-radius-blur-shadow) var(--dui-color-shadow));
 
     .tip {
         position: absolute;
@@ -52,8 +54,6 @@
     }
 
     .content {
-        width: 100%;
-        height: 100%;
         overflow: auto;
     }
 

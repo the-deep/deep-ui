@@ -1,7 +1,4 @@
 .option {
-    display: flex;
-    align-items: center;
-    padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-small));
     overflow: auto;
 
     &.active {

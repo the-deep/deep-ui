@@ -1,14 +1,15 @@
 .icon {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
-    padding: 0 var(--dui-spacing-small);
 }
 
-.label {
+.label-container {
     flex-grow: 1;
-    padding: 0 var(--dui-spacing-small);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: auto;
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
