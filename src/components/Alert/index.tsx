@@ -84,7 +84,6 @@ function Alert<N extends string>(props: Props<N>) {
         const { current: el } = alertElementRef;
         if (el) {
             const bcr = el.getBoundingClientRect();
-            console.info(bcr.height);
             el.style.setProperty(
                 '--height',
                 `${bcr.height}px`,

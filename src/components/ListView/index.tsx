@@ -19,6 +19,8 @@ export type Props<
     GK extends OptionKey
 > = ListProps<D, P, K, GP, GK> & Omit<MessageProps, MessagePropOmission> & {
     className?: string;
+    compactEmptyMessage?: boolean;
+    compactPendingMessage?: boolean;
 };
 
 function ListView<
@@ -40,6 +42,8 @@ function ListView<
         filteredEmptyMessage,
 
         data,
+        compactPendingMessage,
+        compactEmptyMessage,
         ...otherListProps
     } = props;
 
@@ -63,7 +67,8 @@ function ListView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
-                compact={empty && pending}
+                compactPendingMessage={empty || compactPendingMessage}
+                compactEmptyMessage={compactEmptyMessage}
             />
             <List
                 data={data}

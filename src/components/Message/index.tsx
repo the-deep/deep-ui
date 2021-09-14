@@ -1,8 +1,8 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 import {
-    IoList,
     IoSearch,
+    IoEarth,
 } from 'react-icons/io5';
 
 import { genericMemo } from '../../utils';
@@ -24,6 +24,8 @@ export interface Props {
     filteredEmptyMessage?: React.ReactNode;
     pendingContainerClassName?: string;
     compact?: boolean;
+    compactPendingMessage?: boolean;
+    compactEmptyMessage?: boolean;
 }
 
 function Message(props: Props) {
@@ -33,14 +35,16 @@ function Message(props: Props) {
         empty,
         filtered,
         icon: iconFromProps,
-        emptyIcon = <IoList />,
+        emptyIcon = <IoEarth />,
         filteredEmptyIcon = <IoSearch />,
         message: messageFromProps,
         pendingMessage,
-        emptyMessage = 'Cannot find any item',
-        filteredEmptyMessage = 'Cannot find any matching item',
+        emptyMessage = 'No data available',
+        filteredEmptyMessage = 'No matching data',
         pendingContainerClassName,
         compact,
+        compactPendingMessage,
+        compactEmptyMessage,
     } = props;
 
     if (pending) {
@@ -48,7 +52,7 @@ function Message(props: Props) {
             <PendingMessage
                 className={pendingContainerClassName}
                 message={pendingMessage}
-                compact={compact}
+                compact={compactPendingMessage || compact}
             />
         );
     }
@@ -75,7 +79,7 @@ function Message(props: Props) {
             className={_cs(
                 className,
                 styles.message,
-                compact && styles.compact,
+                (compact || compactEmptyMessage) && styles.compact,
             )}
         >
             <div className={styles.iconContainer}>
