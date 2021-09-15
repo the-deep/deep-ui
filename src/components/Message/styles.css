@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: var(--dui-spacing-medium);
     text-align: center;
     color: var(--dui-color-text-message);
     gap: var(--dui-spacing-medium);

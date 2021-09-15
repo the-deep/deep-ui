@@ -56,6 +56,7 @@ export interface Props {
     borderBelowHeader?: boolean;
     borderBelowHeaderWidth?: BorderProps['width'];
     ellipsizeHeading?: boolean;
+    withoutExternalPadding?: boolean;
 }
 
 function Container(props: Props) {
@@ -91,6 +92,7 @@ function Container(props: Props) {
         borderBelowHeader,
         borderBelowHeaderWidth,
         ellipsizeHeading,
+        withoutExternalPadding,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -110,9 +112,10 @@ function Container(props: Props) {
             {...containerElementProps}
             className={_cs(
                 styles.container,
-                className,
                 autoFocus && styles.autoFocused,
                 spacingToStyleMap[spacing],
+                withoutExternalPadding && styles.withoutExternalPadding,
+                className,
             )}
             ref={elementRef}
         >
