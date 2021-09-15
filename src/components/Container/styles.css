@@ -8,6 +8,10 @@
     overflow: auto;
     gap: var(--spacing);
 
+    &.without-external-padding {
+        padding: 0;
+    }
+
     .header {
         flex-shrink: 0;
     }

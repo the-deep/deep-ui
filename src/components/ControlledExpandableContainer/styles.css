@@ -1,15 +1,13 @@
 .expandable-container {
     background-color: var(--dui-color-foreground);
-    padding: 0;
+    --spacing: var(--dui-spacing-medium);
 
     .header {
-        border: var(--dui-width-separator-thin) solid var(--dui-color-accent);
+        margin: calc(var(--spacing) * -1);
         background-color: var(--dui-color-background-information);
-        padding: calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small)) calc(var(--dui-spacing-large) - var(--dui-spacing-small));
+        padding: var(--spacing);
 
         .heading-container {
-            display: flex;
-
             .heading {
                 color: var(--dui-color-accent);
             }
@@ -25,17 +23,42 @@
         }
     }
 
-    .content {
-        display: none;
-        border: var(--dui-width-separator-thin) solid var(--dui-color-grey6);
-        border-top: none;
-        border-bottom-left-radius: var(--dui-border-radius-card);
-        border-bottom-right-radius: var(--dui-border-radius-card);
-        padding: var(--dui-spacing-medium) var(--dui-spacing-large);
-
-        &.visible {
-            display: block;
+    &.expanded {
+        .header {
+            margin-bottom: 0;
         }
+    }
+
+    &.without-external-padding {
+        .header {
+            margin: 0;
+        }
+    }
+
+    &.with-border {
+        border: var(--dui-width-separator-thin) solid var(--dui-color-accent);
+    }
+
+    .content {
+        &.hidden {
+            display: none;
+        }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }
 

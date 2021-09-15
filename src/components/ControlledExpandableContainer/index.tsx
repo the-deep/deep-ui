@@ -5,14 +5,24 @@ import {
     IoChevronDownOutline,
 } from 'react-icons/io5';
 
+import { SpacingTypes } from '../../types';
 import Container, { Props as ContainerProps } from '../Container';
 import Button from '../Button';
 
 import styles from './styles.css';
 
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
+
 export interface Props<T> extends ContainerProps {
-    // NOTE: Mount will mount the child even if its not shown
-    alwaysMountContent?: boolean;
+    // NOTE: content will always be mounted if its not shown (in collapsed state)
+    contentAlwaysMounted?: boolean;
     disabled?: boolean;
     expansionButtonClassName?: string;
     expansionTriggerArea?: 'header' | 'arrow';
@@ -20,6 +30,7 @@ export interface Props<T> extends ContainerProps {
     name: T,
     expanded?: boolean;
     onExpansionChange: (value: boolean, name: T) => void;
+    withoutBorder?: boolean;
 }
 
 function ControlledExpandableContainer<T>(props: Props<T>) {
@@ -28,7 +39,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         heading,
         children,
         headingDescription,
-        alwaysMountContent = true,
+        contentAlwaysMounted,
         headerActions,
         headingContainerClassName,
         headingClassName,
@@ -41,10 +52,13 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         name,
         onExpansionChange,
         expansionTriggerArea = 'header',
+        spacing = 'comfortable',
+        withoutExternalPadding,
+        withoutBorder,
         ...otherProps
     } = props;
 
-    const mountContent = alwaysMountContent || expanded;
+    const mountContent = contentAlwaysMounted || expanded;
 
     const toggleContentVisibility = useCallback(
         () => {
@@ -56,15 +70,20 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
     return (
         <Container
             {...otherProps}
+            withoutExternalPadding={withoutExternalPadding}
             className={_cs(
-                className,
                 styles.expandableContainer,
+                spacingToStyleMap[spacing],
+                withoutExternalPadding && styles.withoutExternalPadding,
+                !withoutBorder && styles.withBorder,
+                expanded && styles.expanded,
+                className,
             )}
-            headerElementProps={{
-                onClick: expansionTriggerArea === 'header' && !disabled
-                    ? toggleContentVisibility
-                    : undefined,
-            }}
+            headerElementProps={
+                expansionTriggerArea === 'header' && !disabled
+                    ? ({ onClick: toggleContentVisibility })
+                    : undefined
+            }
             headerClassName={_cs(
                 styles.header,
                 headerClassName,
@@ -74,6 +93,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
             headingClassName={_cs(styles.heading, headingClassName)}
             heading={heading}
             headingSize={headingSize ?? 'small'}
+            spacing={spacing}
             headerActions={(
                 <>
                     {headerActions}
@@ -96,7 +116,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
             contentClassName={_cs(
                 contentClassName,
                 styles.content,
-                expanded && styles.visible,
+                !expanded && styles.hidden,
             )}
         >
             {mountContent && children}
