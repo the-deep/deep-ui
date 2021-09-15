@@ -6,6 +6,8 @@ export type TabVariant = 'primary' | 'secondary' | 'step';
 interface BaseTabContextProps {
     variant?: TabVariant;
     disabled?: boolean;
+    ellipsize?: boolean;
+    setEllipsize: (ellipsize: boolean) => void;
 }
 
 export type TabContextProps = BaseTabContextProps & (
@@ -24,4 +26,5 @@ export const TabContext = React.createContext<TabContextProps>({
     activeTab: undefined,
     variant: 'primary',
     setActiveTab: () => { console.warn('setActiveTab called before it was initialized'); },
+    setEllipsize: () => { console.warn('setEllipsize called before it was initialize'); },
 });

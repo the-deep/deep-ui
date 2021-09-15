@@ -28,6 +28,7 @@ export interface Props<T extends TabKey> extends Omit<RawButtonProps<T>, 'onClic
     fullWidthActiveBorder?: boolean;
     borderPosition?: BorderProps['position'];
     borderWidth?: BorderProps['width'];
+    ellipsize?: boolean;
 }
 
 function Tab<T extends TabKey>(props: Props<T>) {
@@ -36,6 +37,7 @@ function Tab<T extends TabKey>(props: Props<T>) {
     const {
         variant,
         disabled: disabledFromContext,
+        ellipsize: ellipsizeFromContext,
     } = context;
 
     const {
@@ -49,8 +51,11 @@ function Tab<T extends TabKey>(props: Props<T>) {
         borderPosition = 'bottom',
         borderWidth,
         fullWidthActiveBorder,
+        ellipsize: ellipsizeFromProps,
         ...otherProps
     } = props;
+
+    const ellipsize = ellipsizeFromContext || ellipsizeFromProps;
 
     let isActive = false;
 
@@ -69,12 +74,14 @@ function Tab<T extends TabKey>(props: Props<T>) {
                 isActive && styles.active,
                 isActive && activeClassName,
                 disabled && styles.disabled,
+                ellipsize && styles.ellipsize,
                 variant && tabVariantToStyleMap[variant],
             )}
             onClick={context.useHash ? setHashToBrowser : context.setActiveTab}
             name={name}
             disabled={disabled}
             role="tab"
+            title={typeof children === 'string' ? children : undefined}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}
         >
@@ -88,7 +95,11 @@ function Tab<T extends TabKey>(props: Props<T>) {
                     position={borderPosition}
                 />
             )}
-            {children}
+            {ellipsize ? (
+                <div className={styles.ellipsizeContainer}>
+                    {children}
+                </div>
+            ) : children}
         </RawButton>
     );
 

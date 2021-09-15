@@ -21,6 +21,7 @@ const Template: Story<ButtonProps<string>> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     children: 'Click me!',
+    ellipsize: true,
 };
 
 export const WithIcons = Template.bind({});

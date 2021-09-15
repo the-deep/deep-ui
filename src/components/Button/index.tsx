@@ -54,9 +54,10 @@ export interface Props<N> extends Omit<
     readOnly?: boolean;
     elementRef?: React.RefObject<HTMLButtonElement>;
     spacing?: SpacingTypes;
+    ellipsize?: boolean;
 }
 
-export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsContainerClassName' | 'iconsContainerClassName' | 'childrenContainerClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly' | 'spacing';
+export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsContainerClassName' | 'iconsContainerClassName' | 'childrenContainerClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly' | 'spacing' | 'ellipsize';
 export function useButtonFeatures(
     props: Pick<Props<void>, ButtonFeatureKeys>,
 ) {
@@ -73,6 +74,7 @@ export function useButtonFeatures(
         big,
         readOnly,
         spacing = 'comfortable',
+        ellipsize,
     } = props;
 
     const buttonClassName = _cs(
@@ -81,6 +83,7 @@ export function useButtonFeatures(
         readOnly && styles.readOnly,
         buttonVariantToStyleMap[variant] ?? styles.primary,
         spacingToStyleMap[spacing],
+        ellipsize && styles.ellipsize,
         className,
     );
 
@@ -93,7 +96,11 @@ export function useButtonFeatures(
             childrenContainerClassName={_cs(styles.children, childrenContainerClassName)}
             spacing={spacing}
         >
-            {children}
+            {ellipsize ? (
+                <div className={styles.ellipsizeContainer}>
+                    {children}
+                </div>
+            ) : children }
         </ElementFragments>
     );
 
@@ -121,6 +128,7 @@ function Button<N>(props: Props<N>) {
         readOnly,
         elementRef,
         spacing,
+        ellipsize,
         ...otherProps
     } = props;
 
@@ -143,6 +151,7 @@ function Button<N>(props: Props<N>) {
         big,
         readOnly,
         spacing,
+        ellipsize,
     });
 
     // FIXME: Use raw button

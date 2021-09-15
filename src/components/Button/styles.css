@@ -8,7 +8,6 @@
     --cursor: default;
     --spacing: var(--dui-spacing-medium);
     --padding: calc(var(--spacing) / 2) calc(var(--spacing) * 2);
-    gap: var(--spacing);
 
     display: flex;
     position: relative;
@@ -19,12 +18,21 @@
     cursor: var(--cursor);
     padding: var(--padding);
     width: fit-content;
+    max-width: 100%;
     overflow: hidden;
     text-transform: var(--text-transform);
     color: var(--color-text);
     font-family: inherit;
     font-size: var(--font-size);
     font-weight: var(--dui-font-weight-bold);
+    gap: var(--spacing);
+
+
+    &.ellipsize {
+        .children {
+            overflow: auto;
+        }
+    }
 
     &.primary {
         --text-transform: uppercase;
@@ -150,5 +158,11 @@
 
     &.loose-spacing {
         --spacing: var(--dui-spacing-large);
+    }
+
+    .ellipsize-container {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
