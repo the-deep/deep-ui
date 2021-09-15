@@ -30,6 +30,7 @@ export interface Props<T> extends ContainerProps {
     name: T,
     expanded?: boolean;
     onExpansionChange: (value: boolean, name: T) => void;
+    withoutBorder?: boolean;
 }
 
 function ControlledExpandableContainer<T>(props: Props<T>) {
@@ -53,6 +54,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         expansionTriggerArea = 'header',
         spacing = 'comfortable',
         withoutExternalPadding,
+        withoutBorder,
         ...otherProps
     } = props;
 
@@ -73,6 +75,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
                 styles.expandableContainer,
                 spacingToStyleMap[spacing],
                 withoutExternalPadding && styles.withoutExternalPadding,
+                !withoutBorder && styles.withBorder,
                 expanded && styles.expanded,
                 className,
             )}

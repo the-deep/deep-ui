@@ -1,5 +1,5 @@
 .expandable-container {
-    background-color: var(--dui-color-background);
+    background-color: var(--dui-color-foreground);
     --spacing: var(--dui-spacing-medium);
 
     .header {
@@ -33,6 +33,10 @@
         .header {
             margin: 0;
         }
+    }
+
+    &.with-border {
+        border: var(--dui-width-separator-thin) solid var(--dui-color-accent);
     }
 
     .content {
