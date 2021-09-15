@@ -1,6 +1,6 @@
 {
     "name": "@the-deep/deep-ui",
-    "version": "1.5.6",
+    "version": "1.5.7",
     "description": "React component library by Deep",
     "files": [
         "/build"
