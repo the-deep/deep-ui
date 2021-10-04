@@ -25,7 +25,7 @@ export interface Value {
 }
 
 type InheritedProps = Omit<InputContainerProps, 'input'>;
-export interface Props<N extends string> extends InheritedProps {
+export interface Props<N extends string | number | undefined> extends InheritedProps {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     value: Value | undefined | null;
@@ -33,7 +33,7 @@ export interface Props<N extends string> extends InheritedProps {
     onChange?: (value: Value | undefined, name: N) => void;
 }
 
-function TimeRangeInput<T extends string>(props: Props<T>) {
+function TimeRangeInput<T extends string | number | undefined>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,
