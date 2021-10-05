@@ -9,19 +9,20 @@ import {
 
 type Def = { containerClassName?: string };
 type OptionKey = string | number;
+type NameType = string | number | undefined;
 
 const emptyList: unknown[] = [];
 
 export type Props<
     T extends OptionKey,
-    K extends string,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
 > = SearchSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially' | 'totalOptionsCount'>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function SelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
+function SelectInput<T extends OptionKey, K extends NameType, O extends object, P extends Def>(
     props: Props<T, K, O, P>,
 ) {
     const {

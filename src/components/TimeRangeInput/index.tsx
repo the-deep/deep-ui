@@ -19,13 +19,15 @@ import Popup from '../Popup';
 
 import styles from './styles.css';
 
+type NameType = string | number | undefined;
+
 export interface Value {
     startTime: string;
     endTime: string;
 }
 
 type InheritedProps = Omit<InputContainerProps, 'input'>;
-export interface Props<N extends string> extends InheritedProps {
+export interface Props<N extends NameType> extends InheritedProps {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     value: Value | undefined | null;
@@ -33,7 +35,7 @@ export interface Props<N extends string> extends InheritedProps {
     onChange?: (value: Value | undefined, name: N) => void;
 }
 
-function TimeRangeInput<T extends string>(props: Props<T>) {
+function TimeRangeInput<T extends NameType>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,

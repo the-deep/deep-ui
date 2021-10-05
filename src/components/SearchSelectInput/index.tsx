@@ -35,10 +35,11 @@ function Option(props: OptionProps) {
 
 type Def = { containerClassName?: string, title?: string; };
 type OptionKey = string | number;
+type NameType = string | number | undefined;
 
 export type Props<
     T extends OptionKey,
-    K,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
@@ -89,7 +90,7 @@ const emptyList: unknown[] = [];
 
 function SearchSelectInput<
     T extends OptionKey,
-    K extends string,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,

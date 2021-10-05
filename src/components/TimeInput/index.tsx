@@ -7,13 +7,15 @@ import RawInput, { Props as RawInputProps } from '../RawInput';
 
 import styles from './styles.css';
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & RawInputProps<T>);
-export interface Props<T extends string> extends InheritedProps<T> {
+type NameType = string | number | undefined;
+
+type InheritedProps<T extends NameType> = (Omit<InputContainerProps, 'input'> & RawInputProps<T>);
+export interface Props<T extends NameType> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
 }
 
-function TimeInput<T extends string>(props: Props<T>) {
+function TimeInput<T extends NameType>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,

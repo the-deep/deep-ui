@@ -10,7 +10,9 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
-export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' | 'onChange' | 'value' | 'name' | 'label'> {
+type NameType = string | number | undefined;
+
+export interface Props<N extends NameType> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' | 'onChange' | 'value' | 'name' | 'label'> {
     /**
     * Style for the input
     */
@@ -43,7 +45,7 @@ export interface Props<N> extends Omit<React.HTMLProps<HTMLInputElement>, 'ref' 
 /**
  * The most basic input component with default stylings removed (without any styling)
  */
-function RawInput<N extends string | number>(
+function RawInput<N extends NameType>(
     {
         className,
         onChange,
