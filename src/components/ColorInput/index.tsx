@@ -11,14 +11,16 @@ import Popup from '../Popup';
 
 import styles from './styles.css';
 
-export interface Props<N extends number | string | undefined> {
+type NameType = string | number | undefined;
+
+export interface Props<N extends NameType> {
     className?: string;
     value?: string;
     onChange: (newValue: string, name: N) => void;
     name: N,
 }
 
-function ColorInput<N extends number | string | undefined>(props: Props<N>) {
+function ColorInput<N extends NameType>(props: Props<N>) {
     const {
         className,
         value,

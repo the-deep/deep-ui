@@ -7,12 +7,14 @@ import { Props as RadioProps } from '../RadioInput/Radio';
 
 import styles from './styles.css';
 
+type NameType = string | number | undefined;
+
 // Note: more props can be picked as per requirement
 type ExtraSegmentProps = Pick<ButtonProps<undefined>, 'icons' | 'iconsContainerClassName' | 'actions' | 'actionsContainerClassName'>;
-export interface SegmentProps<N> extends RadioProps<N>, ExtraSegmentProps {
+export interface SegmentProps<N extends NameType> extends RadioProps<N>, ExtraSegmentProps {
 }
 
-function Segment<N>(props: SegmentProps<N>) {
+function Segment<N extends NameType>(props: SegmentProps<N>) {
     const {
         label,
         name,
@@ -37,7 +39,10 @@ function Segment<N>(props: SegmentProps<N>) {
 }
 
 export interface Props<
-    N, O, V, RRP extends RadioProps<V>
+    N extends NameType,
+    O,
+    V,
+    RRP extends RadioProps<V>,
 > extends Omit<RadioInputProps<N, O, V, RRP>, 'rendererParams' | 'renderer' | 'listContainerClassName' | 'keySelector' | 'labelSelector'> {
     rendererParams?: RadioInputProps<N, O, V, RRP>['rendererParams'];
     listContainerClassName?: RadioInputProps<N, O, V, RRP>['listContainerClassName'];
@@ -47,7 +52,7 @@ export interface Props<
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function SegmentInput<
-    N extends string | number,
+    N extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     V extends string | number,

@@ -10,7 +10,9 @@ function isValidDecimalTrailingZeroString(val: string) {
     return /^[+-]?\d+\.\d*0$/.test(val);
 }
 
-export type Props<T extends string> = Omit<InputContainerProps, 'input'>
+type NameType = string | number | undefined;
+
+export type Props<T extends NameType> = Omit<InputContainerProps, 'input'>
     & Omit<RawInputProps<T>, 'onChange' | 'value'>
     & {
         inputElementRef?: React.RefObject<HTMLInputElement>;
@@ -23,7 +25,7 @@ export type Props<T extends string> = Omit<InputContainerProps, 'input'>
         ) => void;
     };
 
-function NumberInput<T extends string>(props: Props<T>) {
+function NumberInput<T extends NameType>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,
