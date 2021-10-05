@@ -1,0 +1,40 @@
+.container {
+    padding: 0;
+
+    .header {
+        align-content: center;
+        border-bottom: 1px solid var(--dui-color-separator);
+        padding: 0 var(--dui-spacing-medium);
+
+        .heading-container {
+            align-items: center;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            align-self: stretch;
+            flex-grow: 1;
+            justify-content: space-between;
+
+            .tab-list {
+                align-self: stretch;
+
+                .tab {
+                    align-self: stretch;
+                    padding: var(--dui-spacing-extra-large);
+                }
+            }
+
+            .actions {
+                display: flex;
+                gap: var(--dui-spacing-medium);
+            }
+        }
+    }
+
+    .content {
+        padding: var(--dui-spacing-medium);
+        padding-top: 0;
+    }
+}
