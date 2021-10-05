@@ -7,12 +7,14 @@ import { Props as RadioProps } from '../RadioInput/Radio';
 
 import styles from './styles.css';
 
-export interface ScaleProps<V extends string | number | undefined> extends Omit<RadioProps<V>, 'label'> {
+type OptionKey = string | number | undefined;
+
+export interface ScaleProps<V extends OptionKey> extends Omit<RadioProps<V>, 'label'> {
     color?: string;
     label?: string;
 }
 
-function Scale<V extends string | number | undefined>(props: ScaleProps<V>) {
+function Scale<V extends OptionKey>(props: ScaleProps<V>) {
     const {
         label,
         name,
@@ -57,7 +59,9 @@ interface ExtendedProps<V> extends RadioProps<V> {
 }
 
 export interface Props<
-    N, O, V
+    N extends OptionKey,
+    O,
+    V
 > extends Omit<RadioInputProps<N, O, V, ExtendedProps<V>>, 'rendererParams' | 'renderer' | 'listContainerClassName' | 'keySelector' | 'labelSelector'> {
     listContainerClassName?: RadioInputProps<N, O, V, ExtendedProps<V>>['listContainerClassName'];
     keySelector: RadioInputProps<N, O, V, ExtendedProps<V>>['keySelector'];
@@ -67,7 +71,7 @@ export interface Props<
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function ScaleInput<
-    N extends string | number,
+    N extends OptionKey,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     V extends string | number,

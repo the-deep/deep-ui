@@ -19,7 +19,9 @@ const spacingToStyleMap: {
     loose: styles.looseSpacing,
 };
 
-export interface Props<N, O, V, RRP extends RadioProps<V>> {
+type NameType = string | number | undefined;
+
+export interface Props<N extends NameType, O, V, RRP extends RadioProps<V>> {
     className?: string;
     options: O[] | undefined;
     name: N;
@@ -42,7 +44,7 @@ export interface Props<N, O, V, RRP extends RadioProps<V>> {
 }
 
 function RadioInput<
-    N extends string | number,
+    N extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     V extends string | number,

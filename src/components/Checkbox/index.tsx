@@ -18,9 +18,9 @@ const spacingToStyleMap: {
     loose: styles.looseSpacing,
 };
 
-type OptionKey = string | number;
+type NameType = string | number | undefined;
 
-export interface Props<N extends OptionKey> {
+export interface Props<N extends NameType> {
     className?: string;
     labelContainerClassName?: string;
     checkmark?: (p: CheckmarkProps) => React.ReactElement;
@@ -37,7 +37,7 @@ export interface Props<N extends OptionKey> {
     spacing?: SpacingTypes;
 }
 
-function Checkbox<N extends OptionKey>(props: Props<N>) {
+function Checkbox<N extends NameType>(props: Props<N>) {
     const {
         label,
         tooltip,

@@ -89,8 +89,10 @@ const DateRenderer = (props: DateRendererProps) => {
     );
 };
 
+type NameType = string | number | undefined;
+
 type InheritedProps = Omit<InputContainerProps, 'input'>;
-export interface Props<N extends number | string | undefined> extends InheritedProps {
+export interface Props<N extends NameType> extends InheritedProps {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     value: Value | undefined | null;
@@ -98,7 +100,7 @@ export interface Props<N extends number | string | undefined> extends InheritedP
     onChange?: (value: Value | undefined, name: N) => void;
 }
 
-function DateRangeInput<N extends string | number | undefined>(props: Props<N>) {
+function DateRangeInput<N extends NameType>(props: Props<N>) {
     const {
         actions,
         actionsContainerClassName,

@@ -17,6 +17,8 @@ import useKeyboard from '../../hooks/useKeyboard';
 import EmptyOptions from './EmptyOptions';
 import styles from './styles.css';
 
+type NameType = string | number | undefined;
+
 interface GroupProps {
     title: string;
     children: React.ReactNode;
@@ -49,7 +51,7 @@ function Group({
 
 export type Props<
     OK extends OptionKey,
-    N,
+    N extends NameType,
     O,
     P extends ContentBaseProps,
     OMISSION extends string,
@@ -92,7 +94,7 @@ export type Props<
 const emptyList: unknown[] = [];
 
 // eslint-disable-next-line @typescript-eslint/ban-types, max-len
-function SelectInputContainer<OK extends OptionKey, N extends string, O extends object, P extends ContentBaseProps>(
+function SelectInputContainer<OK extends OptionKey, N extends NameType, O extends object, P extends ContentBaseProps>(
     props: Props<OK, N, O, P, never>,
 ) {
     const {

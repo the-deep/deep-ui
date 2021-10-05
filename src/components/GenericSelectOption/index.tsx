@@ -21,7 +21,6 @@ export interface Props<P extends ContentBaseProps, OK extends OptionKey, O> {
     onClick: (optionKey: OK, option: O) => void;
     focusedKey?: { key: OK, mouse?: boolean } | undefined;
     onFocus?: (options: { key: OK, mouse?: boolean }) => void;
-
 }
 
 function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O>({

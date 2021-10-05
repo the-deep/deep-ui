@@ -5,18 +5,19 @@ import SearchMultiSelectInput, {
 import { rankedSearchOnList } from '../../utils';
 
 type Def = { containerClassName?: string };
+type NameType = string | number | undefined;
 type OptionKey = string | number;
 
 export type Props<
     T extends OptionKey,
-    K extends string,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
 > = SearchMultiSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'onShowDropdownChange' | 'totalOptionsCount'>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function MultiSelectInput<T extends OptionKey, K extends string, O extends object, P extends Def>(
+function MultiSelectInput<T extends OptionKey, K extends NameType, O extends object, P extends Def>(
     props: Props<T, K, O, P>,
 ) {
     const {

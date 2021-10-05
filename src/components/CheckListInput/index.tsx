@@ -21,10 +21,11 @@ const spacingToStyleMap: {
 };
 
 type OptionKey = string | number;
+type NameType = string | number | undefined;
 
 export interface Props<
     T extends OptionKey,
-    K extends string,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
 > {
@@ -53,7 +54,7 @@ export interface Props<
 
 function CheckListInput<
     T extends OptionKey,
-    K extends string,
+    K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
 >(props: Props<T, K, O>) {

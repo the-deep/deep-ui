@@ -27,8 +27,10 @@ export const isValidFile = (fileName: string, mimeType: string, acceptString?: s
     });
 };
 
-type InheritedProps<T> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange' | 'value'>);
-export type Props<T extends string> = InheritedProps<T> & {
+type NameType = string | number | undefined;
+
+type InheritedProps<T extends NameType> = (Omit<InputContainerProps, 'input'> & Omit<RawInputProps<T>, 'onChange' | 'value'>);
+export type Props<T extends NameType> = InheritedProps<T> & {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
     showStatus?: boolean;
@@ -46,7 +48,7 @@ export type Props<T extends string> = InheritedProps<T> & {
     onChange?: (files: File | undefined, name: T) => void;
 });
 
-function FileInput<T extends string>(props: Props<T>) {
+function FileInput<T extends NameType>(props: Props<T>) {
     const {
         actions,
         actionsContainerClassName,
