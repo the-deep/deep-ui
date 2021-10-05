@@ -32,6 +32,8 @@ export interface Props {
     headingDescription?: React.ReactNode;
     headerDescription?: React.ReactNode;
     headerClassName?: string;
+    headerIconsContainerClassName?: string;
+    headerActionsContainerClassName?: string;
     headerDescriptionClassName?: string;
     headingClassName?: string;
     children?: React.ReactNode;
@@ -55,6 +57,7 @@ export interface Props {
     spacing?: SpacingTypes;
     borderBelowHeader?: boolean;
     borderBelowHeaderWidth?: BorderProps['width'];
+    borderBelowHeaderClassName?: string;
     ellipsizeHeading?: boolean;
     withoutExternalPadding?: boolean;
 }
@@ -68,6 +71,8 @@ function Container(props: Props) {
         headerIcons,
         headingDescription,
         headerDescription,
+        headerIconsContainerClassName,
+        headerActionsContainerClassName,
         headerDescriptionClassName,
         headerClassName,
         headingClassName,
@@ -91,6 +96,7 @@ function Container(props: Props) {
         spacing = 'comfortable',
         borderBelowHeader,
         borderBelowHeaderWidth,
+        borderBelowHeaderClassName,
         ellipsizeHeading,
         withoutExternalPadding,
     } = props;
@@ -127,6 +133,8 @@ function Container(props: Props) {
                     heading={heading}
                     headingSize={headingSize}
                     description={headingDescription}
+                    iconsContainerClassName={headerIconsContainerClassName}
+                    actionsContainerClassName={headerActionsContainerClassName}
                     descriptionClassName={_cs(styles.headerDescription, headerDescriptionClassName)}
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
@@ -140,6 +148,7 @@ function Container(props: Props) {
             )}
             {borderBelowHeader && (
                 <Border
+                    className={borderBelowHeaderClassName}
                     width={borderBelowHeaderWidth}
                     inline
                 />
