@@ -42,6 +42,8 @@ export type { Props as DateInputProps } from './components/DateInput';
 export { default as DateInput } from './components/DateInput';
 export type { Props as DateOutputProps } from './components/DateOutput';
 export { default as DateOutput } from './components/DateOutput';
+export type { Props as DateRangeDualInputProps } from './components/DateRangeDualInput';
+export { default as DateDualRangeInput } from './components/DateRangeDualInput';
 export type { Props as DateRangeInputProps } from './components/DateRangeInput';
 export { default as DateRangeInput } from './components/DateRangeInput';
 export type { Props as DateRangeOutputProps } from './components/DateRangeOutput';
