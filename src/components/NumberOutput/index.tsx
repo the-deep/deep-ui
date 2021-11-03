@@ -145,7 +145,7 @@ function NumberOutput(props: Props) {
     ]);
 
     return (
-        <div className={_cs(styles.numeral, className)}>
+        <div className={_cs(styles.numberOutput, className)}>
             { isFalsy(value) ? (
                 invalidText
             ) : (

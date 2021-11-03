@@ -1,0 +1,37 @@
+.compact-information-card {
+    --spacing: var(--dui-spacing-small);
+    color: var(--dui-color-accent);
+
+    .icon-and-value {
+        gap: var(--spacing);
+        display: flex;
+        align-items: center;
+        font-size: var(--dui-font-size-super-large);
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value {
+            font-weight: var(--dui-font-weight-bold);
+        }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+}

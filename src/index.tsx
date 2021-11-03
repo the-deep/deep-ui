@@ -30,6 +30,8 @@ export type { Props as CollapsibleContainerProps } from './components/Collapsibl
 export { default as CollapsibleContainer } from './components/CollapsibleContainer';
 export type { Props as ColorInputProps } from './components/ColorInput';
 export { default as ColorInput } from './components/ColorInput';
+export type { Props as CompactInformationCardProps } from './components/CompactInformationCard';
+export { default as CompactInformationCard } from './components/CompactInformationCard';
 export { default as ConfirmButton } from './components/ConfirmButton';
 export type { Props as ConfirmButtonProps } from './components/ConfirmButton';
 export type { Props as ContainerProps } from './components/Container';
@@ -76,6 +78,8 @@ export type { Props as ImagePreviewProps } from './components/ImagePreview';
 export { default as ImagePreview } from './components/ImagePreview';
 export type { Props as InformationCardProps } from './components/InformationCard';
 export { default as InformationCard } from './components/InformationCard';
+export type { Props as InformationCardFragmentsProps } from './components/InformationCardFragments';
+export { default as InformationCardFragments } from './components/InformationCardFragments';
 export type { Props as InputContainerProps } from './components/InputContainer';
 export { default as InputContainer } from './components/InputContainer';
 export type { Props as InputErrorProps } from './components/InputError';

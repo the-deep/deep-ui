@@ -1,0 +1,25 @@
+.container {
+    background-color: var(--dui-color-background);
+    padding: var(--dui-spacing-extra-large);
+    height: 30rem;
+}
+
+.grouped-compact-information-card-container {
+    display: flex;
+    border-radius: var(--dui-border-radius-card);
+    background-color: var(--dui-color-foreground);
+    padding: var(--dui-spacing-large);
+    width: 27rem;
+    gap: var(--dui-spacing-extra-large);
+
+    .compact-information-card {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+
+    .border {
+        align-self: stretch;
+        background-color: var(--dui-color-separator);
+        width: var(--dui-width-separator-thin);
+    }
+}
