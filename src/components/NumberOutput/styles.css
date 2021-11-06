@@ -1,4 +1,4 @@
-.numeral {
+.number-output {
     display: flex;
     font-family: var(--dui-font-family-monospace);
     font-size: inherit;

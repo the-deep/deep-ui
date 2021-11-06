@@ -81,8 +81,6 @@
         }
     }
 
-
-
     &.thin {
         --border-width: var(--dui-width-separator-thin);
     }
