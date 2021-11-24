@@ -8,8 +8,7 @@ import {
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
-import GenericSelectOption from '../GenericSelectOption';
-import List from '../List';
+import ListSelection from '../ListSelection';
 import { rankedSearchOnList } from '../../utils';
 import Option from './Option';
 
@@ -255,34 +254,12 @@ function SearchMultiSelectInput<
         [value, onChange, name, onOptionsChange, keySelector],
     );
 
+
     const handleClear = useCallback(
         () => {
             onChange([], name);
         },
         [name, onChange],
-    );
-
-    const optionListRendererParams = useCallback(
-        (key, option) => ({
-            contentRendererParam: optionRendererParams,
-            option,
-            optionKey: key,
-            focusedKey,
-            contentRenderer: Option,
-            onClick: handleOptionClick,
-            onFocus: setFocusedKey,
-            readOnly,
-            disabled,
-            optionContainerClassName: _cs(selectedOptionContainerClassName, styles.selectedItem),
-        }),
-        [
-            readOnly,
-            disabled,
-            focusedKey,
-            handleOptionClick,
-            optionRendererParams,
-            selectedOptionContainerClassName,
-        ],
     );
 
     return (
@@ -313,12 +290,15 @@ function SearchMultiSelectInput<
                 disabled={disabled}
                 readOnly={readOnly}
             />
-            { selectionListShown && (
-                <List
+            {selectionListShown && (
+                <ListSelection
+                    name={name}
+                    value={value}
                     data={selectedOptions}
                     keySelector={keySelector}
-                    renderer={GenericSelectOption}
-                    rendererParams={optionListRendererParams}
+                    labelSelector={labelSelector}
+                    // FIXME: need to intercept this and call onOptionsChange
+                    onChange={onChange}
                 />
             )}
         </>
