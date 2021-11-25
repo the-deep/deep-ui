@@ -136,6 +136,7 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
                                         variant="action"
                                         onClick={handleClearButtonClick}
                                         disabled={disabled}
+                                        title="Clear"
                                     >
                                         <IoClose />
                                     </Button>
@@ -145,6 +146,7 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
                                     variant="action"
                                     onClick={toggleShowTimePicker}
                                     disabled={disabled}
+                                    title="Show time picker"
                                 >
                                     <IoTimeOutline />
                                 </Button>
