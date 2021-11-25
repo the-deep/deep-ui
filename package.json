@@ -47,6 +47,7 @@
         "d3-shape": "^2.1.0",
         "react-color": "^2.19.3",
         "react-icons": "^4.2.0",
+        "react-textarea-autosize": "^8.3.3",
         "react-zoom-pan-pinch": "^1.6.1",
         "resize-observer-polyfill": "^1.5.1"
     },

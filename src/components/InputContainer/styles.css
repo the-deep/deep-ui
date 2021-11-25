@@ -88,19 +88,19 @@
         position: relative;
         align-items: center;
         background-color: var(--color-background-input-section);
+    }
 
-        .input-container {
-            display: flex;
+    .input-container {
+        display: flex;
 
-            >* {
-                flex-grow: 1;
-            }
+        >* {
+            flex-grow: 1;
         }
+    }
 
-        .input-section-border {
-            background-color: var(--color-input-section-border);
-            height: var(--height-border);
-        }
+    .input-section-border {
+        background-color: var(--color-input-section-border);
+        height: var(--height-border);
     }
 
     &.for-general-use {

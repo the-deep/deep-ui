@@ -1,5 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 
@@ -15,6 +16,8 @@ interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>,
         e: React.FormEvent<HTMLTextAreaElement>,
     ) => void;
     elementRef?: React.Ref<HTMLTextAreaElement>;
+    minRows?: number;
+    maxRows?: number;
 }
 export type Props<T> = Omit<InputContainerProps, 'input'> & RawTextAreaProps<T>;
 
@@ -39,6 +42,9 @@ function TextArea<T extends string>(props: Props<T>) {
         value,
         containerRef,
         elementRef,
+        minRows = 3,
+        maxRows = 10,
+        style,
         ...textAreaProps
     } = props;
 
@@ -79,14 +85,17 @@ function TextArea<T extends string>(props: Props<T>) {
             readOnly={readOnly}
             containerRef={containerRef}
             input={(
-                <textarea
+                <TextareaAutosize
                     className={styles.rawTextArea}
                     ref={elementRef}
                     readOnly={readOnly}
+                    style={style as React.ComponentProps<typeof TextareaAutosize>['style']}
                     disabled={disabled}
                     onChange={handleInputChange}
                     value={value ?? ''}
                     autoComplete="off"
+                    minRows={minRows}
+                    maxRows={maxRows}
                     {...textAreaProps}
                 />
             )}
