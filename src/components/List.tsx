@@ -1,7 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { listToGroupList, isNotDefined } from '@togglecorp/fujs';
 
+import Border, { Props as BorderProps } from './Border';
 import { genericMemo } from '../utils';
+import { SpacingTypes } from '../types';
 
 export type OptionKey = string | number;
 
@@ -18,6 +20,10 @@ interface BaseProps<D, P, K extends OptionKey> {
     renderer: (props: P) => JSX.Element | null;
     rendererClassName?: string;
     rendererParams: (key: K, datum: D, index: number, data: D[]) => (P | undefined);
+    borderBetweenItem?: boolean;
+    borderBetweenItemWidth?: BorderProps['width'];
+    borderBetweenItemClassName?: string;
+    spacing?: SpacingTypes;
 }
 
 interface GroupOptions<D, GP, GK extends OptionKey> {
@@ -64,6 +70,10 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         keySelector,
         rendererParams,
         rendererClassName,
+        spacing = 'comfortable',
+        borderBetweenItem,
+        borderBetweenItemWidth = 'thin',
+        borderBetweenItemClassName,
     } = props;
 
     const data = dataFromProps ?? (emptyList as D[]);
@@ -77,13 +87,34 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         }
 
         return (
-            <Renderer
-                key={key}
-                className={rendererClassName}
-                {...extraProps}
-            />
+            <>
+                <Renderer
+                    key={key}
+                    className={rendererClassName}
+                    {...extraProps}
+                />
+                {borderBetweenItem && data.length > (i + 1) && (
+                    <Border
+                        inline
+                        extendToSpacing
+                        spacing={spacing}
+                        className={borderBetweenItemClassName}
+                        width={borderBetweenItemWidth}
+                    />
+                )}
+            </>
         );
-    }, [Renderer, data, keySelector, rendererClassName, rendererParams]);
+    }, [
+        Renderer,
+        data,
+        keySelector,
+        rendererClassName,
+        rendererParams,
+        borderBetweenItem,
+        borderBetweenItemClassName,
+        borderBetweenItemWidth,
+        spacing,
+    ]);
 
     const renderGroup = (
         groupKey: GK,
@@ -150,6 +181,10 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
         renderer: Renderer,
         rendererClassName,
         rendererParams,
+        spacing = 'comfortable',
+        borderBetweenItem,
+        borderBetweenItemClassName,
+        borderBetweenItemWidth = 'thin',
     } = props;
 
     const data = dataFromProps ?? (emptyList as D[]);
@@ -163,13 +198,34 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
         }
 
         return (
-            <Renderer
-                key={key}
-                className={rendererClassName}
-                {...extraProps}
-            />
+            <>
+                <Renderer
+                    key={key}
+                    className={rendererClassName}
+                    {...extraProps}
+                />
+                {borderBetweenItem && data.length > (i + 1) && (
+                    <Border
+                        inline
+                        extendToSpacing
+                        spacing={spacing}
+                        className={borderBetweenItemClassName}
+                        width={borderBetweenItemWidth}
+                    />
+                )}
+            </>
         );
-    }, [keySelector, Renderer, rendererClassName, rendererParams, data]);
+    }, [
+        keySelector,
+        Renderer,
+        rendererClassName,
+        rendererParams,
+        data,
+        spacing,
+        borderBetweenItem,
+        borderBetweenItemWidth,
+        borderBetweenItemClassName,
+    ]);
 
     if (!hasGroup(props)) {
         return (

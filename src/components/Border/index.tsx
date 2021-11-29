@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { SpacingTypes } from '../../types';
 import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
@@ -24,6 +25,15 @@ const widthToStyleMap: {
     dense: styles.dense,
 };
 
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
+
 export interface Props {
     className?: string;
     active?: boolean;
@@ -34,6 +44,10 @@ export interface Props {
     fullWidthActiveBorder?: boolean;
     width?: WidthTypes;
     inline?: boolean;
+
+    // NOTE: only for horizontal borders
+    extendToSpacing?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Border(props: Props) {
@@ -47,6 +61,8 @@ function Border(props: Props) {
         fullWidthActiveBorder,
         width = 'medium',
         inline,
+        spacing = 'comfortable',
+        extendToSpacing,
     } = props;
 
     return (
@@ -61,6 +77,8 @@ function Border(props: Props) {
                 fullWidthActiveBorder && styles.fullWidthActiveBorder,
                 widthToStyleMap[width],
                 !inline && styles.absolutelyPositioned,
+                spacingToStyleMap[spacing],
+                extendToSpacing && styles.extendToSpacing,
                 className,
             )}
         >

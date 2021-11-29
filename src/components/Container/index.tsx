@@ -45,14 +45,11 @@ export interface Props {
     footerQuickActions?: React.ReactNode;
     headingSize?: HeaderProps['headingSize'];
     headingContainerClassName?: HeaderProps['headingContainerClassName'];
-
     inlineHeadingDescription?: boolean;
-
     footerContentClassName?: string;
     footerActionsContainerClassName?: string;
     footerIconsContainerClassName?: string;
     footerQuickActionsContainerClassName?: string;
-
     autoFocus?: boolean;
     spacing?: SpacingTypes;
     borderBelowHeader?: boolean;
@@ -60,6 +57,7 @@ export interface Props {
     borderBelowHeaderClassName?: string;
     ellipsizeHeading?: boolean;
     withoutExternalPadding?: boolean;
+    visibleOverflow?: boolean;
 }
 
 function Container(props: Props) {
@@ -99,6 +97,7 @@ function Container(props: Props) {
         borderBelowHeaderClassName,
         ellipsizeHeading,
         withoutExternalPadding,
+        visibleOverflow,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -121,6 +120,7 @@ function Container(props: Props) {
                 autoFocus && styles.autoFocused,
                 spacingToStyleMap[spacing],
                 withoutExternalPadding && styles.withoutExternalPadding,
+                visibleOverflow && styles.visibleOverflow,
                 className,
             )}
             ref={elementRef}
@@ -148,6 +148,8 @@ function Container(props: Props) {
             )}
             {borderBelowHeader && (
                 <Border
+                    extendToSpacing
+                    spacing={spacing}
                     className={borderBelowHeaderClassName}
                     width={borderBelowHeaderWidth}
                     inline
