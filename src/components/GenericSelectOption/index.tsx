@@ -21,6 +21,8 @@ export interface Props<P extends ContentBaseProps, OK extends OptionKey, O> {
     onClick: (optionKey: OK, option: O) => void;
     focusedKey?: { key: OK, mouse?: boolean } | undefined;
     onFocus?: (options: { key: OK, mouse?: boolean }) => void;
+    readOnly?: boolean;
+    disabled?: boolean;
 }
 
 function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O>({
@@ -32,6 +34,8 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
     onFocus,
     optionKey,
     focusedKey,
+    readOnly,
+    disabled,
 }: Props<P, OK, O>) {
     const params = contentRendererParam(optionKey, option);
     const {
@@ -87,6 +91,8 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
                 styles.genericSelectOption,
                 optionContainerClassName,
                 containerClassName,
+                disabled && styles.disabled,
+                readOnly && styles.readOnly,
             )}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
@@ -94,6 +100,7 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
             title={title}
             name={optionKey}
             focused={isFocused}
+            disabled={disabled || readOnly}
         >
             {contentRenderer(props)}
         </RawButton>

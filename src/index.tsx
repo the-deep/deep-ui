@@ -94,6 +94,8 @@ export type { Props as LinkProps } from './components/Link';
 export { default as Link } from './components/Link';
 export type { Props as ListProps } from './components/List';
 export { default as List } from './components/List';
+export type { Props as ListSelectionProps } from './components/ListSelection';
+export { default as ListSelection } from './components/ListSelection';
 export type { Props as ListViewProps } from './components/ListView';
 export { default as ListView } from './components/ListView';
 export type { Props as MessageProps } from './components/Message';

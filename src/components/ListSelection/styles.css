@@ -1,0 +1,20 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dui-spacing-small);
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--dui-spacing-small);
+
+        .remove-button {
+            color: var(--dui-color-danger);
+        }
+
+        &:hover {
+            background-color: var(--dui-color-background-hover);
+        }
+    }
+}

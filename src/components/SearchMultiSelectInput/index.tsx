@@ -8,6 +8,7 @@ import {
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
+import ListSelection from '../ListSelection';
 import { rankedSearchOnList } from '../../utils';
 import Option from './Option';
 
@@ -39,6 +40,8 @@ export type Props<
     sortFunction?: (options: O[], search: string, labelSelector: (option: O) => string) => O[];
     onSearchValueChange?: (value: string) => void;
     onShowDropdownChange?: (value: boolean) => void;
+    selectedOptionContainerClassName?: string;
+    selectionListShown?: boolean;
 }, OMISSION> & (
     SelectInputContainerProps<T, K, O, P,
         'name'
@@ -89,6 +92,10 @@ function SearchMultiSelectInput<
         searchOptions: searchOptionsFromProps,
         onSearchValueChange,
         onShowDropdownChange,
+        selectedOptionContainerClassName,
+        selectionListShown,
+        disabled,
+        readOnly,
         ...otherProps
     } = props;
 
@@ -255,30 +262,48 @@ function SearchMultiSelectInput<
     );
 
     return (
-        <SelectInputContainer
-            {...otherProps}
-            name={name}
-            options={realOptions}
-            optionsPending={optionsPending}
-            optionsFiltered={searchInputValue?.length > 0}
-            optionKeySelector={keySelector}
-            optionRenderer={Option}
-            optionRendererParams={optionRendererParams}
-            optionContainerClassName={styles.optionContainer}
-            onOptionClick={handleOptionClick}
-            valueDisplay={valueDisplay}
-            onClear={handleClear}
-            searchText={searchInputValue}
-            onSearchTextChange={handleSearchValueChange}
-            onDropdownShownChange={handleChangeDropdown}
-            focused={focused}
-            onFocusedChange={setFocused}
-            focusedKey={focusedKey}
-            onFocusedKeyChange={setFocusedKey}
-            persistentOptionPopup
-            nonClearable={false}
-            hasValue={isDefined(value) && value.length > 0}
-        />
+        <>
+            <SelectInputContainer
+                {...otherProps}
+                name={name}
+                options={realOptions}
+                optionsPending={optionsPending}
+                optionsFiltered={searchInputValue?.length > 0}
+                optionKeySelector={keySelector}
+                optionRenderer={Option}
+                optionRendererParams={optionRendererParams}
+                optionContainerClassName={styles.optionContainer}
+                onOptionClick={handleOptionClick}
+                valueDisplay={valueDisplay}
+                onClear={handleClear}
+                searchText={searchInputValue}
+                onSearchTextChange={handleSearchValueChange}
+                onDropdownShownChange={handleChangeDropdown}
+                focused={focused}
+                onFocusedChange={setFocused}
+                focusedKey={focusedKey}
+                onFocusedKeyChange={setFocusedKey}
+                persistentOptionPopup
+                nonClearable={false}
+                hasValue={isDefined(value) && value.length > 0}
+                disabled={disabled}
+                readOnly={readOnly}
+            />
+            {selectionListShown && (
+                <ListSelection
+                    className={selectedOptionContainerClassName}
+                    name={name}
+                    value={value}
+                    data={selectedOptions}
+                    keySelector={keySelector}
+                    labelSelector={labelSelector}
+                    // FIXME: need to intercept this and call onOptionsChange
+                    onChange={onChange}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                />
+            )}
+        </>
     );
 }
 
