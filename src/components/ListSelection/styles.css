@@ -9,8 +9,12 @@
         justify-content: space-between;
         gap: var(--dui-spacing-small);
 
-        .button {
+        .remove-button {
             color: var(--dui-color-danger);
+        }
+
+        &:hover {
+            background-color: var(--dui-color-background-hover);
         }
     }
 }

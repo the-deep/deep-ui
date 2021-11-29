@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
-import { IoClose } from 'react-icons/io5';
 import { _cs } from '@togglecorp/fujs';
+import { IoClose } from 'react-icons/io5';
 
 import ListView from '../ListView';
 import Button, { Props as ButtonProps } from '../Button';
@@ -15,6 +15,9 @@ interface RendererProps<D, K extends NameType> {
     labelSelector: (datum: D) => string;
     onRemove: ButtonProps<K>['onClick'];
     itemKey: K;
+    disabled?: boolean;
+    readOnly?: boolean;
+    rendererClassName?: string;
 }
 
 function ListItem<D, K extends NameType>(props: RendererProps<D, K>) {
@@ -23,22 +26,27 @@ function ListItem<D, K extends NameType>(props: RendererProps<D, K>) {
         datum,
         labelSelector,
         onRemove,
+        disabled,
+        readOnly,
+        rendererClassName,
     } = props;
 
     const label = labelSelector(datum);
 
     return (
-        <div className={styles.item}>
+        <div className={_cs(styles.item, rendererClassName)}>
             {label}
-            <div className={styles.button}>
+            {!readOnly && (
                 <Button
+                    className={styles.removeButton}
                     name={itemKey}
                     onClick={onRemove}
-                    variant ="transparent"
+                    variant="transparent"
+                    disabled={disabled}
                 >
                     <IoClose />
                 </Button>
-            </div>
+            )}
         </div>
     );
 }
@@ -50,6 +58,10 @@ export interface Props<D, K extends OptionKey, N extends NameType> {
     labelSelector: (datum: D) => string;
     onChange: (value: K[], name: N) => void;
     value: K[] | undefined;
+    disabled?: boolean;
+    readOnly?: boolean;
+    className?: string;
+    rendererClassName?: string;
 }
 
 function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<D, K, N>) {
@@ -60,6 +72,10 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
         onChange,
         value,
         name,
+        disabled,
+        readOnly,
+        className,
+        rendererClassName,
     } = props;
 
     const handleItemRemove = useCallback(
@@ -67,7 +83,7 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
             const newData = value?.filter((i) => i !== id);
             onChange(newData ?? [], name);
         },
-        [value],
+        [value, onChange, name],
     );
 
     const rendererParams = useCallback(
@@ -76,8 +92,14 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
             itemKey: key,
             labelSelector,
             onRemove: handleItemRemove,
+            disabled,
+            readOnly,
+            rendererClassName,
         }),
         [
+            rendererClassName,
+            disabled,
+            readOnly,
             labelSelector,
             handleItemRemove,
         ],
@@ -92,7 +114,7 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
 
     return (
         <ListView
-            className={styles.list}
+            className={_cs(styles.list, className)}
             data={selectedValues}
             keySelector={keySelector}
             renderer={ListItem}
@@ -100,4 +122,5 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
         />
     );
 }
+
 export default ListSelection;

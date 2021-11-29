@@ -254,7 +254,6 @@ function SearchMultiSelectInput<
         [value, onChange, name, onOptionsChange, keySelector],
     );
 
-
     const handleClear = useCallback(
         () => {
             onChange([], name);
@@ -292,6 +291,7 @@ function SearchMultiSelectInput<
             />
             {selectionListShown && (
                 <ListSelection
+                    className={selectedOptionContainerClassName}
                     name={name}
                     value={value}
                     data={selectedOptions}
@@ -299,6 +299,8 @@ function SearchMultiSelectInput<
                     labelSelector={labelSelector}
                     // FIXME: need to intercept this and call onOptionsChange
                     onChange={onChange}
+                    disabled={disabled}
+                    readOnly={readOnly}
                 />
             )}
         </>
