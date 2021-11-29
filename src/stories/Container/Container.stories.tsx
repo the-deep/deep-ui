@@ -40,6 +40,8 @@ Default.args = {
     headingDescription: 'Created on: Feb2, 2021',
     headerClassName: styles.header,
     headerActionsContainerClassName: styles.headerActions,
+    borderBelowHeader: true,
+    borderBelowHeaderWidth: 'thin',
     headerActions: (
         <Tabs
             value="primary"

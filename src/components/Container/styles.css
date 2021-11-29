@@ -45,6 +45,14 @@
     &.loose-spacing {
         --spacing: var(--dui-spacing-large);
     }
+
+    &.visible-overflow {
+        overflow: visible;
+
+        .content {
+            overflow: visible;
+        }
+    }
 }
 
 @keyframes get-focus {

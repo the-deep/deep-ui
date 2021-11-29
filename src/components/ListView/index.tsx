@@ -7,8 +7,18 @@ import List, {
     GroupCommonProps,
 } from '../List';
 
+import { SpacingTypes } from '../../types';
 import Message, { Props as MessageProps } from '../Message';
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 type MessagePropOmission = 'className' | 'message' | 'compact' | 'icon' | 'empty' | 'pendingContainerClassName';
 export type Props<
@@ -44,6 +54,7 @@ function ListView<
         data,
         compactPendingMessage,
         compactEmptyMessage,
+        spacing = 'comfortable',
         ...otherListProps
     } = props;
 
@@ -53,9 +64,10 @@ function ListView<
         <div
             className={_cs(
                 styles.listView,
-                className,
                 empty && styles.empty,
                 pending && styles.pending,
+                spacingToStyleMap[spacing],
+                className,
             )}
         >
             <Message
@@ -72,6 +84,7 @@ function ListView<
             />
             <List
                 data={data}
+                spacing={spacing}
                 {...otherListProps}
             />
         </div>

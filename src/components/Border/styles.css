@@ -1,6 +1,8 @@
 .border {
     --border-width: var(--dui-width-separator-medium);
+    --spacing: var(--dui-spacing-medium);
 
+    position: relative;
     background-color: var(--dui-color-separator);
     width: 100%;
     height: var(--border-width);
@@ -95,6 +97,43 @@
 
     &.dense {
         --border-width: var(--dui-width-separator-dense);
+    }
+
+    /* NOTE: this assumes border to be in horizontal direction */
+    &.extend-to-spacing {
+        &::before {
+            position: absolute;
+            left: calc(-1 * var(--spacing));
+            background-color: var(--dui-color-separator);
+            width: var(--spacing);
+            height: var(--border-width);
+            content: '';
+        }
+
+        &::after {
+            position: absolute;
+            right: calc(-1 * var(--spacing));
+            background-color: var(--dui-color-separator);
+            width: var(--spacing);
+            height: var(--border-width);
+            content: '';
+        }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }
 

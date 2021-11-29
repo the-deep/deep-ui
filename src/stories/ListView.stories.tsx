@@ -2,6 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
+import Container from '#components/Container';
 import ListView, { Props as ListViewProps } from '../components/ListView';
 import Checkbox from '../components/Checkbox';
 
@@ -30,7 +31,7 @@ const options: OptionFields[] = [
 ];
 
 const Option = ({ children }: OptionProps) => (
-    <div style={{ padding: '10px' }}>
+    <div>
         { children }
     </div>
 );
@@ -69,19 +70,19 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
             />
             <div
                 style={{
-                    width: '320px',
-                    backgroundColor: '#e0e0e0',
-                    padding: '10px',
-                    marginTop: '16px',
+                    width: '350px',
+                    marginTop: '20px',
                 }}
             >
-                <ListView
-                    {...args}
-                    pending={pending}
-                    filtered={filtered}
-                    // eslint-disable-next-line react/destructuring-assignment
-                    data={empty ? [] : args.data}
-                />
+                <Container visibleOverflow>
+                    <ListView
+                        {...args}
+                        pending={pending}
+                        filtered={filtered}
+                        // eslint-disable-next-line react/destructuring-assignment
+                        data={empty ? [] : args.data}
+                    />
+                </Container>
             </div>
         </div>
     );
@@ -93,4 +94,5 @@ Default.args = {
     keySelector: (d) => d.key,
     renderer: Option,
     rendererParams: (_, option) => ({ children: option.label }),
+    borderBetweenItem: true,
 };
