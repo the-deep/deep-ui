@@ -262,34 +262,32 @@ function SearchMultiSelectInput<
     );
 
     return (
-        <>
-            <SelectInputContainer
-                {...otherProps}
-                name={name}
-                options={realOptions}
-                optionsPending={optionsPending}
-                optionsFiltered={searchInputValue?.length > 0}
-                optionKeySelector={keySelector}
-                optionRenderer={Option}
-                optionRendererParams={optionRendererParams}
-                optionContainerClassName={styles.optionContainer}
-                onOptionClick={handleOptionClick}
-                valueDisplay={valueDisplay}
-                onClear={handleClear}
-                searchText={searchInputValue}
-                onSearchTextChange={handleSearchValueChange}
-                onDropdownShownChange={handleChangeDropdown}
-                focused={focused}
-                onFocusedChange={setFocused}
-                focusedKey={focusedKey}
-                onFocusedKeyChange={setFocusedKey}
-                persistentOptionPopup
-                nonClearable={false}
-                hasValue={isDefined(value) && value.length > 0}
-                disabled={disabled}
-                readOnly={readOnly}
-            />
-            {selectionListShown && (
+        <SelectInputContainer
+            {...otherProps}
+            name={name}
+            options={realOptions}
+            optionsPending={optionsPending}
+            optionsFiltered={searchInputValue?.length > 0}
+            optionKeySelector={keySelector}
+            optionRenderer={Option}
+            optionRendererParams={optionRendererParams}
+            optionContainerClassName={styles.optionContainer}
+            onOptionClick={handleOptionClick}
+            valueDisplay={valueDisplay}
+            onClear={handleClear}
+            searchText={searchInputValue}
+            onSearchTextChange={handleSearchValueChange}
+            onDropdownShownChange={handleChangeDropdown}
+            focused={focused}
+            onFocusedChange={setFocused}
+            focusedKey={focusedKey}
+            onFocusedKeyChange={setFocusedKey}
+            persistentOptionPopup
+            nonClearable={false}
+            hasValue={isDefined(value) && value.length > 0}
+            disabled={disabled}
+            readOnly={readOnly}
+            inputDescription={selectionListShown && (
                 <ListSelection
                     className={selectedOptionContainerClassName}
                     name={name}
@@ -303,7 +301,7 @@ function SearchMultiSelectInput<
                     readOnly={readOnly}
                 />
             )}
-        </>
+        />
     );
 }
 

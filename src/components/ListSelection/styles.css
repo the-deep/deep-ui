@@ -9,6 +9,10 @@
         justify-content: space-between;
         gap: var(--dui-spacing-small);
 
+        .label {
+            padding: var(--dui-spacing-small);
+        }
+
         .remove-button {
             color: var(--dui-color-danger);
         }

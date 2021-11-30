@@ -11,6 +11,18 @@ import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
+type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'cover';
+
+const sizeToStyleMap: {
+    [key in SizeTypes]: string;
+} = {
+    extraSmall: styles.extraSmallSize,
+    small: styles.smallSize,
+    medium: styles.mediumSize,
+    large: styles.largeSize,
+    cover: styles.coverSize,
+};
+
 const spacingToStyleMap: {
     [key in SpacingTypes]: string;
 } = {
@@ -48,6 +60,8 @@ interface BaseProps {
     footerIconsContainerClassName?: string;
     footerQuickActionsContainerClassName?: string;
     spacing?: SpacingTypes;
+    size?: SizeTypes;
+    freeHeight?: boolean;
 }
 
 export type Props = BaseProps & ({
@@ -87,7 +101,9 @@ function Modal(props: Props) {
         footerQuickActions,
 
         headingSize,
-        spacing = 'comfortable',
+        spacing = 'loose',
+        size = 'medium',
+        freeHeight,
     } = props;
 
     const shouldHideHeader = props.hideCloseButton && !heading && !headerActions && !headerIcons;
@@ -98,6 +114,8 @@ function Modal(props: Props) {
                 className={_cs(
                     styles.modal,
                     spacingToStyleMap[spacing],
+                    sizeToStyleMap[size],
+                    freeHeight && styles.freeHeight,
                     className,
                 )}
             >

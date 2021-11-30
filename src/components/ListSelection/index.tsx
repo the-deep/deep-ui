@@ -35,7 +35,9 @@ function ListItem<D, K extends NameType>(props: RendererProps<D, K>) {
 
     return (
         <div className={_cs(styles.item, rendererClassName)}>
-            {label}
+            <div className={styles.label}>
+                {label}
+            </div>
             {!readOnly && (
                 <Button
                     className={styles.removeButton}

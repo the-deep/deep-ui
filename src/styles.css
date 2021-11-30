@@ -187,6 +187,21 @@
     --dui-width-max-modal: 96vw;
     --dui-height-max-modal: 96vh;
 
+    --dui-width-modal-extra-small: 360px;
+    --dui-height-modal-extra-small: 240px;
+
+    --dui-width-modal-small: 480px;
+    --dui-height-modal-small: 360px;
+
+    --dui-width-modal-medium: 640px;
+    --dui-height-modal-medium: 560px;
+
+    --dui-width-modal-large: 800px;
+    --dui-height-modal-large: 720px;
+
+    --dui-width-modal-cover: 96vw;
+    --dui-height-modal-cover: 96vh;
+
     --dui-width-min-modal: 20rem;
     --dui-width-scrollbar: 0.5rem;
 
