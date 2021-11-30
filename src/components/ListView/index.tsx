@@ -30,6 +30,7 @@ export type Props<
 > = ListProps<D, P, K, GP, GK> & Omit<MessageProps, MessagePropOmission> & {
     className?: string;
     compactEmptyMessage?: boolean;
+    compactAndVerticalEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
 };
 
@@ -54,6 +55,7 @@ function ListView<
         data,
         compactPendingMessage,
         compactEmptyMessage,
+        compactAndVerticalEmptyMessage,
         spacing = 'comfortable',
         ...otherListProps
     } = props;
@@ -80,7 +82,8 @@ function ListView<
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
                 compactPendingMessage={empty || compactPendingMessage}
-                compactEmptyMessage={compactEmptyMessage}
+                compact={compactEmptyMessage}
+                compactAndVertical={compactAndVerticalEmptyMessage}
             />
             <List
                 data={data}
