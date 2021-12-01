@@ -90,6 +90,8 @@ export type { Props as InputLabelProps } from './components/InputLabel';
 export { default as InputLabel } from './components/InputLabel';
 export { default as KeyFigure } from './components/KeyFigure';
 export type { Props as KeyFigureProps } from './components/KeyFigure';
+export type { Props as KrakenProps } from './components/Kraken';
+export { default as Kraken } from './components/Kraken';
 export type { Props as LinkProps } from './components/Link';
 export { default as Link } from './components/Link';
 export type { Props as ListProps } from './components/List';
