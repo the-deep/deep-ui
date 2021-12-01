@@ -1,7 +1,9 @@
 .list-view {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
+    &.vertical {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing);
+    }
 
     &.empty {
         &.pending {

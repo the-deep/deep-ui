@@ -32,6 +32,7 @@ export type Props<
     compactEmptyMessage?: boolean;
     compactAndVerticalEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
+    direction?: 'horizontal' | 'vertical';
 };
 
 function ListView<
@@ -56,7 +57,8 @@ function ListView<
         compactPendingMessage,
         compactEmptyMessage,
         compactAndVerticalEmptyMessage,
-        spacing = 'comfortable',
+        spacing = 'none',
+        direction = 'horizontal',
         ...otherListProps
     } = props;
 
@@ -69,6 +71,7 @@ function ListView<
                 empty && styles.empty,
                 pending && styles.pending,
                 spacingToStyleMap[spacing],
+                direction === 'vertical' && styles.vertical,
                 className,
             )}
         >
