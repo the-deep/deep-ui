@@ -66,7 +66,7 @@ export interface Props<D, K extends OptionKey, N extends NameType> {
     rendererClassName?: string;
 }
 
-function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<D, K, N>) {
+function DismissibleList<D, K extends OptionKey, N extends NameType>(props: Props<D, K, N>) {
     const {
         data,
         labelSelector,
@@ -125,5 +125,4 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
         />
     );
 }
-
-export default ListSelection;
+export default DismissibleList;
