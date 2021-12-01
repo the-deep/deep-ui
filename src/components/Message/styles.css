@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: var(--dui-spacing-medium);
     text-align: center;
     color: var(--dui-color-text-message);
     gap: var(--dui-spacing-medium);
@@ -13,12 +14,14 @@
     }
 
     &.compact {
-        align-items: initial;
-        flex-direction: row;
-        justify-content: flex-start;
-
         .icon-container {
             font-size: 1em;
+        }
+
+        &:not(.vertical) {
+            align-items: center;
+            flex-direction: row;
+            justify-content: flex-start;
         }
     }
 }

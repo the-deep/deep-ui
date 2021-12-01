@@ -63,14 +63,16 @@ function SegmentInput<
         listContainerClassName,
         keySelector,
         labelSelector,
+        className,
         ...otherProps
     } = props;
     return (
         <RadioInput
+            className={_cs(className, styles.segmentInput)}
             {...otherProps}
             renderer={Segment}
             rendererParams={rendererParams}
-            listContainerClassName={listContainerClassName}
+            listContainerClassName={_cs(listContainerClassName, styles.list)}
             keySelector={keySelector}
             labelSelector={labelSelector}
         />

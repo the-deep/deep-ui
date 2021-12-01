@@ -138,6 +138,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
         onDropdownShownChange,
         totalOptionsCount,
         variant,
+        inputDescription,
         hasValue,
     } = props;
 
@@ -350,6 +351,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                     onKeyDown={handleKeyDown}
                 />
             )}
+            inputDescription={inputDescription}
         >
             <Popup
                 parentRef={containerRef}

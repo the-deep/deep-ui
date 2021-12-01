@@ -22,6 +22,7 @@ export interface Props {
     actionsContainerClassName?: string;
     icons?: React.ReactNode;
     actions?: React.ReactNode;
+    inputDescription?: React.ReactNode;
     input: React.ReactNode;
     label?: React.ReactNode;
     hint?: React.ReactNode;
@@ -51,6 +52,7 @@ function InputContainer(props: Props) {
         input,
         hintContainerClassName,
         errorContainerClassName,
+        inputDescription,
         disabled,
         readOnly,
         hint,
@@ -110,6 +112,7 @@ function InputContainer(props: Props) {
                     {hint}
                 </InputHint>
             )}
+            {inputDescription}
         </div>
     );
 }

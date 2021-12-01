@@ -7,6 +7,7 @@
     .radio-list-container {
         display: flex;
         flex-wrap: wrap;
+        gap: var(--spacing);
     }
 
     &.no-spacing {
@@ -14,15 +15,14 @@
     }
 
     &.compact-spacing {
-        --spacing: var(--dui-spacing-extra-small);
-    }
-
-    &.comfortable-spacing {
         --spacing: var(--dui-spacing-small);
     }
 
-    &.loose-spacing {
+    &.comfortable-spacing {
         --spacing: var(--dui-spacing-medium);
     }
 
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
+    }
 }

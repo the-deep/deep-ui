@@ -84,7 +84,7 @@ function RadioInput<
     ) => RRP = React.useCallback((key: V, item: O) => {
         // NOTE: this is required becase this is advance usecase
         // and the typings
-        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value' | 'disabled' | 'readOnly'> = {
+        const radioProps: Pick<RRP, 'inputName' | 'label' | 'name' | 'onClick' | 'value' | 'disabled' | 'readOnly' | 'spacing'> = {
             inputName: name,
             label: labelSelector(item),
             name: key,
@@ -92,6 +92,7 @@ function RadioInput<
             value: key === value,
             disabled,
             readOnly,
+            spacing,
         };
 
         const combinedProps = {
@@ -103,6 +104,7 @@ function RadioInput<
     }, [
         name,
         labelSelector,
+        spacing,
         value,
         handleRadioClick,
         rendererParamsFromProps,

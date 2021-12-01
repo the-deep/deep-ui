@@ -41,5 +41,33 @@
     &.loose-spacing {
         --spacing: var(--dui-spacing-large);
     }
-}
 
+    &.extra-small-size {
+        width: var(--dui-width-modal-extra-small);
+        height: var(--dui-height-modal-extra-small);
+    }
+
+    &.small-size {
+        width: var(--dui-width-modal-small);
+        height: var(--dui-height-modal-small);
+    }
+
+    &.medium-size {
+        width: var(--dui-width-modal-medium);
+        height: var(--dui-height-modal-medium);
+    }
+
+    &.large-size {
+        width: var(--dui-width-modal-large);
+        height: var(--dui-height-modal-large);
+    }
+
+    &.cover-size {
+        width: var(--dui-width-modal-cover);
+        height: var(--dui-height-modal-cover);
+    }
+
+    &.free-height {
+        height: auto;
+    }
+}

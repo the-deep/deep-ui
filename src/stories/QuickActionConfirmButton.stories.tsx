@@ -33,6 +33,7 @@ CustomProperties.args = {
     heading: 'Exit the Matrix?',
     message: 'The decision is yours, please choose wisely',
     confirmButtonContent: 'Blue pill',
+    onConfirm: () => { console.warn('here'); },
     confirmButtonActions: <IoCheckmarkDone />,
     denyButtonContent: 'Red pill',
     denyButtonActions: <IoClose />,

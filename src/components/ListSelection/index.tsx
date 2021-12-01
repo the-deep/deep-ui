@@ -35,7 +35,9 @@ function ListItem<D, K extends NameType>(props: RendererProps<D, K>) {
 
     return (
         <div className={_cs(styles.item, rendererClassName)}>
-            {label}
+            <div className={styles.label}>
+                {label}
+            </div>
             {!readOnly && (
                 <Button
                     className={styles.removeButton}
@@ -118,6 +120,7 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
             data={selectedValues}
             keySelector={keySelector}
             renderer={ListItem}
+            spacing="none"
             rendererParams={rendererParams}
         />
     );

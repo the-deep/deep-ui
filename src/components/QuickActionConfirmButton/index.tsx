@@ -7,7 +7,7 @@ import useConfirmation, {
 } from '../../hooks/useConfirmation';
 
 // eslint-disable-next-line
-export interface Props<N extends string | number | undefined, T = string> extends QuickActionButtonProps<N>, ConfirmOptions<T> {
+export interface Props<N extends string | number | undefined, T = string> extends Omit<QuickActionButtonProps<N>, 'onClick'>, ConfirmOptions<T> {
     confirmModalProps?: ConfirmExtraProps,
 }
 

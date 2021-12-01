@@ -1,9 +1,11 @@
 .radio {
     --cursor: default;
+    --spacing: var(--dui-spacing-small);
+
     display: flex;
     align-items: center;
     cursor: var(--cursor);
-    padding: var(--dui-spacing-extra-small) calc(var(--dui-spacing-medium) - var(--dui-spacing-extra-small));
+    gap: var(--spacing);
 
     .icon {
         font-size: 1.2em;
@@ -23,11 +25,23 @@
         opacity: var(--dui-opacity-disabled-element);
     }
 
-    &:not(.disabled) {
-        &:hover {
-            background-color: var(--dui-color-background-hover);
-        }
+    &.no-spacing {
+        --spacing: 0;
+    }
 
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-extra-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &:not(.disabled) {
         &:not(.read-only) {
             --cursor: pointer;
         }

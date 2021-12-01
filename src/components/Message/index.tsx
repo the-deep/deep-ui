@@ -1,10 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-import {
-    IoSearch,
-    IoEarth,
-} from 'react-icons/io5';
 
+import Kraken, { SizeTypes as KrakenSizeTypes } from '../Kraken';
 import { genericMemo } from '../../utils';
 import PendingMessage from '../PendingMessage';
 
@@ -24,6 +21,7 @@ export interface Props {
     filteredEmptyMessage?: React.ReactNode;
     pendingContainerClassName?: string;
     compact?: boolean;
+    compactAndVertical?: boolean;
     compactPendingMessage?: boolean;
     compactEmptyMessage?: boolean;
 }
@@ -35,8 +33,8 @@ function Message(props: Props) {
         empty,
         filtered,
         icon: iconFromProps,
-        emptyIcon = <IoEarth />,
-        filteredEmptyIcon = <IoSearch />,
+        emptyIcon,
+        filteredEmptyIcon,
         message: messageFromProps,
         pendingMessage,
         emptyMessage = 'No data available',
@@ -45,6 +43,7 @@ function Message(props: Props) {
         compact,
         compactPendingMessage,
         compactEmptyMessage,
+        compactAndVertical,
     } = props;
 
     if (pending) {
@@ -61,11 +60,27 @@ function Message(props: Props) {
     let message: React.ReactNode = messageFromProps;
 
     if (empty) {
+        let size: KrakenSizeTypes = 'medium';
+        if (compact) {
+            size = 'extraSmall';
+        } else if (compactAndVertical) {
+            size = 'small';
+        }
         if (filtered) {
-            icon = filteredEmptyIcon;
+            icon = filteredEmptyIcon ?? (
+                <Kraken
+                    variant="search"
+                    size={size}
+                />
+            );
             message = filteredEmptyMessage;
         } else {
-            icon = emptyIcon;
+            icon = emptyIcon ?? (
+                <Kraken
+                    variant="ballon"
+                    size={size}
+                />
+            );
             message = emptyMessage;
         }
     }
@@ -79,7 +94,8 @@ function Message(props: Props) {
             className={_cs(
                 className,
                 styles.message,
-                (compact || compactEmptyMessage) && styles.compact,
+                (compactAndVertical || compact || compactEmptyMessage) && styles.compact,
+                compactAndVertical && styles.vertical,
             )}
         >
             <div className={styles.iconContainer}>

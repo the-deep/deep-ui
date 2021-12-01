@@ -30,12 +30,16 @@ const labelSelector = (d: Option) => d.name;
 
 // eslint-disable-next-line max-len
 const Template: Story<ListSelectionProps<Option, string, string>> = (props) => {
-    const [value, setValue] = useState<string[]>(options.map((v) => v.id));
+    const {
+        data,
+    } = props;
+
+    const [value, setValue] = useState<string[] | undefined>(data?.map((v) => v.id));
 
     return (
         <ListSelection
             {...props}
-            data={options}
+            data={data}
             keySelector={keySelector}
             labelSelector={labelSelector}
             value={value}
@@ -51,4 +55,5 @@ NoValue.args = {
 
 export const Default = Template.bind({});
 Default.args = {
+    data: options,
 };

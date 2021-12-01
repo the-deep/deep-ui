@@ -129,6 +129,7 @@ function DateInput<T extends NameType>(props: Props<T>) {
                                         variant="action"
                                         onClick={handleClearButtonClick}
                                         disabled={disabled}
+                                        title="Clear"
                                     >
                                         <IoClose />
                                     </Button>
@@ -137,6 +138,7 @@ function DateInput<T extends NameType>(props: Props<T>) {
                                     name={undefined}
                                     variant="action"
                                     onClick={toggleShowCalendar}
+                                    title="Set current date"
                                     disabled={disabled}
                                 >
                                     <IoCalendarOutline />

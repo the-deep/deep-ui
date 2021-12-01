@@ -294,6 +294,7 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
                                         variant="action"
                                         onClick={handleClearButtonClick}
                                         disabled={disabled}
+                                        title="Clear"
                                     >
                                         <IoClose />
                                     </Button>
@@ -303,6 +304,7 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
                                     variant="action"
                                     onClick={toggleShowCalendar}
                                     disabled={disabled}
+                                    title="Show calendar"
                                 >
                                     <IoCalendarOutline />
                                 </Button>
