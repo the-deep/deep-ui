@@ -60,9 +60,9 @@ function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacem
         }
 
         if (verticalPosition === 'top') {
-            placement.bottom = `${window.innerHeight - y + 10}px`;
+            placement.bottom = `${window.innerHeight - y + 20}px`;
         } else if (verticalPosition === 'bottom') {
-            placement.top = `${y + height + 10}px`;
+            placement.top = `${y + height + 20}px`;
         }
 
         contentWidth = `${width}px`;
