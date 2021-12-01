@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import ListSelection, {
-    Props as ListSelectionProps,
-} from '#components/ListSelection';
+import DismissibleList, {
+    Props as DismissibleListProps,
+} from '#components/DismissibleList';
 
 export default {
-    title: 'Input/ListSelection',
-    component: ListSelection,
+    title: 'Input/DismissibleList',
+    component: DismissibleList,
     argTypes: {},
 };
 
@@ -28,16 +28,15 @@ const keySelector = (d: Option) => d.id;
 
 const labelSelector = (d: Option) => d.name;
 
-// eslint-disable-next-line max-len
-const Template: Story<ListSelectionProps<Option, string, string>> = (props) => {
+const Template: Story<DismissibleListProps<Option, string, string>> = (props) => {
     const {
         data,
     } = props;
 
-    const [value, setValue] = useState<string[] | undefined>(data?.map((v) => v.id));
+    const [value, setValue] = useState<string[]>(options.map((v) => v.id));
 
     return (
-        <ListSelection
+        <DismissibleList
             {...props}
             data={data}
             keySelector={keySelector}

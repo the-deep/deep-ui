@@ -8,7 +8,7 @@ import {
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
-import ListSelection from '../ListSelection';
+import DismissibleList from '../DismissibleList';
 import { rankedSearchOnList } from '../../utils';
 import Option from './Option';
 
@@ -288,9 +288,9 @@ function SearchMultiSelectInput<
             disabled={disabled}
             readOnly={readOnly}
             inputDescription={selectionListShown && (
-                <ListSelection
-                    className={selectedOptionContainerClassName}
+                <DismissibleList
                     name={name}
+                    className={selectedOptionContainerClassName}
                     value={value}
                     data={selectedOptions}
                     keySelector={keySelector}
