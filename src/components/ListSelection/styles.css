@@ -1,7 +1,6 @@
 .list {
     display: flex;
     flex-direction: column;
-    gap: var(--dui-spacing-small);
 
     .item {
         display: flex;
@@ -10,10 +9,11 @@
         gap: var(--dui-spacing-small);
 
         .label {
-            padding: var(--dui-spacing-small);
+            padding: var(--dui-spacing-extra-small);
         }
 
         .remove-button {
+            padding: var(--dui-spacing-extra-small);
             color: var(--dui-color-danger);
         }
 

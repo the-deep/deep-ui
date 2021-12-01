@@ -81,6 +81,7 @@ function ScaleInput<
         keySelector,
         labelSelector,
         colorSelector,
+        className,
         ...otherProps
     } = props;
 
@@ -91,7 +92,9 @@ function ScaleInput<
     return (
         <RadioInput<N, O, V, ExtendedProps<V>>
             {...otherProps}
+            className={_cs(className, styles.scaleInput)}
             renderer={Scale}
+            spacing="compact"
             rendererParams={finalRendererParams}
             listContainerClassName={_cs(
                 listContainerClassName,

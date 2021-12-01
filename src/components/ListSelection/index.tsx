@@ -120,6 +120,7 @@ function ListSelection<D, K extends OptionKey, N extends NameType>(props: Props<
             data={selectedValues}
             keySelector={keySelector}
             renderer={ListItem}
+            spacing="none"
             rendererParams={rendererParams}
         />
     );

@@ -11,6 +11,10 @@
 
     --spacing: var(--dui-spacing-medium);
 
+    &.no-spacing {
+        --spacing: 0;
+    }
+
     &.compact-spacing {
         --spacing: var(--dui-spacing-small);
     }

@@ -8,9 +8,19 @@ import {
     IoRadioButtonOff,
 } from 'react-icons/io5';
 
+import { SpacingTypes } from '../../../types';
 import InputElementFragments from '../../InputElementFragments';
 
 import styles from './styles.css';
+
+const spacingToStyleMap: {
+    [key in SpacingTypes]: string;
+} = {
+    none: styles.noSpacing,
+    compact: styles.compactSpacing,
+    comfortable: styles.comfortableSpacing,
+    loose: styles.looseSpacing,
+};
 
 export interface Props<N> {
     className?: string;
@@ -21,6 +31,7 @@ export interface Props<N> {
     value: boolean;
     disabled?: boolean;
     readOnly?: boolean;
+    spacing?: SpacingTypes;
 }
 
 function Radio<N extends string | number>(props: Props<N>) {
@@ -33,6 +44,7 @@ function Radio<N extends string | number>(props: Props<N>) {
         onClick,
         disabled,
         readOnly,
+        spacing = 'comfortable',
     } = props;
 
     const handleClick = React.useCallback(() => {
@@ -50,6 +62,7 @@ function Radio<N extends string | number>(props: Props<N>) {
                 className,
                 disabled && styles.disabled,
                 readOnly && styles.readOnly,
+                spacingToStyleMap[spacing],
             )}
         >
             <InputElementFragments
