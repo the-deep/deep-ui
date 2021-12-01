@@ -6,6 +6,7 @@ import filesize from 'rollup-plugin-filesize';
 // import autoprefixer from 'autoprefixer';
 import { eslint } from 'rollup-plugin-eslint';
 import stylelint from 'rollup-plugin-stylelint';
+import image from '@rollup/plugin-image';
 
 import postcssPresetEnv from 'postcss-preset-env';
 import postcssNested from 'postcss-nested';
@@ -45,6 +46,7 @@ const PLUGINS = [
     }),
     commonjs(),
     filesize(),
+    image(),
 ];
 
 const OUTPUT_DATA = [

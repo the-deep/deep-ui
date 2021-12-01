@@ -73,6 +73,7 @@
         "@babel/preset-typescript": "^7.10.4",
         "@rollup/plugin-babel": "^5.2.0",
         "@rollup/plugin-commonjs": "^15.0.0",
+        "@rollup/plugin-image": "^2.1.1",
         "@rollup/plugin-node-resolve": "^9.0.0",
         "@storybook/addon-a11y": "^6.0.21",
         "@storybook/addon-actions": "^6.0.21",
