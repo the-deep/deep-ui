@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 
-import { Props as ContainerProps } from '../Container';
-import ControlledExpandableContainer from '../ControlledExpandableContainer';
+import ControlledExpandableContainer, {
+    Props as ControlledExpandableContainerProps,
+} from '../ControlledExpandableContainer';
 
-export interface Props extends ContainerProps {
-    // NOTE: Mount will mount the child even if its not shown
-    alwaysMountContent?: boolean;
-    disabled?: boolean;
-    expansionButtonClassName?: string;
-    expansionTriggerArea?: 'header' | 'arrow';
-
+export interface Props extends Omit<ControlledExpandableContainerProps<undefined>, 'expanded' | 'onExpansionChange' | 'name'>{
     defaultVisibility?: boolean;
 }
 

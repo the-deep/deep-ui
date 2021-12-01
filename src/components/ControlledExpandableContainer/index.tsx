@@ -22,7 +22,7 @@ const spacingToStyleMap: {
 
 export interface Props<T> extends ContainerProps {
     // NOTE: content will always be mounted if its not shown (in collapsed state)
-    contentAlwaysMounted?: boolean;
+    alwaysMountedContent?: boolean;
     disabled?: boolean;
     expansionButtonClassName?: string;
     expansionTriggerArea?: 'header' | 'arrow';
@@ -39,7 +39,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         heading,
         children,
         headingDescription,
-        contentAlwaysMounted,
+        alwaysMountedContent,
         headerActions,
         headingContainerClassName,
         headingClassName,
@@ -58,7 +58,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         ...otherProps
     } = props;
 
-    const mountContent = contentAlwaysMounted || expanded;
+    const mountContent = alwaysMountedContent || expanded;
 
     const toggleContentVisibility = useCallback(
         () => {

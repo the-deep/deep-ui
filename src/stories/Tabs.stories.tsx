@@ -22,7 +22,7 @@ const Template: Story<TabsProps<string>> = (args) => {
 
     const children = (
         <>
-            <TabList>
+            <TabList ellipsize>
                 <Tab name="tab-one">
                     Home
                 </Tab>

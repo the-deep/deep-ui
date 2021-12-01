@@ -1,3 +1,4 @@
 .tab-list {
     display: flex;
+    overflow: auto;
 }

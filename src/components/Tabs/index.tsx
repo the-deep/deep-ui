@@ -37,6 +37,8 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
         disabled,
     } = props;
 
+    const [ellipsize, setEllipsize] = React.useState(false);
+
     // eslint-disable-next-line react/destructuring-assignment
     const defaultHash = props.useHash && isFalsyString(getHashFromBrowser())
         // eslint-disable-next-line react/destructuring-assignment
@@ -60,6 +62,8 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
                 disabled,
                 hash,
                 useHash: props.useHash,
+                ellipsize,
+                setEllipsize,
             };
         }
 
@@ -70,9 +74,11 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
             disabled,
             activeTab: value,
             setActiveTab: onChange as (key: TabKey | undefined) => void | undefined,
+            ellipsize,
+            setEllipsize,
         };
         // eslint-disable-next-line react/destructuring-assignment
-    }, [props.useHash, value, onChange, variant, disabled, hash]);
+    }, [props.useHash, value, onChange, variant, disabled, hash, ellipsize]);
 
     return (
         <TabContext.Provider value={contextValue}>
