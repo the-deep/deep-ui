@@ -114,6 +114,8 @@ function useConfirmation<T = string>(options?: Options<T>, extraProps?: ExtraPro
             <Modal
                 {...modalProps}
                 heading={heading}
+                freeHeight
+                size="small"
                 hideCloseButton
                 // onCloseButtonClick={handleCancelButtonClick}
                 footerActions={(

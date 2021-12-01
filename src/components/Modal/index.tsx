@@ -11,11 +11,12 @@ import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
 
-type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'cover';
+type SizeTypes = 'free' | 'extraSmall' | 'small' | 'medium' | 'large' | 'cover';
 
 const sizeToStyleMap: {
     [key in SizeTypes]: string;
 } = {
+    free: styles.freeSize,
     extraSmall: styles.extraSmallSize,
     small: styles.smallSize,
     medium: styles.mediumSize,
