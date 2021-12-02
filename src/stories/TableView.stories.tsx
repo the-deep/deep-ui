@@ -117,6 +117,8 @@ const Template: Story<
                     // eslint-disable-next-line react/destructuring-assignment
                     data={empty ? [] : args.data}
                     columns={columns}
+                    messageShown
+                    messageIconShown
                 />
             </div>
         </div>

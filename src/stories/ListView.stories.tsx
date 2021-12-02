@@ -79,6 +79,10 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                         {...args}
                         pending={pending}
                         filtered={filtered}
+                        direction="vertical"
+                        spacing="comfortable"
+                        messageShown
+                        messageIconShown
                         // eslint-disable-next-line react/destructuring-assignment
                         data={empty ? [] : args.data}
                     />
