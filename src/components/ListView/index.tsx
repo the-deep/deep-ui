@@ -20,7 +20,8 @@ const spacingToStyleMap: {
     loose: styles.looseSpacing,
 };
 
-type MessagePropOmission = 'className' | 'message' | 'compact' | 'icon' | 'empty' | 'pendingContainerClassName';
+type MessagePropOmission = 'className' | 'message'
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden';
 export type Props<
     D,
     P,
@@ -33,6 +34,8 @@ export type Props<
     compactAndVerticalEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
     direction?: 'horizontal' | 'vertical';
+    messageShown?: boolean;
+    messageIconShown?: boolean;
 };
 
 function ListView<
@@ -59,6 +62,8 @@ function ListView<
         compactAndVerticalEmptyMessage,
         spacing = 'none',
         direction = 'horizontal',
+        messageShown = false,
+        messageIconShown = false,
         ...otherListProps
     } = props;
 
@@ -87,6 +92,8 @@ function ListView<
                 compactPendingMessage={empty || compactPendingMessage}
                 compact={compactEmptyMessage}
                 compactAndVertical={compactAndVerticalEmptyMessage}
+                messageHidden={!messageShown}
+                messageIconHidden={!messageIconShown}
             />
             <List
                 data={data}
