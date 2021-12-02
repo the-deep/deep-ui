@@ -36,6 +36,27 @@ const sizeToStyleMap: {
     extraLarge: styles.extraLarge,
 };
 
+const variantToSvgMap: {
+    [key in KrakenTypes]: string;
+} = {
+    ballon: ballonSvg,
+    exercise: exerciseSvg,
+    experiment: experimentSvg,
+    search: searchSvg,
+    skydive: skydiveSvg,
+    work: workSvg,
+    coffee: coffeeSvg,
+    fat: fatSvg,
+    move: moveSvg,
+    read: readSvg,
+    sing: singSvg,
+    skate: skateSvg,
+    sleep: sleepSvg,
+    standby: standbySvg,
+    whip: whipSvg,
+    hi: hiSvg,
+};
+
 export interface Props {
     className?: string;
     variant?: KrakenTypes;
@@ -51,57 +72,6 @@ function Kraken(props: Props) {
         blackAndWhite,
     } = props;
 
-    let src = hiSvg;
-    switch (variant) {
-        case 'ballon':
-            src = ballonSvg;
-            break;
-        case 'exercise':
-            src = exerciseSvg;
-            break;
-        case 'experiment':
-            src = experimentSvg;
-            break;
-        case 'search':
-            src = searchSvg;
-            break;
-        case 'skydive':
-            src = skydiveSvg;
-            break;
-        case 'work':
-            src = workSvg;
-            break;
-        case 'coffee':
-            src = coffeeSvg;
-            break;
-        case 'fat':
-            src = fatSvg;
-            break;
-        case 'move':
-            src = moveSvg;
-            break;
-        case 'read':
-            src = readSvg;
-            break;
-        case 'sing':
-            src = singSvg;
-            break;
-        case 'skate':
-            src = skateSvg;
-            break;
-        case 'sleep':
-            src = sleepSvg;
-            break;
-        case 'standby':
-            src = standbySvg;
-            break;
-        case 'whip':
-            src = whipSvg;
-            break;
-        default:
-            src = hiSvg;
-    }
-
     return (
         <Svg
             className={_cs(
@@ -110,7 +80,7 @@ function Kraken(props: Props) {
                 sizeToStyleMap[size],
                 blackAndWhite && styles.blackAndWhite,
             )}
-            src={src}
+            src={variantToSvgMap[variant]}
         />
     );
 }
