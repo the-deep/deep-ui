@@ -23,3 +23,16 @@
         width: var(--dui-width-separator-thin);
     }
 }
+
+.virtualized-list-view {
+    margin-top: var(--dui-spacing-super-large);
+    border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
+    padding: var(--dui-spacing-medium);
+    width: 20rem;
+    height: 20rem;
+
+    .virtualized-list-item {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,8 @@
+.virtualized-list-view {
+    position: relative;
+    overflow: auto;
+
+    .dummy {
+        visibility: hidden;
+    }
+}

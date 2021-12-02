@@ -195,6 +195,8 @@ export type { Props as TimeRangeOutputProps } from './components/TimeRangeOutput
 export { default as TimeRangeOutput } from './components/TimeRangeOutput';
 export type { Props as TooltipProps } from './components/Tooltip';
 export { default as Tooltip } from './components/Tooltip';
+export type { Props as VirtualizedListViewProps } from './components/VirtualizedListView';
+export { default as VirtualizedListView } from './components/VirtualizedListView';
 export { default as useAlert } from './hooks/useAlert';
 export { default as useBlurEffect } from './hooks/useBlurEffect';
 export { default as useBooleanState } from './hooks/useBooleanState';
