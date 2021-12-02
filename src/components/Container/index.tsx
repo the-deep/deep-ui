@@ -47,6 +47,7 @@ export interface Props {
     headingContainerClassName?: HeaderProps['headingContainerClassName'];
     inlineHeadingDescription?: boolean;
     footerContentClassName?: string;
+    headingSectionClassName?: string;
     footerActionsContainerClassName?: string;
     footerIconsContainerClassName?: string;
     footerQuickActionsContainerClassName?: string;
@@ -81,6 +82,7 @@ function Container(props: Props) {
         footerClassName,
         footerIconsContainerClassName,
         footerActionsContainerClassName,
+        headingSectionClassName,
         footerContentClassName,
         footerQuickActionsContainerClassName,
         containerElementProps,
@@ -136,6 +138,7 @@ function Container(props: Props) {
                     iconsContainerClassName={headerIconsContainerClassName}
                     actionsContainerClassName={headerActionsContainerClassName}
                     descriptionClassName={_cs(styles.headerDescription, headerDescriptionClassName)}
+                    headingSectionClassName={headingSectionClassName}
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
                     headingContainerClassName={headingContainerClassName}
