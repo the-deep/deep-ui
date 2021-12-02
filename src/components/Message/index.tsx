@@ -102,12 +102,12 @@ function Message(props: Props) {
                 compactAndVertical && styles.vertical,
             )}
         >
-            {!messageHidden && (
+            {!messageIconHidden && (
                 <div className={styles.iconContainer}>
                     {icon}
                 </div>
             )}
-            {!messageIconHidden && (
+            {!messageHidden && (
                 <div className={styles.content}>
                     { message }
                 </div>

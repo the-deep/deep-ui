@@ -9,10 +9,22 @@ import exerciseSvg from './images/exercise.svg';
 import experimentSvg from './images/experiment.svg';
 import searchSvg from './images/search.svg';
 import skydiveSvg from './images/skydive.svg';
+import coffeeSvg from './images/coffee.svg';
+import fatSvg from './images/fat.svg';
+import moveSvg from './images/move.svg';
+import readSvg from './images/read.svg';
+import singSvg from './images/sing.svg';
+import skateSvg from './images/skate.svg';
+import sleepSvg from './images/sleep.svg';
+import standbySvg from './images/standby.svg';
+import whipSvg from './images/whip.svg';
 
 import styles from './styles.css';
 
 export type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
+export type KrakenTypes = 'ballon' | 'exercise'
+| 'experiment' | 'hi' | 'search' | 'skydive' | 'work' | 'coffee'
+| 'fat' | 'move' | 'read' | 'sing' | 'skate' | 'sleep' | 'standby' | 'whip';
 
 const sizeToStyleMap: {
     [key in SizeTypes]: string;
@@ -26,7 +38,7 @@ const sizeToStyleMap: {
 
 export interface Props {
     className?: string;
-    variant?: 'ballon' | 'exercise' | 'experiment' | 'hi' | 'search' | 'skydive' | 'work';
+    variant?: KrakenTypes;
     size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
     blackAndWhite?: boolean;
 }
@@ -58,6 +70,33 @@ function Kraken(props: Props) {
             break;
         case 'work':
             src = workSvg;
+            break;
+        case 'coffee':
+            src = coffeeSvg;
+            break;
+        case 'fat':
+            src = fatSvg;
+            break;
+        case 'move':
+            src = moveSvg;
+            break;
+        case 'read':
+            src = readSvg;
+            break;
+        case 'sing':
+            src = singSvg;
+            break;
+        case 'skate':
+            src = skateSvg;
+            break;
+        case 'sleep':
+            src = sleepSvg;
+            break;
+        case 'standby':
+            src = standbySvg;
+            break;
+        case 'whip':
+            src = whipSvg;
             break;
         default:
             src = hiSvg;
