@@ -95,8 +95,8 @@ const Template: Story<VirtualizedListViewProps<OptionFields, OptionProps, string
                 onChange={handleCheckboxChange}
             />
             <VirtualizedListView
-                className={styles.virtualizedListView}
                 {...args}
+                className={styles.virtualizedListView}
                 pending={pending}
                 filtered={filtered}
                 // eslint-disable-next-line react/destructuring-assignment
@@ -112,5 +112,6 @@ Default.args = {
     keySelector: (d) => d.key,
     renderer: Option,
     rendererParams: (_, option) => ({ children: option.label }),
+    scrollToItemKey: '10',
     itemHeight: ITEM_HEIGHT,
 };

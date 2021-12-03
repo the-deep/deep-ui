@@ -13,6 +13,7 @@ export type Props<D, P, K extends OptionKey> = {
     itemHeight: number;
     elementRef?: React.RefObject<HTMLDivElement>;
     buffer?: number;
+    scrollToItemKey?: K;
 } & ListViewProps<D, P, K, GroupCommonProps, OptionKey>
 
 function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
@@ -23,13 +24,22 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         data = [],
         buffer = 1,
         pending,
+        scrollToItemKey,
+        keySelector,
         ...otherProps
     } = props;
 
-    const [scrollOffset, setScrollOffset] = React.useState<number>(0);
+    const [scrollOffset, setScrollOffset] = React.useState<number | undefined>(undefined);
     const internalRef = React.useRef<HTMLDivElement>(null);
     const elementRef = elementRefFromProps ?? internalRef;
     const idleCallbackRef = React.useRef<number | undefined>();
+
+    React.useEffect(() => {
+        const itemIndex = data.findIndex((d, i) => (keySelector(d, i) === scrollToItemKey));
+        if (elementRef.current) {
+            elementRef.current.scrollTop = itemIndex * itemHeight;
+        }
+    }, [scrollToItemKey, data, keySelector, itemHeight, elementRef]);
 
     const setScrollOffsetFromElement = React.useCallback(() => {
         if (idleCallbackRef.current) {
@@ -48,15 +58,20 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         topDummyHeight,
         bottomDummyHeight,
     ] = React.useMemo(() => {
-        if (!elementRef.current || !data || data.length === 0 || data.length <= 2 * buffer) {
+        if (
+            !elementRef.current
+            || !data
+            || data.length === 0
+            || data.length <= (2 * buffer)
+        ) {
             return [data, 0, 0];
         }
 
         const containerHeight = elementRef.current.getBoundingClientRect().height;
-        const startIndex = Math.max(0, Math.floor(scrollOffset / itemHeight) - buffer);
+        const startIndex = Math.max(0, (Math.floor((scrollOffset ?? 0) / itemHeight) - buffer));
         const endIndex = Math.min(
             data.length,
-            startIndex + Math.ceil(containerHeight / itemHeight) + buffer,
+            startIndex + Math.ceil(containerHeight / itemHeight) + 2 * buffer,
         );
 
         return [
@@ -66,7 +81,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         ];
     }, [data, itemHeight, scrollOffset, elementRef, buffer]);
 
-    const handleScroll = React.useCallback((e: Event) => {
+    const handleScroll = React.useCallback((e: React.UIEvent<HTMLDivElement>) => {
         if (e.target !== elementRef.current) {
             return;
         }
@@ -74,33 +89,30 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         setScrollOffsetFromElement();
     }, [setScrollOffsetFromElement, elementRef]);
 
-    React.useEffect(() => {
-        setScrollOffsetFromElement();
-        window.addEventListener('scroll', handleScroll);
+    React.useEffect(setScrollOffsetFromElement, [setScrollOffsetFromElement]);
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [setScrollOffsetFromElement, handleScroll]);
+    const totalHeight = itemHeight * data.length;
+    const listViewHeight = totalHeight - topDummyHeight - bottomDummyHeight;
 
     return (
         <div
             ref={elementRef}
             className={_cs(styles.virtualizedListView, className)}
+            onScroll={handleScroll}
         >
-            <div
-                className={styles.dummy}
-                style={{ height: `${topDummyHeight}px` }}
-            />
-            <ListView
-                data={renderData}
-                pending={pending}
-                {...otherProps}
-            />
-            <div
-                className={styles.dummy}
-                style={{ height: `${bottomDummyHeight}px` }}
-            />
+            <div style={{ height: `${totalHeight}px` }}>
+                <ListView
+                    {...otherProps}
+                    data={renderData}
+                    pending={pending}
+                    direction="vertical"
+                    keySelector={keySelector}
+                    style={{
+                        height: `${listViewHeight}px`,
+                        transform: `translateY(${topDummyHeight}px)`,
+                    }}
+                />
+            </div>
         </div>
     );
 }

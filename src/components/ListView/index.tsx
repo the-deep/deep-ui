@@ -36,6 +36,7 @@ export type Props<
     direction?: 'horizontal' | 'vertical';
     messageShown?: boolean;
     messageIconShown?: boolean;
+    style?: React.CSSProperties,
 };
 
 function ListView<
@@ -64,6 +65,7 @@ function ListView<
         direction = 'horizontal',
         messageShown = false,
         messageIconShown = false,
+        style,
         ...otherListProps
     } = props;
 
@@ -79,6 +81,7 @@ function ListView<
                 direction === 'vertical' && styles.vertical,
                 className,
             )}
+            style={style}
         >
             <Message
                 empty={empty}
