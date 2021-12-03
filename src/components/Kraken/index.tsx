@@ -9,10 +9,22 @@ import exerciseSvg from './images/exercise.svg';
 import experimentSvg from './images/experiment.svg';
 import searchSvg from './images/search.svg';
 import skydiveSvg from './images/skydive.svg';
+import coffeeSvg from './images/coffee.svg';
+import fatSvg from './images/fat.svg';
+import moveSvg from './images/move.svg';
+import readSvg from './images/read.svg';
+import singSvg from './images/sing.svg';
+import skateSvg from './images/skate.svg';
+import sleepSvg from './images/sleep.svg';
+import standbySvg from './images/standby.svg';
+import whipSvg from './images/whip.svg';
 
 import styles from './styles.css';
 
 export type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
+export type KrakenTypes = 'ballon' | 'exercise'
+| 'experiment' | 'hi' | 'search' | 'skydive' | 'work' | 'coffee'
+| 'fat' | 'move' | 'read' | 'sing' | 'skate' | 'sleep' | 'standby' | 'whip';
 
 const sizeToStyleMap: {
     [key in SizeTypes]: string;
@@ -24,9 +36,30 @@ const sizeToStyleMap: {
     extraLarge: styles.extraLarge,
 };
 
+const variantToSvgMap: {
+    [key in KrakenTypes]: string;
+} = {
+    ballon: ballonSvg,
+    exercise: exerciseSvg,
+    experiment: experimentSvg,
+    search: searchSvg,
+    skydive: skydiveSvg,
+    work: workSvg,
+    coffee: coffeeSvg,
+    fat: fatSvg,
+    move: moveSvg,
+    read: readSvg,
+    sing: singSvg,
+    skate: skateSvg,
+    sleep: sleepSvg,
+    standby: standbySvg,
+    whip: whipSvg,
+    hi: hiSvg,
+};
+
 export interface Props {
     className?: string;
-    variant?: 'ballon' | 'exercise' | 'experiment' | 'hi' | 'search' | 'skydive' | 'work';
+    variant?: KrakenTypes;
     size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
     blackAndWhite?: boolean;
 }
@@ -39,30 +72,6 @@ function Kraken(props: Props) {
         blackAndWhite,
     } = props;
 
-    let src = hiSvg;
-    switch (variant) {
-        case 'ballon':
-            src = ballonSvg;
-            break;
-        case 'exercise':
-            src = exerciseSvg;
-            break;
-        case 'experiment':
-            src = experimentSvg;
-            break;
-        case 'search':
-            src = searchSvg;
-            break;
-        case 'skydive':
-            src = skydiveSvg;
-            break;
-        case 'work':
-            src = workSvg;
-            break;
-        default:
-            src = hiSvg;
-    }
-
     return (
         <Svg
             className={_cs(
@@ -71,7 +80,7 @@ function Kraken(props: Props) {
                 sizeToStyleMap[size],
                 blackAndWhite && styles.blackAndWhite,
             )}
-            src={src}
+            src={variantToSvgMap[variant]}
         />
     );
 }

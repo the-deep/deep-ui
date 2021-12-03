@@ -24,6 +24,8 @@ export interface Props {
     compactAndVertical?: boolean;
     compactPendingMessage?: boolean;
     compactEmptyMessage?: boolean;
+    messageHidden?: boolean;
+    messageIconHidden?: boolean;
 }
 
 function Message(props: Props) {
@@ -44,6 +46,8 @@ function Message(props: Props) {
         compactPendingMessage,
         compactEmptyMessage,
         compactAndVertical,
+        messageHidden = false,
+        messageIconHidden = false,
     } = props;
 
     if (pending) {
@@ -98,12 +102,16 @@ function Message(props: Props) {
                 compactAndVertical && styles.vertical,
             )}
         >
-            <div className={styles.iconContainer}>
-                {icon}
-            </div>
-            <div className={styles.content}>
-                { message }
-            </div>
+            {!messageIconHidden && (
+                <div className={styles.iconContainer}>
+                    {icon}
+                </div>
+            )}
+            {!messageHidden && (
+                <div className={styles.content}>
+                    { message }
+                </div>
+            )}
         </div>
     );
 }
