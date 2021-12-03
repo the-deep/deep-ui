@@ -121,6 +121,8 @@ function DismissibleList<D, K extends OptionKey, N extends NameType>(props: Prop
             keySelector={keySelector}
             renderer={ListItem}
             spacing="none"
+            filtered={false}
+            pending={false}
             rendererParams={rendererParams}
         />
     );

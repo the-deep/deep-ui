@@ -7,7 +7,7 @@
 
     &.empty {
         &.pending {
-            min-height: calc(1em + var(--dui-spacing-medium) * 2);
+            min-height: calc(2em + var(--dui-spacing-medium) * 2);
         }
     }
 
