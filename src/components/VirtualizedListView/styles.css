@@ -1,0 +1,4 @@
+.virtualized-list-view {
+    position: relative;
+    overflow: auto;
+}
