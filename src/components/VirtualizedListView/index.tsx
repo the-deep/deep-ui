@@ -58,9 +58,12 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         topDummyHeight,
         bottomDummyHeight,
     ] = React.useMemo(() => {
+        if (!elementRef.current) {
+            return [[], 0, 0];
+        }
+
         if (
-            !elementRef.current
-            || !data
+            !data
             || data.length === 0
             || data.length <= (2 * buffer)
         ) {
@@ -75,7 +78,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         );
 
         return [
-            [...data].slice(startIndex, endIndex),
+            data.slice(startIndex, endIndex),
             startIndex * itemHeight,
             (data.length - endIndex) * itemHeight,
         ];

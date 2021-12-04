@@ -16,40 +16,16 @@ export default {
 interface OptionFields {
     key: string;
     label: string;
-    group: string;
 }
 
 interface OptionProps {
     children: React.ReactNode
 }
 
-const options: OptionFields[] = [
-    { key: '1', label: 'Superman', group: 'Air' },
-    { key: '2', label: 'Batman', group: 'Land' },
-    { key: '3', label: 'Flash', group: 'Land' },
-    { key: '4', label: 'Wonder Woman', group: 'Air' },
-    { key: '5', label: 'Green Lantern', group: 'Air' },
-    { key: '6', label: 'Ant-Man', group: 'Land' },
-    { key: '7', label: 'Aquaman', group: 'Water' },
-    { key: '8', label: 'Black Panther', group: 'Land' },
-    { key: '9', label: 'Iron Man', group: 'Air' },
-    { key: '10', label: 'Spider Man', group: 'Air' },
-    { key: '11', label: 'Wolverine', group: 'Land' },
-    { key: '12', label: 'Thor', group: 'Air' },
-    { key: '13', label: 'Hulk', group: 'Land' },
-    { key: '14', label: 'Doctor Strange', group: 'Air' },
-    { key: '15', label: 'Quick Silver', group: 'Land' },
-    { key: '16', label: 'Doctor Manhattan', group: 'Air' },
-    { key: '17', label: 'Robocop', group: 'Land' },
-    { key: '18', label: 'Drax', group: 'Land' },
-    { key: '19', label: 'Mystique', group: 'Land' },
-    { key: '20', label: 'Rorsharch', group: 'Land' },
-    { key: '21', label: 'Professor X', group: 'Land' },
-    { key: '22', label: 'Groot', group: 'Land' },
-    { key: '23', label: 'Black Widow', group: 'Land' },
-    { key: '24', label: 'Hawkeye', group: 'Land' },
-    { key: '25', label: 'Deadpool', group: 'Land' },
-];
+const options: OptionFields[] = Array.from(Array(1000000)).map((_, index) => ({
+    key: String(index),
+    label: `Item ${index}`,
+}));
 
 const ITEM_HEIGHT = 40;
 
