@@ -21,7 +21,8 @@ const spacingToStyleMap: {
 };
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending';
+
 export type Props<
     D,
     P,
@@ -37,6 +38,8 @@ export type Props<
     messageShown?: boolean;
     messageIconShown?: boolean;
     style?: React.CSSProperties,
+    filtered: boolean;
+    pending: boolean;
 };
 
 function ListView<
@@ -92,7 +95,7 @@ function ListView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
-                compactPendingMessage={empty || compactPendingMessage}
+                compactPendingMessage={compactPendingMessage}
                 compact={compactEmptyMessage}
                 compactAndVertical={compactAndVerticalEmptyMessage}
                 messageHidden={!messageShown}

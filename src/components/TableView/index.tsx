@@ -10,7 +10,8 @@ import Message, { Props as MessageProps } from '../Message';
 import styles from './styles.css';
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending';
+
 export type Props<
     D,
     K extends string | number,
@@ -27,6 +28,8 @@ export type Props<
     compactPendingMessage?: boolean;
     messageShown?: boolean;
     messageIconShown?: boolean;
+    filtered: boolean;
+    pending: boolean;
 };
 
 function TableView<
@@ -80,7 +83,7 @@ function TableView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
-                compactPendingMessage={empty || compactPendingMessage}
+                compactPendingMessage={compactPendingMessage}
                 compactEmptyMessage={compactEmptyMessage}
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
