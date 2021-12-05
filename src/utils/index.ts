@@ -46,3 +46,8 @@ export function ymdToDateString(year: number, month: number, day: number) {
 export function dateStringToDate(value: string) {
     return new Date(`${value}T00:00`);
 }
+
+const localhostRegex = /(?<=\/\/)localhost(?=[:/]|$)/;
+export function isLocalUrl(url: string) {
+    return localhostRegex.test(url);
+}

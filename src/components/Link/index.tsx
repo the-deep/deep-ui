@@ -9,7 +9,10 @@ import {
 } from 'react-router-dom';
 import { IoChevronForward } from 'react-icons/io5';
 
-import { genericMemo } from '../../utils';
+import {
+    genericMemo,
+    isLocalUrl,
+} from '../../utils';
 import { SpacingTypes } from '../../types';
 import Actions from '../Actions';
 import Icons from '../Icons';
@@ -52,7 +55,7 @@ function Link(props: Props) {
 
     const isExternalLink = React.useMemo(
         () => (
-            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:'))
+            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:') || isLocalUrl(to))
         ),
         [to],
     );
