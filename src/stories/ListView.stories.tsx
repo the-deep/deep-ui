@@ -81,21 +81,19 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                     marginTop: '20px',
                 }}
             >
-                <Container visibleOverflow>
-                    <ListView
-                        {...args}
-                        pending={pending}
-                        filtered={filtered}
-                        errored={errored}
-                        onReload={() => { console.warn('reloaded'); }}
-                        direction="vertical"
-                        spacing="comfortable"
-                        messageShown
-                        messageIconShown
-                        // eslint-disable-next-line react/destructuring-assignment
-                        data={empty ? [] : args.data}
-                    />
-                </Container>
+                <ListView
+                    {...args}
+                    pending={pending}
+                    filtered={filtered}
+                    errored={errored}
+                    onReload={() => { console.warn('reloaded'); }}
+                    direction="vertical"
+                    spacing="comfortable"
+                    messageShown
+                    messageIconShown
+                    // eslint-disable-next-line react/destructuring-assignment
+                    data={empty ? [] : args.data}
+                />
             </div>
         </div>
     );

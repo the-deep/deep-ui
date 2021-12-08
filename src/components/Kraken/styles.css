@@ -23,8 +23,4 @@
     &.extra-large {
         --height: 16rem;
     }
-
-    &.black-and-white {
-        filter: grayscale(100%);
-    }
 }

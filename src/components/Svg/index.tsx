@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { randomString, _cs } from '@togglecorp/fujs';
-import SVGInjector from 'svg-injector';
+import { SVGInjector } from '@tanem/svg-injector';
 
 import styles from './styles.css';
 
-interface Props extends React.SVGProps<SVGSVGElement> {
+interface Props {
     className?: string;
-    evalScripts?: 'always' | 'once' | 'never';
-    fallback?: string;
-    onInject?: () => void;
     src: string;
 }
 
@@ -16,44 +13,36 @@ function Svg(props: Props) {
     const {
         className,
         src,
-        evalScripts,
-        fallback,
-        onInject,
-        ...otherProps
     } = props;
 
-    const [id] = useState(() => randomString(16));
+    const [id] = useState(() => `svg-${randomString(16)}`);
+    const [svgId] = useState(() => `svg-${randomString(16)}`);
 
     useEffect(() => {
-        const svg = document.getElementById(id);
-        if (svg) {
+        const div = document.getElementById(id);
+        if (div) {
+            const svg = document.createElement('svg');
+            svg.setAttribute('id', svgId);
+            svg.setAttribute('class', styles.svg);
             svg.setAttribute('data-src', src);
-            const options = {
-                evalScripts,
-            };
+            div.appendChild(svg);
 
-            SVGInjector(svg, options, onInject);
+            SVGInjector(svg);
         }
 
         return () => {
-            if (svg) {
-                svg.remove();
+            const mySvg = document.getElementById(svgId);
+            if (mySvg) {
+                mySvg.remove();
             }
         };
-    }, [evalScripts, id, onInject, src]);
+    }, [id, svgId, src]);
 
     return (
         <div
+            id={id}
             className={_cs(className, styles.svgContainer)}
-        >
-            <svg
-                className={styles.svg}
-                id={id}
-                data-src={src}
-                data-fallback={fallback}
-                {...otherProps}
-            />
-        </div>
+        />
     );
 }
 

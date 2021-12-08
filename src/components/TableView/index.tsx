@@ -74,6 +74,11 @@ function TableView<
                 pending && styles.pending,
             )}
         >
+            <Table
+                className={_cs(styles.table, contentClassName)}
+                data={errored ? undefined : data}
+                {...otherTableProps}
+            />
             <Message
                 empty={empty}
                 errored={errored}
@@ -92,13 +97,6 @@ function TableView<
                 messageIconHidden={!messageIconShown}
                 onReload={onReload}
             />
-            {!errored && (
-                <Table
-                    className={_cs(styles.table, contentClassName)}
-                    data={data}
-                    {...otherTableProps}
-                />
-            )}
         </div>
     );
 }
