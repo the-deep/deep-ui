@@ -21,7 +21,7 @@ const spacingToStyleMap: {
 };
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending' | 'errored';
 
 export type Props<
     D,
@@ -38,6 +38,7 @@ export type Props<
     messageShown?: boolean;
     messageIconShown?: boolean;
     style?: React.CSSProperties,
+    errored: boolean;
     filtered: boolean;
     pending: boolean;
 };
@@ -53,12 +54,15 @@ function ListView<
         className,
 
         pending,
+        errored,
         filtered,
         emptyIcon,
         emptyMessage,
         pendingMessage,
         filteredEmptyIcon,
         filteredEmptyMessage,
+        erroredEmptyIcon,
+        erroredEmptyMessage,
 
         data,
         compactPendingMessage,
@@ -69,6 +73,7 @@ function ListView<
         messageShown = false,
         messageIconShown = false,
         style,
+        onReload,
         ...otherListProps
     } = props;
 
@@ -88,6 +93,7 @@ function ListView<
         >
             <Message
                 empty={empty}
+                errored={errored}
                 pending={pending}
                 filtered={filtered}
                 emptyIcon={emptyIcon}
@@ -95,17 +101,22 @@ function ListView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
+                erroredEmptyIcon={erroredEmptyIcon}
+                erroredEmptyMessage={erroredEmptyMessage}
                 compactPendingMessage={compactPendingMessage}
                 compact={compactEmptyMessage}
                 compactAndVertical={compactAndVerticalEmptyMessage}
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
+                onReload={onReload}
             />
-            <List
-                data={data}
-                spacing={spacing}
-                {...otherListProps}
-            />
+            {!errored && (
+                <List
+                    data={data}
+                    spacing={spacing}
+                    {...otherListProps}
+                />
+            )}
         </div>
     );
 }

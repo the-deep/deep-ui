@@ -24,4 +24,9 @@
             justify-content: flex-start;
         }
     }
+
+    .actions {
+        display: flex;
+        gap: var(--dui-spacing-small);
+    }
 }

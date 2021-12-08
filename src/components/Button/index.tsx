@@ -36,7 +36,7 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
 
 export interface Props<N> extends Omit<
     React.HTMLProps<HTMLButtonElement>,
-    'ref' | 'onClick' | 'name' | 'type' | 'label'
+    'ref' | 'onClick' | 'name' | 'type' | 'label' | 'title'
 > {
     type?: 'button' | 'submit' | 'reset';
     variant?: ButtonVariant;
@@ -55,6 +55,8 @@ export interface Props<N> extends Omit<
     elementRef?: React.RefObject<HTMLButtonElement>;
     spacing?: SpacingTypes;
     ellipsize?: boolean;
+    title?: string;
+    disabledTitle?: string;
 }
 
 export type ButtonFeatureKeys = 'variant' | 'className' | 'actionsContainerClassName' | 'iconsContainerClassName' | 'childrenContainerClassName' | 'children' | 'icons' | 'actions' | 'disabled' | 'big' | 'readOnly' | 'spacing' | 'ellipsize';
@@ -129,6 +131,8 @@ function Button<N>(props: Props<N>) {
         elementRef,
         spacing,
         ellipsize,
+        title,
+        disabledTitle,
         ...otherProps
     } = props;
 
@@ -160,6 +164,7 @@ function Button<N>(props: Props<N>) {
             ref={elementRef}
             type="button"
             onClick={handleButtonClick}
+            title={(disabled && disabledTitle) ? disabledTitle : title}
             {...otherProps}
             {...buttonProps}
         />

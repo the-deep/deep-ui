@@ -43,11 +43,14 @@ function TableView<
 
         pending,
         filtered,
+        errored,
         emptyIcon,
         emptyMessage,
         pendingMessage,
         filteredEmptyIcon,
         filteredEmptyMessage,
+        erroredEmptyIcon,
+        erroredEmptyMessage,
 
         data,
         contentClassName,
@@ -76,6 +79,7 @@ function TableView<
             />
             <Message
                 empty={empty}
+                errored={errored}
                 pending={pending}
                 filtered={filtered}
                 emptyIcon={emptyIcon}
@@ -83,6 +87,8 @@ function TableView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
+                erroredEmptyIcon={erroredEmptyIcon}
+                erroredEmptyMessage={erroredEmptyMessage}
                 compactPendingMessage={compactPendingMessage}
                 compactEmptyMessage={compactEmptyMessage}
                 messageHidden={!messageShown}

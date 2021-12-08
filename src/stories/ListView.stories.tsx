@@ -42,6 +42,7 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
         empty,
         pending,
         filtered,
+        errored,
     }, updateArgs] = useArgs();
 
     const handleCheckboxChange = React.useCallback((value, name) => {
@@ -54,6 +55,12 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                 name="empty"
                 label="Empty"
                 value={empty}
+                onChange={handleCheckboxChange}
+            />
+            <Checkbox
+                name="errored"
+                label="Errored"
+                value={errored}
                 onChange={handleCheckboxChange}
             />
             <Checkbox
@@ -79,6 +86,8 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                         {...args}
                         pending={pending}
                         filtered={filtered}
+                        errored={errored}
+                        onReload={() => { console.warn('reloaded'); }}
                         direction="vertical"
                         spacing="comfortable"
                         messageShown
