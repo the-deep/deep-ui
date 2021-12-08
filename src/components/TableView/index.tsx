@@ -10,7 +10,7 @@ import Message, { Props as MessageProps } from '../Message';
 import styles from './styles.css';
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending' | 'errored';
 
 export type Props<
     D,
@@ -28,6 +28,7 @@ export type Props<
     compactPendingMessage?: boolean;
     messageShown?: boolean;
     messageIconShown?: boolean;
+    errored: boolean;
     filtered: boolean;
     pending: boolean;
 };
@@ -58,6 +59,7 @@ function TableView<
         compactPendingMessage,
         messageShown = false,
         messageIconShown = false,
+        onReload,
         ...otherTableProps
     } = props;
 
@@ -72,11 +74,6 @@ function TableView<
                 pending && styles.pending,
             )}
         >
-            <Table
-                className={_cs(styles.table, contentClassName)}
-                data={data}
-                {...otherTableProps}
-            />
             <Message
                 empty={empty}
                 errored={errored}
@@ -93,7 +90,15 @@ function TableView<
                 compactEmptyMessage={compactEmptyMessage}
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
+                onReload={onReload}
             />
+            {!errored && (
+                <Table
+                    className={_cs(styles.table, contentClassName)}
+                    data={data}
+                    {...otherTableProps}
+                />
+            )}
         </div>
     );
 }

@@ -78,6 +78,7 @@ const Template: Story<
         empty,
         pending,
         filtered,
+        errored,
     }, updateArgs] = useArgs();
 
     const handleCheckboxChange = React.useCallback((value, name) => {
@@ -90,6 +91,12 @@ const Template: Story<
                 name="empty"
                 label="Empty"
                 value={empty}
+                onChange={handleCheckboxChange}
+            />
+            <Checkbox
+                name="errored"
+                label="Errored"
+                value={errored}
                 onChange={handleCheckboxChange}
             />
             <Checkbox
@@ -114,6 +121,7 @@ const Template: Story<
                     {...args}
                     pending={pending}
                     filtered={filtered}
+                    errored={errored}
                     // eslint-disable-next-line react/destructuring-assignment
                     data={empty ? [] : args.data}
                     columns={columns}
