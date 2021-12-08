@@ -37,6 +37,7 @@ function Spinner(props: Props) {
             <div className={styles.pointsContainer}>
                 {points.map((point, i) => (
                     <div
+                        key={i}
                         className={styles.point}
                         style={{
                             left: `${100 * point[0]}%`,

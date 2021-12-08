@@ -28,6 +28,7 @@
     }
 
     .action-container {
+        align-items: flex-start;
         font-size: 1.1em;
     }
 

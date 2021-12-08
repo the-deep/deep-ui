@@ -69,6 +69,7 @@ function useRowExpansion<D, K extends string | number>(
         if (expandOnRowClick) {
             newRow = React.cloneElement(row, {
                 ...newRowProps,
+                key: rowKey,
                 onClick: () => {
                     setExpandedRowKey((oldValue) => (
                         oldValue === rowKey ? undefined : rowKey
@@ -80,7 +81,9 @@ function useRowExpansion<D, K extends string | number>(
         }
 
         return (
-            <>
+            <React.Fragment
+                key={`${rowKey}-fragment`}
+            >
                 {newRow}
                 {isActive && (
                     <TableRow
@@ -95,7 +98,7 @@ function useRowExpansion<D, K extends string | number>(
                         </TableData>
                     </TableRow>
                 )}
-            </>
+            </React.Fragment>
         );
     }, [
         expandedRowKey,

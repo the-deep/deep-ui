@@ -18,6 +18,7 @@ interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>,
     elementRef?: React.Ref<HTMLTextAreaElement>;
     minRows?: number;
     maxRows?: number;
+    autoComplete?: string;
 }
 export type Props<T> = Omit<InputContainerProps, 'input'> & RawTextAreaProps<T>;
 
@@ -44,6 +45,7 @@ function TextArea<T extends string>(props: Props<T>) {
         elementRef,
         minRows = 3,
         maxRows = 10,
+        autoComplete,
         style,
         ...textAreaProps
     } = props;
@@ -93,7 +95,7 @@ function TextArea<T extends string>(props: Props<T>) {
                     disabled={disabled}
                     onChange={handleInputChange}
                     value={value ?? ''}
-                    autoComplete="off"
+                    autoComplete={autoComplete}
                     minRows={minRows}
                     maxRows={maxRows}
                     {...textAreaProps}

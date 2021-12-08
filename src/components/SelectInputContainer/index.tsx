@@ -314,7 +314,11 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                             <IoClose />
                         </Button>
                     )}
-                    {!readOnly && (showDropdown ? <IoChevronUp /> : <IoChevronDown />)}
+                    {!readOnly && (
+                        showDropdown
+                            ? <IoChevronUp onClick={handleHideDropdown} />
+                            : <IoChevronDown onClick={handleSearchInputClick} />
+                    )}
                 </>
             )}
             actionsContainerClassName={actionsContainerClassName}
