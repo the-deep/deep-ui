@@ -2,7 +2,6 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import Container from '#components/Container';
 import ListView, { Props as ListViewProps } from '../components/ListView';
 import Checkbox from '../components/Checkbox';
 
