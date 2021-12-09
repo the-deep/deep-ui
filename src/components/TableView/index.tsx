@@ -10,7 +10,7 @@ import Message, { Props as MessageProps } from '../Message';
 import styles from './styles.css';
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending' | 'errored';
 
 export type Props<
     D,
@@ -28,6 +28,7 @@ export type Props<
     compactPendingMessage?: boolean;
     messageShown?: boolean;
     messageIconShown?: boolean;
+    errored: boolean;
     filtered: boolean;
     pending: boolean;
 };
@@ -43,11 +44,14 @@ function TableView<
 
         pending,
         filtered,
+        errored,
         emptyIcon,
         emptyMessage,
         pendingMessage,
         filteredEmptyIcon,
         filteredEmptyMessage,
+        erroredEmptyIcon,
+        erroredEmptyMessage,
 
         data,
         contentClassName,
@@ -55,6 +59,7 @@ function TableView<
         compactPendingMessage,
         messageShown = false,
         messageIconShown = false,
+        onReload,
         ...otherTableProps
     } = props;
 
@@ -71,11 +76,12 @@ function TableView<
         >
             <Table
                 className={_cs(styles.table, contentClassName)}
-                data={data}
+                data={errored ? undefined : data}
                 {...otherTableProps}
             />
             <Message
                 empty={empty}
+                errored={errored}
                 pending={pending}
                 filtered={filtered}
                 emptyIcon={emptyIcon}
@@ -83,10 +89,13 @@ function TableView<
                 pendingMessage={pendingMessage}
                 filteredEmptyIcon={filteredEmptyIcon}
                 filteredEmptyMessage={filteredEmptyMessage}
+                erroredEmptyIcon={erroredEmptyIcon}
+                erroredEmptyMessage={erroredEmptyMessage}
                 compactPendingMessage={compactPendingMessage}
                 compactEmptyMessage={compactEmptyMessage}
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
+                onReload={onReload}
             />
         </div>
     );

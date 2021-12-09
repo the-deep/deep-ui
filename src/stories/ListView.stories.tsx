@@ -2,7 +2,6 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import Container from '#components/Container';
 import ListView, { Props as ListViewProps } from '../components/ListView';
 import Checkbox from '../components/Checkbox';
 
@@ -42,6 +41,7 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
         empty,
         pending,
         filtered,
+        errored,
     }, updateArgs] = useArgs();
 
     const handleCheckboxChange = React.useCallback((value, name) => {
@@ -54,6 +54,12 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                 name="empty"
                 label="Empty"
                 value={empty}
+                onChange={handleCheckboxChange}
+            />
+            <Checkbox
+                name="errored"
+                label="Errored"
+                value={errored}
                 onChange={handleCheckboxChange}
             />
             <Checkbox
@@ -74,19 +80,19 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                     marginTop: '20px',
                 }}
             >
-                <Container visibleOverflow>
-                    <ListView
-                        {...args}
-                        pending={pending}
-                        filtered={filtered}
-                        direction="vertical"
-                        spacing="comfortable"
-                        messageShown
-                        messageIconShown
-                        // eslint-disable-next-line react/destructuring-assignment
-                        data={empty ? [] : args.data}
-                    />
-                </Container>
+                <ListView
+                    {...args}
+                    pending={pending}
+                    filtered={filtered}
+                    errored={errored}
+                    onReload={() => { console.warn('reloaded'); }}
+                    direction="vertical"
+                    spacing="comfortable"
+                    messageShown
+                    messageIconShown
+                    // eslint-disable-next-line react/destructuring-assignment
+                    data={empty ? [] : args.data}
+                />
             </div>
         </div>
     );

@@ -123,6 +123,7 @@ function DismissibleList<D, K extends OptionKey, N extends NameType>(props: Prop
             spacing="none"
             filtered={false}
             pending={false}
+            errored={false}
             rendererParams={rendererParams}
         />
     );

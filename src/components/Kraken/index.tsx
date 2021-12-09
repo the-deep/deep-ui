@@ -61,7 +61,6 @@ export interface Props {
     className?: string;
     variant?: KrakenTypes;
     size?: 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
-    blackAndWhite?: boolean;
 }
 
 function Kraken(props: Props) {
@@ -69,7 +68,6 @@ function Kraken(props: Props) {
         className,
         variant = 'hi',
         size = 'small',
-        blackAndWhite,
     } = props;
 
     return (
@@ -78,7 +76,6 @@ function Kraken(props: Props) {
                 className,
                 styles.kraken,
                 sizeToStyleMap[size],
-                blackAndWhite && styles.blackAndWhite,
             )}
             src={variantToSvgMap[variant]}
         />
