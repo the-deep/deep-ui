@@ -41,6 +41,7 @@ export interface Props<N extends NameType> extends Omit<React.HTMLProps<HTMLInpu
      * ref to the element
      */
     elementRef?: React.Ref<HTMLInputElement>;
+    autoComplete?: string;
 }
 /**
  * The most basic input component with default stylings removed (without any styling)
@@ -53,6 +54,7 @@ function RawInput<N extends NameType>(
         elementRef,
         value,
         name,
+        autoComplete = 'off',
         ...otherProps
     }: Props<N>,
 ) {
@@ -84,6 +86,7 @@ function RawInput<N extends NameType>(
             onChange={handleChange}
             name={isDefined(name) ? String(name) : undefined}
             value={value ?? ''}
+            autoComplete={autoComplete}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}
         />
