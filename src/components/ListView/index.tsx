@@ -21,7 +21,8 @@ const spacingToStyleMap: {
 };
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending' | 'errored';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden'
+| 'messageIconHidden' | 'filtered' | 'pending' | 'errored' | 'actions';
 
 export type Props<
     D,
@@ -41,6 +42,7 @@ export type Props<
     errored: boolean;
     filtered: boolean;
     pending: boolean;
+    messageActions?: React.ReactNode;
 };
 
 function ListView<
@@ -68,6 +70,7 @@ function ListView<
         compactPendingMessage,
         compactEmptyMessage,
         compactAndVerticalEmptyMessage,
+        messageActions,
         spacing = 'none',
         direction = 'horizontal',
         messageShown = false,
@@ -109,6 +112,7 @@ function ListView<
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
                 onReload={onReload}
+                actions={messageActions}
             />
             {!errored && (
                 <List
