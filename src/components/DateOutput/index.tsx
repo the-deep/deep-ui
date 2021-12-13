@@ -39,7 +39,7 @@ function DateOutput(props: Props) {
         return populateFormat(breakFormat(format), date);
     }, [format, value]);
 
-    const formattedDate = formattedValueList?.join('');
+    const formattedDate = formattedValueList?.map((v) => v.value)?.join('');
 
     return (
         <div className={_cs(styles.dateOutput, className)}>

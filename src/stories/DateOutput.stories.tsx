@@ -20,6 +20,12 @@ Default.args = {
     value: '1992-12-20',
 };
 
+export const DateWithTime = Template.bind({});
+DateWithTime.args = {
+    value: '1992-12-20 14:40',
+    format: 'yyyy-MM-dd hh:mm aaa',
+};
+
 export const NoValue = Template.bind({});
 NoValue.args = {
     value: undefined,
