@@ -10,7 +10,8 @@ import Message, { Props as MessageProps } from '../Message';
 import styles from './styles.css';
 
 type MessagePropOmission = 'className' | 'message'
-| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden' | 'messageIconHidden' | 'filtered' | 'pending' | 'errored';
+| 'compact' | 'icon' | 'empty' | 'pendingContainerClassName' | 'messageHidden'
+| 'messageIconHidden' | 'filtered' | 'pending' | 'errored' | 'actions';
 
 export type Props<
     D,
@@ -31,6 +32,7 @@ export type Props<
     errored: boolean;
     filtered: boolean;
     pending: boolean;
+    messageActions?: React.ReactNode;
 };
 
 function TableView<
@@ -52,6 +54,7 @@ function TableView<
         filteredEmptyMessage,
         erroredEmptyIcon,
         erroredEmptyMessage,
+        messageActions,
 
         data,
         contentClassName,
@@ -96,6 +99,7 @@ function TableView<
                 messageHidden={!messageShown}
                 messageIconHidden={!messageIconShown}
                 onReload={onReload}
+                actions={messageActions}
             />
         </div>
     );

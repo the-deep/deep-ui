@@ -128,10 +128,10 @@ function ImagePreview(props: Props) {
     if (expanded) {
         return (
             <Modal
-                className={styles.expandedModal}
                 heading={null}
                 onCloseButtonClick={setExpandedFalse}
                 bodyClassName={styles.body}
+                size="cover"
             >
                 {children}
             </Modal>
