@@ -2,7 +2,7 @@ import React from 'react';
 import {
     populateFormat,
     breakFormat,
-    isDefined,
+    isTruthyString,
     isNotDefined,
     _cs,
 } from '@togglecorp/fujs';
@@ -39,12 +39,12 @@ function DateOutput(props: Props) {
         return populateFormat(breakFormat(format), date);
     }, [format, value]);
 
-    const formattedDate = formattedValueList?.find((d) => d.type === 'date');
+    const formattedDate = formattedValueList?.join('');
 
     return (
         <div className={_cs(styles.dateOutput, className)}>
-            { isDefined(formattedDate) ? (
-                formattedDate.value
+            {isTruthyString(formattedDate) ? (
+                formattedDate
             ) : (
                 emptyComponent
             )}

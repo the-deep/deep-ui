@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     TransformWrapper,
     TransformComponent,
@@ -39,7 +39,17 @@ function ImagePreview(props: Props) {
     } = props;
 
     const [expanded, , setExpandedFalse, , toggleExpanded] = useBooleanState(false);
-    const [pending, , setPendingFalse] = useBooleanState(true);
+    const [pending, setPendingTrue, setPendingFalse] = useBooleanState(true);
+
+    // NOTE: not using img.onloadstart because it's not supported in react and
+    // chrome
+    // https://github.com/facebook/react/issues/20330
+    useEffect(
+        () => {
+            setPendingTrue();
+        },
+        [setPendingTrue, src],
+    );
 
     const buttonProps = useButtonFeatures({
         className: styles.toolButton,
@@ -54,12 +64,9 @@ function ImagePreview(props: Props) {
                 styles.imagePreview,
             )}
         >
-            { pending && <PendingMessage /> }
-
+            {pending && <PendingMessage />}
             <TransformWrapper
-                wheel={{
-                    step: 100,
-                }}
+                wheel={{ step: 100 }}
             >
                 {({
                     zoomIn,
@@ -113,7 +120,9 @@ function ImagePreview(props: Props) {
                         )}
                         <TransformComponent>
                             <img
+                                key={src}
                                 onLoad={setPendingFalse}
+                                onError={setPendingFalse}
                                 className={styles.image}
                                 src={src}
                                 alt={alt}

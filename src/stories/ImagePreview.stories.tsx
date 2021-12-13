@@ -27,3 +27,8 @@ Default.args = {
     src: 'https://i.imgur.com/5ehANlp.jpg',
     // alt: 'Image cannot be loaded',
 };
+
+export const WithoutImage = Template.bind({});
+WithoutImage.args = {
+    src: '',
+};
