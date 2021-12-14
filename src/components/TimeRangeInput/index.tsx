@@ -87,7 +87,8 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
     }, [setShowTimePickerFalse, setTempTime]);
 
     const handlePopupBlur = React.useCallback(
-        (isClickedWithin: boolean) => {
+        (isClickedOnPopup: boolean, isClickedOnParent: boolean) => {
+            const isClickedWithin = isClickedOnPopup || isClickedOnParent;
             if (!isClickedWithin) {
                 hideTimePicker();
             }

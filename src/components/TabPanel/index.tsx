@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { _cs } from '@togglecorp/fujs';
+
 import { TabKey, TabContext } from '../TabContext';
+import styles from './styles.css';
 
 export interface Props extends React.HTMLProps<HTMLDivElement> {
     name: TabKey;
     elementRef?: React.Ref<HTMLDivElement>;
+    activeClassName?: string;
+    retainMount?: 'eager' | 'lazy' | 'none';
 }
 
 export default function TabPanel(props: Props) {
@@ -12,18 +17,32 @@ export default function TabPanel(props: Props) {
     const {
         name,
         elementRef,
+        activeClassName,
+        retainMount = 'none',
+        className,
         ...otherProps
     } = props;
 
-    let isActive = false;
+    const isLoadedOnce = useRef(false);
 
+    let isActive = false;
     if (context.useHash) {
         isActive = context.hash === name;
     } else {
         isActive = context.activeTab === name;
     }
 
-    if (!isActive) {
+    useEffect(() => {
+        if (isActive) {
+            isLoadedOnce.current = true;
+        }
+    }, [isActive, retainMount]);
+
+    if (retainMount === 'none' && !isActive) {
+        return null;
+    }
+
+    if (retainMount === 'lazy' && !isLoadedOnce.current && !isActive) {
         return null;
     }
 
@@ -31,6 +50,12 @@ export default function TabPanel(props: Props) {
         <div
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}
+            className={_cs(
+                styles.tabPanel,
+                className,
+                isActive && activeClassName,
+                !isActive && styles.hide,
+            )}
             role="tabpanel"
             ref={elementRef}
         />
