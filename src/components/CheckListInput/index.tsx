@@ -35,7 +35,7 @@ export interface Props<
     keySelector: (option: O) => T;
     labelSelector: (option: O) => string;
     name: K;
-    uiMode: UiMode;
+    uiMode?: UiMode;
     className?: string;
     checkboxLabelContainerClassName?: string;
     checkboxClassName?: string;
