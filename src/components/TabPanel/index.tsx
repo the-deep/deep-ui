@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { TabKey, TabContext } from '../TabContext';
@@ -8,7 +8,7 @@ export interface Props extends React.HTMLProps<HTMLDivElement> {
     name: TabKey;
     elementRef?: React.Ref<HTMLDivElement>;
     activeClassName?: string;
-    retainMount?: boolean;
+    retainMount?: 'eager' | 'lazy' | 'none';
 }
 
 export default function TabPanel(props: Props) {
@@ -18,14 +18,14 @@ export default function TabPanel(props: Props) {
         name,
         elementRef,
         activeClassName,
-        retainMount = false,
+        retainMount = 'none',
         className,
         ...otherProps
     } = props;
 
-    let isActive = false;
-    const [isLoadedOnce, setIsLoadedOnce] = useState(false);
+    const isLoadedOnce = useRef(false);
 
+    let isActive = false;
     if (context.useHash) {
         isActive = context.hash === name;
     } else {
@@ -33,10 +33,16 @@ export default function TabPanel(props: Props) {
     }
 
     useEffect(() => {
-        setIsLoadedOnce(retainMount ?? false);
+        if (isActive) {
+            isLoadedOnce.current = true;
+        }
     }, [isActive, retainMount]);
 
-    if (!isActive && !isLoadedOnce) {
+    if (retainMount === 'none' && !isActive) {
+        return null;
+    }
+
+    if (retainMount === 'lazy' && !isLoadedOnce.current && !isActive) {
         return null;
     }
 

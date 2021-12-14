@@ -61,6 +61,7 @@ const Template: Story<TabsProps<string>> = (args) => {
             </TabPanel>
             <TabPanel
                 name="tab-two"
+                retainMount="eager"
                 className={styles.largeTab}
             >
                 This tab panel mount is not retained.
@@ -69,7 +70,7 @@ const Template: Story<TabsProps<string>> = (args) => {
             <TabPanel
                 name="tab-three"
                 className={styles.largeTab}
-                retainMount
+                retainMount="lazy"
             >
                 This tab panel mount is retained.
                 {dummyText}
@@ -157,6 +158,50 @@ export function DisabledTab() {
             <TabPanel
                 name="tab-three"
                 className={styles.largeTab}
+            >
+                {dummyText}
+            </TabPanel>
+        </Tabs>
+    );
+}
+
+export function RetainMountTabs() {
+    const [value, setValue] = useState<string | undefined>('tab-one');
+    return (
+        <Tabs
+            value={value}
+            onChange={setValue}
+        >
+            <TabList>
+                <Tab name="tab-one">
+                    Not Retained
+                </Tab>
+                <Tab name="tab-two">
+                    Eagerly retained
+                </Tab>
+                <Tab name="tab-three">
+                    Lazily retained
+                </Tab>
+            </TabList>
+
+            <TabPanel
+                name="tab-one"
+                className={styles.largeTab}
+                retainMount="none"
+            >
+                {dummyText}
+            </TabPanel>
+            <TabPanel
+                name="tab-two"
+                className={styles.largeTab}
+                retainMount="eager"
+            >
+                {dummyText}
+            </TabPanel>
+            <TabPanel
+                name="tab-three"
+                className={styles.largeTab}
+                retainMount="lazy"
             >
                 {dummyText}
             </TabPanel>
