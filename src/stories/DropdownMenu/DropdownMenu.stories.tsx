@@ -16,43 +16,28 @@ const handleMenuItemClick = () => {
     console.info('Dropdown menu clicked');
 };
 
-const Template: Story<DropdownMenuProps> = (props) => {
-    const children = [];
-    for (let i = 0; i < 5; i += 1) {
-        children.push(
-            <DropdownMenu
-                key={i}
-                {...props}
-            >
-                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
-                    {i}
-                </DropdownMenuItem>
-                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
-                    Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
-                    Projects
-                </DropdownMenuItem>
-                <Separator />
-                <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
-                    Logout
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                    href="https://togglecorp.com"
-                    actions={<IoExitOutline />}
-                >
-                    Goto Togglecorp
-                </DropdownMenuItem>
-            </DropdownMenu>,
-        );
-    }
-
-    return (
-        <div>
-            {children}
-        </div>
-    );
-};
+const Template: Story<DropdownMenuProps> = (props) => (
+    <DropdownMenu
+        {...props}
+    >
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+            Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+            Projects
+        </DropdownMenuItem>
+        <Separator />
+        <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+            Logout
+        </DropdownMenuItem>
+        <DropdownMenuItem
+            href="https://togglecorp.com"
+            actions={<IoExitOutline />}
+        >
+            Goto Togglecorp
+        </DropdownMenuItem>
+    </DropdownMenu>
+);
 
 export const Default = Template.bind({});
 
@@ -70,6 +55,12 @@ export const PrimaryButtonLike = Template.bind({});
 PrimaryButtonLike.args = {
     label: 'Looks like button',
     variant: 'primary',
+};
+
+export const Persistent = Template.bind({});
+Persistent.args = {
+    label: 'Persistent',
+    persistent: true,
 };
 
 export const Variants: Story = () => (

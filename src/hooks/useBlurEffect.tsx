@@ -2,9 +2,9 @@ import React from 'react';
 
 function useBlurEffect(
     shouldWatch: boolean,
-    callback: (isClickedWithin: boolean, e: MouseEvent) => void,
+    callback: (clickedOnElement: boolean, clickedOnParent: boolean, e: MouseEvent) => void,
     elementRef: React.RefObject<HTMLElement>,
-    parentRef: React.RefObject<HTMLElement>,
+    parentRef?: React.RefObject<HTMLElement>,
 ) {
     React.useEffect(
         () => {
@@ -14,7 +14,7 @@ function useBlurEffect(
 
             const handleDocumentClick = (e: MouseEvent) => {
                 const { current: element } = elementRef;
-                const { current: parent } = parentRef;
+                const parent = parentRef?.current;
 
                 const isElementOrContainedInElement = element
                     ? element === e.target || element.contains(e.target as HTMLElement)
@@ -23,9 +23,7 @@ function useBlurEffect(
                     ? parent === e.target || parent.contains(e.target as HTMLElement)
                     : false;
 
-                const clickedInside = isElementOrContainedInElement || isParentOrContainedInParent;
-
-                callback(clickedInside, e);
+                callback(isElementOrContainedInElement, isParentOrContainedInParent, e);
             };
 
             document.addEventListener('click', handleDocumentClick, true);

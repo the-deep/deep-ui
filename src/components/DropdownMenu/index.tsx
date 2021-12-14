@@ -1,6 +1,9 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-import { IoChevronDown } from 'react-icons/io5';
+import {
+    IoChevronDown,
+    IoChevronUp,
+} from 'react-icons/io5';
 
 import Button, { Props as ButtonProps } from '../Button';
 import { genericMemo } from '../../utils';
@@ -14,14 +17,17 @@ export function useDropdownFeatures(persistent = false) {
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const popupRef = React.useRef<HTMLDivElement>(null);
     const [
-        showPopup,
-        setShowPopupTrue,
+        showPopup,,
         setShowPopupFalse,
         setShowPopup,
+        togglePopup,
     ] = useBooleanState(false);
 
-    const handleBlur = React.useCallback((clickedWithin: boolean) => {
-        if (persistent && clickedWithin) {
+    const handleBlur = React.useCallback((clickedOnElement: boolean, clickedOnParent: boolean) => {
+        if (clickedOnParent) {
+            return;
+        }
+        if (persistent && clickedOnElement) {
             return;
         }
 
@@ -35,7 +41,7 @@ export function useDropdownFeatures(persistent = false) {
         popupRef,
         showPopup,
         setShowPopup,
-        handleButtonClick: setShowPopupTrue,
+        handleButtonClick: togglePopup,
     };
 }
 
@@ -97,9 +103,7 @@ function DropdownMenu(props: Props) {
                 actions={(
                     <>
                         {actions}
-                        {!hideDropdownIcon && (
-                            <IoChevronDown />
-                        )}
+                        {!hideDropdownIcon && (showPopup ? <IoChevronUp /> : <IoChevronDown />)}
                     </>
                 )}
             >

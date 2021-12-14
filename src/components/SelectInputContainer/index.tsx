@@ -195,7 +195,8 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
     );
 
     const handlePopupBlur = useCallback(
-        (isClickedWithin: boolean) => {
+        (isClickedOnPopup: boolean, isClickedOnParent: boolean) => {
+            const isClickedWithin = isClickedOnPopup || isClickedOnParent;
             if (!isClickedWithin) {
                 handleHideDropdown();
             } else if (persistentOptionPopup && inputElementRef.current) {

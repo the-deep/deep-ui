@@ -73,7 +73,8 @@ function DateInput<T extends NameType>(props: Props<T>) {
     ] = useBooleanState(false);
 
     const handlePopupBlur = React.useCallback(
-        (isClickedWithin: boolean, e: MouseEvent) => {
+        (isClickedOnPopup: boolean, isClickedOnParent: boolean, e: MouseEvent) => {
+            const isClickedWithin = isClickedOnPopup || isClickedOnParent;
             // Following is to prevent the popup blur when
             // month selection is changed in the calendar
             const container = document.getElementsByClassName(
