@@ -77,8 +77,16 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
             ellipsize,
             setEllipsize,
         };
+    }, [
         // eslint-disable-next-line react/destructuring-assignment
-    }, [props.useHash, value, onChange, variant, disabled, hash, ellipsize]);
+        props.useHash,
+        value,
+        onChange,
+        variant,
+        disabled,
+        hash,
+        ellipsize,
+    ]);
 
     return (
         <TabContext.Provider value={contextValue}>
