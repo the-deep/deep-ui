@@ -21,7 +21,7 @@ export { default as Calendar } from './components/Calendar';
 export type { Props as CardProps } from './components/Card';
 export { default as Card } from './components/Card';
 export type { Props as CheckListInputProps } from './components/CheckListInput';
-export type { default as CheckListInput } from './components/CheckListInput';
+export { default as CheckListInput } from './components/CheckListInput';
 export type { Props as CheckboxProps } from './components/Checkbox';
 export { default as Checkbox } from './components/Checkbox';
 export type { Props as CircularProgressBarProps } from './components/CircularProgressBar';
