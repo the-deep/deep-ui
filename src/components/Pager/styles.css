@@ -83,4 +83,5 @@
 
 .per-page-option-popup {
     width: 132px;
+    font-size: var(--dui-font-size-medium);
 }
