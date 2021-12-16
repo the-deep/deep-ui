@@ -198,9 +198,10 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
         }
 
         return (
-            <>
+            <React.Fragment
+                key={key}
+            >
                 <Renderer
-                    key={key}
                     className={rendererClassName}
                     {...extraProps}
                 />
@@ -213,7 +214,7 @@ function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends
                         width={borderBetweenItemWidth}
                     />
                 )}
-            </>
+            </React.Fragment>
         );
     }, [
         keySelector,
