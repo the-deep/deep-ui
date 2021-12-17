@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
 function useSizeTracking(
@@ -6,27 +6,30 @@ function useSizeTracking(
     shouldTrack = true,
 ) {
     const [bcr, setBcr] = React.useState<DOMRect | undefined>(undefined);
-    const callbackRef = React.useRef<number | undefined>();
 
     const resizeObserverRef = React.useRef<ResizeObserver>();
 
-    const handleResize = React.useCallback(() => {
-        if (callbackRef.current) {
-            window.cancelIdleCallback(callbackRef.current);
-        }
-
-        callbackRef.current = window.requestIdleCallback(() => {
-            const { current: el } = elementRef;
-            const trackingTarget = el;
-
-            if (trackingTarget) {
-                const elementBCR = trackingTarget.getBoundingClientRect();
-                setBcr(elementBCR);
+    const callbackRef = React.useRef<number | undefined>();
+    const handleResize: ResizeObserverCallback = useCallback(
+        (entries: ResizeObserverEntry[]) => {
+            if (callbackRef.current) {
+                window.cancelIdleCallback(callbackRef.current);
             }
-        }, { timeout: 200 });
-    }, [elementRef, setBcr]);
 
-    React.useEffect(() => {
+            const firstEntry = entries[0];
+            if (!firstEntry) {
+                return;
+            }
+
+            callbackRef.current = window.requestIdleCallback(() => {
+                const elementBCR = firstEntry.contentRect;
+                setBcr(elementBCR);
+            }, { timeout: 200 });
+        },
+        [],
+    );
+
+    useEffect(() => {
         if (!shouldTrack) {
             return undefined;
         }
@@ -38,10 +41,8 @@ function useSizeTracking(
             return undefined;
         }
 
-        const targetElement = el;
-
         resizeObserverRef.current = new ResizeObserver(handleResize);
-        resizeObserverRef.current.observe(targetElement);
+        resizeObserverRef.current.observe(el);
 
         return () => {
             if (resizeObserverRef.current) {

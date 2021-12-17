@@ -362,9 +362,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                 className={_cs(optionsPopupClassName, styles.popup)}
                 contentClassName={_cs(
                     styles.popupContent,
-                    // FIXME: disabling because linter is not smart enough
-                    // eslint-disable-next-line react-hooks/exhaustive-deps,
-                    // react/destructuring-assignment
+                    // eslint-disable-next-line react/destructuring-assignment
                     props.grouped && styles.grouped,
                     optionsPopupContentClassName,
                 )}

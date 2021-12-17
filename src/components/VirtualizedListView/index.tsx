@@ -114,23 +114,35 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
     const totalHeight = itemHeight * data.length;
     const listViewHeight = totalHeight - topDummyHeight - bottomDummyHeight;
 
+    const wrapperContainerStyle = useMemo(
+        () => ({
+            height: `${totalHeight}px`,
+        }),
+        [totalHeight],
+    );
+
+    const listViewStyle = useMemo(
+        () => ({
+            height: `${listViewHeight}px`,
+            transform: `translateY(${topDummyHeight}px)`,
+        }),
+        [listViewHeight, topDummyHeight],
+    );
+
     return (
         <div
             ref={elementRef}
             className={_cs(styles.virtualizedListView, className)}
             onScroll={handleScroll}
         >
-            <div style={{ height: `${totalHeight}px` }}>
+            <div style={wrapperContainerStyle}>
                 <ListView
                     {...otherProps}
                     data={renderData}
                     pending={pending || (data.length > 0 && renderData.length <= 0)}
                     direction="vertical"
                     keySelector={keySelector}
-                    style={{
-                        height: `${listViewHeight}px`,
-                        transform: `translateY(${topDummyHeight}px)`,
-                    }}
+                    style={listViewStyle}
                 />
             </div>
         </div>

@@ -7,6 +7,7 @@ import {
 
 function useHash(value?: string) {
     const [initialValue] = useState<string | undefined>(value);
+
     const [hash, setHash] = useState(getHashFromBrowser());
 
     React.useEffect(() => {
@@ -17,7 +18,7 @@ function useHash(value?: string) {
 
     const handleHashChange = React.useCallback(() => {
         setHash(getHashFromBrowser());
-    }, [setHash]);
+    }, []);
 
     React.useEffect(() => {
         window.addEventListener('hashchange', handleHashChange);

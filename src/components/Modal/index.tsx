@@ -107,6 +107,7 @@ function Modal(props: Props) {
         freeHeight,
     } = props;
 
+    // eslint-disable-next-line react/destructuring-assignment
     const shouldHideHeader = props.hideCloseButton && !heading && !headerActions && !headerIcons;
 
     return (
@@ -136,16 +137,18 @@ function Modal(props: Props) {
                         actions={(
                             <>
                                 {headerActions}
-                                {!props.hideCloseButton && (
-                                    <Button
-                                        className={closeButtonClassName}
-                                        onClick={props.onCloseButtonClick}
-                                        name="close-modal"
-                                        variant="action"
-                                    >
-                                        <IoClose />
-                                    </Button>
-                                )}
+                                { // eslint-disable-next-line react/destructuring-assignment
+                                    !props.hideCloseButton && (
+                                        <Button
+                                            className={closeButtonClassName}
+                                            onClick={props.onCloseButtonClick}
+                                            name="close-modal"
+                                            variant="action"
+                                        >
+                                            <IoClose />
+                                        </Button>
+                                    )
+                                }
                             </>
                         )}
                     />
