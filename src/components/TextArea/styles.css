@@ -3,17 +3,34 @@
         border: var(--width-separator-thin) solid var(--color-separator);
     }
 
+    .raw-text-area-container {
+        display: grid;
+        width: 100%;
+
+        &::after {
+            visibility: hidden;
+            white-space: pre-wrap;
+            content: attr(data-replicated-value) " ";
+        }
+    }
+
     .raw-text-area {
+        overflow: hidden;
+        resize: none;
+    }
+
+    .raw-text-area, .raw-text-area-container::after {
         margin: 0;
         outline: none;
         border: 0;
         background-color: transparent;
         padding: 0;
-        width: 100%;
-        resize: vertical;
         color: inherit;
         font-family: inherit;
         font-size: inherit;
+
+        grid-area: 1 / 1 / 2 / 2;
     }
+
 }
 
