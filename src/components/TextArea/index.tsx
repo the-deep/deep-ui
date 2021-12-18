@@ -15,8 +15,6 @@ interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>,
         e: React.FormEvent<HTMLTextAreaElement>,
     ) => void;
     elementRef?: React.RefObject<HTMLTextAreaElement>;
-    // minRows?: number;
-    // maxRows?: number;
     autoComplete?: string;
 }
 export type Props<T> = Omit<InputContainerProps, 'input'> & RawTextAreaProps<T>;
@@ -42,8 +40,6 @@ function TextArea<T extends string>(props: Props<T>) {
         value,
         containerRef,
         elementRef,
-        // minRows = 3,
-        // maxRows = 10,
         autoComplete,
         style,
         ...textAreaProps
@@ -70,6 +66,7 @@ function TextArea<T extends string>(props: Props<T>) {
         [name, onChange],
     );
 
+    // NOTE: implemented from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/
     useLayoutEffect(
         () => {
             const elem = textAreaContainerRef?.current;
@@ -108,13 +105,10 @@ function TextArea<T extends string>(props: Props<T>) {
                         ref={elementRef}
                         readOnly={readOnly}
                         style={style}
-                        // style={style as React.ComponentProps<typeof TextareaAutosize>['style']}
                         disabled={disabled}
                         onChange={handleInputChange}
                         value={value ?? ''}
                         autoComplete={autoComplete}
-                        // minRows={minRows}
-                        // maxRows={maxRows}
                         {...textAreaProps}
                     />
                 </div>
