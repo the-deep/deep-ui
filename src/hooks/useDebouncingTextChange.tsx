@@ -22,6 +22,7 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
                     value: v,
                 },
             } = e;
+            e.persist();
 
             if (debouncingRef.current) {
                 window.clearTimeout(debouncingRef.current);
