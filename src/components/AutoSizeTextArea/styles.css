@@ -1,28 +1,32 @@
-.raw-text-area-container {
-    display: grid;
-    width: 100%;
+.auto-size-text-area {
+    position: relative;
 
-    &::after {
-        visibility: hidden;
+    .preview {
         white-space: pre-wrap;
-        content: attr(data-replicated-value) " ";
+        word-break: break-all;
+        font-family: inherit;
+        font-size: inherit;
+
+        &::after {
+            visibility: hidden;
+            white-space: pre-wrap;
+            content: ' ';
+        }
     }
-}
 
-.raw-text-area {
-    overflow: hidden;
-    resize: none;
-}
-
-.raw-text-area, .raw-text-area-container::after {
-    margin: 0;
-    outline: none;
-    border: 0;
-    background-color: transparent;
-    padding: 0;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-
-    grid-area: 1 / 1 / 2 / 2;
+    .input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        outline: none;
+        border: 0;
+        padding: inherit;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        resize: none;
+        line-height: inherit;
+        font-family: inherit;
+        font-size: inherit;
+    }
 }
