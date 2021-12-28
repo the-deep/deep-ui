@@ -19,11 +19,14 @@ const Template: Story<PagerProps> = (args) => {
         handleArgsChange({ activePage: e });
     };
 
+    const onMaxItemsPerPageChange = (e: number) => {
+        handleArgsChange({ maxItemsPerPage: e });
+    };
+
     return (
         <Pager
             {...args}
-            itemsPerPageControlHidden
-            onItemsPerPageChange={undefined}
+            onItemsPerPageChange={onMaxItemsPerPageChange}
             onActivePageChange={setActivePage}
             maxItemsPerPage={maxItemsPerPage}
             activePage={activePage}

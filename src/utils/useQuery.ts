@@ -42,7 +42,6 @@ function useQuery<T, V>(
                 setPending(false);
                 return undefined;
             }
-            console.warn('Querying...', variable);
             setPending(true);
             const timer = setTimeout(
                 () => {

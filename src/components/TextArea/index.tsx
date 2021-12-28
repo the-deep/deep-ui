@@ -1,9 +1,10 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
-import TextareaAutosize from 'react-textarea-autosize';
 
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
+import useDebouncingTextChange from '../../hooks/useDebouncingTextChange';
 
+import AutoSizeTextArea from '../AutoSizeTextArea';
 import styles from './styles.css';
 
 interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>, 'ref' | 'onChange' | 'value' | 'name' | 'label'> {
@@ -15,9 +16,8 @@ interface RawTextAreaProps<K> extends Omit<React.HTMLProps<HTMLTextAreaElement>,
         name: K,
         e: React.FormEvent<HTMLTextAreaElement>,
     ) => void;
-    elementRef?: React.Ref<HTMLTextAreaElement>;
-    minRows?: number;
-    maxRows?: number;
+    elementRef?: React.RefObject<HTMLTextAreaElement>;
+    autoSize?: boolean;
     autoComplete?: string;
 }
 export type Props<T> = Omit<InputContainerProps, 'input'> & RawTextAreaProps<T>;
@@ -43,31 +43,21 @@ function TextArea<T extends string>(props: Props<T>) {
         value,
         containerRef,
         elementRef,
-        minRows = 3,
-        maxRows = 10,
-        autoComplete,
         style,
+        autoSize,
+        autoComplete = 'off',
         ...textAreaProps
     } = props;
 
-    const handleInputChange = React.useCallback(
-        (e: React.FormEvent<HTMLTextAreaElement>) => {
-            const {
-                currentTarget: {
-                    value: v,
-                },
-            } = e;
-
-            if (onChange) {
-                onChange(
-                    v === '' ? undefined : v,
-                    name,
-                    e,
-                );
-            }
-        },
-        [name, onChange],
-    );
+    const {
+        value: immediateValue,
+        onInputChange: handleInputChange,
+        onInputBlur: handleInputBlur,
+    } = useDebouncingTextChange({
+        name,
+        value,
+        onChange,
+    });
 
     return (
         <InputContainer
@@ -86,18 +76,30 @@ function TextArea<T extends string>(props: Props<T>) {
             labelContainerClassName={labelContainerClassName}
             readOnly={readOnly}
             containerRef={containerRef}
-            input={(
-                <TextareaAutosize
+            input={autoSize ? (
+                <AutoSizeTextArea
+                    className={styles.rawTextArea}
+                    elementRef={elementRef}
+                    readOnly={readOnly}
+                    style={style}
+                    disabled={disabled}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
+                    value={immediateValue ?? ''}
+                    autoComplete={autoComplete}
+                    {...textAreaProps}
+                />
+            ) : (
+                <textarea
                     className={styles.rawTextArea}
                     ref={elementRef}
                     readOnly={readOnly}
-                    style={style as React.ComponentProps<typeof TextareaAutosize>['style']}
+                    style={style}
                     disabled={disabled}
                     onChange={handleInputChange}
-                    value={value ?? ''}
+                    onBlur={handleInputBlur}
+                    value={immediateValue ?? ''}
                     autoComplete={autoComplete}
-                    minRows={minRows}
-                    maxRows={maxRows}
                     {...textAreaProps}
                 />
             )}

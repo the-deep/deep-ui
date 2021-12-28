@@ -4,6 +4,7 @@ import {
     isDefined,
 } from '@togglecorp/fujs';
 
+import useDebouncingTextChange from '../../hooks/useDebouncingTextChange';
 import type { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import { genericMemo } from '../../utils';
@@ -58,24 +59,15 @@ function RawInput<N extends NameType>(
         ...otherProps
     }: Props<N>,
 ) {
-    const handleChange = React.useCallback(
-        (e: React.FormEvent<HTMLInputElement>) => {
-            const {
-                currentTarget: {
-                    value: v,
-                },
-            } = e;
-
-            if (onChange) {
-                onChange(
-                    v === '' ? undefined : v,
-                    name,
-                    e,
-                );
-            }
-        },
-        [name, onChange],
-    );
+    const {
+        value: immediateValue,
+        onInputChange: handleInputChange,
+        onInputBlur: handleInputBlur,
+    } = useDebouncingTextChange({
+        name,
+        value,
+        onChange,
+    });
 
     const themeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
@@ -83,9 +75,10 @@ function RawInput<N extends NameType>(
         <input
             ref={elementRef}
             className={_cs(className, styles.rawInput, themeClassName)}
-            onChange={handleChange}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            value={immediateValue ?? ''}
             name={isDefined(name) ? String(name) : undefined}
-            value={value ?? ''}
             autoComplete={autoComplete}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...otherProps}

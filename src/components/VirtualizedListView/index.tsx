@@ -1,11 +1,12 @@
-import React from 'react';
-import { _cs } from '@togglecorp/fujs';
+import React, { useEffect, useCallback, useMemo } from 'react';
+import { _cs, isNotDefined } from '@togglecorp/fujs';
 
 import ListView, { Props as ListViewProps } from '../ListView';
 import {
     OptionKey,
     GroupCommonProps,
 } from '../List';
+import useSizeTracking from '../../hooks/useSizeTracking';
 
 import styles from './styles.css';
 
@@ -30,48 +31,74 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
     } = props;
 
     const [scrollOffset, setScrollOffset] = React.useState<number | undefined>(undefined);
+
     const internalRef = React.useRef<HTMLDivElement>(null);
     const elementRef = elementRefFromProps ?? internalRef;
     const idleCallbackRef = React.useRef<number | undefined>();
 
-    React.useEffect(() => {
-        const itemIndex = data.findIndex((d, i) => (keySelector(d, i) === scrollToItemKey));
-        if (elementRef.current) {
-            elementRef.current.scrollTop = itemIndex * itemHeight;
-        }
-    }, [scrollToItemKey, data, keySelector, itemHeight, elementRef]);
+    const size = useSizeTracking(elementRef);
+    const height = size?.height;
 
-    const setScrollOffsetFromElement = React.useCallback(() => {
-        if (idleCallbackRef.current) {
-            window.cancelIdleCallback(idleCallbackRef.current);
-        }
+    const handleScroll = useCallback(
+        (e: React.UIEvent<HTMLDivElement>) => {
+            if (e.target !== elementRef.current) {
+                return;
+            }
 
-        idleCallbackRef.current = window.requestIdleCallback(() => {
+            if (idleCallbackRef.current) {
+                window.cancelIdleCallback(idleCallbackRef.current);
+            }
+
+            idleCallbackRef.current = window.requestIdleCallback(() => {
+                if (elementRef.current) {
+                    setScrollOffset(elementRef.current.scrollTop);
+                }
+            }, { timeout: 200 });
+        },
+        [elementRef],
+    );
+
+    // Handle scroll to element
+    useEffect(
+        () => {
+            if (elementRef.current) {
+                const itemIndex = data.findIndex(
+                    (d, i) => (keySelector(d, i) === scrollToItemKey),
+                );
+                elementRef.current.scrollTop = itemIndex * itemHeight;
+            }
+        },
+        [scrollToItemKey, data, keySelector, itemHeight, elementRef],
+    );
+
+    // Initially set scroll offset
+    useEffect(
+        () => {
             if (elementRef.current) {
                 setScrollOffset(elementRef.current.scrollTop);
             }
-        }, { timeout: 200 });
-    }, [elementRef]);
+        },
+        [elementRef],
+    );
 
     const [
         renderData,
         topDummyHeight,
         bottomDummyHeight,
-    ] = React.useMemo(() => {
-        if (!elementRef.current) {
-            return [[], 0, 0];
-        }
-
-        if (
-            !data
-            || data.length === 0
-            || data.length <= (2 * buffer)
-        ) {
+    ] = useMemo(() => {
+        if (data.length <= 2 * buffer) {
             return [data, 0, 0];
         }
 
-        const containerHeight = elementRef.current.getBoundingClientRect().height;
-        const startIndex = Math.max(0, (Math.floor((scrollOffset ?? 0) / itemHeight) - buffer));
+        if (isNotDefined(height)) {
+            return [[], 0, 0];
+        }
+
+        const containerHeight = height;
+        const startIndex = Math.max(
+            0,
+            Math.floor((scrollOffset ?? 0) / itemHeight) - buffer,
+        );
         const endIndex = Math.min(
             data.length,
             startIndex + Math.ceil(containerHeight / itemHeight) + 2 * buffer,
@@ -82,20 +109,25 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
             startIndex * itemHeight,
             (data.length - endIndex) * itemHeight,
         ];
-    }, [data, itemHeight, scrollOffset, elementRef, buffer]);
-
-    const handleScroll = React.useCallback((e: React.UIEvent<HTMLDivElement>) => {
-        if (e.target !== elementRef.current) {
-            return;
-        }
-
-        setScrollOffsetFromElement();
-    }, [setScrollOffsetFromElement, elementRef]);
-
-    React.useEffect(setScrollOffsetFromElement, [setScrollOffsetFromElement]);
+    }, [data, itemHeight, scrollOffset, buffer, height]);
 
     const totalHeight = itemHeight * data.length;
     const listViewHeight = totalHeight - topDummyHeight - bottomDummyHeight;
+
+    const wrapperContainerStyle = useMemo(
+        () => ({
+            height: `${totalHeight}px`,
+        }),
+        [totalHeight],
+    );
+
+    const listViewStyle = useMemo(
+        () => ({
+            height: `${listViewHeight}px`,
+            transform: `translateY(${topDummyHeight}px)`,
+        }),
+        [listViewHeight, topDummyHeight],
+    );
 
     return (
         <div
@@ -103,17 +135,14 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
             className={_cs(styles.virtualizedListView, className)}
             onScroll={handleScroll}
         >
-            <div style={{ height: `${totalHeight}px` }}>
+            <div style={wrapperContainerStyle}>
                 <ListView
                     {...otherProps}
                     data={renderData}
-                    pending={pending}
+                    pending={pending || (data.length > 0 && renderData.length <= 0)}
                     direction="vertical"
                     keySelector={keySelector}
-                    style={{
-                        height: `${listViewHeight}px`,
-                        transform: `translateY(${topDummyHeight}px)`,
-                    }}
+                    style={listViewStyle}
                 />
             </div>
         </div>

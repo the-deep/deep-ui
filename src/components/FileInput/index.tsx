@@ -100,9 +100,11 @@ function FileInput<T extends NameType>(props: Props<T>) {
 
             if (!props.multiple) {
                 const [firstFile] = validFiles;
-                props.onChange(firstFile, name);
+                const onChangeFromProps = props.onChange;
+                onChangeFromProps(firstFile, name);
             } else {
-                props.onChange(validFiles, name);
+                const onChangeFromProps = props.onChange;
+                onChangeFromProps(validFiles, name);
             }
         },
         // eslint-disable-next-line react/destructuring-assignment
@@ -168,9 +170,11 @@ function FileInput<T extends NameType>(props: Props<T>) {
             }
 
             if (props.multiple) {
-                props.onChange([], name);
+                const onChangeFromProps = props.onChange;
+                onChangeFromProps([], name);
             } else {
-                props.onChange(undefined, name);
+                const onChangeFromProps = props.onChange;
+                onChangeFromProps(undefined, name);
             }
         },
         // eslint-disable-next-line react/destructuring-assignment

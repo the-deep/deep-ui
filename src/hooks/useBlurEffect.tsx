@@ -13,7 +13,7 @@ function useBlurEffect(
             }
 
             const handleDocumentClick = (e: MouseEvent) => {
-                const { current: element } = elementRef;
+                const element = elementRef.current;
                 const parent = parentRef?.current;
 
                 const isElementOrContainedInElement = element

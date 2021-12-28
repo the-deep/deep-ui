@@ -153,7 +153,10 @@ export function usePopupFeatures(
         delayedShow && !useMousePosition,
         !parentRef,
     );
-    const [mouseX, mouseY] = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
+    const mousePositions = useMousePositionTracking((useMousePosition && delayedShow) ?? false);
+    const mouseX = mousePositions?.[0];
+    const mouseY = mousePositions?.[1];
+
     const {
         placement,
         width,

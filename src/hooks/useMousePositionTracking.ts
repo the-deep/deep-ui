@@ -1,17 +1,14 @@
 import React from 'react';
 
 function useMousePositionTracking(use = true) {
-    const [x, setX] = React.useState<number|undefined>();
-    const [y, setY] = React.useState<number|undefined>();
+    const [pos, setPos] = React.useState<[number, number] | undefined>(undefined);
 
     const handleMouseMove = React.useCallback((e: MouseEvent) => {
-        setX(e.clientX);
-        setY(e.clientY);
+        setPos([e.clientX, e.clientY]);
     }, []);
 
     const handleMouseOver = React.useCallback((e: MouseEvent) => {
-        setX(e.clientX);
-        setY(e.clientY);
+        setPos([e.clientX, e.clientY]);
     }, []);
 
     React.useEffect(() => {
@@ -21,12 +18,12 @@ function useMousePositionTracking(use = true) {
         }
 
         return () => {
-            window.removeEventListener('mouseover', handleMouseMove);
+            window.removeEventListener('mouseover', handleMouseOver);
             window.removeEventListener('mousemove', handleMouseMove);
         };
     }, [use, handleMouseMove, handleMouseOver]);
 
-    return [x, y];
+    return pos;
 }
 
 export default useMousePositionTracking;

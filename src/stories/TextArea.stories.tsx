@@ -31,6 +31,12 @@ Default.args = {
     label: 'Name',
 };
 
+export const WithValue = Template.bind({});
+WithValue.args = {
+    label: 'Name',
+    value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada ut enim nec vehicula. Vestibulum sed laoreet felis. Aenean congue imperdiet felis vitae molestie. Sed tincidunt lacus a lectus volutpat, sit amet efficitur risus posuere. Vestibulum scelerisque commodo varius. Duis vitae orci turpis.',
+};
+
 export const WithIcon = Template.bind({});
 WithIcon.args = {
     icons: <IoText />,
