@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { _cs } from '@togglecorp/fujs';
 import { IoClose } from 'react-icons/io5';
 
@@ -9,23 +9,44 @@ import Button, { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
 import styles from './styles.css';
 
-export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
+enum ErrorType {
+    maxFileSizeExceeded = 'MAX_FILE_SIZE_EXCEEDED',
+    invalidFileType = 'INVALID_FILE_TYPE',
+}
+type ValidityStatus = {
+    isValid: true;
+} | {
+    isValid: false;
+    errorType: ErrorType;
+}
+export function isValidFile(
+    file: File,
+    maxFileSize: number,
+    acceptString?: string,
+): ValidityStatus {
+    if (file.size > (maxFileSize * 1024 * 1024)) {
+        return { isValid: false, errorType: ErrorType.maxFileSizeExceeded };
+    }
     // if there is no accept string, anything is valid
     if (!acceptString) {
-        return true;
+        return { isValid: true };
     }
-    const extensionMatch = /\.\w+$/.exec(fileName);
-    const mimeMatch = /^.+\//.exec(mimeType);
+    const extensionMatch = /\.\w+$/.exec(file.name);
+    const mimeMatch = /^.+\//.exec(file.type);
 
     const fileTypeList = acceptString.split(/,\s+/);
-    return fileTypeList.some((fileType) => {
+    const isFileValid = fileTypeList.some((fileType) => {
         // check mimeType such as image/png or image/*
-        if (mimeType === fileType || (!!mimeMatch && `${mimeMatch[0]}*` === fileType)) {
-            return true;
+        if (file.type === fileType || (!!mimeMatch && `${mimeMatch[0]}*` === fileType)) {
+            return { isValid: true };
         }
         return !!extensionMatch && extensionMatch[0].toLowerCase() === fileType.toLowerCase();
     });
-};
+    if (!isFileValid) {
+        return { isValid: false, errorType: ErrorType.invalidFileType };
+    }
+    return { isValid: true };
+}
 
 type NameType = string | number | undefined;
 
@@ -38,6 +59,7 @@ export type Props<T extends NameType> = InheritedProps<T> & {
 
     overrideStatus?: boolean;
     status?: string;
+    maxFileSize?: number; // NOTE: maxFileSize is in MB.
 } & ({
     multiple: true;
     value: File[] | undefined | null;
@@ -81,19 +103,51 @@ function FileInput<T extends NameType>(props: Props<T>) {
         labelClassName,
         children,
         variant,
+        maxFileSize = 10, // 10MB is default max file size
         ...fileInputProps
     } = props;
 
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
+    const [internalError, setInternalError] = useState<string>();
 
     const handleFiles = useCallback(
         (files: FileList | null) => {
+            setInternalError(undefined);
             if (!files || !props.onChange) {
                 return;
             }
 
             const fileList = Array.from(files);
-            const validFiles = fileList.filter((f) => isValidFile(f.name, f.type, accept));
+            let numberOfFilesExceedSize = 0;
+            let numberOfInvalidFiles = 0;
+
+            const validFiles = fileList.filter((f) => {
+                const validity = isValidFile(f, maxFileSize, accept);
+                if (!validity.isValid) {
+                    if (validity.errorType === ErrorType.invalidFileType) {
+                        numberOfInvalidFiles += 1;
+                    } else {
+                        numberOfFilesExceedSize += 1;
+                    }
+                }
+                return validity.isValid;
+            });
+
+            if (numberOfFilesExceedSize > 0 && numberOfInvalidFiles > 0) {
+                const isSingularFileSizeError = numberOfFilesExceedSize === 1;
+                const isSingularInvalidFileError = numberOfInvalidFiles === 1;
+                setInternalError(`${numberOfFilesExceedSize} ${isSingularFileSizeError ? 'file exceeds' : 'files exceed'} file size limit of ${maxFileSize} MB.
+                    ${numberOfFilesExceedSize} ${isSingularInvalidFileError ? 'file is' : 'files are'} invalid. They are removed from selection.`);
+            } else if (numberOfFilesExceedSize > 0) {
+                const isSingularError = numberOfFilesExceedSize === 1;
+                setInternalError(`${numberOfFilesExceedSize} ${isSingularError ? 'file exceeds' : 'files exceed'} file size limit of ${maxFileSize} MB.
+                    ${isSingularError ? 'It is' : 'They are'} removed from selection.`);
+            } else if (numberOfInvalidFiles > 0) {
+                const isSingularError = numberOfInvalidFiles === 1;
+                setInternalError(`${numberOfFilesExceedSize} ${isSingularError ? 'file is' : 'files are'} invalid.
+                    ${isSingularError ? 'It is' : 'They are'} removed from selection.`);
+            }
+
             if (validFiles.length <= 0) {
                 return;
             }
@@ -108,11 +162,13 @@ function FileInput<T extends NameType>(props: Props<T>) {
             }
         },
         // eslint-disable-next-line react/destructuring-assignment
-        [accept, props.multiple, props.onChange, name],
+        [accept, props.multiple, props.onChange, name, maxFileSize],
     );
 
     const handleChange = useCallback((
-        _: string | undefined, __: T, e?: React.FormEvent<HTMLInputElement>,
+        _: string | undefined,
+        __: T,
+        e?: React.FormEvent<HTMLInputElement>,
     ) => {
         if (e) {
             const { files } = (e.target as HTMLInputElement);
@@ -165,6 +221,7 @@ function FileInput<T extends NameType>(props: Props<T>) {
 
     const handleClear = useCallback(
         () => {
+            setInternalError(undefined);
             if (!props.onChange) {
                 return;
             }
@@ -235,7 +292,7 @@ function FileInput<T extends NameType>(props: Props<T>) {
             actionsContainerClassName={actionsContainerClassName}
             className={_cs(className, styles.fileInput)}
             disabled={disabled}
-            error={error}
+            error={error ?? internalError}
             errorContainerClassName={errorContainerClassName}
             hint={hint}
             hintContainerClassName={hintContainerClassName}
