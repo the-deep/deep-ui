@@ -57,16 +57,19 @@ const columns = [
         'id',
         'ID',
         (item) => item.id,
+        { columnWidth: 300 },
     ),
     createStringColumn<Program, number>(
         'name',
         'Name',
         (item) => item.name,
+        { columnWidth: 300 },
     ),
     createNumberColumn<Program, number>(
         'budget',
         'Budget',
         (item) => item.budget,
+        { columnWidth: 300 },
     ),
 ];
 

@@ -24,7 +24,8 @@ export type Props<
     C
 > & Omit<MessageProps, MessagePropOmission> & {
     className?: string;
-    contentClassName?: string,
+    contentClassName?: string;
+    overflowContainerClassName?: string;
     compactEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
     messageShown?: boolean;
@@ -62,6 +63,7 @@ function TableView<
         compactPendingMessage,
         messageShown = false,
         messageIconShown = false,
+        overflowContainerClassName,
         onReload,
         ...otherTableProps
     } = props;
@@ -77,11 +79,13 @@ function TableView<
                 pending && styles.pending,
             )}
         >
-            <Table
-                className={_cs(styles.table, contentClassName)}
-                data={errored ? undefined : data}
-                {...otherTableProps}
-            />
+            <div className={_cs(styles.overflowContainer, overflowContainerClassName)}>
+                <Table
+                    className={_cs(styles.table, contentClassName)}
+                    data={errored ? undefined : data}
+                    {...otherTableProps}
+                />
+            </div>
             <Message
                 empty={empty}
                 errored={errored}
