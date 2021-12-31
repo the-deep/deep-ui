@@ -168,11 +168,11 @@ function FileInput<T extends NameType>(props: Props<T>) {
     const handleChange = useCallback((
         _: string | undefined,
         __: T,
-        e?: React.FormEvent<HTMLInputElement>,
+        e?: React.ChangeEvent<HTMLInputElement>,
     ) => {
         if (e) {
-            const { files } = (e.target as HTMLInputElement);
-            handleFiles(files);
+            handleFiles(e.target.files);
+            e.target.value = '';
         }
     }, [handleFiles]);
 

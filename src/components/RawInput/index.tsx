@@ -32,7 +32,7 @@ export interface Props<N extends NameType> extends Omit<React.HTMLProps<HTMLInpu
     onChange?: (
         value: string | undefined,
         name: N,
-        e?: React.FormEvent<HTMLInputElement> | undefined,
+        e?: React.ChangeEvent<HTMLInputElement> | undefined,
     ) => void;
     /**
      * UI mode: light or dark
@@ -69,6 +69,7 @@ function RawInput<N extends NameType>(
         onChange,
     });
 
+    console.warn('value', value);
     const themeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     return (
