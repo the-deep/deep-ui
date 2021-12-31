@@ -69,7 +69,6 @@ function RawInput<N extends NameType>(
         onChange,
     });
 
-    console.warn('value', value);
     const themeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
 
     return (
