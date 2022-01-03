@@ -5,10 +5,11 @@ const postcssNormalize = require('postcss-normalize');
 
 const base = process.cwd();
 const src = path.resolve(base, '../src/');
+const stories = path.resolve(base, './stories/');
 
 module.exports = {
     stories: [
-        "../../src/stories/*.stories.tsx",
+        "../stories/*.stories.tsx",
     ],
     addons: [
         "@storybook/addon-links",
@@ -25,7 +26,7 @@ module.exports = {
         config.module.rules
             .push({
                 test: /\.css$/,
-                include: src,
+                include: [src, stories],
                 use: [
                     require.resolve('style-loader'),
                     {
