@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoCloudUpload } from 'react-icons/io5';
-import FileInput, { Props as FileInputProps } from '#components/FileInput';
+import FileInput, { Props as FileInputProps } from '../components/FileInput';
 
 export default {
     title: 'Input/FileInput',

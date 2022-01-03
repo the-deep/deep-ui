@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import ColorInput, { Props as ColorInputProps } from '#components/ColorInput';
+import ColorInput, { Props as ColorInputProps } from '../components/ColorInput';
 
 export default {
     title: 'Input/ColorInput',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 interface Props {
@@ -50,4 +51,4 @@ function Cover(props: Props) {
     );
 }
 
-export default Cover;
+export default genericMemo(Cover);

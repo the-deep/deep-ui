@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 
 import ExpandableContainer, {
     Props as ExpandableContainerProps,
-} from '#components/ExpandableContainer';
+} from '../components/ExpandableContainer';
 
 export default {
     title: 'View/ExpandableContainer',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import ImagePreview, { Props as ImagePreviewProps } from '#components/ImagePreview';
+import ImagePreview, { Props as ImagePreviewProps } from '../components/ImagePreview';
 
 export default {
     title: 'View/ImagePreview',

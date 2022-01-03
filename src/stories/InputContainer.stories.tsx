@@ -2,8 +2,8 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag, IoClose } from 'react-icons/io5';
 
-import InputContainer, { Props as InputContainerProps } from '#components/InputContainer';
-import Button from '#components/Button';
+import InputContainer, { Props as InputContainerProps } from '../components/InputContainer';
+import Button from '../components/Button';
 
 export default {
     title: 'Input/Private/InputContainer',

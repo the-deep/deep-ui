@@ -2,8 +2,8 @@ import React from 'react';
 import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
 import { IoCheckmarkDone } from 'react-icons/io5';
-import SelectInputContainer, { Props as SelectInputContainerProps } from '#components/SelectInputContainer';
-import Button from '#components/Button';
+import SelectInputContainer, { Props as SelectInputContainerProps } from '../components/SelectInputContainer';
+import Button from '../components/Button';
 
 export default {
     title: 'Input/Private/SelectInputContainer',
@@ -41,11 +41,13 @@ interface OptionItemProps {
     children: React.ReactNode;
 }
 
-const OptionItem = ({ children }: OptionItemProps) => (
-    <div>
-        { children }
-    </div>
-);
+function OptionItem({ children }: OptionItemProps) {
+    return (
+        <div>
+            { children }
+        </div>
+    );
+}
 
 export const Default = Template.bind({});
 Default.args = {

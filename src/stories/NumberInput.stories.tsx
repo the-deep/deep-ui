@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoCalculatorOutline } from 'react-icons/io5';
 
-import NumberInput, { Props as NumberInputProps } from '#components/NumberInput';
+import NumberInput, { Props as NumberInputProps } from '../components/NumberInput';
 
 export default {
     title: 'Input/NumberInput',

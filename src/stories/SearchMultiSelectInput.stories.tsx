@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import SearchMultiSelectInput, {
     Props as SearchMultiSelectInputProps,
-} from '#components/SearchMultiSelectInput';
+} from '../components/SearchMultiSelectInput';
 import useQuery, { entityListTransformer } from '../utils/useQuery';
 
 export default {

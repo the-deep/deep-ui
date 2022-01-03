@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import Modal, { Props as ModalProps } from '#components/Modal';
+import Modal, { Props as ModalProps } from '../components/Modal';
 
 export default {
     title: 'View/Modal',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import DismissibleList, {
     Props as DismissibleListProps,
-} from '#components/DismissibleList';
+} from '../components/DismissibleList';
 
 export default {
     title: 'Input/DismissibleList',

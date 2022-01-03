@@ -5,6 +5,7 @@ import useConfirmation, {
     Options as ConfirmOptions,
     ExtraProps as ConfirmExtraProps,
 } from '../../hooks/useConfirmation';
+import { genericMemo } from '../../utils';
 
 // eslint-disable-next-line
 export interface Props<N extends string | number | undefined, T = string> extends Omit<QuickActionButtonProps<N>, 'onClick'>, ConfirmOptions<T> {
@@ -64,4 +65,4 @@ function QuickActionConfirmButton<N extends string | number | undefined, T = str
     );
 }
 
-export default QuickActionConfirmButton;
+export default genericMemo(QuickActionConfirmButton);

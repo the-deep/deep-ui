@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import Alert, { Props as AlertProps } from '#components/Alert';
+import Alert, { Props as AlertProps } from '../components/Alert';
 
 export default {
     title: 'View/Alert',

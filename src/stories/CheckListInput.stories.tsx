@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import CheckListInput, { Props as CheckListInputProps } from '#components/CheckListInput';
+import CheckListInput, { Props as CheckListInputProps } from '../components/CheckListInput';
 
 export default {
     title: 'Input/CheckListInput',

@@ -4,8 +4,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import filesize from 'rollup-plugin-filesize';
 // import autoprefixer from 'autoprefixer';
-import { eslint } from 'rollup-plugin-eslint';
-import stylelint from 'rollup-plugin-stylelint';
+import eslint from '@rollup/plugin-eslint';
+import { visualizer } from 'rollup-plugin-visualizer';
 import image from '@rollup/plugin-image';
 
 import postcssPresetEnv from 'postcss-preset-env';
@@ -17,7 +17,6 @@ import pkg from './package.json';
 const INPUT_FILE_PATH = 'src/index.tsx';
 
 const PLUGINS = [
-    stylelint(),
     postcss({
         extract: true,
         modules: {
@@ -36,7 +35,8 @@ const PLUGINS = [
         include: ['**/*.jsx', '**/*.js', '**/*.ts', '**/*.tsx'],
     }),
     babel({
-        babelHelpers: 'runtime',
+        // babelHelpers: 'runtime',
+        babelHelpers: 'bundled',
         exclude: 'node_modules/**',
         extensions: ['.jsx', '.js', '.ts', '.tsx'],
     }),
@@ -45,8 +45,9 @@ const PLUGINS = [
         extensions: ['.jsx', '.js', '.ts', '.tsx'],
     }),
     commonjs(),
-    filesize(),
     image(),
+    filesize(),
+    visualizer({ template: 'sunburst' }),
 ];
 
 const OUTPUT_DATA = [

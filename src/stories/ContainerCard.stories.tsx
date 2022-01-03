@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag, IoClose, IoChatboxOutline } from 'react-icons/io5';
 
-import ContainerCard, { Props as ContainerCardProps } from '#components/ContainerCard';
+import ContainerCard, { Props as ContainerCardProps } from '../components/ContainerCard';
 
 export default {
     title: 'View/ContainerCard',

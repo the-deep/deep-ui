@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import Kraken, { Props as KrakenProps } from '#components/Kraken';
+import Kraken, { Props as KrakenProps } from '../components/Kraken';
 
 export default {
     title: 'View/Kraken',

@@ -4,7 +4,7 @@ import { useArgs } from '@storybook/client-api';
 import { Story } from '@storybook/react/types-6-0';
 import { IoText } from 'react-icons/io5';
 
-import PasswordInput, { Props as PasswordInputProps } from '#components/PasswordInput';
+import PasswordInput, { Props as PasswordInputProps } from '../components/PasswordInput';
 
 export default {
     title: 'Input/PasswordInput',

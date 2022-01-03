@@ -2,14 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import TableView, {
-    Props as TableViewProps,
-} from '../components/TableView';
-import { Column } from '#components/Table';
+import { Column } from '../components/Table';
 import {
     createStringColumn,
     createNumberColumn,
-} from '#components/Table/predefinedColumns';
+} from '../components/Table/predefinedColumns';
+import TableView, {
+    Props as TableViewProps,
+} from '../components/TableView';
 import Checkbox from '../components/Checkbox';
 
 export default {

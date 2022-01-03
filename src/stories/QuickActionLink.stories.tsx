@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag } from 'react-icons/io5';
 
-import QuickActionLink, { Props as QuickActionLinkProps } from '#components/QuickActionLink';
+import QuickActionLink, { Props as QuickActionLinkProps } from '../components/QuickActionLink';
 
 export default {
     title: 'Action/QuickActionLink',

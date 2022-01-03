@@ -7,7 +7,7 @@ import InputError from '../InputError';
 import InputHint from '../InputHint';
 import List from '../List';
 import Checkbox from '../Checkbox';
-
+import { genericMemo } from '../../utils';
 import { SpacingTypes } from '../../types';
 import styles from './styles.css';
 
@@ -145,4 +145,4 @@ function CheckListInput<
     );
 }
 
-export default CheckListInput;
+export default genericMemo(CheckListInput);

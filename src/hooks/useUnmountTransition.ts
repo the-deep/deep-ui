@@ -2,14 +2,13 @@ import React from 'react';
 
 function useUnmountTransition(show: boolean | undefined) {
     const prevShow = React.useRef<boolean | undefined>();
-    const timeoutRef = React.useRef<number | undefined>();
 
     const [shouldUnmount, setShouldUnmount] = React.useState(!show);
 
     React.useEffect(() => {
+        let timeoutId: number | undefined;
         if (prevShow.current === true && !show) {
-            window.clearTimeout(timeoutRef.current);
-            timeoutRef.current = window.setTimeout(() => {
+            timeoutId = window.setTimeout(() => {
                 setShouldUnmount(true);
             }, 200);
         } else {
@@ -18,7 +17,9 @@ function useUnmountTransition(show: boolean | undefined) {
         prevShow.current = show;
 
         return () => {
-            window.clearTimeout(timeoutRef.current);
+            if (timeoutId) {
+                window.clearTimeout(timeoutId);
+            }
         };
     }, [show]);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import PendingMessage, { Props as ContainerProps } from '#components/PendingMessage';
+import PendingMessage, { Props as ContainerProps } from '../components/PendingMessage';
 
 export default {
     title: 'View/PendingMessage',

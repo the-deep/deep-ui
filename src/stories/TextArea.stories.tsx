@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoText } from 'react-icons/io5';
 
-import TextArea, { Props as TextAreaProps } from '#components/TextArea';
+import TextArea, { Props as TextAreaProps } from '../components/TextArea';
 
 export default {
     title: 'Input/TextArea',

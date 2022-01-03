@@ -6,7 +6,7 @@ import { IoText } from 'react-icons/io5';
 import TimeRangeInput, {
     Props as TimeRangeInputProps,
     Value,
-} from '#components/TimeRangeInput';
+} from '../components/TimeRangeInput';
 
 export default {
     title: 'Input/TimeRangeInput',

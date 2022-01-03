@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 import { IoClose } from 'react-icons/io5';
 
 import Header, { Props as HeaderProps } from '../Header';
+import { genericMemo } from '../../utils';
 import Footer from '../Footer';
 import Button from '../Button';
 import BodyBackdrop from '../BodyBackdrop';
@@ -141,6 +142,8 @@ function Modal(props: Props) {
                                     !props.hideCloseButton && (
                                         <Button
                                             className={closeButtonClassName}
+                                            // eslint-disable-next-line max-len
+                                            // eslint-disable-next-line react/destructuring-assignment
                                             onClick={props.onCloseButtonClick}
                                             name="close-modal"
                                             variant="action"
@@ -176,4 +179,4 @@ function Modal(props: Props) {
     );
 }
 
-export default Modal;
+export default genericMemo(Modal);

@@ -6,6 +6,7 @@ import {
 } from 'react-color';
 
 import { useDropdownFeatures } from '../DropdownMenu';
+import { genericMemo } from '../../utils';
 import RawButton from '../RawButton';
 import Popup from '../Popup';
 
@@ -70,4 +71,4 @@ function ColorInput<N extends NameType>(props: Props<N>) {
     );
 }
 
-export default ColorInput;
+export default genericMemo(ColorInput);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import RawInput, { Props as RawInputProps } from '#components/RawInput';
+import RawInput, { Props as RawInputProps } from '../components/RawInput';
 
 export default {
     title: 'Input/RawInput',

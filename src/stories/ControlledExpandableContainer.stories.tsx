@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 
 import ControlledExpandableContainer, {
     Props as ControlledExpandableContainerProps,
-} from '#components/ControlledExpandableContainer';
+} from '../components/ControlledExpandableContainer';
 
 export default {
     title: 'View/ControlledExpandableContainer',

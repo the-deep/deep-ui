@@ -6,7 +6,7 @@ import {
     IoCheckmarkCircle,
 } from 'react-icons/io5';
 
-import DraggableContent, { Props as DraggableContentProps } from '#components/DraggableContent';
+import DraggableContent, { Props as DraggableContentProps } from '../components/DraggableContent';
 
 export default {
     title: 'View/DraggableContent',

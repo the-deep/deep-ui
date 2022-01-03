@@ -8,7 +8,7 @@ import {
     IoExpand,
 } from 'react-icons/io5';
 
-import QuickActionConfirmButton, { Props as QuickActionConfirmButtonProps } from '#components/QuickActionConfirmButton';
+import QuickActionConfirmButton, { Props as QuickActionConfirmButtonProps } from '../components/QuickActionConfirmButton';
 
 export default {
     title: 'Action/QuickActionConfirmButton',

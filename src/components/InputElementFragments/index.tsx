@@ -1,5 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -43,4 +44,4 @@ function ElementFragments(props: Props) {
     );
 }
 
-export default ElementFragments;
+export default genericMemo(ElementFragments);

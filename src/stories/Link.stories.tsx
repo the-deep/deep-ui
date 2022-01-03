@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoAccessibility, IoShuffle } from 'react-icons/io5';
 
-import Link, { Props as LinkProps } from '#components/Link';
+import Link, { Props as LinkProps } from '../components/Link';
 
 export default {
     title: 'Action/Link',

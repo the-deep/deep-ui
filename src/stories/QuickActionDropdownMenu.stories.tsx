@@ -4,8 +4,8 @@ import { IoExitOutline } from 'react-icons/io5';
 
 import QuickActionDropdownMenu, {
     Props as QuickActionDropdownMenuProps,
-} from '#components/QuickActionDropdownMenu';
-import DropdownMenuItem, { Separator } from '#components/DropdownMenuItem';
+} from '../components/QuickActionDropdownMenu';
+import DropdownMenuItem, { Separator } from '../components/DropdownMenuItem';
 
 export default {
     title: 'View/QuickActionDropdownMenu',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import ConfirmButton, { Props as ConfirmButtonProps } from '#components/ConfirmButton';
+import ConfirmButton, { Props as ConfirmButtonProps } from '../components/ConfirmButton';
 
 export default {
     title: 'Action/ConfirmButton',

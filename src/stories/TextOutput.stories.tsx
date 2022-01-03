@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import TextOutput, { Props as TextOutputProps } from '#components/TextOutput';
+import TextOutput, { Props as TextOutputProps } from '../components/TextOutput';
 
 export default {
     title: 'View/TextOutput',

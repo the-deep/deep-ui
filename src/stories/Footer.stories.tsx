@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoChatboxOutline } from 'react-icons/io5';
 
-import Footer, { Props as FooterProps } from '#components/Footer';
+import Footer, { Props as FooterProps } from '../components/Footer';
 
 export default {
     title: 'View/Private/Footer',

@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import NumberOutput from '../NumberOutput';
+import { genericMemo } from '../../utils';
 import { SpacingTypes } from '../../types';
 
 import styles from './styles.css';
@@ -59,4 +60,4 @@ function CompactInformationCard(props: Props) {
     );
 }
 
-export default CompactInformationCard;
+export default genericMemo(CompactInformationCard);

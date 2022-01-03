@@ -64,15 +64,20 @@ function TextOutput(props: Props) {
     if (props.valueType === 'number') {
         value = (
             <NumberOutput
+                // eslint-disable-next-line react/destructuring-assignment
                 value={props.value}
+                // eslint-disable-next-line react/destructuring-assignment
                 {...props.valueProps}
             />
         );
     // eslint-disable-next-line react/destructuring-assignment
     } else if (props.valueType === 'date') {
+        // eslint-disable-next-line react/destructuring-assignment
         value = props.value ? (
             <DateOutput
+                // eslint-disable-next-line react/destructuring-assignment
                 value={props.value}
+                // eslint-disable-next-line react/destructuring-assignment
                 {...props.valueProps}
             />
         ) : null;

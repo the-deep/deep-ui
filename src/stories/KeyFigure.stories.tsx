@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import KeyFigure, { Props as KeyFigureProps } from '#components/KeyFigure';
+import KeyFigure, { Props as KeyFigureProps } from '../components/KeyFigure';
 
 export default {
     title: 'View/KeyFigure',

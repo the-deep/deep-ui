@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import DateRangeDualInput, { Props as DateRangeDualInputProps } from '#components/DateRangeDualInput';
+import DateRangeDualInput, { Props as DateRangeDualInputProps } from '../components/DateRangeDualInput';
 
 export default {
     title: 'Input/DateRangeDualInput',

@@ -3,7 +3,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import DateInput, { Props as DateInputProps } from '#components/DateInput';
+import DateInput, { Props as DateInputProps } from '../components/DateInput';
 
 export default {
     title: 'Input/DateInput',

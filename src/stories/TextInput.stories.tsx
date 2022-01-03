@@ -4,7 +4,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoText } from 'react-icons/io5';
 
-import TextInput, { Props as TextInputProps } from '#components/TextInput';
+import TextInput, { Props as TextInputProps } from '../components/TextInput';
 
 export default {
     title: 'Input/TextInput',

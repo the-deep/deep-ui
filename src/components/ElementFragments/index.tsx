@@ -3,7 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import Icons from '../Icons';
 import Actions from '../Actions';
-
+import { genericMemo } from '../../utils';
 import { SpacingTypes } from '../../types';
 import styles from './styles.css';
 
@@ -82,4 +82,4 @@ function ElementFragments(props: Props) {
     );
 }
 
-export default ElementFragments;
+export default genericMemo(ElementFragments);

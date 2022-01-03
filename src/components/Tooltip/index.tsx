@@ -78,12 +78,12 @@ function Tooltip(props: Props) {
     }, [hovered, delay]);
 
     React.useEffect(() => {
-        if (delayedShow && tooltipRef.current) {
-            tooltipRef.current.addEventListener('mouseenter', handleTooltipMouseEnter);
-            tooltipRef.current.addEventListener('mouseleave', handleTooltipMouseLeave);
-        }
-
         const tooltipEl = tooltipRef.current;
+
+        if (delayedShow && tooltipEl) {
+            tooltipEl.addEventListener('mouseenter', handleTooltipMouseEnter);
+            tooltipEl.addEventListener('mouseleave', handleTooltipMouseLeave);
+        }
 
         return () => {
             if (tooltipEl) {
@@ -96,15 +96,17 @@ function Tooltip(props: Props) {
     React.useEffect(() => {
         const { current: el } = dummyRef;
 
-        if (el && el.parentElement) {
-            el.parentElement.addEventListener('mouseenter', handleParentMouseEnter);
-            el.parentElement.addEventListener('mouseleave', handleParentMouseLeave);
+        const parentElement = el?.parentElement;
+
+        if (parentElement) {
+            parentElement.addEventListener('mouseenter', handleParentMouseEnter);
+            parentElement.addEventListener('mouseleave', handleParentMouseLeave);
         }
 
         return () => {
-            if (el && el.parentElement) {
-                el.parentElement.removeEventListener('mouseenter', handleParentMouseEnter);
-                el.parentElement.removeEventListener('mouseleave', handleParentMouseLeave);
+            if (parentElement) {
+                parentElement.removeEventListener('mouseenter', handleParentMouseEnter);
+                parentElement.removeEventListener('mouseleave', handleParentMouseLeave);
             }
         };
     }, [dummyRef, handleParentMouseEnter, handleParentMouseLeave]);

@@ -2,8 +2,8 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoExitOutline } from 'react-icons/io5';
 
-import DropdownMenu, { Props as DropdownMenuProps } from '#components/DropdownMenu';
-import DropdownMenuItem, { Separator } from '#components/DropdownMenuItem';
+import DropdownMenu, { Props as DropdownMenuProps } from '../components/DropdownMenu';
+import DropdownMenuItem, { Separator } from '../components/DropdownMenuItem';
 import styles from './styles.css';
 
 export default {

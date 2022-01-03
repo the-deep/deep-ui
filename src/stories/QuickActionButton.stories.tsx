@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag } from 'react-icons/io5';
 
-import QuickActionButton, { Props as QuickActionButtonProps } from '#components/QuickActionButton';
+import QuickActionButton, { Props as QuickActionButtonProps } from '../components/QuickActionButton';
 
 export default {
     title: 'Action/QuickActionButton',

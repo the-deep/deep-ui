@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import CollapsibleContainer, { Props as CollapsibleContainerProps } from '#components/CollapsibleContainer';
+import CollapsibleContainer, { Props as CollapsibleContainerProps } from '../components/CollapsibleContainer';
 
 export default {
     title: 'View/CollapsibleContainer',

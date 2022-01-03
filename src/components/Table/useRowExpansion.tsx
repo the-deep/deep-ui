@@ -28,7 +28,7 @@ export interface ExpansionOptions {
 function useRowExpansion<D, K extends string | number>(
     expansionRowChildren: ExpansionRowChildrenProps<D, K>,
     options: ExpansionOptions = {},
-    expandOnRowClick?: boolean,
+    expandOnRowClick = false,
 ) {
     const [expandedRowKey, setExpandedRowKey] = useState<string | number | undefined>();
 

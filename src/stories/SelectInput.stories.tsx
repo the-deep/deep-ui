@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import SelectInput, { Props as SelectInputProps } from '#components/SelectInput';
+import SelectInput, { Props as SelectInputProps } from '../components/SelectInput';
 
 export default {
     title: 'Input/SelectInput',

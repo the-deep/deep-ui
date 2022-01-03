@@ -4,12 +4,11 @@ const postcssNested = require('postcss-nested');
 const postcssNormalize = require('postcss-normalize');
 
 const base = process.cwd();
-const src = path.resolve(base, 'src/');
+const src = path.resolve(base, '../src/');
 
 module.exports = {
     stories: [
-        "../src/**/*.stories.mdx",
-        "../src/**/*.stories.@(js|jsx|ts|tsx)",
+        "../../src/stories/*.stories.tsx",
     ],
     addons: [
         "@storybook/addon-links",
@@ -19,6 +18,7 @@ module.exports = {
         "storybook-dark-mode",
         "storybook-addon-designs",
     ],
+    framework: '@storybook/react',
     webpackFinal: async (config, { configType }) => {
         config.module.rules = config.module.rules
             .filter(item => String(item.test) !== String(/\.css$/))

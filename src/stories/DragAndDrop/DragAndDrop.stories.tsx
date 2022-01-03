@@ -1,8 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import DraggableContent from '#components/DraggableContent';
-import DropContainer from '#components/DropContainer';
+import DraggableContent from '../components/DraggableContent';
+import DropContainer from '../components/DropContainer';
 
 import styles from './styles.css';
 

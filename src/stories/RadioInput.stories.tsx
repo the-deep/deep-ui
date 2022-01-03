@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import RadioInput, { Props as RadioInputProps } from '#components/RadioInput';
+import RadioInput, { Props as RadioInputProps } from '../components/RadioInput';
 
 export default {
     title: 'Input/RadioInput',

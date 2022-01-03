@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import RawButton, { Props as RawButtonProps } from '#components/RawButton';
+import RawButton, { Props as RawButtonProps } from '../components/RawButton';
 
 export default {
     title: 'Action/Private/RawButton',

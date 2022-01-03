@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag } from 'react-icons/io5';
 
-import PercentageInformationCard, { Props as PercentageInformationCardProps } from '#components/PercentageInformationCard';
+import PercentageInformationCard, { Props as PercentageInformationCardProps } from '../components/PercentageInformationCard';
 
 export default {
     title: 'View/PercentageInformationCard',

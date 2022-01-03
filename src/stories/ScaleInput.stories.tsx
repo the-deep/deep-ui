@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import ScaleInput, { Props as ScaleInputProps } from '#components/ScaleInput';
+import ScaleInput, { Props as ScaleInputProps } from '../components/ScaleInput';
 
 export default {
     title: 'Input/ScaleInput',

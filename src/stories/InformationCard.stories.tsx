@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag } from 'react-icons/io5';
 
-import InformationCard, { Props as InformationCardProps } from '#components/InformationCard';
+import InformationCard, { Props as InformationCardProps } from '../components/InformationCard';
 
 export default {
     title: 'View/InformationCard',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
-import Actions, { Props as ActionsProps } from '#components/Actions';
+import Actions, { Props as ActionsProps } from '../components/Actions';
 
 export default {
     title: 'View/Private/Actions',

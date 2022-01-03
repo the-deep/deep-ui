@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import TimeRangeOutput, { Props as TimeRangeOutputProps } from '#components/TimeRangeOutput';
+import TimeRangeOutput, { Props as TimeRangeOutputProps } from '../components/TimeRangeOutput';
 
 export default {
     title: 'View/TimeRangeOutput',

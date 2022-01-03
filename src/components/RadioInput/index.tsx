@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import InputLabel from '../InputLabel';
 import InputError from '../InputError';
 import InputHint from '../InputHint';
@@ -148,4 +149,4 @@ function RadioInput<
     );
 }
 
-export default RadioInput;
+export default genericMemo(RadioInput);

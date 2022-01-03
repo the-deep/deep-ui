@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoTimer } from 'react-icons/io5';
 
-import TimeInput, { Props as TimeInputProps } from '#components/TimeInput';
+import TimeInput, { Props as TimeInputProps } from '../components/TimeInput';
 
 export default {
     title: 'Input/TimeInput',

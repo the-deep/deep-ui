@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import { TabKey, TabContext } from '../TabContext';
 import styles from './styles.css';
 
@@ -11,7 +12,7 @@ export interface Props extends React.HTMLProps<HTMLDivElement> {
     retainMount?: 'eager' | 'lazy' | 'none';
 }
 
-export default function TabPanel(props: Props) {
+function TabPanel(props: Props) {
     const context = React.useContext(TabContext);
 
     const {
@@ -61,3 +62,5 @@ export default function TabPanel(props: Props) {
         />
     );
 }
+
+export default genericMemo(TabPanel);

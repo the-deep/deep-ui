@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import DateOutput, { Props as DateOutputProps } from '#components/DateOutput';
+import DateOutput, { Props as DateOutputProps } from '../components/DateOutput';
 
 export default {
     title: 'View/DateOutput',

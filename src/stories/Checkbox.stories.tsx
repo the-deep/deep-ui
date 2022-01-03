@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
-import Checkbox, { Props as CheckboxProps } from '#components/Checkbox';
+import Checkbox, { Props as CheckboxProps } from '../components/Checkbox';
 
 export default {
     title: 'Input/Checkbox',

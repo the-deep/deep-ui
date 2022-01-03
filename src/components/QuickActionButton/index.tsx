@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import Button, { Props as ButtonProps } from '../Button';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -24,4 +25,4 @@ function QuickActionButton<T extends string | number | undefined>(props: Props<T
     );
 }
 
-export default QuickActionButton;
+export default genericMemo(QuickActionButton);

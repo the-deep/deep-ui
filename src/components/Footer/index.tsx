@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import ElementFragments from '../ElementFragments';
 import QuickActionGroup from '../QuickActionGroup';
+import { genericMemo } from '../../utils';
 
 import { SpacingTypes } from '../../types';
 import styles from './styles.css';
@@ -76,4 +77,4 @@ function Footer(props: Props) {
     );
 }
 
-export default Footer;
+export default genericMemo(Footer);

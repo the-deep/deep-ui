@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag, IoClose } from 'react-icons/io5';
 
-import ElementFragments, { Props as ElementFragmentsProps } from '#components/ElementFragments';
+import ElementFragments, { Props as ElementFragmentsProps } from '../components/ElementFragments';
 
 export default {
     title: 'View/Private/ElementFragments',

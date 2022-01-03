@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import NumberOutput, { Props as NumberOutputProps } from '#components/NumberOutput';
+import NumberOutput, { Props as NumberOutputProps } from '../components/NumberOutput';
 
 export default {
     title: 'View/NumberOutput',

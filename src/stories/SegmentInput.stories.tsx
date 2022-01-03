@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { IoLogoApple } from 'react-icons/io5';
 
-import SegmentInput, { Props as SegmentInputProps } from '#components/SegmentInput';
+import SegmentInput, { Props as SegmentInputProps } from '../components/SegmentInput';
 
 export default {
     title: 'Input/SegmentInput',

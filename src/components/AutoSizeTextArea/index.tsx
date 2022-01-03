@@ -1,5 +1,6 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -30,4 +31,4 @@ function AutoSizeTextArea(props: AutoSizeTextAreaProps) {
     );
 }
 
-export default AutoSizeTextArea;
+export default genericMemo(AutoSizeTextArea);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import DateRangeOutput, { Props as DateRangeOutputProps } from '#components/DateRangeOutput';
+import DateRangeOutput, { Props as DateRangeOutputProps } from '../components/DateRangeOutput';
 
 export default {
     title: 'View/DateRangeOutput',

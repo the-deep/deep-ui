@@ -2,7 +2,7 @@ import React from 'react';
 import SearchMultiSelectInput, {
     Props as SearchMultiSelectInputProps,
 } from '../SearchMultiSelectInput';
-import { rankedSearchOnList } from '../../utils';
+import { rankedSearchOnList, genericMemo } from '../../utils';
 
 type Def = { containerClassName?: string };
 type NameType = string | number | undefined;
@@ -38,4 +38,4 @@ function MultiSelectInput<T extends OptionKey, K extends NameType, O extends obj
     );
 }
 
-export default MultiSelectInput;
+export default genericMemo(MultiSelectInput);

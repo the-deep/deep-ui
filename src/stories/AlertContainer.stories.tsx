@@ -3,11 +3,11 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import { unique } from '@togglecorp/fujs';
 
-import AlertContainer, { Props as AlertContainerProps } from '#components/AlertContainer';
-import AlertContext, { AlertOptions, AlertVariant } from '#components/AlertContext';
-import Button from '#components/Button';
-import SegmentInput from '#components/SegmentInput';
-import useAlert from '#hooks/useAlert';
+import AlertContainer, { Props as AlertContainerProps } from '../components/AlertContainer';
+import AlertContext, { AlertOptions, AlertVariant } from '../components/AlertContext';
+import Button from '../components/Button';
+import SegmentInput from '../components/SegmentInput';
+import useAlert from '../hooks/useAlert';
 
 export default {
     title: 'View/AlertContainer',
@@ -22,7 +22,7 @@ const messages: React.ReactNode[] = [
     'Doesn\'t look very good',
     'Task failed not be successful',
     'Uh oh, looks like somebody is in trouble',
-    <>
+    <React.Fragment key="link">
         You should visit
         &nbsp;
         <a
@@ -33,9 +33,9 @@ const messages: React.ReactNode[] = [
         >
             our website
         </a>
-    </>,
+    </React.Fragment>,
     'Such alert, much wow!',
-    <div>
+    <div key="message">
         <div>
             Just look at it
         </div>
@@ -54,17 +54,19 @@ const alertVariantOptions: {
     { key: 'success', label: 'Success' },
 ];
 
-const Container = ({ children } : {
+function Container({ children } : {
     children?: React.ReactNode;
-}) => (
-    <div
-        style={{
-            margin: '10px',
-        }}
-    >
-        { children }
-    </div>
-);
+}) {
+    return (
+        <div
+            style={{
+                margin: '10px',
+            }}
+        >
+            { children }
+        </div>
+    );
+}
 
 interface Props {
     variant: AlertVariant;

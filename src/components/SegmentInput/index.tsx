@@ -4,6 +4,7 @@ import { _cs } from '@togglecorp/fujs';
 import Button, { Props as ButtonProps } from '../Button';
 import RadioInput, { Props as RadioInputProps } from '../RadioInput';
 import { Props as RadioProps } from '../RadioInput/Radio';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -79,4 +80,4 @@ function SegmentInput<
     );
 }
 
-export default SegmentInput;
+export default genericMemo(SegmentInput);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import DropContainer, { Props as DropContainerProps } from '#components/DropContainer';
+import DropContainer, { Props as DropContainerProps } from '../components/DropContainer';
 
 export default {
     title: 'View/DropContainer',
