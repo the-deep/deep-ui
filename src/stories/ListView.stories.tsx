@@ -29,11 +29,13 @@ const options: OptionFields[] = [
     { key: '5', label: 'Green Lantern', group: 'Air' },
 ];
 
-const Option = ({ children }: OptionProps) => (
-    <div>
-        { children }
-    </div>
-);
+function Option({ children }: OptionProps) {
+    return (
+        <div>
+            { children }
+        </div>
+    );
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>> = (args) => {

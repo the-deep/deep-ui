@@ -47,7 +47,7 @@ interface DateRendererProps extends CalendarDateProps {
     endDate?: string;
 }
 
-const DateRenderer = (props: DateRendererProps) => {
+function DateRenderer(props: DateRendererProps) {
     const {
         className: dateClassName,
         year,
@@ -87,7 +87,7 @@ const DateRenderer = (props: DateRendererProps) => {
             ghost={ghost}
         />
     );
-};
+}
 
 type NameType = string | number | undefined;
 

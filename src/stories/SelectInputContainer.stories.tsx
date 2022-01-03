@@ -41,11 +41,13 @@ interface OptionItemProps {
     children: React.ReactNode;
 }
 
-const OptionItem = ({ children }: OptionItemProps) => (
-    <div>
-        { children }
-    </div>
-);
+function OptionItem({ children }: OptionItemProps) {
+    return (
+        <div>
+            { children }
+        </div>
+    );
+}
 
 export const Default = Template.bind({});
 Default.args = {

@@ -7,17 +7,19 @@ export default {
     argTypes: {},
 };
 
-export const Default = () => (
-    <div
-        style={{
-            width: 'fit-content',
-            border: '1px solid red',
-            padding: '10px',
-        }}
-    >
-        Hover over me
-        <Tooltip>
-            Okay dood!
-        </Tooltip>
-    </div>
-);
+export function Default() {
+    return (
+        <div
+            style={{
+                width: 'fit-content',
+                border: '1px solid red',
+                padding: '10px',
+            }}
+        >
+            Hover over me
+            <Tooltip>
+                Okay dood!
+            </Tooltip>
+        </div>
+    );
+}

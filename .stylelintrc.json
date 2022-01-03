@@ -1,8 +1,7 @@
 {
     "plugins": [],
     "extends": [
-        "stylelint-config-recommended",
-        "stylelint-config-concentric"
+        "stylelint-config-recommended"
     ],
     "rules": {
         "indentation": 4,

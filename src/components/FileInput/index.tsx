@@ -89,6 +89,7 @@ function FileInput<T extends NameType>(props: Props<T>) {
 
     const handleFiles = useCallback(
         (files: FileList | null) => {
+            // eslint-disable-next-line react/destructuring-assignment
             if (!files || !props.onChange) {
                 return;
             }
@@ -99,11 +100,14 @@ function FileInput<T extends NameType>(props: Props<T>) {
                 return;
             }
 
+            // eslint-disable-next-line react/destructuring-assignment
             if (!props.multiple) {
                 const [firstFile] = validFiles;
+                // eslint-disable-next-line react/destructuring-assignment
                 const onChangeFromProps = props.onChange;
                 onChangeFromProps(firstFile, name);
             } else {
+                // eslint-disable-next-line react/destructuring-assignment
                 const onChangeFromProps = props.onChange;
                 onChangeFromProps(validFiles, name);
             }
@@ -166,14 +170,17 @@ function FileInput<T extends NameType>(props: Props<T>) {
 
     const handleClear = useCallback(
         () => {
+            // eslint-disable-next-line react/destructuring-assignment
             if (!props.onChange) {
                 return;
             }
-
+            // eslint-disable-next-line react/destructuring-assignment
             if (props.multiple) {
+                // eslint-disable-next-line react/destructuring-assignment
                 const onChangeFromProps = props.onChange;
                 onChangeFromProps([], name);
             } else {
+                // eslint-disable-next-line react/destructuring-assignment
                 const onChangeFromProps = props.onChange;
                 onChangeFromProps(undefined, name);
             }
@@ -191,11 +198,14 @@ function FileInput<T extends NameType>(props: Props<T>) {
 
     const status = useMemo(
         () => {
+            // eslint-disable-next-line react/destructuring-assignment
             if (!props.multiple) {
+                // eslint-disable-next-line react/destructuring-assignment
                 const singleFile = props.value;
                 return singleFile ? singleFile.name : 'No file chosen';
             }
 
+            // eslint-disable-next-line react/destructuring-assignment
             const multipleFile = props.value;
             if (!multipleFile || multipleFile.length === 0) {
                 return 'No file chosen';

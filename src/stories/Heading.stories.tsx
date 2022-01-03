@@ -20,22 +20,24 @@ Default.args = {
     children: 'Heading',
 };
 
-export const Sizes = () => (
-    <>
-        <Heading size="extraLarge">
-            Extra large heading
-        </Heading>
-        <Heading size="large">
-            Large heading
-        </Heading>
-        <Heading size="medium">
-            Medium heading
-        </Heading>
-        <Heading size="small">
-            Small heading
-        </Heading>
-        <Heading size="extraSmall">
-            Extra small heading
-        </Heading>
-    </>
-);
+export function Sizes() {
+    return (
+        <>
+            <Heading size="extraLarge">
+                Extra large heading
+            </Heading>
+            <Heading size="large">
+                Large heading
+            </Heading>
+            <Heading size="medium">
+                Medium heading
+            </Heading>
+            <Heading size="small">
+                Small heading
+            </Heading>
+            <Heading size="extraSmall">
+                Extra small heading
+            </Heading>
+        </>
+    );
+}

@@ -27,38 +27,42 @@ const options: Option[] = [
 interface OptionProps {
     children: React.ReactNode
 }
-const Option = ({ children }: OptionProps) => (
-    <div>
-        { children }
-    </div>
-);
+function Option({ children }: OptionProps) {
+    return (
+        <div>
+            { children }
+        </div>
+    );
+}
 
 interface GroupProps {
     title: string;
     children: React.ReactNode;
 }
-const Group = ({
+function Group({
     title,
     children,
-}: GroupProps) => (
-    <div>
-        <header>
-            <h3>
-                Group
-                &nbsp;
-                {title}
-            </h3>
-        </header>
+}: GroupProps) {
+    return (
         <div>
-            { children }
+            <header>
+                <h3>
+                    Group
+                    &nbsp;
+                    {title}
+                </h3>
+            </header>
+            <div>
+                { children }
+            </div>
         </div>
-    </div>
-);
+    );
+}
 
-const CollapsedGroup = ({
+function CollapsedGroup({
     title,
     children,
-}: GroupProps) => {
+}: GroupProps) {
     const [groupOpen, setGroupOpen] = useState(false);
     const handleGroupButtonClick = React.useCallback(() => {
         setGroupOpen((prevValue) => !prevValue);
@@ -83,7 +87,7 @@ const CollapsedGroup = ({
             )}
         </div>
     );
-};
+}
 
 const Template: Story<ListProps<Option, OptionProps, string, GroupProps, string>> = (args) => (
     <List {...args} />

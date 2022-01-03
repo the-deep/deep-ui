@@ -7,8 +7,8 @@ export default {
     argTypes: {},
 };
 
-export const Default = () => (
-    <>
+export function Default() {
+    return (
         <div
             style={{
                 display: 'flex',
@@ -74,5 +74,5 @@ export const Default = () => (
                 </div>
             </div>
         </div>
-    </>
-);
+    );
+}

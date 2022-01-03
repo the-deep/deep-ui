@@ -56,11 +56,13 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
     const value = !props.useHash ? props.value : undefined;
 
     const contextValue = React.useMemo(() => {
+        // eslint-disable-next-line react/destructuring-assignment
         if (props.useHash) {
             return {
                 variant,
                 disabled,
                 hash,
+                // eslint-disable-next-line react/destructuring-assignment
                 useHash: props.useHash,
                 ellipsize,
                 setEllipsize,

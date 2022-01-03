@@ -54,17 +54,19 @@ const alertVariantOptions: {
     { key: 'success', label: 'Success' },
 ];
 
-const Container = ({ children } : {
+function Container({ children } : {
     children?: React.ReactNode;
-}) => (
-    <div
-        style={{
-            margin: '10px',
-        }}
-    >
-        { children }
-    </div>
-);
+}) {
+    return (
+        <div
+            style={{
+                margin: '10px',
+            }}
+        >
+            { children }
+        </div>
+    );
+}
 
 interface Props {
     variant: AlertVariant;

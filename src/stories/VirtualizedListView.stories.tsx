@@ -29,14 +29,16 @@ const options: OptionFields[] = Array.from(Array(100000)).map((_, index) => ({
 
 const ITEM_HEIGHT = 40;
 
-const Option = ({ children }: OptionProps) => (
-    <div
-        className={styles.virtualizedListItem}
-        style={{ height: `${ITEM_HEIGHT}px` }}
-    >
-        { children }
-    </div>
-);
+function Option({ children }: OptionProps) {
+    return (
+        <div
+            className={styles.virtualizedListItem}
+            style={{ height: `${ITEM_HEIGHT}px` }}
+        >
+            { children }
+        </div>
+    );
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Template: Story<VirtualizedListViewProps<OptionFields, OptionProps, string>> = (args) => {

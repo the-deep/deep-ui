@@ -43,82 +43,84 @@ WithIconsAndActions.args = {
     actions: <IoShuffle />,
     to: 'https://wikipedia.org',
 };
-export const Variants = () => (
-    <div className={styles.buttonVariants}>
-        <section>
-            <h3>Normal</h3>
-            <div className={styles.content}>
-                <ButtonLikeLink to="https://wikipedia.org">
-                    Default
-                </ButtonLikeLink>
-                <ButtonLikeLink variant="primary" to="https://wikipedia.org">
-                    Primary
-                </ButtonLikeLink>
-                <ButtonLikeLink variant="secondary" to="https://wikipedia.org">
-                    Secondary
-                </ButtonLikeLink>
-                <ButtonLikeLink variant="tertiary" to="https://wikipedia.org">
-                    Tertiary
-                </ButtonLikeLink>
-            </div>
-        </section>
-        <section>
-            <h3>Disabled</h3>
-            <div className={styles.content}>
-                <ButtonLikeLink disabled to="https://wikipedia.org">
-                    Default
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="primary"
-                    disabled
-                    to="https://wikipedia.org"
-                >
-                    Primary
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="secondary"
-                    disabled
-                    to="https://wikipedia.org"
-                >
-                    Secondary
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="tertiary"
-                    disabled
-                    to="https://wikipedia.org"
-                >
-                    Tertiary
-                </ButtonLikeLink>
-            </div>
-        </section>
-        <section>
-            <h3>Big</h3>
-            <div className={styles.content}>
-                <ButtonLikeLink big to="https://wikipedia.org">
-                    Default
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="primary"
-                    big
-                    to="https://wikipedia.org"
-                >
-                    Primary
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="secondary"
-                    big
-                    to="https://wikipedia.org"
-                >
-                    Secondary
-                </ButtonLikeLink>
-                <ButtonLikeLink
-                    variant="tertiary"
-                    big
-                    to="https://wikipedia.org"
-                >
-                    Tertiary
-                </ButtonLikeLink>
-            </div>
-        </section>
-    </div>
-);
+export function Variants() {
+    return (
+        <div className={styles.buttonVariants}>
+            <section>
+                <h3>Normal</h3>
+                <div className={styles.content}>
+                    <ButtonLikeLink to="https://wikipedia.org">
+                        Default
+                    </ButtonLikeLink>
+                    <ButtonLikeLink variant="primary" to="https://wikipedia.org">
+                        Primary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink variant="secondary" to="https://wikipedia.org">
+                        Secondary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink variant="tertiary" to="https://wikipedia.org">
+                        Tertiary
+                    </ButtonLikeLink>
+                </div>
+            </section>
+            <section>
+                <h3>Disabled</h3>
+                <div className={styles.content}>
+                    <ButtonLikeLink disabled to="https://wikipedia.org">
+                        Default
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="primary"
+                        disabled
+                        to="https://wikipedia.org"
+                    >
+                        Primary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="secondary"
+                        disabled
+                        to="https://wikipedia.org"
+                    >
+                        Secondary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="tertiary"
+                        disabled
+                        to="https://wikipedia.org"
+                    >
+                        Tertiary
+                    </ButtonLikeLink>
+                </div>
+            </section>
+            <section>
+                <h3>Big</h3>
+                <div className={styles.content}>
+                    <ButtonLikeLink big to="https://wikipedia.org">
+                        Default
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="primary"
+                        big
+                        to="https://wikipedia.org"
+                    >
+                        Primary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="secondary"
+                        big
+                        to="https://wikipedia.org"
+                    >
+                        Secondary
+                    </ButtonLikeLink>
+                    <ButtonLikeLink
+                        variant="tertiary"
+                        big
+                        to="https://wikipedia.org"
+                    >
+                        Tertiary
+                    </ButtonLikeLink>
+                </div>
+            </section>
+        </div>
+    );
+}

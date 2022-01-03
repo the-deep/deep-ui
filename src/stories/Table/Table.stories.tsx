@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Table, {
     Props as TableProps,
@@ -123,9 +123,14 @@ export const Expandable: Story<
         true,
     );
 
+    const contextValue = useMemo(
+        () => ({ expandedRowKey, setExpandedRowKey }),
+        [expandedRowKey, setExpandedRowKey],
+    );
+
     return (
         <RowExpansionContext.Provider
-            value={{ expandedRowKey, setExpandedRowKey }}
+            value={contextValue}
         >
             <Table
                 {...args}
@@ -139,7 +144,7 @@ export const Expandable: Story<
     );
 };
 
-export const ManualRowExpansion = () => {
+export function ManualRowExpansion() {
     const [
         rowModifier,
         expandedRowKey,
@@ -166,9 +171,14 @@ export const ManualRowExpansion = () => {
         ...columns,
     ];
 
+    const contextValue = useMemo(
+        () => ({ expandedRowKey, setExpandedRowKey }),
+        [expandedRowKey, setExpandedRowKey],
+    );
+
     return (
         <RowExpansionContext.Provider
-            value={{ expandedRowKey, setExpandedRowKey }}
+            value={contextValue}
         >
             <Table
                 className={styles.table}
@@ -180,4 +190,4 @@ export const ManualRowExpansion = () => {
             />
         </RowExpansionContext.Provider>
     );
-};
+}

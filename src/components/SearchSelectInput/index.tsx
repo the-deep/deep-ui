@@ -251,7 +251,9 @@ function SearchSelectInput<
 
     const handleClear = useCallback(
         () => {
+            // eslint-disable-next-line react/destructuring-assignment
             if (!props.nonClearable) {
+                // eslint-disable-next-line react/destructuring-assignment
                 props.onChange(undefined, name);
             }
         },

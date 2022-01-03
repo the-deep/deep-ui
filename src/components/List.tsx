@@ -166,6 +166,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
     ));
 
     return (
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
             {children}
         </>

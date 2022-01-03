@@ -60,6 +60,7 @@ function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>
         childrenContainerClassName,
         actionsContainerClassName,
         spacing = 'comfortable',
+        href,
     } = props;
 
     const className = _cs(
@@ -80,17 +81,16 @@ function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>
         </ElementFragments>
     );
 
-    // eslint-disable-next-line react/destructuring-assignment
-    if (props.href !== undefined) {
-        const isExternalLink = props.href
-            && typeof props.href === 'string'
-            && (isValidUrl(props.href) || props.href.startsWith('mailto:'));
+    if (href !== undefined) {
+        const isExternalLink = href
+            && typeof href === 'string'
+            && (isValidUrl(href) || href.startsWith('mailto:'));
 
         if (isExternalLink) {
             return (
                 <a
                     className={className}
-                    href={props.href}
+                    href={href}
                     target="_blank"
                     rel="noreferrer"
                 >
@@ -102,7 +102,7 @@ function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>
         return (
             <Link
                 className={className}
-                to={props.href}
+                to={href}
             >
                 {children}
             </Link>
