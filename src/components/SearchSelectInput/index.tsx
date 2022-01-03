@@ -11,7 +11,7 @@ import ElementFragments from '../ElementFragments';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
-import { rankedSearchOnList } from '../../utils';
+import { rankedSearchOnList, genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -32,6 +32,8 @@ function Option(props: OptionProps) {
         </ElementFragments>
     );
 }
+
+const MemoizedOption = genericMemo(Option);
 
 type Def = { containerClassName?: string, title?: string; };
 type OptionKey = string | number;
@@ -265,7 +267,7 @@ function SearchSelectInput<
             optionsPending={optionsPending}
             optionsFiltered={searchInputValue?.length > 0}
             optionKeySelector={keySelector}
-            optionRenderer={Option}
+            optionRenderer={MemoizedOption}
             optionRendererParams={optionRendererParams}
             optionContainerClassName={styles.optionContainer}
             onOptionClick={handleOptionClick}
@@ -284,4 +286,4 @@ function SearchSelectInput<
     );
 }
 
-export default SearchSelectInput;
+export default genericMemo(SearchSelectInput);

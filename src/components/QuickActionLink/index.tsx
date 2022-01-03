@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import ButtonLikeLink, { Props as ButtonLikeLinkProps } from '../ButtonLikeLink';
 
 import styles from './styles.css';
@@ -23,4 +24,4 @@ function QuickActionLink(props: Props) {
     );
 }
 
-export default QuickActionLink;
+export default genericMemo(QuickActionLink);

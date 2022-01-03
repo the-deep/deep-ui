@@ -8,9 +8,6 @@ function usePositionTracking(
 ) {
     const [bcr, setBcr] = useState<DOMRect | undefined>(undefined);
 
-    const resizeObserverRef = useRef<ResizeObserver>();
-    const mutationObserverRef = useRef<MutationObserver>();
-
     const callbackRef = useRef<number | undefined>();
     const queueSync = useCallback(() => {
         if (callbackRef.current) {
@@ -72,11 +69,11 @@ function usePositionTracking(
         document.addEventListener('scroll', handleScroll, true);
 
         const targetElement = trackParent ? parentElement as HTMLElement : el;
-        resizeObserverRef.current = new ResizeObserver(handleResize);
-        resizeObserverRef.current.observe(targetElement);
+        const resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(targetElement);
 
-        mutationObserverRef.current = new MutationObserver(handleAttributeMutation);
-        mutationObserverRef.current.observe(
+        const mutationObserver = new MutationObserver(handleAttributeMutation);
+        mutationObserver.observe(
             document.documentElement,
             {
                 attributes: true,
@@ -87,14 +84,8 @@ function usePositionTracking(
 
         return () => {
             document.removeEventListener('scroll', handleScroll, true);
-
-            if (resizeObserverRef.current) {
-                resizeObserverRef.current.disconnect();
-            }
-
-            if (mutationObserverRef.current) {
-                mutationObserverRef.current.disconnect();
-            }
+            resizeObserver.disconnect();
+            mutationObserver.disconnect();
         };
     }, [elementRef, handleResize, handleAttributeMutation, handleScroll, shouldTrack, trackParent]);
 

@@ -7,6 +7,7 @@ import {
     GroupCommonProps,
 } from '../List';
 import useSizeTracking from '../../hooks/useSizeTracking';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -149,4 +150,4 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
     );
 }
 
-export default VirtualizedListView;
+export default genericMemo(VirtualizedListView);

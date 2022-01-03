@@ -6,6 +6,7 @@ import ElementFragments, {
 } from '../ElementFragments';
 
 import { SpacingTypes } from '../../types';
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 const spacingToStyleMap: {
@@ -50,4 +51,4 @@ function Element(props: Props) {
     );
 }
 
-export default Element;
+export default genericMemo(Element);

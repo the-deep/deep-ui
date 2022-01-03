@@ -10,6 +10,7 @@ import Container, { Props as ContainerProps } from '../Container';
 import Button from '../Button';
 import QuickActionButton from '../QuickActionButton';
 import useBooleanState from '../../hooks/useBooleanState';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -92,4 +93,4 @@ function CollapsibleContainer(props: Props) {
     );
 }
 
-export default CollapsibleContainer;
+export default genericMemo(CollapsibleContainer);

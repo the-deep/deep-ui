@@ -7,6 +7,7 @@ import type {
     Props as DraggableContentProps,
     SerializableValue,
 } from '../DraggableContent';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -107,4 +108,4 @@ function DropContainer(props: Props) {
     );
 }
 
-export default DropContainer;
+export default genericMemo(DropContainer);

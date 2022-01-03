@@ -13,6 +13,7 @@ import Button from '../Button';
 import List from '../List';
 import useBlurEffect from '../../hooks/useBlurEffect';
 import useKeyboard from '../../hooks/useKeyboard';
+import { genericMemo } from '../../utils';
 
 import EmptyOptions from './EmptyOptions';
 import styles from './styles.css';
@@ -347,6 +348,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                     value={(showDropdown || focused) ? searchText : valueDisplay}
                     onChange={handleSearchInputChange}
                     onClick={handleSearchInputClick}
+                    // FIXME: memoize this
                     onFocus={() => onFocusedChange(true)}
                     onBlur={() => onFocusedChange(false)}
                     placeholder={valueDisplay || placeholder}
@@ -381,4 +383,4 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
     );
 }
 
-export default SelectInputContainer;
+export default genericMemo(SelectInputContainer);

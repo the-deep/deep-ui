@@ -17,7 +17,7 @@ import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
 import { Props as CalendarDateProps } from '../Calendar/CalendarDate';
-import { ymdToDateString } from '../../utils';
+import { genericMemo, ymdToDateString } from '../../utils';
 
 import styles from './styles.css';
 
@@ -208,4 +208,4 @@ function DateInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default DateInput;
+export default genericMemo(DateInput);

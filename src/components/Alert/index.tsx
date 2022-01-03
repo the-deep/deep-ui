@@ -77,7 +77,6 @@ function Alert<N extends string>(props: Props<N>) {
     } = props;
 
     const alertElementRef = React.useRef<HTMLDivElement>(null);
-    const hideTimeout = React.useRef<number | undefined>();
     const [hidden, setHidden] = React.useState(false);
 
     React.useEffect(() => {
@@ -92,10 +91,10 @@ function Alert<N extends string>(props: Props<N>) {
     }, []);
 
     React.useEffect(() => {
-        window.clearTimeout(hideTimeout.current);
+        let hideTimeoutId: number | undefined;
 
         if (duration > 0 && duration !== Infinity) {
-            hideTimeout.current = window.setTimeout(() => {
+            hideTimeoutId = window.setTimeout(() => {
                 setHidden(true);
                 if (onTimeout) {
                     onTimeout(name, TRANSITION_DURATION);
@@ -104,7 +103,9 @@ function Alert<N extends string>(props: Props<N>) {
         }
 
         return () => {
-            window.clearTimeout(hideTimeout.current);
+            if (hideTimeoutId) {
+                window.clearTimeout(hideTimeoutId);
+            }
         };
     }, [duration, setHidden, onTimeout, name]);
 

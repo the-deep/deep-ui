@@ -8,6 +8,7 @@ import InputHint from '../InputHint';
 import InputBorder from '../InputBorder';
 import { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -117,4 +118,4 @@ function InputContainer(props: Props) {
     );
 }
 
-export default InputContainer;
+export default genericMemo(InputContainer);

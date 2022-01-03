@@ -1,6 +1,8 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -26,4 +28,4 @@ function Card(props: Props) {
     );
 }
 
-export default Card;
+export default genericMemo(Card);

@@ -5,6 +5,7 @@ import Header, { Props as HeaderProps } from '../Header';
 import Footer from '../Footer';
 import Border, { Props as BorderProps } from '../Border';
 import { SpacingTypes } from '../../types';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -179,4 +180,4 @@ function Container(props: Props) {
     );
 }
 
-export default Container;
+export default genericMemo(Container);

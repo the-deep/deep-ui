@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import List, {
     Props as ListProps,
     OptionKey,
@@ -125,4 +126,4 @@ function ListView<
     );
 }
 
-export default ListView;
+export default genericMemo(ListView);

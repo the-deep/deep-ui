@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
@@ -83,4 +84,4 @@ function TextInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default TextInput;
+export default genericMemo(TextInput);

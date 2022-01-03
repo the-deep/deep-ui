@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { randomString, _cs } from '@togglecorp/fujs';
 import { SVGInjector } from '@tanem/svg-injector';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
-interface Props {
+export interface Props {
     className?: string;
     src: string;
 }
@@ -46,4 +47,4 @@ function Svg(props: Props) {
     );
 }
 
-export default Svg;
+export default genericMemo(Svg);

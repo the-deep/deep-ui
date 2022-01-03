@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import Table, {
     Props as TableProps,
     Column,
@@ -105,4 +106,4 @@ function TableView<
     );
 }
 
-export default TableView;
+export default genericMemo(TableView);

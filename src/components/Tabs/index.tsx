@@ -8,7 +8,7 @@ import {
 } from '../TabContext';
 
 import useHash from '../../hooks/useHash';
-import { getHashFromBrowser } from '../../utils';
+import { getHashFromBrowser, genericMemo } from '../../utils';
 
 export interface BaseProps {
     children: React.ReactNode;
@@ -95,4 +95,4 @@ export function Tabs<T extends TabKey>(props: Props<T>) {
     );
 }
 
-export default Tabs;
+export default genericMemo(Tabs);

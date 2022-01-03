@@ -30,6 +30,7 @@ const spacingToStyleMap: {
     loose: styles.looseSpacing,
 };
 
+// FIXME: remove this (only used in stories)
 export function Separator({ className }: { className?: string }) {
     return (
         <hr className={_cs(styles.separator, className)} />

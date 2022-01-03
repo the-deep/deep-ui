@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { useDropdownFeatures } from '../DropdownMenu';
+import { genericMemo } from '../../utils';
 import Popup from '../Popup';
 import QuickActionButton, {
     Props as QuickActionButtonProps,
@@ -77,4 +78,4 @@ function QuickActionDropdownMenu(props: Props) {
     );
 }
 
-export default QuickActionDropdownMenu;
+export default genericMemo(QuickActionDropdownMenu);

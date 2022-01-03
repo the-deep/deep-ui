@@ -19,7 +19,7 @@ import Button from '../Button';
 import Popup from '../Popup';
 import Calendar, { Props as CalendarProps } from '../Calendar';
 import CalendarDate, { Props as CalendarDateProps } from '../Calendar/CalendarDate';
-import { ymdToDateString, dateStringToDate } from '../../utils';
+import { ymdToDateString, dateStringToDate, genericMemo } from '../../utils';
 
 import {
     predefinedDateRangeOptions,
@@ -421,4 +421,4 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
     );
 }
 
-export default DateRangeInput;
+export default genericMemo(DateRangeInput);

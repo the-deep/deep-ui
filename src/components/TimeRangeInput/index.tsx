@@ -8,6 +8,7 @@ import {
     IoClose,
 } from 'react-icons/io5';
 
+import { genericMemo } from '../../utils';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import useBlurEffect from '../../hooks/useBlurEffect';
 import useBooleanState from '../../hooks/useBooleanState';
@@ -253,4 +254,4 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default TimeRangeInput;
+export default genericMemo(TimeRangeInput);

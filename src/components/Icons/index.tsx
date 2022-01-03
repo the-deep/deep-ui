@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { SpacingTypes } from '../../types';
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 const spacingToStyleMap: {
@@ -45,4 +46,4 @@ function Icons(props: Props) {
     );
 }
 
-export default Icons;
+export default genericMemo(Icons);

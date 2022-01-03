@@ -9,6 +9,8 @@ import {
     Lang,
 } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
+
 import styles from './styles.css';
 
 export interface Props {
@@ -184,4 +186,4 @@ function NumberOutput(props: Props) {
     );
 }
 
-export default NumberOutput;
+export default genericMemo(NumberOutput);

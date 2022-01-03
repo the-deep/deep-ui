@@ -7,6 +7,7 @@ import InputContainer, { Props as InputContainerProps } from '../InputContainer'
 import RawInput, { Props as RawInputProps } from '../RawInput';
 import Button, { useButtonFeatures } from '../Button';
 import useDropHandler from '../../hooks/useDropHandler';
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 export const isValidFile = (fileName: string, mimeType: string, acceptString?: string) => {
@@ -285,4 +286,4 @@ function FileInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default FileInput;
+export default genericMemo(FileInput);

@@ -8,6 +8,7 @@ import {
     IoRadioButtonOff,
 } from 'react-icons/io5';
 
+import { genericMemo } from '../../../utils';
 import { SpacingTypes } from '../../../types';
 import InputElementFragments from '../../InputElementFragments';
 
@@ -86,4 +87,4 @@ function Radio<N extends string | number>(props: Props<N>) {
     );
 }
 
-export default Radio;
+export default genericMemo(Radio);

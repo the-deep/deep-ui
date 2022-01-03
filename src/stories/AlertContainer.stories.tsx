@@ -22,7 +22,7 @@ const messages: React.ReactNode[] = [
     'Doesn\'t look very good',
     'Task failed not be successful',
     'Uh oh, looks like somebody is in trouble',
-    <>
+    <React.Fragment key="link">
         You should visit
         &nbsp;
         <a
@@ -33,9 +33,9 @@ const messages: React.ReactNode[] = [
         >
             our website
         </a>
-    </>,
+    </React.Fragment>,
     'Such alert, much wow!',
-    <div>
+    <div key="message">
         <div>
             Just look at it
         </div>

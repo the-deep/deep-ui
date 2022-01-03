@@ -6,6 +6,7 @@ import useUiModeClassName from '../../hooks/useUiModeClassName';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
 import Button from '../Button';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -99,4 +100,4 @@ function PasswordInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default PasswordInput;
+export default genericMemo(PasswordInput);

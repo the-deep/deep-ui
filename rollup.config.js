@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import filesize from 'rollup-plugin-filesize';
 // import autoprefixer from 'autoprefixer';
 import { eslint } from 'rollup-plugin-eslint';
+import { visualizer } from 'rollup-plugin-visualizer';
 import stylelint from 'rollup-plugin-stylelint';
 import image from '@rollup/plugin-image';
 
@@ -36,7 +37,7 @@ const PLUGINS = [
         include: ['**/*.jsx', '**/*.js', '**/*.ts', '**/*.tsx'],
     }),
     babel({
-        babelHelpers: 'runtime',
+        // babelHelpers: 'runtime',
         exclude: 'node_modules/**',
         extensions: ['.jsx', '.js', '.ts', '.tsx'],
     }),
@@ -45,8 +46,9 @@ const PLUGINS = [
         extensions: ['.jsx', '.js', '.ts', '.tsx'],
     }),
     commonjs(),
-    filesize(),
     image(),
+    filesize(),
+    visualizer({ template: 'sunburst' }),
 ];
 
 const OUTPUT_DATA = [

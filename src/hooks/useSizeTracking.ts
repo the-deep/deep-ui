@@ -7,8 +7,6 @@ function useSizeTracking(
 ) {
     const [bcr, setBcr] = React.useState<DOMRect | undefined>(undefined);
 
-    const resizeObserverRef = React.useRef<ResizeObserver>();
-
     const callbackRef = React.useRef<number | undefined>();
     const handleResize: ResizeObserverCallback = useCallback(
         (entries: ResizeObserverEntry[]) => {
@@ -41,13 +39,11 @@ function useSizeTracking(
             return undefined;
         }
 
-        resizeObserverRef.current = new ResizeObserver(handleResize);
-        resizeObserverRef.current.observe(el);
+        const resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(el);
 
         return () => {
-            if (resizeObserverRef.current) {
-                resizeObserverRef.current.disconnect();
-            }
+            resizeObserver.disconnect();
         };
     }, [elementRef, handleResize, shouldTrack]);
 
