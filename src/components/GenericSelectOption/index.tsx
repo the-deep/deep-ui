@@ -14,7 +14,7 @@ export type OptionKey = string | number;
 
 export interface Props<P extends ContentBaseProps, OK extends OptionKey, O> {
     optionContainerClassName?: string;
-    contentRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => React.ReactNode;
+    contentRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => JSX.Element;
     contentRendererParam: (key: OK, opt: O) => P;
     option: O;
     optionKey: OK;
@@ -27,7 +27,7 @@ export interface Props<P extends ContentBaseProps, OK extends OptionKey, O> {
 
 function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O>({
     optionContainerClassName,
-    contentRenderer,
+    contentRenderer: ContentRenderer,
     contentRendererParam,
     option,
     onClick,
@@ -102,7 +102,9 @@ function GenericSelectOption<P extends ContentBaseProps, OK extends OptionKey, O
             focused={isFocused}
             disabled={disabled || readOnly}
         >
-            {contentRenderer(props)}
+            <ContentRenderer
+                {...props}
+            />
         </RawButton>
     );
 }
