@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import styles from './styles.css';
+import { genericMemo } from '../../utils';
 
 export type InformationVariant = 'accent'
     | 'complement1'
@@ -77,4 +78,4 @@ function InformationCardFragments(props: Props) {
     );
 }
 
-export default InformationCardFragments;
+export default genericMemo(InformationCardFragments);

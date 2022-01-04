@@ -20,7 +20,6 @@ import useBooleanState from '../../hooks/useBooleanState';
 
 import styles from './styles.css';
 
-type ButtonClickHandler = React.HTMLProps<HTMLButtonElement>['onClick'];
 type HTMLImageProps = React.HTMLProps<HTMLImageProps>;
 
 export interface Props {
@@ -66,23 +65,23 @@ function ImagePreview(props: Props) {
         >
             {pending && <PendingMessage />}
             <TransformWrapper
-                wheel={{ step: 100 }}
+                wheel={{ step: 0.2 }}
+                centerZoomedOut
+                centerOnInit
+                minScale={0.2}
+                maxScale={8}
             >
                 {({
                     zoomIn,
                     zoomOut,
                     resetTransform,
-                }: {
-                    zoomIn: ButtonClickHandler,
-                    zoomOut: ButtonClickHandler,
-                    resetTransform: ButtonClickHandler,
                 }) => (
                     <>
                         {!hideTools && (
                             <div className={styles.tools}>
                                 <button
                                     {...buttonProps}
-                                    onClick={toggleExpanded}
+                                    onClick={() => toggleExpanded()}
                                     title={expanded ? 'Close fullscreen' : 'View fullscreen'}
                                     type="button"
                                 >
@@ -94,7 +93,7 @@ function ImagePreview(props: Props) {
                                 </button>
                                 <button
                                     {...buttonProps}
-                                    onClick={zoomIn}
+                                    onClick={() => zoomIn()}
                                     title="Zoom in"
                                     type="button"
                                 >
@@ -102,7 +101,7 @@ function ImagePreview(props: Props) {
                                 </button>
                                 <button
                                     {...buttonProps}
-                                    onClick={zoomOut}
+                                    onClick={() => zoomOut()}
                                     title="Zoom in"
                                     type="button"
                                 >
@@ -110,7 +109,7 @@ function ImagePreview(props: Props) {
                                 </button>
                                 <button
                                     {...buttonProps}
-                                    onClick={resetTransform}
+                                    onClick={() => resetTransform()}
                                     title="Reset zoom"
                                     type="button"
                                 >
@@ -118,7 +117,9 @@ function ImagePreview(props: Props) {
                                 </button>
                             </div>
                         )}
-                        <TransformComponent>
+                        <TransformComponent
+                            wrapperClass={styles.wrapper}
+                        >
                             <img
                                 key={src}
                                 onLoad={setPendingFalse}

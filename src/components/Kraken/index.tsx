@@ -2,6 +2,8 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import Svg from '../Svg';
+import { genericMemo } from '../../utils';
+
 import ballonSvg from './images/ballon.svg';
 import hiSvg from './images/hi.svg';
 import workSvg from './images/work.svg';
@@ -82,4 +84,4 @@ function Kraken(props: Props) {
     );
 }
 
-export default Kraken;
+export default genericMemo(Kraken);

@@ -3,6 +3,7 @@ import {
     _cs,
     isNotDefined,
 } from '@togglecorp/fujs';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -122,4 +123,4 @@ function Heading(props: Props) {
     return heading;
 }
 
-export default Heading;
+export default genericMemo(Heading);

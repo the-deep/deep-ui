@@ -6,6 +6,7 @@ import {
 
 import { BaseHeader } from './types';
 
+import { genericMemo } from '../../utils';
 import { UiMode } from '../UiModeContext';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import TableHeader from './TableHeader';
@@ -258,4 +259,4 @@ function Table<D, K extends string | number, C extends Column<D, K, any, any>>(
     );
 }
 
-export default Table;
+export default genericMemo(Table);

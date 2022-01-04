@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 import { GrDrag } from 'react-icons/gr';
 
 import Container, { Props as ContainerProps } from '../Container';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -97,4 +98,4 @@ function DraggableContent(props: Props) {
     );
 }
 
-export default DraggableContent;
+export default genericMemo(DraggableContent);

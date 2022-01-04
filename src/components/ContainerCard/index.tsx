@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import Container, { Props as ContainerProps } from '../Container';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -23,4 +24,4 @@ function ContainerCard(props: Props) {
     );
 }
 
-export default ContainerCard;
+export default genericMemo(ContainerCard);

@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import TextOutput from '../TextOutput';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -30,4 +31,4 @@ function KeyFigure(props: Props) {
     );
 }
 
-export default KeyFigure;
+export default genericMemo(KeyFigure);

@@ -8,6 +8,7 @@ import {
 import { SpacingTypes } from '../../types';
 import Container, { Props as ContainerProps } from '../Container';
 import Button from '../Button';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -124,4 +125,4 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
     );
 }
 
-export default ControlledExpandableContainer;
+export default genericMemo(ControlledExpandableContainer);

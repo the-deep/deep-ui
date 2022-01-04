@@ -1,6 +1,8 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
+
 import Portal from '../Portal';
 
 import styles from './styles.css';
@@ -25,4 +27,4 @@ function BodyBackdrop(props: Props) {
     );
 }
 
-export default BodyBackdrop;
+export default genericMemo(BodyBackdrop);

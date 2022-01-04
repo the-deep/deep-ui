@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import RawButton from '../RawButton';
 import RadioInput, { Props as RadioInputProps } from '../RadioInput';
 import { Props as RadioProps } from '../RadioInput/Radio';
@@ -53,6 +54,8 @@ function Scale<V extends OptionKey>(props: ScaleProps<V>) {
     );
 }
 
+const MemoizedScale = genericMemo(Scale);
+
 interface ExtendedProps<V> extends RadioProps<V> {
     color?: string;
     label?: string;
@@ -93,7 +96,7 @@ function ScaleInput<
         <RadioInput<N, O, V, ExtendedProps<V>>
             {...otherProps}
             className={_cs(className, styles.scaleInput)}
-            renderer={Scale}
+            renderer={MemoizedScale}
             spacing="compact"
             rendererParams={finalRendererParams}
             listContainerClassName={_cs(
@@ -106,4 +109,4 @@ function ScaleInput<
     );
 }
 
-export default ScaleInput;
+export default genericMemo(ScaleInput);

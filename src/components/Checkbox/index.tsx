@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import { UiMode } from '../UiModeContext';
 
@@ -105,4 +106,4 @@ function Checkbox<N extends NameType>(props: Props<N>) {
     );
 }
 
-export default Checkbox;
+export default genericMemo(Checkbox);

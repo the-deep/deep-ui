@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import useDebouncingTextChange from '../../hooks/useDebouncingTextChange';
+import { genericMemo } from '../../utils';
 
 import AutoSizeTextArea from '../AutoSizeTextArea';
 import styles from './styles.css';
@@ -107,4 +108,4 @@ function TextArea<T extends string>(props: Props<T>) {
     );
 }
 
-export default TextArea;
+export default genericMemo(TextArea);

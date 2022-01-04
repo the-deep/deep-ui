@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PendingAnimation from '../../PendingAnimation';
+import { genericMemo } from '../../../utils';
 
 import styles from './styles.css';
 
@@ -55,4 +56,4 @@ function EmptyOptions(props: Props) {
 
     return null;
 }
-export default EmptyOptions;
+export default genericMemo(EmptyOptions);

@@ -3,6 +3,7 @@ import { _cs } from '@togglecorp/fujs';
 import { IoClose } from 'react-icons/io5';
 
 import ListView from '../ListView';
+import { genericMemo } from '../../utils';
 import Button, { Props as ButtonProps } from '../Button';
 
 import styles from './styles.css';
@@ -128,4 +129,4 @@ function DismissibleList<D, K extends OptionKey, N extends NameType>(props: Prop
         />
     );
 }
-export default DismissibleList;
+export default genericMemo(DismissibleList);

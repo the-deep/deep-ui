@@ -2,6 +2,7 @@ import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
 import { SpacingTypes } from '../../types';
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 const spacingToStyleMap: {
@@ -39,4 +40,4 @@ function QuickActionGroup(props: Props) {
     );
 }
 
-export default QuickActionGroup;
+export default genericMemo(QuickActionGroup);

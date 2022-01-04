@@ -4,6 +4,7 @@ import {
     IoSquareOutline,
 } from 'react-icons/io5';
 
+import { genericMemo } from '../../../utils';
 import ElementFragments from '../../ElementFragments';
 
 import styles from './styles.css';
@@ -34,4 +35,4 @@ function Option(props: Props) {
     );
 }
 
-export default Option;
+export default genericMemo(Option);

@@ -9,7 +9,7 @@ import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
 import DismissibleList from '../DismissibleList';
-import { rankedSearchOnList } from '../../utils';
+import { rankedSearchOnList, genericMemo } from '../../utils';
 import Option from './Option';
 
 import styles from './styles.css';
@@ -305,4 +305,4 @@ function SearchMultiSelectInput<
     );
 }
 
-export default SearchMultiSelectInput;
+export default genericMemo(SearchMultiSelectInput);

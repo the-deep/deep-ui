@@ -1,6 +1,7 @@
 import React from 'react';
 import { _cs } from '@togglecorp/fujs';
 
+import { genericMemo } from '../../utils';
 import { TabContext } from '../TabContext';
 
 import styles from './styles.css';
@@ -11,7 +12,7 @@ export interface Props extends React.HTMLProps<HTMLDivElement> {
     ellipsize?: boolean;
 }
 
-export default function TabList(props: Props) {
+function TabList(props: Props) {
     const {
         children,
         className,
@@ -35,3 +36,5 @@ export default function TabList(props: Props) {
         </div>
     );
 }
+
+export default genericMemo(TabList);

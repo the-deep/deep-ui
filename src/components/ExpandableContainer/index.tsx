@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ControlledExpandableContainer, {
     Props as ControlledExpandableContainerProps,
 } from '../ControlledExpandableContainer';
+import { genericMemo } from '../../utils';
 
 export interface Props extends Omit<ControlledExpandableContainerProps<undefined>, 'expanded' | 'onExpansionChange' | 'name'>{
     defaultVisibility?: boolean;
@@ -26,4 +27,4 @@ function ExpandableContainer(props: Props) {
     );
 }
 
-export default ExpandableContainer;
+export default genericMemo(ExpandableContainer);

@@ -4,6 +4,7 @@ import { _cs } from '@togglecorp/fujs';
 import Element from '../Element';
 import Heading, { Props as HeadingProps } from '../Heading';
 import { SpacingTypes } from '../../types';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -114,4 +115,4 @@ function Header(props: Props) {
     );
 }
 
-export default Header;
+export default genericMemo(Header);

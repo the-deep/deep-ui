@@ -5,6 +5,7 @@ import Element, {
     Props as ElementProps,
 } from '../Element';
 
+import { genericMemo } from '../../utils';
 import styles from './styles.css';
 
 export type TagVariant = (
@@ -56,4 +57,4 @@ function Tag(props: Props) {
     );
 }
 
-export default Tag;
+export default genericMemo(Tag);

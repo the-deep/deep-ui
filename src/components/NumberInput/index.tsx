@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import { isDefined, isFalsyString, isTruthyString, bound } from '@togglecorp/fujs';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
+import { genericMemo } from '../../utils';
 
 function isValidNumericString(val: string) {
     return /^[+-]?\d+(\.\d+)?$/.test(val);
@@ -147,4 +148,4 @@ function NumberInput<T extends NameType>(props: Props<T>) {
     );
 }
 
-export default NumberInput;
+export default genericMemo(NumberInput);

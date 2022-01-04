@@ -7,6 +7,7 @@ import DateRangeInput, {
     Props as DateRangeInputProps,
     Value as DateRangeInputValue,
 } from '../DateRangeInput';
+import { genericMemo } from '../../utils';
 
 type DateRangeProps<N extends string | number | undefined> = Omit<DateRangeInputProps<N>, 'onChange' | 'name' | 'value'>;
 
@@ -75,4 +76,4 @@ function DateRangeDualInput<N extends string | number | undefined>(props: Props<
     );
 }
 
-export default DateRangeDualInput;
+export default genericMemo(DateRangeDualInput);

@@ -10,7 +10,7 @@ import { useButtonFeatures } from '../Button';
 import styles from './styles.css';
 
 type PropsFromButton = Parameters<typeof useButtonFeatures>[0];
-export interface Props extends PropsFromButton, RouterLinkProps {
+export interface Props extends PropsFromButton, Omit<RouterLinkProps, 'children'> {
     className?: string;
     title?: string;
 }
