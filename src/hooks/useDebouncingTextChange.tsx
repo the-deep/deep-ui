@@ -10,13 +10,13 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
     onChange?: (
         value: string | undefined,
         name: N,
-        e: React.FormEvent<T>,
+        e: React.ChangeEvent<T>,
     ) => void,
 }) {
     const debouncingRef = useRef(0);
     const [immediateValue, setImmediateValue] = useState(value);
     const handleInputChange = React.useCallback(
-        (e: React.FormEvent<T>) => {
+        (e: React.ChangeEvent<T>) => {
             const {
                 currentTarget: {
                     value: v,
@@ -51,7 +51,7 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
     );
 
     const handleInputBlur = React.useCallback(
-        (e: React.FormEvent<T>) => {
+        (e: React.ChangeEvent<T>) => {
             const {
                 currentTarget: {
                     value: v,

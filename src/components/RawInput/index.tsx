@@ -32,7 +32,7 @@ export interface Props<N extends NameType> extends Omit<React.HTMLProps<HTMLInpu
     onChange?: (
         value: string | undefined,
         name: N,
-        e?: React.FormEvent<HTMLInputElement> | undefined,
+        e?: React.ChangeEvent<HTMLInputElement> | undefined,
     ) => void;
     /**
      * UI mode: light or dark
