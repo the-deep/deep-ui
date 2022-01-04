@@ -14,7 +14,6 @@ export type Props<D, P, K extends OptionKey> = {
     itemHeight: number;
     elementRef?: React.RefObject<HTMLDivElement>;
     buffer?: number;
-    scrollToItemKey?: K;
 } & ListViewProps<D, P, K, GroupCommonProps, OptionKey>
 
 function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
@@ -25,7 +24,6 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         data = [],
         buffer = 1,
         pending,
-        scrollToItemKey,
         keySelector,
         ...otherProps
     } = props;
@@ -56,19 +54,6 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
             }, { timeout: 200 });
         },
         [elementRef],
-    );
-
-    // Handle scroll to element
-    useEffect(
-        () => {
-            if (elementRef.current) {
-                const itemIndex = data.findIndex(
-                    (d, i) => (keySelector(d, i) === scrollToItemKey),
-                );
-                elementRef.current.scrollTop = itemIndex * itemHeight;
-            }
-        },
-        [scrollToItemKey, data, keySelector, itemHeight, elementRef],
     );
 
     // Initially set scroll offset
