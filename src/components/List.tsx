@@ -38,6 +38,7 @@ interface GroupOptions<D, GP, GK extends OptionKey> {
 
 interface NoGroupOptions {
     grouped?: false;
+    indexOffset?: number;
 }
 
 // eslint-disable-next-line max-len
@@ -46,15 +47,80 @@ export type Props<D, P, K extends OptionKey, GP, GK extends OptionKey> = (
 );
 
 // eslint-disable-next-line max-len
+export type NonGroupedListProps<D, P, K extends OptionKey> = (
+    BaseProps<D, P, K> & NoGroupOptions
+);
+
+function NonGroupedList<D, P, K extends OptionKey>(
+    props: NonGroupedListProps<D, P, K>,
+) {
+    const {
+        data: dataFromProps,
+        keySelector,
+        renderer: Renderer,
+        rendererClassName,
+        rendererParams,
+        spacing = 'comfortable',
+        borderBetweenItem,
+        borderBetweenItemClassName,
+        borderBetweenItemWidth = 'thin',
+        indexOffset = 0,
+    } = props;
+
+    const data = dataFromProps ?? (emptyList as D[]);
+
+    const renderListItem = useCallback((datum: D, i: number) => {
+        const actualIndex = i + indexOffset;
+        const key = keySelector(datum, actualIndex);
+        const extraProps = rendererParams(key, datum, actualIndex, data);
+
+        if (isNotDefined(extraProps)) {
+            return null;
+        }
+
+        return (
+            <React.Fragment
+                key={key}
+            >
+                <Renderer
+                    className={rendererClassName}
+                    {...extraProps}
+                />
+                {borderBetweenItem && data.length > (actualIndex + 1) && (
+                    <Border
+                        inline
+                        extendToSpacing
+                        spacing={spacing}
+                        className={borderBetweenItemClassName}
+                        width={borderBetweenItemWidth}
+                    />
+                )}
+            </React.Fragment>
+        );
+    }, [
+        keySelector,
+        indexOffset,
+        Renderer,
+        rendererClassName,
+        rendererParams,
+        data,
+        spacing,
+        borderBetweenItem,
+        borderBetweenItemWidth,
+        borderBetweenItemClassName,
+    ]);
+
+    return (
+        <>
+            {data.map(renderListItem)}
+        </>
+    );
+}
+
+// eslint-disable-next-line max-len
 export type GroupedListProps<D, P, K extends OptionKey, GP, GK extends OptionKey> = (
     BaseProps<D, P, K> & GroupOptions<D, GP, GK>
 );
-
-function hasGroup<D, P, K extends OptionKey, GP, GK extends OptionKey>(
-    props: Props<D, P, K, GP, GK>,
-): props is (BaseProps<D, P, K> & GroupOptions<D, GP, GK>) {
-    return !!(props as BaseProps<D, P, K> & GroupOptions<D, GP, GK>).grouped;
-}
 
 function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends OptionKey>(
     props: GroupedListProps<D, P, K, GP, GK>,
@@ -156,18 +222,16 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         [groups, groupComparator],
     );
 
-    const children: React.ReactNode[] = sortedGroupKeys.map((groupKey, i) => (
-        renderGroup(
-            groupKey,
-            i,
-            groups[groupKey],
-            groups[groupKey].map(renderListItem),
-        )
-    ));
-
     return (
         <>
-            {children}
+            {sortedGroupKeys.map((groupKey, i) => (
+                renderGroup(
+                    groupKey,
+                    i,
+                    groups[groupKey],
+                    groups[groupKey].map(renderListItem),
+                )
+            ))}
         </>
     );
 }
@@ -175,64 +239,12 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
 function List<D, P, K extends OptionKey, GP extends GroupCommonProps, GK extends OptionKey>(
     props: Props<D, P, K, GP, GK>,
 ) {
-    const {
-        data: dataFromProps,
-        keySelector,
-        renderer: Renderer,
-        rendererClassName,
-        rendererParams,
-        spacing = 'comfortable',
-        borderBetweenItem,
-        borderBetweenItemClassName,
-        borderBetweenItemWidth = 'thin',
-    } = props;
-
-    const data = dataFromProps ?? (emptyList as D[]);
-
-    const renderListItem = useCallback((datum: D, i: number) => {
-        const key = keySelector(datum, i);
-        const extraProps = rendererParams(key, datum, i, data);
-
-        if (isNotDefined(extraProps)) {
-            return null;
-        }
-
+    // eslint-disable-next-line react/destructuring-assignment
+    if (!props.grouped) {
         return (
-            <React.Fragment
-                key={key}
-            >
-                <Renderer
-                    className={rendererClassName}
-                    {...extraProps}
-                />
-                {borderBetweenItem && data.length > (i + 1) && (
-                    <Border
-                        inline
-                        extendToSpacing
-                        spacing={spacing}
-                        className={borderBetweenItemClassName}
-                        width={borderBetweenItemWidth}
-                    />
-                )}
-            </React.Fragment>
-        );
-    }, [
-        keySelector,
-        Renderer,
-        rendererClassName,
-        rendererParams,
-        data,
-        spacing,
-        borderBetweenItem,
-        borderBetweenItemWidth,
-        borderBetweenItemClassName,
-    ]);
-
-    if (!hasGroup(props)) {
-        return (
-            <>
-                {data.map(renderListItem)}
-            </>
+            <NonGroupedList
+                {...props}
+            />
         );
     }
 

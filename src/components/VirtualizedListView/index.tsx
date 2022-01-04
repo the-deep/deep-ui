@@ -85,13 +85,14 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         renderData,
         topDummyHeight,
         bottomDummyHeight,
+        offset,
     ] = useMemo(() => {
         if (data.length <= 2 * buffer) {
-            return [data, 0, 0];
+            return [data, 0, 0, 0];
         }
 
         if (isNotDefined(height)) {
-            return [[], 0, 0];
+            return [[], 0, 0, 0];
         }
 
         const containerHeight = height;
@@ -108,6 +109,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
             data.slice(startIndex, endIndex),
             startIndex * itemHeight,
             (data.length - endIndex) * itemHeight,
+            startIndex,
         ];
     }, [data, itemHeight, scrollOffset, buffer, height]);
 
@@ -138,6 +140,8 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
             <div style={wrapperContainerStyle}>
                 <ListView
                     {...otherProps}
+                    grouped={false}
+                    indexOffset={offset}
                     data={renderData}
                     pending={pending || (data.length > 0 && renderData.length <= 0)}
                     direction="vertical"
