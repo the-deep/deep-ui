@@ -88,6 +88,5 @@ Default.args = {
     keySelector: (d) => d.key,
     renderer: Option,
     rendererParams: (_, option) => ({ children: option.label }),
-    scrollToItemKey: '10',
     itemHeight: ITEM_HEIGHT,
 };
