@@ -68,7 +68,7 @@ export type Props<
     onSearchTextChange: (search: string) => void;
     optionContainerClassName?: string;
     optionKeySelector: (datum: O, index: number) => OK;
-    optionRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => React.ReactNode;
+    optionRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => JSX.Element;
     optionRendererParams: (optionKey: OK, option: O) => P;
     totalOptionsCount?: number;
     options: O[] | undefined | null;

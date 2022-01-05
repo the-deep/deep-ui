@@ -17,6 +17,7 @@ const initialValue: RowExpansionContextInterface = {
 };
 export const RowExpansionContext = createContext<RowExpansionContextInterface>(initialValue);
 
+// FIXME: may need to change return type to JSX.Element and use as jsx to use memoized component
 export type ExpansionRowChildrenProps<D, K> = (rowOptions: RowOptions<D, K>) => React.ReactNode;
 export interface ExpansionOptions {
     expandedRowClassName?: string;
