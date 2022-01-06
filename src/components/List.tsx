@@ -23,6 +23,7 @@ interface BaseProps<D, P, K extends OptionKey> {
     borderBetweenItem?: boolean;
     borderBetweenItemWidth?: BorderProps['width'];
     borderBetweenItemClassName?: string;
+    direction?: 'horizontal' | 'vertical';
     spacing?: SpacingTypes;
 }
 
@@ -64,6 +65,7 @@ function NonGroupedList<D, P, K extends OptionKey>(
         borderBetweenItem,
         borderBetweenItemClassName,
         borderBetweenItemWidth = 'thin',
+        direction = 'horizontal',
         indexOffset = 0,
     } = props;
 
@@ -93,6 +95,7 @@ function NonGroupedList<D, P, K extends OptionKey>(
                         spacing={spacing}
                         className={borderBetweenItemClassName}
                         width={borderBetweenItemWidth}
+                        position={direction === 'horizontal' ? 'right' : 'bottom'}
                     />
                 )}
             </React.Fragment>
@@ -108,6 +111,7 @@ function NonGroupedList<D, P, K extends OptionKey>(
         borderBetweenItem,
         borderBetweenItemWidth,
         borderBetweenItemClassName,
+        direction,
     ]);
 
     return (
@@ -140,6 +144,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         borderBetweenItem,
         borderBetweenItemWidth = 'thin',
         borderBetweenItemClassName,
+        direction = 'horizontal',
     } = props;
 
     const data = dataFromProps ?? (emptyList as D[]);
@@ -166,6 +171,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
                         spacing={spacing}
                         className={borderBetweenItemClassName}
                         width={borderBetweenItemWidth}
+                        position={direction === 'horizontal' ? 'right' : 'bottom'}
                     />
                 )}
             </>
@@ -180,6 +186,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         borderBetweenItemClassName,
         borderBetweenItemWidth,
         spacing,
+        direction,
     ]);
 
     const renderGroup = (
