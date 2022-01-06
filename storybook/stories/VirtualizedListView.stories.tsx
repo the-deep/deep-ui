@@ -22,7 +22,9 @@ interface OptionProps {
     children: React.ReactNode
 }
 
-const options: OptionFields[] = Array.from(Array(100000)).map((_, index) => ({
+// const totalOptionsCount = 100000;
+const totalOptionsCount = 100;
+const options: OptionFields[] = Array.from(Array(totalOptionsCount)).map((_, index) => ({
     key: String(index),
     label: `Item ${index}`,
 }));

@@ -36,6 +36,7 @@ export type Props<
     compactEmptyMessage?: boolean;
     compactAndVerticalEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
+    // FIXME: need proper documentation for direction
     direction?: 'horizontal' | 'vertical';
     messageShown?: boolean;
     messageIconShown?: boolean;
@@ -44,6 +45,7 @@ export type Props<
     filtered: boolean;
     pending: boolean;
     messageActions?: React.ReactNode;
+    reverse?: boolean;
 };
 
 function ListView<
@@ -78,6 +80,7 @@ function ListView<
         messageIconShown = false,
         style,
         onReload,
+        reverse,
         ...otherListProps
     } = props;
 
@@ -91,6 +94,7 @@ function ListView<
                 pending && styles.pending,
                 spacingToStyleMap[spacing],
                 direction === 'vertical' && styles.vertical,
+                reverse && styles.reverse,
                 className,
             )}
             style={style}

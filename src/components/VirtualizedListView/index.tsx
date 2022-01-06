@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useMemo } from 'react';
-import { _cs, isNotDefined } from '@togglecorp/fujs';
+import { _cs, isNotDefined, bound } from '@togglecorp/fujs';
 
 import ListView, { Props as ListViewProps } from '../ListView';
 import {
@@ -26,6 +26,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         buffer = 1,
         pending,
         keySelector,
+        reverse,
         ...otherProps
     } = props;
 
@@ -74,6 +75,8 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         offset,
     ] = useMemo(() => {
         if (data.length <= 2 * buffer) {
+            // NOTE: we do not need to set offset because this is a case
+            // without virtualization
             return [data, 0, 0, 0];
         }
 
@@ -82,22 +85,37 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         }
 
         const containerHeight = height;
-        const startIndex = Math.max(
-            0,
+
+        const startIndex = bound(
             Math.floor((scrollOffset ?? 0) / itemHeight) - buffer,
-        );
-        const endIndex = Math.min(
-            data.length,
-            startIndex + Math.ceil(containerHeight / itemHeight) + 2 * buffer,
+            0,
+            data.length - 1,
         );
 
+        const endIndex = bound(
+            startIndex + Math.ceil(containerHeight / itemHeight) + 2 * buffer,
+            0,
+            data.length - 1,
+        );
+
+        const topHeight = startIndex * itemHeight;
+        const bottomHeight = (data.length - 1 - endIndex) * itemHeight;
+
+        const actualStartIndex = reverse ? data.length - 1 - endIndex : startIndex;
+        const actualEndIndex = reverse ? data.length - 1 - startIndex : endIndex;
+
         return [
-            data.slice(startIndex, endIndex),
-            startIndex * itemHeight,
-            (data.length - endIndex) * itemHeight,
-            startIndex,
+            data.slice(
+                actualStartIndex,
+                actualEndIndex + 1,
+            ),
+
+            topHeight,
+            bottomHeight,
+
+            actualStartIndex,
         ];
-    }, [data, itemHeight, scrollOffset, buffer, height]);
+    }, [data, itemHeight, scrollOffset, buffer, height, reverse]);
 
     const totalHeight = itemHeight * data.length;
     const listViewHeight = totalHeight - topDummyHeight - bottomDummyHeight;
@@ -127,6 +145,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
                 <ListView
                     {...otherProps}
                     grouped={false}
+                    reverse={reverse}
                     indexOffset={offset}
                     data={renderData}
                     pending={pending || (data.length > 0 && renderData.length <= 0)}
