@@ -56,6 +56,7 @@ NoValue.args = {
 export const Default = Template.bind({});
 Default.args = {
     value: '1',
+    ellipsizeOptions: true,
 };
 
 export const Disabled = Template.bind({});

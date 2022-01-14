@@ -1,4 +1,5 @@
 import React from 'react';
+import { _cs } from '@togglecorp/fujs';
 import {
     IoCheckbox,
     IoSquareOutline,
@@ -12,12 +13,14 @@ import styles from './styles.css';
 export interface Props {
     children: React.ReactNode;
     isActive: boolean;
+    ellipsize?: boolean;
 }
 
 function Option(props: Props) {
     const {
         children,
         isActive,
+        ellipsize = false,
     } = props;
 
     return (
@@ -26,7 +29,7 @@ function Option(props: Props) {
             childrenContainerClassName={styles.labelContainer}
         >
             <div
-                className={styles.label}
+                className={_cs(styles.label, ellipsize && styles.ellipsis)}
                 title={typeof children === 'string' ? children : undefined}
             >
                 { children }
