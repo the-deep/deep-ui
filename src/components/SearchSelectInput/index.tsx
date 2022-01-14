@@ -17,16 +17,20 @@ import styles from './styles.css';
 
 interface OptionProps {
     children: React.ReactNode;
+    ellipsize?: boolean;
 }
 function Option(props: OptionProps) {
-    const { children } = props;
+    const {
+        children,
+        ellipsize = false,
+    } = props;
 
     return (
         <ElementFragments
             icons={<IoCheckmark className={styles.icon} />}
             childrenContainerClassName={styles.label}
         >
-            <div className={styles.text}>
+            <div className={_cs(styles.text, ellipsize && styles.ellipsis)}>
                 { children }
             </div>
         </ElementFragments>
@@ -84,9 +88,16 @@ export type Props<
         | 'hasValue'
     >
 ) & (
-    { nonClearable: true; onChange: (newValue: T, name: K) => void }
-    | { nonClearable?: false; onChange: (newValue: T | undefined, name: K) => void }
-);
+    {
+        nonClearable: true;
+        onChange: (newValue: T, name: K) => void;
+    } | {
+        nonClearable?: false;
+        onChange: (newValue: T | undefined, name: K) => void;
+    }
+) & {
+    ellipsizeOptions?: boolean;
+};
 
 const emptyList: unknown[] = [];
 
@@ -113,6 +124,7 @@ function SearchSelectInput<
         searchOptions: searchOptionsFromProps,
         onSearchValueChange,
         onShowDropdownChange,
+        ellipsizeOptions,
         ...otherProps
     } = props;
 
@@ -227,9 +239,10 @@ function SearchSelectInput<
                 children: optionLabelSelector ? optionLabelSelector(option) : labelSelector(option),
                 containerClassName: _cs(styles.option, isActive && styles.active),
                 title: labelSelector(option),
+                ellipsize: ellipsizeOptions,
             };
         },
-        [value, labelSelector, optionLabelSelector],
+        [value, labelSelector, optionLabelSelector, ellipsizeOptions],
     );
 
     const handleOptionClick = useCallback(

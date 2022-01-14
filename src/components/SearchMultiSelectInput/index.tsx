@@ -65,7 +65,9 @@ export type Props<
         | 'onFocusedKeyChange'
         | 'hasValue'
     >
-);
+) & {
+    ellipsizeOptions?: boolean;
+};
 
 const emptyList: unknown[] = [];
 
@@ -96,6 +98,7 @@ function SearchMultiSelectInput<
         selectionListShown,
         disabled,
         readOnly,
+        ellipsizeOptions,
         ...otherProps
     } = props;
 
@@ -221,9 +224,10 @@ function SearchMultiSelectInput<
                 containerClassName: _cs(styles.option, isActive && styles.active),
                 title: labelSelector(option),
                 isActive,
+                ellipsize: ellipsizeOptions,
             };
         },
-        [labelSelector, value, optionLabelSelector],
+        [labelSelector, value, optionLabelSelector, ellipsizeOptions],
     );
 
     // FIXME: value should not be on dependency list

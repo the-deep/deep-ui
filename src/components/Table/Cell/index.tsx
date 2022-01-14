@@ -6,12 +6,14 @@ import { genericMemo } from '../../../utils';
 export interface CellProps<T>{
     className?: string;
     value: T | null | undefined;
+    tooltip?: string | null | undefined,
 }
 
 function Cell<T>(props: CellProps<T>) {
     const {
         className,
         value,
+        tooltip,
     } = props;
 
     if (isNotDefined(value)) {
@@ -19,7 +21,10 @@ function Cell<T>(props: CellProps<T>) {
     }
 
     return (
-        <div className={className}>
+        <div
+            className={className}
+            title={tooltip ?? undefined}
+        >
             {value}
         </div>
     );

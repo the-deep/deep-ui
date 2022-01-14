@@ -45,6 +45,7 @@ function ExpandButton<T extends string | number | undefined>(props: ExpandButton
             name={undefined}
             variant="action"
             onClick={handleClick}
+            title={id === expandedRowKey ? 'Collapse' : 'Expand'}
         >
             {id === expandedRowKey ? <IoChevronDown /> : <IoChevronForward />}
         </Button>
@@ -85,6 +86,7 @@ export function createStringColumn<D, K>(
         cellRenderer: Cell,
         cellRendererParams: (_: K, datum: D): CellProps<string> => ({
             value: accessor(datum),
+            tooltip: accessor(datum),
         }),
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareString(accessor(foo), accessor(bar)),
@@ -127,8 +129,8 @@ export function createNumberColumn<D, K>(
         },
         cellRenderer: NumberOutput,
         cellRendererParams: (_: K, datum: D): NumberOutputProps => ({
-            // Note override null with undefined
-            value: accessor(datum) ?? undefined,
+            value: accessor(datum),
+            tooltip: accessor(datum),
         }),
         valueSelector: accessor,
         valueComparator: (foo: D, bar: D) => compareNumber(accessor(foo), accessor(bar)),
