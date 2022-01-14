@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 
 function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputElement>({
     name,
@@ -13,9 +13,10 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
         e: React.ChangeEvent<T>,
     ) => void,
 }) {
-    const debouncingRef = useRef(0);
+    const debouncingRef = useRef<number | undefined>(undefined);
     const [immediateValue, setImmediateValue] = useState(value);
-    const handleInputChange = React.useCallback(
+
+    const handleInputChange = useCallback(
         (e: React.ChangeEvent<T>) => {
             const {
                 currentTarget: {
@@ -26,7 +27,7 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
 
             if (debouncingRef.current) {
                 window.clearTimeout(debouncingRef.current);
-                debouncingRef.current = 0;
+                debouncingRef.current = undefined;
             }
 
             const newValue = v === '' ? undefined : v;
@@ -34,6 +35,8 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
 
             debouncingRef.current = window.setTimeout(
                 () => {
+                    debouncingRef.current = undefined;
+
                     // console.warn('Setting on input change', newValue);
                     if (onChange) {
                         onChange(
@@ -42,7 +45,6 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
                             e,
                         );
                     }
-                    debouncingRef.current = 0;
                 },
                 200,
             );
@@ -50,7 +52,7 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
         [name, onChange],
     );
 
-    const handleInputBlur = React.useCallback(
+    const handleInputBlur = useCallback(
         (e: React.ChangeEvent<T>) => {
             const {
                 currentTarget: {
@@ -58,10 +60,12 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
                 },
             } = e;
 
-            if (debouncingRef.current) {
-                clearTimeout(debouncingRef.current);
-                debouncingRef.current = 0;
+            if (!debouncingRef.current) {
+                return;
             }
+
+            debouncingRef.current = undefined;
+            clearTimeout(debouncingRef.current);
 
             const newValue = v === '' ? undefined : v;
             // console.warn('Setting on input blur', newValue);
@@ -79,7 +83,7 @@ function useDebouncingTextChange<N, T extends HTMLTextAreaElement | HTMLInputEle
 
     React.useEffect(
         () => {
-            if (debouncingRef.current === 0) {
+            if (debouncingRef.current === undefined) {
                 // console.warn('Setting on prop change', value);
                 setImmediateValue(value);
             }

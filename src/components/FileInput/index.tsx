@@ -108,6 +108,10 @@ function FileInput<T extends NameType>(props: Props<T>) {
         ...fileInputProps
     } = props;
 
+    // NOTE: we need to increase inputKey after each file upload to destroy the
+    // input (clearing out file input using `e.target.value = ''` doesn't work
+    const [inputKey, setInputKey] = useState(0);
+
     const uiModeClassName = useUiModeClassName(uiMode, styles.light, styles.dark);
     const [internalError, setInternalError] = useState<string>();
 
@@ -177,7 +181,7 @@ function FileInput<T extends NameType>(props: Props<T>) {
     ) => {
         if (e) {
             handleFiles(e.target.files);
-            e.target.value = '';
+            setInputKey((val) => val + 1);
         }
     }, [handleFiles]);
 
@@ -207,6 +211,7 @@ function FileInput<T extends NameType>(props: Props<T>) {
             <>
                 {children}
                 <RawInput<T>
+                    key={inputKey}
                     {...fileInputProps}
                     className={styles.input}
                     elementRef={inputElementRef}
