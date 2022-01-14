@@ -54,6 +54,8 @@ export interface Props {
     numberClassName?: string;
     normalizationSuffixClassName?: string;
     suffixClassName?: string;
+
+    tooltip?: number | string | null | undefined,
 }
 
 /**
@@ -76,6 +78,7 @@ function NumberOutput(props: Props) {
         numberClassName,
         normalizationSuffixClassName,
         suffixClassName,
+        tooltip,
     } = props;
 
     const [number, normalizationSuffix] = React.useMemo(() => {
@@ -147,7 +150,10 @@ function NumberOutput(props: Props) {
     ]);
 
     return (
-        <div className={_cs(styles.numberOutput, className)}>
+        <div
+            className={_cs(styles.numberOutput, className)}
+            title={isDefined(tooltip) ? String(tooltip) : undefined}
+        >
             { isFalsy(value) ? (
                 invalidText
             ) : (
