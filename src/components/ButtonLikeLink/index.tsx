@@ -67,6 +67,7 @@ function ButtonLikeLink(props: Props) {
                 className={_cs(className, styles.link)}
                 target="_blank"
                 rel="noopener noreferrer"
+                title={title}
                 {...linkProps}
             >
                 {children}

@@ -11,6 +11,8 @@ import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
+const emptyList: unknown[] = [];
+
 export type Props<D, P, K extends OptionKey> = {
     itemHeight: number;
     elementRef?: React.RefObject<HTMLDivElement>;
@@ -22,13 +24,15 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         className,
         itemHeight = 16,
         elementRef: elementRefFromProps,
-        data = [],
+        data: dataFromProps,
         buffer = 1,
         pending,
         keySelector,
         reverse,
         ...otherProps
     } = props;
+
+    const data = dataFromProps ?? (emptyList as D[]);
 
     const [scrollOffset, setScrollOffset] = React.useState<number | undefined>(undefined);
 
