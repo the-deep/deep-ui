@@ -43,6 +43,18 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
+      - name: 🤞 Run CSS Lint on Stories 🧪
+        env:
+            DOCKER_IMAGE: ${{ steps.prep.outputs.tagged_image }}
+        run: |
+          docker run --rm --workdir="/code/" $DOCKER_IMAGE sh -c 'yarn css-lint:stories'
+
+      - name: 🤞 Run Lint on Stories 🧪
+        env:
+            DOCKER_IMAGE: ${{ steps.prep.outputs.tagged_image }}
+        run: |
+          docker run --rm --workdir="/code/" $DOCKER_IMAGE sh -c 'yarn lint:stories'
+
       - name: 🤞 Run CSS Lint 🧪
         env:
             DOCKER_IMAGE: ${{ steps.prep.outputs.tagged_image }}
