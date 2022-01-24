@@ -18,7 +18,8 @@
         "prepack": "yarn build",
         "watch": "rollup -c -w",
         "typecheck": "tsc",
-        "lint": "eslint 'src/**/*.[tj]s?(x)' --ignore-pattern 'stories'",
+        "lint": "eslint 'src/**/*.[tj]s?(x)'",
+        "lint:stories": "eslint 'storybook/stories/**/*.[tj]s?(x)'",
         "css-lint": "stylelint 'src/**/*.css' --config .stylelintrc.json"
     },
     "repository": {

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
-import Tabs, { Props as TabsProps } from '../../src/components/Tabs';
-import Tab from '../../src/components/Tab';
-import TabList from '../../src/components/TabList';
-import TabPanel from '../../src/components/TabPanel';
+import Tabs, { Props as TabsProps } from '../../../src/components/Tabs';
+import Tab from '../../../src/components/Tab';
+import TabList from '../../../src/components/TabList';
+import TabPanel from '../../../src/components/TabPanel';
 
 import styles from './styles.css';
 

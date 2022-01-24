@@ -2,8 +2,8 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoFlag, IoClose } from 'react-icons/io5';
 
-import PendingAnimation from '../../src/components/PendingAnimation';
-import Tag, { Props as TagProps } from '../../src/components/Tag';
+import PendingAnimation from '../../../src/components/PendingAnimation';
+import Tag, { Props as TagProps } from '../../../src/components/Tag';
 
 import styles from './styles.css';
 
