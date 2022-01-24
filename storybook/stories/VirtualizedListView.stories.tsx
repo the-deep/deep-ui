@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
+import Button from '../../src/components/Button';
 import VirtualizedListView, { Props as VirtualizedListViewProps } from '../../src/components/VirtualizedListView';
 import Checkbox from '../../src/components/Checkbox';
 
@@ -42,6 +43,8 @@ function Option({ children }: OptionProps) {
     );
 }
 
+const scrollTo = String(Math.floor(totalOptionsCount / 2) + 3);
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Template: Story<VirtualizedListViewProps<OptionFields, OptionProps, string>> = (args) => {
     const [{
@@ -50,9 +53,21 @@ const Template: Story<VirtualizedListViewProps<OptionFields, OptionProps, string
         filtered,
     }, updateArgs] = useArgs();
 
+    interface Component {
+        scrollTo: (item: string) => void;
+    }
+
+    const componentRef = useRef<Component | null>(null);
+
     const handleCheckboxChange = React.useCallback((value, name) => {
         updateArgs({ [name]: value });
     }, [updateArgs]);
+
+    const handleScroll = (key: string) => {
+        if (componentRef.current) {
+            componentRef.current.scrollTo(key);
+        }
+    };
 
     return (
         <div>
@@ -74,8 +89,15 @@ const Template: Story<VirtualizedListViewProps<OptionFields, OptionProps, string
                 value={pending}
                 onChange={handleCheckboxChange}
             />
+            <Button
+                name={scrollTo}
+                onClick={handleScroll}
+            >
+                {`Jump to item ${scrollTo}`}
+            </Button>
             <VirtualizedListView
                 {...args}
+                componentRef={componentRef}
                 className={styles.virtualizedListView}
                 pending={pending}
                 filtered={filtered}
