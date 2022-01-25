@@ -3,13 +3,13 @@ import { Story } from '@storybook/react/types-6-0';
 import Table, {
     Props as TableProps,
     Column,
-} from '../../src/components/Table';
-import useRowExpansion, { RowExpansionContext } from '../../src/components/Table/useRowExpansion';
+} from '../../../src/components/Table';
+import useRowExpansion, { RowExpansionContext } from '../../../src/components/Table/useRowExpansion';
 import {
     createStringColumn,
     createNumberColumn,
     createExpandColumn,
-} from '../../src/components/Table/predefinedColumns';
+} from '../../../src/components/Table/predefinedColumns';
 
 import styles from './styles.css';
 

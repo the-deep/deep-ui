@@ -17,6 +17,9 @@ export type Props<D, P, K extends OptionKey> = {
     itemHeight: number;
     elementRef?: React.RefObject<HTMLDivElement>;
     buffer?: number;
+    componentRef?: React.MutableRefObject<{
+        scrollTo: (item: K) => void;
+    } | null>;
 } & ListViewProps<D, P, K, GroupCommonProps, OptionKey>
 
 function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
@@ -29,6 +32,7 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
         pending,
         keySelector,
         reverse,
+        componentRef,
         ...otherProps
     } = props;
 
@@ -42,6 +46,29 @@ function VirtualizedListView<D, P, K extends OptionKey>(props: Props<D, P, K>) {
 
     const size = useSizeTracking(elementRef);
     const height = size?.height;
+
+    useEffect(
+        () => {
+            if (componentRef) {
+                componentRef.current = {
+                    scrollTo: (key: K) => {
+                        if (!elementRef.current) {
+                            return;
+                        }
+                        const itemIndex = data.findIndex(
+                            (item, index) => keySelector(item, index) === key,
+                        );
+                        if (itemIndex === -1) {
+                            console.error('Cannot scroll to key', key);
+                            return;
+                        }
+                        elementRef.current.scrollTop = itemHeight * itemIndex;
+                    },
+                };
+            }
+        },
+        [data, keySelector, elementRef, componentRef, itemHeight],
+    );
 
     const handleScroll = useCallback(
         (e: React.UIEvent<HTMLDivElement>) => {

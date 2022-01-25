@@ -13,11 +13,22 @@ jobs:
     # the list of steps that the action will go through
     steps:
       - uses: actions/checkout@v1
+
       - name: Install dependencies
         run: yarn
+
       - name: Install storybook dependencies
         run: yarn
         working-directory: storybook
+
+      - name: 🤞 Run CSS Lint 🧪
+        run: |
+          yarn css-lint:stories
+
+      - name: 🤞 Run Lint 🧪
+        run: |
+          yarn lint:stories
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         # options required to the GitHub chromatic action

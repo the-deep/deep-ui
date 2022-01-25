@@ -10,12 +10,12 @@ import {
     IoCheckmark,
 } from 'react-icons/io5';
 
-import Button from '../../src/components/Button';
-import Tab from '../../src/components/Tab';
-import Tabs from '../../src/components/Tabs';
-import TabList from '../../src/components/TabList';
-import QuickActionButton from '../../src/components/QuickActionButton';
-import Container, { Props as ContainerProps } from '../../src/components/Container';
+import Button from '../../../src/components/Button';
+import Tab from '../../../src/components/Tab';
+import Tabs from '../../../src/components/Tabs';
+import TabList from '../../../src/components/TabList';
+import QuickActionButton from '../../../src/components/QuickActionButton';
+import Container, { Props as ContainerProps } from '../../../src/components/Container';
 
 import styles from './styles.css';
 

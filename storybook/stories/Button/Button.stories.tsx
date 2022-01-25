@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import { IoAccessibility, IoShuffle } from 'react-icons/io5';
 
-import Button, { Props as ButtonProps } from '../../src/components/Button';
+import Button, { Props as ButtonProps } from '../../../src/components/Button';
 
 import styles from './styles.css';
 
