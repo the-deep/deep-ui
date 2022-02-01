@@ -7,6 +7,7 @@ import {
 import {
     IoCalendarOutline,
     IoClose,
+    IoRepeatSharp,
 } from 'react-icons/io5';
 
 import useUiModeClassName from '../../hooks/useUiModeClassName';
@@ -140,7 +141,7 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
     const [
         showCalendar,
         setShowCalendarTrue,
-        setShowCalendarFalse,,
+        setShowCalendarFalse, ,
         toggleShowCalendar,
     ] = useBooleanState(false);
 
@@ -279,6 +280,13 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
         1,
     );
 
+    const handleSwapDateRange = React.useCallback(() => {
+        setTempDate({
+            startDate: tempDate.endDate ?? value?.endDate,
+            endDate: tempDate.startDate ?? value?.startDate,
+        });
+    }, [value, tempDate.startDate, tempDate.endDate]);
+
     return (
         <>
             <InputContainer
@@ -286,7 +294,7 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
                 inputSectionRef={inputSectionRef}
                 actions={(
                     <>
-                        { actions }
+                        {actions}
                         {!readOnly && (
                             <>
                                 {value && (
@@ -308,6 +316,16 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
                                     title="Show calendar"
                                 >
                                     <IoCalendarOutline />
+                                </Button>
+
+                                <Button
+                                    name={undefined}
+                                    variant="action"
+                                    onClick={handleSwapDateRange}
+                                    disabled={disabled}
+                                    title="Swap Date"
+                                >
+                                    <IoRepeatSharp />
                                 </Button>
                             </>
                         )}

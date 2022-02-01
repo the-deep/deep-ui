@@ -6,6 +6,7 @@ import {
 import {
     IoTimeOutline,
     IoClose,
+    IoRepeatSharp,
 } from 'react-icons/io5';
 
 import { genericMemo } from '../../utils';
@@ -70,7 +71,7 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
     const [
         showTimePicker,
         setShowTimePickerTrue,
-        setShowTimePickerFalse,,
+        setShowTimePickerFalse, ,
         toggleShowTimePicker,
     ] = useBooleanState(false);
 
@@ -122,6 +123,13 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
         hideTimePicker();
     }, [tempTime, name, onChange, hideTimePicker]);
 
+    const handleSwapTimeRange = React.useCallback(() => {
+        setTempTime({
+            startTime: tempTime.endTime ?? value?.endTime,
+            endTime: tempTime.startTime ?? value?.startTime,
+        });
+    }, [value, tempTime.startTime, tempTime.endTime]);
+
     return (
         <>
             <InputContainer
@@ -129,7 +137,7 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
                 inputSectionRef={inputSectionRef}
                 actions={(
                     <>
-                        { actions }
+                        {actions}
                         {!readOnly && (
                             <>
                                 {value && (
@@ -151,6 +159,15 @@ function TimeRangeInput<T extends NameType>(props: Props<T>) {
                                     title="Show time picker"
                                 >
                                     <IoTimeOutline />
+                                </Button>
+                                <Button
+                                    name={undefined}
+                                    variant="action"
+                                    onClick={handleSwapTimeRange}
+                                    disabled={disabled}
+                                    title="Swap Date"
+                                >
+                                    <IoRepeatSharp />
                                 </Button>
                             </>
                         )}
