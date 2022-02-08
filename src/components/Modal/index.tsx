@@ -42,6 +42,7 @@ interface BaseProps {
     headingContainerClassName?: HeaderProps['headingContainerClassName'];
     headingClassName?: string;
     className?: string;
+    backdropClassName?: string;
     bodyClassName?: string;
     headerDescriptionClassName?: string;
     headerClassName?: string;
@@ -80,6 +81,7 @@ function Modal(props: Props) {
         footer,
 
         className,
+        backdropClassName,
         headerClassName,
         bodyClassName,
         footerClassName,
@@ -112,7 +114,7 @@ function Modal(props: Props) {
     const shouldHideHeader = props.hideCloseButton && !heading && !headerActions && !headerIcons;
 
     return (
-        <BodyBackdrop>
+        <BodyBackdrop className={backdropClassName}>
             <div
                 className={_cs(
                     styles.modal,

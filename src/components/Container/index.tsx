@@ -31,6 +31,7 @@ export interface Props {
     headerIcons?: React.ReactNode;
     headerActions?: React.ReactNode;
     headingDescription?: React.ReactNode;
+    headingDescriptionClassName?: string;
     headerDescription?: React.ReactNode;
     headerClassName?: string;
     headerIconsContainerClassName?: string;
@@ -101,6 +102,7 @@ function Container(props: Props) {
         ellipsizeHeading,
         withoutExternalPadding,
         visibleOverflow,
+        headingDescriptionClassName,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -138,7 +140,8 @@ function Container(props: Props) {
                     description={headingDescription}
                     iconsContainerClassName={headerIconsContainerClassName}
                     actionsContainerClassName={headerActionsContainerClassName}
-                    descriptionClassName={_cs(styles.headerDescription, headerDescriptionClassName)}
+                    descriptionClassName={headingDescriptionClassName}
+                    childrenContainerClassName={headerDescriptionClassName}
                     headingSectionClassName={headingSectionClassName}
                     headingClassName={headingClassName}
                     elementProps={headerElementProps}
