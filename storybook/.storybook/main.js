@@ -9,7 +9,7 @@ const stories = path.resolve(base, './stories/');
 
 module.exports = {
     stories: [
-        "../stories/*.stories.tsx",
+        "../stories/**/*.stories.tsx",
     ],
     addons: [
         "@storybook/addon-links",
