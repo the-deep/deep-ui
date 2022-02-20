@@ -113,6 +113,10 @@
     --dui-color-background-hover-primary-button: var(--dui-color-accent-hover);
     --dui-color-background-input-section: transparent;
 
+    --dui-color-background-switch-icon: rgba(0, 0, 0, .4);
+    --dui-color-background-switch-knob: #ffffff;
+
+
     /* FIXME: this color has 3 occurance */
     --dui-color-background-tertiary-hover: #f5f8fb;
 
