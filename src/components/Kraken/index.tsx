@@ -20,13 +20,15 @@ import skateSvg from './images/skate.svg';
 import sleepSvg from './images/sleep.svg';
 import standbySvg from './images/standby.svg';
 import whipSvg from './images/whip.svg';
+import crutchesSvg from './images/crutches.svg';
+import icecreamSvg from './images/icecream.svg';
 
 import styles from './styles.css';
 
 export type SizeTypes = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
 export type KrakenTypes = 'ballon' | 'exercise'
-| 'experiment' | 'hi' | 'search' | 'skydive' | 'work' | 'coffee'
-| 'fat' | 'move' | 'read' | 'sing' | 'skate' | 'sleep' | 'standby' | 'whip';
+    | 'experiment' | 'hi' | 'search' | 'skydive' | 'work' | 'coffee'
+    | 'fat' | 'move' | 'read' | 'sing' | 'skate' | 'sleep' | 'standby' | 'whip' | 'crutches' | 'icecream';
 
 const sizeToStyleMap: {
     [key in SizeTypes]: string;
@@ -57,6 +59,8 @@ const variantToSvgMap: {
     standby: standbySvg,
     whip: whipSvg,
     hi: hiSvg,
+    crutches: crutchesSvg,
+    icecream: icecreamSvg,
 };
 
 export interface Props {
