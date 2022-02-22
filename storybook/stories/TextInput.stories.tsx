@@ -47,6 +47,21 @@ WithIcon.args = {
     label: 'Name',
 };
 
+export const WithSuggestions = Template.bind({});
+WithSuggestions.args = {
+    label: 'Name',
+    inputSuggestions: [
+        {
+            id: '1',
+            title: 'cats',
+        },
+        {
+            id: '2',
+            title: 'dogs',
+        },
+    ],
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
     label: 'Name',
