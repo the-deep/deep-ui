@@ -1,0 +1,4 @@
+.suggestions {
+    display: flex;
+    gap: var(--dui-spacing-medium);
+}

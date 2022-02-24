@@ -49,6 +49,7 @@ function NumberInput<T extends NameType>(props: Props<T>) {
         name,
         value,
         variant,
+        inputDescription,
         ...rawInputProps
     } = props;
 
@@ -144,6 +145,7 @@ function NumberInput<T extends NameType>(props: Props<T>) {
                     value={finalValue}
                 />
             )}
+            inputDescription={inputDescription}
         />
     );
 }

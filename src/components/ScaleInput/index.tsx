@@ -85,6 +85,7 @@ function ScaleInput<
         labelSelector,
         colorSelector,
         className,
+        hint,
         ...otherProps
     } = props;
 
@@ -105,6 +106,7 @@ function ScaleInput<
             )}
             keySelector={keySelector}
             labelSelector={labelSelector}
+            hint={hint}
         />
     );
 }
