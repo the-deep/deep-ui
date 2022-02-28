@@ -5,6 +5,7 @@ import { useArgs } from '@storybook/client-api';
 import { IoText } from 'react-icons/io5';
 
 import TextInput, { Props as TextInputProps } from '../../src/components/TextInput';
+import Suggestion from '../../src/components/Suggestion';
 
 export default {
     title: 'Input/TextInput',
@@ -71,4 +72,50 @@ export const WithError = Template.bind({});
 WithError.args = {
     label: 'Name',
     error: 'This field is required',
+};
+
+const SuggestionTemplate: Story<TextInputProps<string>> = (args) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const handleChange = (e: string | undefined) => {
+        updateArgs({ value: e });
+    };
+
+    const suggestionOptions = [
+        {
+            key: 'cats',
+            label: 'Cats',
+        },
+        {
+            key: 'dogs',
+            label: 'Dogs',
+        },
+        {
+            key: 'monkeys',
+            label: 'Monkeys',
+        },
+    ];
+
+    return (
+        <TextInput
+            {...args}
+            value={value}
+            onChange={handleChange}
+            inputDescription={(
+                <Suggestion
+                    value={value}
+                    name={undefined}
+                    options={suggestionOptions}
+                    keySelector={(s) => s.key}
+                    labelSelector={(s) => s.label}
+                    onChange={handleChange}
+                />
+            )}
+        />
+    );
+};
+
+export const WithSuggestions = SuggestionTemplate.bind({});
+WithSuggestions.args = {
+    label: 'Pets',
 };

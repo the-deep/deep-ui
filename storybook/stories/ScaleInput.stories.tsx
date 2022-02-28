@@ -3,6 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
 import ScaleInput, { Props as ScaleInputProps } from '../../src/components/ScaleInput';
+import Suggestion from '../../src/components/Suggestion';
 
 export default {
     title: 'Input/ScaleInput',
@@ -91,4 +92,57 @@ Error.args = {
     name: 'test',
     value: '1',
     error: 'This is wrong',
+};
+
+const SuggestionTemplate: Story<
+    ScaleInputProps<Option['key'], Option, Option['label']>
+> = (props) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const setValue = (e: string) => {
+        updateArgs({ value: e });
+    };
+
+    const suggestionOptions = [
+        {
+            id: '1',
+            label: 'Twilight rating',
+        },
+        {
+            id: '3',
+            label: 'Squid Game rating',
+        },
+        {
+            id: '5',
+            label: 'Space Odyssey rating',
+        },
+    ];
+
+    return (
+        <ScaleInput
+            label="Severity"
+            {...props}
+            value={value}
+            options={options}
+            keySelector={(d: Option) => d.key}
+            labelSelector={(d: Option) => d.label}
+            colorSelector={(d: Option) => d.color}
+            onChange={setValue}
+            hint={(
+                <Suggestion
+                    name={undefined}
+                    value={value}
+                    options={suggestionOptions}
+                    keySelector={(s) => s.id}
+                    labelSelector={(s) => s.label}
+                    onChange={setValue}
+                />
+            )}
+        />
+    );
+};
+
+export const WithSuggestion = SuggestionTemplate.bind({});
+WithSuggestion.args = {
+    value: undefined,
 };

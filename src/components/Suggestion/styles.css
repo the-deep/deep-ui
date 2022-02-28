@@ -1,0 +1,8 @@
+.suggestions {
+    display: flex;
+    gap: var(--dui-spacing-small);
+
+    .button {
+        font-size: var(--dui-font-size-small);
+    }
+}

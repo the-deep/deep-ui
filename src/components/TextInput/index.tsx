@@ -19,6 +19,8 @@ export interface Props<T extends NameType> extends InheritedProps<T> {
 
 function TextInput<T extends NameType>(props: Props<T>) {
     const {
+        name,
+        onChange,
         actions,
         actionsContainerClassName,
         className,
@@ -38,6 +40,7 @@ function TextInput<T extends NameType>(props: Props<T>) {
         containerRef,
         inputSectionRef,
         inputClassName,
+        inputDescription,
         variant,
         ...textInputProps
     } = props;
@@ -63,10 +66,13 @@ function TextInput<T extends NameType>(props: Props<T>) {
             labelContainerClassName={labelContainerClassName}
             readOnly={readOnly}
             uiMode={uiMode}
+            inputDescription={inputDescription}
             variant={variant}
             input={(
                 <RawInput<T>
                     {...textInputProps}
+                    name={name}
+                    onChange={onChange}
                     className={_cs(
                         styles.input,
                         uiModeClassName,

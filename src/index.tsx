@@ -152,6 +152,8 @@ export { default as SelectInput } from './components/SelectInput';
 export type { Props as SelectInputProps } from './components/SelectInput';
 export { default as Spinner } from './components/Spinner';
 export type { Props as SpinnerProps } from './components/Spinner';
+export type { Props as SuggestionProps } from './components/Suggestion';
+export { default as Suggestion } from './components/Suggestion';
 export type { Props as SvgProps } from './components/Svg';
 export { default as Svg } from './components/Svg';
 export type { Props as SwitchProps } from './components/Switch';

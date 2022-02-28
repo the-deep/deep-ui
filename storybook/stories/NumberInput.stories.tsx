@@ -4,6 +4,7 @@ import { useArgs } from '@storybook/client-api';
 import { IoCalculatorOutline } from 'react-icons/io5';
 
 import NumberInput, { Props as NumberInputProps } from '../../src/components/NumberInput';
+import Suggestion from '../../src/components/Suggestion';
 
 export default {
     title: 'Input/NumberInput',
@@ -62,4 +63,39 @@ export const WithError = Template.bind({});
 WithError.args = {
     label: 'Age',
     error: 'This field is required',
+};
+
+const SuggestionTemplate: Story<NumberInputProps<string>> = (args) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const handleChange = (e: number | undefined) => {
+        updateArgs({ value: e });
+    };
+
+    return (
+        <NumberInput
+            {...args}
+            value={value}
+            onChange={handleChange}
+            inputDescription={(
+                <Suggestion
+                    name={undefined}
+                    value={value}
+                    onChange={handleChange}
+                    keySelector={(item) => item.key}
+                    labelSelector={(item) => item.value}
+                    options={[
+                        { key: 1, value: '1' },
+                        { key: 10, value: '10' },
+                        { key: 100, value: '100' },
+                    ]}
+                />
+            )}
+        />
+    );
+};
+
+export const WithSuggestions = SuggestionTemplate.bind({});
+WithSuggestions.args = {
+    label: 'Number',
 };

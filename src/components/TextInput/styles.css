@@ -12,3 +12,9 @@
         }
     }
 }
+
+.suggestions {
+    display: flex;
+    margin-top: var(--dui-spacing-medium);
+    gap: var(--dui-spacing-medium);
+}
