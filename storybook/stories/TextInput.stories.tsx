@@ -119,4 +119,3 @@ export const WithSuggestions = SuggestionTemplate.bind({});
 WithSuggestions.args = {
     label: 'Pets',
 };
-

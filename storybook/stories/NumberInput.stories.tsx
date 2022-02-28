@@ -99,4 +99,3 @@ export const WithSuggestions = SuggestionTemplate.bind({});
 WithSuggestions.args = {
     label: 'Number',
 };
-

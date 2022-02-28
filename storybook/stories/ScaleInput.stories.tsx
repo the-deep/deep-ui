@@ -144,5 +144,5 @@ const SuggestionTemplate: Story<
 
 export const WithSuggestion = SuggestionTemplate.bind({});
 WithSuggestion.args = {
-    value: undefined
+    value: undefined,
 };

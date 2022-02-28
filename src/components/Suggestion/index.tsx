@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { _cs } from '@togglecorp/fujs';
 
 import ListView from '../ListView';
 import Button, { ButtonVariant } from '../Button';
@@ -16,7 +17,9 @@ export interface Props<O, N extends NameType, K extends OptionKey> {
     labelSelector: (datum: O) => string;
     onChange?: (value: K, name: N) => void;
     disabled?: boolean | undefined;
-    variant?: ButtonVariant;
+    buttonVariant?: ButtonVariant;
+    className?: string;
+    buttonClassName?: string;
 }
 
 function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, N, K>) {
@@ -28,7 +31,9 @@ function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, 
         labelSelector,
         keySelector,
         value,
-        variant = 'secondary',
+        className,
+        buttonClassName,
+        buttonVariant = 'tertiary',
     } = props;
 
     const handleOptionClick = useCallback((key: K) => {
@@ -38,28 +43,37 @@ function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, 
     }, [
         onChange,
         name,
-        value,
     ]);
 
     const rendererParams = useCallback((_: K, data: O) => ({
         name: keySelector(data),
         children: labelSelector(data),
         disabled,
-        variant,
+        variant: buttonVariant,
         onClick: handleOptionClick,
+        spacing: 'compact' as const,
+        className: _cs(buttonClassName, styles.button),
     }), [
-        variant,
+        buttonClassName,
+        buttonVariant,
         disabled,
         handleOptionClick,
         keySelector,
         labelSelector,
     ]);
 
-    const filteredOptions = options.filter((option) => keySelector(option) !== value);
+    const filteredOptions = useMemo(() => (
+        options.filter((option) => keySelector(option) !== value)
+    ),
+    [
+        value,
+        options,
+        keySelector,
+    ]);
 
     return (
         <ListView
-            className={styles.suggestions}
+            className={_cs(styles.suggestions, className)}
             keySelector={keySelector}
             data={filteredOptions}
             renderer={Button}
