@@ -11,7 +11,7 @@ type OptionKey = string | number;
 
 export interface Props<O, N extends NameType, K extends OptionKey> {
     name: N;
-    value: K,
+    value: K | null | undefined;
     options: O[];
     keySelector: (datum: O) => K;
     labelSelector: (datum: O) => string;
