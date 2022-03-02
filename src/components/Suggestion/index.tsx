@@ -18,8 +18,12 @@ export interface Props<O, N extends NameType, K extends OptionKey> {
     onChange?: (value: K, name: N) => void;
     disabled?: boolean | undefined;
     buttonVariant?: ButtonVariant;
-    className?: string;
+    listClassName?: string;
     buttonClassName?: string;
+    containerClassName?: string;
+    labelClassName?: string;
+    labelHidden?: boolean;
+    label?: string;
 }
 
 function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, N, K>) {
@@ -31,9 +35,13 @@ function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, 
         labelSelector,
         keySelector,
         value,
-        className,
+        listClassName,
+        containerClassName,
+        labelClassName,
         buttonClassName,
         buttonVariant = 'tertiary',
+        label = 'Suggestions:',
+        labelHidden = false,
     } = props;
 
     const handleOptionClick = useCallback((key: K) => {
@@ -72,16 +80,23 @@ function Suggestion<O, N extends NameType, K extends OptionKey>(props: Props<O, 
     ]);
 
     return (
-        <ListView
-            className={_cs(styles.suggestions, className)}
-            keySelector={keySelector}
-            data={filteredOptions}
-            renderer={Button}
-            rendererParams={rendererParams}
-            filtered={false}
-            pending={false}
-            errored={false}
-        />
+        <div className={_cs(styles.container, containerClassName)}>
+            {!labelHidden && (
+                <div className={_cs(styles.label, labelClassName)}>
+                    {label}
+                </div>
+            )}
+            <ListView
+                className={_cs(styles.suggestions, listClassName)}
+                keySelector={keySelector}
+                data={filteredOptions}
+                renderer={Button}
+                rendererParams={rendererParams}
+                filtered={false}
+                pending={false}
+                errored={false}
+            />
+        </div>
     );
 }
 export default Suggestion;
