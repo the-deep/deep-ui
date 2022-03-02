@@ -4,6 +4,7 @@ import { useArgs } from '@storybook/client-api';
 import SearchMultiSelectInput, {
     Props as SearchMultiSelectInputProps,
 } from '../../src/components/SearchMultiSelectInput';
+import Suggestion from '../../src/components/Suggestion';
 import useQuery, { entityListTransformer } from '../../src/utils/useQuery';
 
 export default {
@@ -24,6 +25,12 @@ const options: Option[] = [
     { id: '3', name: 'Pumpkin' },
     { id: '5', name: 'Spinach' },
     { id: '2', name: 'Tomato' },
+];
+
+const suggestionOptions: Option[] = [
+    { id: '2', name: 'Tomato' },
+    { id: '4', name: 'Gourd' },
+    { id: '6', name: 'Eggplant' },
 ];
 
 // eslint-disable-next-line max-len
@@ -104,4 +111,69 @@ SelectedListShownReadOnly.args = {
     value: ['1', '3'],
     selectionListShown: true,
     readOnly: true,
+};
+
+const SuggestionTemplate: Story<
+    SearchMultiSelectInputProps<string, string, Option, { containerClassName?: string }, never>
+> = (props) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const setValue = (e: string[]) => {
+        updateArgs({ value: e });
+    };
+
+    const [searchValue, setSearchValue] = useState('');
+    const [opened, setOpened] = useState(false);
+    const [cacheOptions, setCacheOptions] = useState<Option[] | undefined | null>([
+        options[2],
+        options[3],
+    ]);
+
+    const [pending, searchOptions, , totalCount] = useQuery(
+        options,
+        searchValue,
+        entityListTransformer,
+        !opened,
+    );
+
+    return (
+        <SearchMultiSelectInput
+            label="Vegetables"
+            {...props}
+            totalOptionsCount={totalCount}
+            options={cacheOptions}
+            value={value}
+            onChange={setValue}
+            keySelector={(d) => d.id}
+            labelSelector={(d) => d.name}
+            searchOptions={searchOptions}
+            onSearchValueChange={setSearchValue}
+            optionsPending={pending}
+            onOptionsChange={setCacheOptions}
+            onShowDropdownChange={setOpened}
+            inputDescription={(
+                <Suggestion
+                    name={undefined}
+                    value={value}
+                    options={suggestionOptions}
+                    keySelector={(s) => s.id}
+                    labelSelector={(s) => s.name}
+                    onChange={setValue}
+                    // NOTE: This is disabled till suggestion supports multi-select inputs
+                    disabled
+                />
+            )}
+        />
+    );
+};
+
+export const WithSuggestions = SuggestionTemplate.bind({});
+WithSuggestions.args = {
+    value: ['1'],
+};
+
+export const SelectedListShownWithSuggestions = SuggestionTemplate.bind({});
+SelectedListShownWithSuggestions.args = {
+    value: ['1', '3'],
+    selectionListShown: true,
 };

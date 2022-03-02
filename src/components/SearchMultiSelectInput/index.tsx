@@ -98,6 +98,7 @@ function SearchMultiSelectInput<
         selectionListShown,
         disabled,
         readOnly,
+        inputDescription,
         ellipsizeOptions,
         ...otherProps
     } = props;
@@ -291,19 +292,24 @@ function SearchMultiSelectInput<
             hasValue={isDefined(value) && value.length > 0}
             disabled={disabled}
             readOnly={readOnly}
-            inputDescription={selectionListShown && (
-                <DismissibleList
-                    name={name}
-                    className={selectedOptionContainerClassName}
-                    value={value}
-                    data={selectedOptions}
-                    keySelector={keySelector}
-                    labelSelector={labelSelector}
-                    // FIXME: need to intercept this and call onOptionsChange
-                    onChange={onChange}
-                    disabled={disabled}
-                    readOnly={readOnly}
-                />
+            inputDescription={(
+                <>
+                    {inputDescription}
+                    {selectionListShown && (
+                        <DismissibleList
+                            name={name}
+                            className={selectedOptionContainerClassName}
+                            value={value}
+                            data={selectedOptions}
+                            keySelector={keySelector}
+                            labelSelector={labelSelector}
+                            // FIXME: need to intercept this and call onOptionsChange
+                            onChange={onChange}
+                            disabled={disabled}
+                            readOnly={readOnly}
+                        />
+                    )}
+                </>
             )}
         />
     );
