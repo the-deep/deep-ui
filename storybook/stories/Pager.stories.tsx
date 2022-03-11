@@ -39,7 +39,6 @@ Default.args = {
     activePage: 2,
     maxItemsPerPage: 10,
     itemsCount: 100,
-    hideInfo: true,
 };
 Default.parameters = {
     design: {
@@ -48,14 +47,44 @@ Default.parameters = {
     },
 };
 
+export const AllPagesExpanded = Template.bind({});
+AllPagesExpanded.args = {
+    activePage: 2,
+    maxItemsPerPage: 10,
+    itemsCount: 100,
+    allPagesExpanded: true,
+};
+AllPagesExpanded.parameters = {
+    design: {
+        type: 'figma',
+        url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4925%3A3559',
+    },
+};
+
+export const PageSizeDisabled = Template.bind({});
+PageSizeDisabled.args = {
+    activePage: 2,
+    maxItemsPerPage: 10,
+    itemsCount: 100,
+    itemsPerPageControlHidden: true,
+};
+PageSizeDisabled.parameters = {
+    design: {
+        type: 'figma',
+        url: 'https://www.figma.com/file/a83upKqdwvEYFoxXjlwSmv/DEEP_UI_LIBRARY-shared?node-id=4925%3A3559',
+    },
+};
+
 export const PreviousNextOnly = Template.bind({});
 PreviousNextOnly.args = {
-    showPrevAndNextLabel: true,
-    hidePages: true,
     activePage: 1,
     maxItemsPerPage: 10,
     itemsCount: 100,
-    hideInfo: true,
+
+    pagesNextPrevControlLabelShown: true,
+    pagesControlHidden: true,
+
+    infoVisibility: 'hidden',
 };
 PreviousNextOnly.parameters = {
     design: {
@@ -69,10 +98,13 @@ DotsOnly.args = {
     activePage: 1,
     maxItemsPerPage: 10,
     itemsCount: 100,
-    hideInfo: true,
-    hidePageNumberLabel: true,
-    showAllPages: true,
-    hidePrevAndNext: true,
+
+    allPagesExpanded: true,
+
+    pagesControlLabelHidden: true,
+    pageNextPrevControlHidden: true,
+
+    infoVisibility: 'hidden',
 };
 DotsOnly.parameters = {
     design: {

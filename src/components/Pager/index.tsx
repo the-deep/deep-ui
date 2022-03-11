@@ -163,13 +163,15 @@ export type Props = {
     onActivePageChange: (pageNumber: number) => void;
     totalCapacity?: number;
     options?: PagerOption[] | null;
-    hideInfo?: boolean;
     disabled?: boolean;
-    showPrevAndNextLabel?: boolean;
-    hidePrevAndNext?: boolean;
-    hidePages?: boolean;
-    hidePageNumberLabel?: boolean;
-    showAllPages?: boolean;
+
+    allPagesExpanded?: boolean;
+    infoVisibility?: 'hidden' | 'hidden-for-single-page' | 'visible';
+
+    pagesNextPrevControlLabelShown?: boolean;
+    pageNextPrevControlHidden?: boolean;
+    pagesControlHidden?: boolean;
+    pagesControlLabelHidden?: boolean;
 } & ({
     itemsPerPageControlHidden: true;
     onItemsPerPageChange?: (pageCapacity: number) => void;
@@ -188,12 +190,12 @@ function Pager(props: Props) {
         maxItemsPerPage = 25,
         totalCapacity = 7,
         disabled = false,
-        hideInfo,
-        showPrevAndNextLabel = false,
-        hidePrevAndNext,
-        hidePages,
-        hidePageNumberLabel,
-        showAllPages = false,
+        infoVisibility = 'visible',
+        pagesNextPrevControlLabelShown = false,
+        pageNextPrevControlHidden = false,
+        pagesControlHidden = false,
+        pagesControlLabelHidden = false,
+        allPagesExpanded = false,
     } = props;
 
     const showingTitle = 'Showing';
@@ -211,16 +213,16 @@ function Pager(props: Props) {
     const currentItemsStart = itemsOnPage > 0 ? offset + 1 : offset;
     const currentItemsEnd = offset + itemsOnPage;
 
-    const pages = applyPagination(totalCapacity, activePage, numPages, showAllPages);
+    const pages = applyPagination(totalCapacity, activePage, numPages, allPagesExpanded);
 
     const pageList = pages.length > 1 && (
         <div
             className={_cs(
                 styles.pageList,
-                hidePageNumberLabel && styles.pageNumberHidden,
+                pagesControlLabelHidden && styles.pageNumberHidden,
             )}
         >
-            {!hidePrevAndNext && (
+            {!pageNextPrevControlHidden && (
                 <Button
                     name={activePage - 1}
                     className={styles.pageButton}
@@ -229,12 +231,12 @@ function Pager(props: Props) {
                     icons={<IoChevronBack />}
                     variant="action"
                 >
-                    {showPrevAndNextLabel && (
+                    {pagesNextPrevControlLabelShown && (
                         'Previous'
                     )}
                 </Button>
             )}
-            {!hidePages && pages.map((page) => {
+            {!pagesControlHidden && pages.map((page) => {
                 if (page.type === 'button') {
                     return (
                         <Button
@@ -243,9 +245,9 @@ function Pager(props: Props) {
                             onClick={onActivePageChange}
                             className={_cs(styles.pageButton, styles.pageNumberButton)}
                             disabled={disabled}
-                            variant={hidePageNumberLabel ? 'secondary' : 'action'}
+                            variant={pagesControlLabelHidden ? 'secondary' : 'action'}
                         >
-                            {!hidePageNumberLabel && (
+                            {!pagesControlLabelHidden && (
                                 page.index
                             )}
                         </Button>
@@ -255,7 +257,7 @@ function Pager(props: Props) {
                     return (
                         <Button
                             key={`button-${page.key}`}
-                            variant={hidePageNumberLabel ? 'primary' : 'action'}
+                            variant={pagesControlLabelHidden ? 'primary' : 'action'}
                             name={undefined}
                             className={_cs(
                                 styles.pageButton,
@@ -263,7 +265,7 @@ function Pager(props: Props) {
                                 styles.active,
                             )}
                         >
-                            {!hidePageNumberLabel && (
+                            {!pagesControlLabelHidden && (
                                 page.label
                             )}
                         </Button>
@@ -278,7 +280,7 @@ function Pager(props: Props) {
                     </div>
                 );
             })}
-            {!hidePrevAndNext && (
+            {!pageNextPrevControlHidden && (
                 <Button
                     name={activePage + 1}
                     onClick={onActivePageChange}
@@ -287,7 +289,7 @@ function Pager(props: Props) {
                     actions={<IoChevronForward />}
                     variant="action"
                 >
-                    {showPrevAndNextLabel && (
+                    {pagesNextPrevControlLabelShown && (
                         'Next'
                     )}
                 </Button>
@@ -295,7 +297,19 @@ function Pager(props: Props) {
         </div>
     );
 
-    const info = !hideInfo && (
+    const hasMultiplePages = itemsCount > maxItemsPerPage;
+
+    const showInfo = useMemo(() => {
+        if (infoVisibility === 'visible') {
+            return true;
+        }
+        if (infoVisibility === 'hidden') {
+            return false;
+        }
+        return hasMultiplePages;
+    }, [infoVisibility, hasMultiplePages]);
+
+    const info = showInfo && (
         <div className={styles.currentRangeInformation}>
             <div className={styles.showing}>
                 {showingTitle}
@@ -342,6 +356,7 @@ function Pager(props: Props) {
                 placeholder=""
                 optionsPopupClassName={styles.perPageOptionPopup}
                 nonClearable
+                variant="general"
             />
         </div>
     );
