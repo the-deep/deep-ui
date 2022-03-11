@@ -165,7 +165,7 @@ export type Props = {
     options?: PagerOption[] | null;
     disabled?: boolean;
 
-    allPagesControlShown?: boolean;
+    allPagesExpanded?: boolean;
     infoVisibility?: 'hidden' | 'hidden-for-single-page' | 'visible';
 
     pagesNextPrevControlLabelShown?: boolean;
@@ -192,10 +192,10 @@ function Pager(props: Props) {
         disabled = false,
         infoVisibility = 'visible',
         pagesNextPrevControlLabelShown = false,
-        pageNextPrevControlHidden,
-        pagesControlHidden,
-        pagesControlLabelHidden,
-        allPagesControlShown = false,
+        pageNextPrevControlHidden = false,
+        pagesControlHidden = false,
+        pagesControlLabelHidden = false,
+        allPagesExpanded = false,
     } = props;
 
     const showingTitle = 'Showing';
@@ -213,7 +213,7 @@ function Pager(props: Props) {
     const currentItemsStart = itemsOnPage > 0 ? offset + 1 : offset;
     const currentItemsEnd = offset + itemsOnPage;
 
-    const pages = applyPagination(totalCapacity, activePage, numPages, allPagesControlShown);
+    const pages = applyPagination(totalCapacity, activePage, numPages, allPagesExpanded);
 
     const pageList = pages.length > 1 && (
         <div
@@ -356,6 +356,7 @@ function Pager(props: Props) {
                 placeholder=""
                 optionsPopupClassName={styles.perPageOptionPopup}
                 nonClearable
+                variant="general"
             />
         </div>
     );
