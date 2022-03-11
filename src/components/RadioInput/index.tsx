@@ -50,7 +50,7 @@ function RadioInput<
     O extends object,
     V extends string | number,
     RRP extends RadioProps<V>,
->(props: Props<N, O, V, RRP>) {
+    >(props: Props<N, O, V, RRP>) {
     const {
         className,
         name,
@@ -126,7 +126,7 @@ function RadioInput<
                 className={labelContainerClassName}
                 disabled={disabled}
             >
-                { label }
+                {label}
             </InputLabel>
             <div className={_cs(styles.radioListContainer, listContainerClassName)}>
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}

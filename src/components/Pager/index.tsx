@@ -295,24 +295,24 @@ function Pager(props: Props) {
         </div>
     );
 
-    const info = !hideInfo && (itemsCount > maxItemsPerPage) && (
+    const info = !hideInfo && (
         <div className={styles.currentRangeInformation}>
             <div className={styles.showing}>
-                { showingTitle }
+                {showingTitle}
             </div>
             <div className={styles.range}>
                 <div className={styles.from}>
-                    { currentItemsStart }
+                    {currentItemsStart}
                 </div>
                 <div className={styles.separator}>
-                    { rangeIndicator }
+                    {rangeIndicator}
                 </div>
                 <div className={styles.to}>
-                    { currentItemsEnd }
+                    {currentItemsEnd}
                 </div>
             </div>
             <div className={styles.of}>
-                { ofTitle }
+                {ofTitle}
             </div>
             <div className={styles.total}>
                 {itemsCount}
