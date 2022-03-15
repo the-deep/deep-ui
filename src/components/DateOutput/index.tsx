@@ -15,7 +15,9 @@ export interface Props {
     value: string | number | undefined | null;
     format?: string;
     emptyComponent?: React.ReactNode;
-    tooltip?: string | null | undefined,
+    tooltip?: string | null | undefined;
+
+    formatter?: typeof populateFormat;
 }
 
 function DateOutput(props: Props) {
@@ -25,6 +27,7 @@ function DateOutput(props: Props) {
         className,
         emptyComponent = '-',
         tooltip,
+        formatter = populateFormat,
     } = props;
 
     const formattedValueList = React.useMemo(() => {
@@ -38,8 +41,8 @@ function DateOutput(props: Props) {
             return undefined;
         }
 
-        return populateFormat(breakFormat(format), date);
-    }, [format, value]);
+        return formatter(breakFormat(format), date);
+    }, [format, value, formatter]);
 
     const formattedDate = formattedValueList?.map((v) => v.value)?.join('');
 

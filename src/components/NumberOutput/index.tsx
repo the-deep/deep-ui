@@ -55,7 +55,9 @@ export interface Props {
     normalizationSuffixClassName?: string;
     suffixClassName?: string;
 
-    tooltip?: number | string | null | undefined,
+    tooltip?: number | string | null | undefined;
+
+    normalizer?: typeof formattedNormalize;
 }
 
 /**
@@ -79,6 +81,7 @@ function NumberOutput(props: Props) {
         normalizationSuffixClassName,
         suffixClassName,
         tooltip,
+        normalizer = formattedNormalize,
     } = props;
 
     const [number, normalizationSuffix] = React.useMemo(() => {
@@ -96,7 +99,7 @@ function NumberOutput(props: Props) {
             const {
                 number: n,
                 normalizeSuffix: ns,
-            } = formattedNormalize(num, Lang.en);
+            } = normalizer(num, Lang.en);
 
             num = n;
             nSuffix = ns;
@@ -147,6 +150,7 @@ function NumberOutput(props: Props) {
         normal,
         precision,
         separator,
+        normalizer,
     ]);
 
     return (
