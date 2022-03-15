@@ -66,6 +66,7 @@ export type Props<
     onFocusedKeyChange: (value: { key: OK, mouse?: boolean } | undefined) => void;
     searchText: string;
     onSearchTextChange: (search: string) => void;
+    inputClassName?: string;
     optionContainerClassName?: string;
     optionKeySelector: (datum: O, index: number) => OK;
     optionRenderer: (props: Pick<P, Exclude<keyof P, 'containerClassName' | 'title'>>) => JSX.Element;
@@ -141,6 +142,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
         variant,
         inputDescription,
         hasValue,
+        inputClassName,
     } = props;
 
     const options = optionsFromProps ?? (emptyList as O[]);
@@ -342,6 +344,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
             variant={variant}
             input={(
                 <RawInput
+                    className={inputClassName}
                     name={name}
                     elementRef={inputElementRef}
                     readOnly={readOnly}
