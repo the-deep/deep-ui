@@ -59,6 +59,8 @@
     --dui-color-white: #ffffff;
     --dui-color-brand: #00125b;
     --dui-color-accent: #1a3ed0;
+    --dui-color-nlp: #5f54ab;
+    --dui-color-nlp-hover: #534a94;
     --dui-color-positive: #29bb75;
     --dui-color-information: #3fa2f7;
     --dui-color-negative: #ff5c52;
@@ -103,6 +105,7 @@
     --dui-color-surface-positive: #d3f7f1;
     --dui-color-surface-information: #dfe7f2;
     --dui-color-surface-negative: #ffe7f2;
+    --dui-color-surface-information-hover: #d1d9e3;
 
     --dui-color-foreground: #ffffff;
     --dui-color-background: #f6f6f6;

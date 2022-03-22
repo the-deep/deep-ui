@@ -101,6 +101,18 @@ export const Variants: Story = () => (
                 >
                     General
                 </Button>
+                <Button
+                    variant="nlp"
+                    name="nlp"
+                >
+                    NLP
+                </Button>
+                <Button
+                    variant="surface"
+                    name="surface"
+                >
+                    Surface
+                </Button>
             </div>
         </section>
         <section>
@@ -144,14 +156,30 @@ export const Variants: Story = () => (
                 <Button
                     variant="transparent"
                     name="transparent"
+                    disabled
                 >
                     Transparent
                 </Button>
                 <Button
                     variant="general"
                     name="general"
+                    disabled
                 >
                     General
+                </Button>
+                <Button
+                    variant="nlp"
+                    name="nlp"
+                    disabled
+                >
+                    NLP
+                </Button>
+                <Button
+                    variant="surface"
+                    name="surface"
+                    disabled
+                >
+                    Surface
                 </Button>
             </div>
         </section>
@@ -196,14 +224,30 @@ export const Variants: Story = () => (
                 <Button
                     variant="transparent"
                     name="transparent"
+                    readOnly
                 >
                     Transparent
                 </Button>
                 <Button
                     variant="general"
                     name="general"
+                    readOnly
                 >
                     General
+                </Button>
+                <Button
+                    variant="nlp"
+                    name="nlp"
+                    readOnly
+                >
+                    NLP
+                </Button>
+                <Button
+                    variant="surface"
+                    name="surface"
+                    readOnly
+                >
+                    Surface
                 </Button>
             </div>
         </section>
@@ -254,8 +298,23 @@ export const Variants: Story = () => (
                 <Button
                     variant="general"
                     name="general"
+                    big
                 >
                     General
+                </Button>
+                <Button
+                    variant="nlp"
+                    name="nlp"
+                    big
+                >
+                    NLP
+                </Button>
+                <Button
+                    variant="surface"
+                    name="surface"
+                    big
+                >
+                    Surface
                 </Button>
             </div>
         </section>
