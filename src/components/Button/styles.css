@@ -96,6 +96,34 @@
         }
     }
 
+    &.nlp {
+        --text-transform: uppercase;
+        --color-background: var(--dui-color-nlp);
+        --color-text: var(--dui-color-text-primary-button);
+        --color-border: var(--dui-color-nlp);
+
+        &:not(:disabled) {
+            &:hover {
+                --color-background: var(--dui-color-nlp-hover);
+                --color-text: var(--dui-color-text-primary-button);
+                --color-border: var(--dui-color-nlp);
+            }
+        }
+    }
+
+    &.surface {
+        --color-background: var(--dui-color-surface-information);
+        --color-text: var(--dui-color-text);
+
+        &:not(:disabled) {
+            &:hover {
+                --color-border: transparent;
+                --color-background: var(--dui-color-surface-information-hover);
+            }
+        }
+    }
+
+
     &.action {
         --padding: 0;
         --color-border: transparent;
