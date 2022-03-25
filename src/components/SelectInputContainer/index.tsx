@@ -83,6 +83,7 @@ export type Props<
     hasValue?: boolean;
     nonClearable?: boolean;
     onClear: () => void;
+    autoFocus?: boolean;
 }, OMISSION> & Omit<InputContainerProps, 'input'> & ({
     grouped: true;
     groupLabelSelector: (option: O) => string;
@@ -143,6 +144,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
         inputDescription,
         hasValue,
         inputClassName,
+        autoFocus,
     } = props;
 
     const options = optionsFromProps ?? (emptyList as O[]);
@@ -359,6 +361,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                     placeholder={valueDisplay || placeholder}
                     autoComplete="off"
                     onKeyDown={handleKeyDown}
+                    autoFocus={autoFocus}
                 />
             )}
             inputDescription={inputDescription}
