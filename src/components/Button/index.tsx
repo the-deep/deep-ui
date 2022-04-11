@@ -23,8 +23,10 @@ export type ButtonVariant = (
     | 'action'
     | 'transparent'
     | 'general'
-    | 'nlp'
-    | 'surface'
+    | 'nlp-primary'
+    | 'nlp-secondary'
+    | 'nlp-tertiary'
+    | 'nlp-general'
 );
 
 const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
@@ -34,8 +36,10 @@ const buttonVariantToStyleMap: { [key in ButtonVariant]: string; } = {
     action: styles.action,
     transparent: styles.transparent,
     general: styles.general,
-    nlp: styles.nlp,
-    surface: styles.surface,
+    'nlp-primary': styles.nlpPrimary,
+    'nlp-secondary': styles.nlpSecondary,
+    'nlp-tertiary': styles.nlpTertiary,
+    'nlp-general': styles.nlpGeneral,
 };
 
 export interface Props<N> extends Omit<

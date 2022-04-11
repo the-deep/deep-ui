@@ -102,16 +102,29 @@ export const Variants: Story = () => (
                     General
                 </Button>
                 <Button
-                    variant="nlp"
+                    variant="nlp-primary"
                     name="nlp"
                 >
-                    NLP
+                    NLP Primary
                 </Button>
                 <Button
-                    variant="surface"
-                    name="surface"
+                    variant="nlp-secondary"
+                    name="nlp-secondary"
                 >
-                    Surface
+                    NLP Secondary
+                </Button>
+                <Button
+                    variant="nlp-tertiary"
+                    name="nlp-tertiary"
+                    disabled
+                >
+                    NLP Tertiary
+                </Button>
+                <Button
+                    variant="nlp-general"
+                    name="nlp-general"
+                >
+                    NLP General
                 </Button>
             </div>
         </section>
@@ -168,18 +181,32 @@ export const Variants: Story = () => (
                     General
                 </Button>
                 <Button
-                    variant="nlp"
+                    variant="nlp-primary"
                     name="nlp"
                     disabled
                 >
-                    NLP
+                    NLP Primary
                 </Button>
                 <Button
-                    variant="surface"
-                    name="surface"
+                    variant="nlp-secondary"
+                    name="nlp-secondary"
                     disabled
                 >
-                    Surface
+                    NLP Secondary
+                </Button>
+                <Button
+                    variant="nlp-tertiary"
+                    name="nlp-tertiary"
+                    disabled
+                >
+                    NLP Tertiary
+                </Button>
+                <Button
+                    variant="nlp-general"
+                    name="nlp-general"
+                    disabled
+                >
+                    NLP General
                 </Button>
             </div>
         </section>
@@ -236,18 +263,32 @@ export const Variants: Story = () => (
                     General
                 </Button>
                 <Button
-                    variant="nlp"
+                    variant="nlp-primary"
                     name="nlp"
                     readOnly
                 >
-                    NLP
+                    NLP Primary
                 </Button>
                 <Button
-                    variant="surface"
-                    name="surface"
+                    variant="nlp-secondary"
+                    name="nlp-secondary"
                     readOnly
                 >
-                    Surface
+                    NLP Secondary
+                </Button>
+                <Button
+                    variant="nlp-tertiary"
+                    name="nlp-tertiary"
+                    readOnly
+                >
+                    NLP Tertiary
+                </Button>
+                <Button
+                    variant="nlp-general"
+                    name="nlp-general"
+                    readOnly
+                >
+                    NLP General
                 </Button>
             </div>
         </section>
@@ -303,18 +344,32 @@ export const Variants: Story = () => (
                     General
                 </Button>
                 <Button
-                    variant="nlp"
+                    variant="nlp-primary"
                     name="nlp"
                     big
                 >
-                    NLP
+                    NLP Primary
                 </Button>
                 <Button
-                    variant="surface"
-                    name="surface"
+                    variant="nlp-secondary"
+                    name="nlp-secondary"
                     big
                 >
-                    Surface
+                    NLP Secondary
+                </Button>
+                <Button
+                    variant="nlp-tertiary"
+                    name="nlp-tertiary"
+                    big
+                >
+                    NLP Tertiary
+                </Button>
+                <Button
+                    variant="nlp-general"
+                    name="nlp-general"
+                    big
+                >
+                    NLP General
                 </Button>
             </div>
         </section>

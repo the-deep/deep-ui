@@ -48,6 +48,21 @@
         }
     }
 
+    &.nlp-primary {
+        --text-transform: uppercase;
+        --color-background: var(--dui-color-nlp);
+        --color-text: var(--dui-color-text-primary-button);
+        --color-border: var(--dui-color-nlp);
+
+        &:not(:disabled) {
+            &:hover {
+                --color-background: var(--dui-color-nlp-hover);
+                --color-text: var(--dui-color-text-primary-button);
+                --color-border: var(--dui-color-nlp);
+            }
+        }
+    }
+
     &.secondary {
         --text-transform: uppercase;
         --color-border: transparent;
@@ -58,6 +73,20 @@
             &:hover {
                 --color-border: transparent;
                 --color-background: var(--dui-color-background-negative);
+            }
+        }
+    }
+
+    &.nlp-secondary {
+        --text-transform: uppercase;
+        --color-border: transparent;
+        --color-background: var(--dui-color-background-information-nlp);
+        --color-text: var(--dui-color-nlp);
+
+        &:not(:disabled) {
+            &:hover {
+                --color-border: transparent;
+                --color-background: var(--dui-color-background-information-nlp-hover);
             }
         }
     }
@@ -79,6 +108,23 @@
         }
     }
 
+    &.nlp-tertiary {
+        --color-background: var(--dui-color-foreground);
+        --color-text: var(--dui-color-nlp);
+        --color-border: var(--dui-color-nlp);
+
+        &:disabled {
+            --color-border: var(--dui-color-text-disabled);
+            --color-text: var(--dui-color-text);
+        }
+
+        &:not(:disabled) {
+            &:hover {
+                --color-background: var(--dui-color-background-information-nlp-hover);
+            }
+        }
+    }
+
     &.general {
         --color-background: var(--dui-color-background-information);
         --color-text: var(--dui-color-text);
@@ -96,22 +142,7 @@
         }
     }
 
-    &.nlp {
-        --text-transform: uppercase;
-        --color-background: var(--dui-color-nlp);
-        --color-text: var(--dui-color-text-primary-button);
-        --color-border: var(--dui-color-nlp);
-
-        &:not(:disabled) {
-            &:hover {
-                --color-background: var(--dui-color-nlp-hover);
-                --color-text: var(--dui-color-text-primary-button);
-                --color-border: var(--dui-color-nlp);
-            }
-        }
-    }
-
-    &.surface {
+    &.nlp-general {
         --color-background: var(--dui-color-surface-information);
         --color-text: var(--dui-color-text);
 
