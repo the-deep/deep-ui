@@ -58,6 +58,7 @@
     }
 
     &.hidden {
+        pointer-events: none;
         transform-origin: 0 0;
 
         &.top {
