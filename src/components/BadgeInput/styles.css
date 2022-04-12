@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: var(--dui-spacing-small);
+
+    .suggestions {
+        display: flex;
+        gap: var(--dui-spacing-small);
+
+        .button {
+            &.small-button {
+                font-size: var(--dui-font-size-small);
+                text-transform: unset;
+            }
+        }
+    }
+}

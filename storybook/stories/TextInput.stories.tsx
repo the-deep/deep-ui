@@ -5,7 +5,7 @@ import { useArgs } from '@storybook/client-api';
 import { IoText } from 'react-icons/io5';
 
 import TextInput, { Props as TextInputProps } from '../../src/components/TextInput';
-import Suggestion from '../../src/components/Suggestion';
+import BadgeInput from '../../src/components/BadgeInput';
 
 export default {
     title: 'Input/TextInput',
@@ -74,7 +74,7 @@ WithError.args = {
     error: 'This field is required',
 };
 
-const SuggestionTemplate: Story<TextInputProps<string>> = (args) => {
+const BadgeInputTemplate: Story<TextInputProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
 
     const handleChange = (e: string | undefined) => {
@@ -102,20 +102,22 @@ const SuggestionTemplate: Story<TextInputProps<string>> = (args) => {
             value={value}
             onChange={handleChange}
             inputDescription={(
-                <Suggestion
+                <BadgeInput
                     value={value}
                     name={undefined}
                     options={suggestionOptions}
                     keySelector={(s) => s.key}
                     labelSelector={(s) => s.label}
                     onChange={handleChange}
+                    suggestionMode
+                    smallButtons
                 />
             )}
         />
     );
 };
 
-export const WithSuggestions = SuggestionTemplate.bind({});
-WithSuggestions.args = {
+export const WithSuggestion = BadgeInputTemplate.bind({});
+WithSuggestion.args = {
     label: 'Pets',
 };

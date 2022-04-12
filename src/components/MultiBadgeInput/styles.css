@@ -9,6 +9,7 @@
 
         .button {
             font-size: var(--dui-font-size-small);
+            text-transform: unset;
         }
     }
 }
