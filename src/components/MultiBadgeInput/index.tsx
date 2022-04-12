@@ -68,12 +68,14 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
         }
         if (!value) {
             onChange([key], name);
+            return;
         }
 
         if (value?.findIndex((val) => val === key) === -1) {
             onChange([...value, key], name);
         } else {
-            onChange(value?.filter((val) => val !== key), name);
+            const newVal = value?.filter((val) => val !== key);
+            onChange(newVal?.length > 0 ? newVal : undefined, name);
         }
     }, [
         value,
