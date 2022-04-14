@@ -18,7 +18,7 @@ type OptionKey = string | number;
 export interface Props<O, N extends NameType, K extends OptionKey> {
     name: N;
     value: K[] | null | undefined;
-    options: O[];
+    options: O[] | null | undefined;
     keySelector: (datum: O) => K;
     labelSelector: (datum: O) => string;
     onChange?: (value: K[] | undefined, name: N) => void;
@@ -112,7 +112,7 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
 
     const filteredOptions = useMemo(() => (
         selectedValueHidden
-            ? options.filter((option) => !valueMap?.[keySelector(option)])
+            ? options?.filter((option) => !valueMap?.[keySelector(option)])
             : options
     ),
     [
