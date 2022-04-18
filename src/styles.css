@@ -128,6 +128,8 @@
 
     /* FIXME: this color has 3 occurance */
     --dui-color-background-information: #f5f8fb;
+    --dui-color-background-information-nlp: #f7f5fa;
+    --dui-color-background-information-nlp-hover: #e8e6eb;
 
     --dui-color-background-negative: #dfe7f2;
     --dui-color-background-card: var(--dui-color-foreground);

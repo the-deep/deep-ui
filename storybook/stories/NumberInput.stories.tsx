@@ -4,7 +4,7 @@ import { useArgs } from '@storybook/client-api';
 import { IoCalculatorOutline } from 'react-icons/io5';
 
 import NumberInput, { Props as NumberInputProps } from '../../src/components/NumberInput';
-import Suggestion from '../../src/components/Suggestion';
+import BadgeInput from '../../src/components/BadgeInput';
 
 export default {
     title: 'Input/NumberInput',
@@ -65,7 +65,7 @@ WithError.args = {
     error: 'This field is required',
 };
 
-const SuggestionTemplate: Story<NumberInputProps<string>> = (args) => {
+const BadgeInputTemplate: Story<NumberInputProps<string>> = (args) => {
     const [{ value }, updateArgs] = useArgs();
 
     const handleChange = (e: number | undefined) => {
@@ -78,7 +78,7 @@ const SuggestionTemplate: Story<NumberInputProps<string>> = (args) => {
             value={value}
             onChange={handleChange}
             inputDescription={(
-                <Suggestion
+                <BadgeInput
                     name={undefined}
                     value={value}
                     onChange={handleChange}
@@ -89,13 +89,15 @@ const SuggestionTemplate: Story<NumberInputProps<string>> = (args) => {
                         { key: 10, value: '10' },
                         { key: 100, value: '100' },
                     ]}
+                    suggestionMode
+                    smallButtons
                 />
             )}
         />
     );
 };
 
-export const WithSuggestions = SuggestionTemplate.bind({});
+export const WithSuggestions = BadgeInputTemplate.bind({});
 WithSuggestions.args = {
     label: 'Number',
 };

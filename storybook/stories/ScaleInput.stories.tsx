@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 
 import ScaleInput, { Props as ScaleInputProps } from '../../src/components/ScaleInput';
-import Suggestion from '../../src/components/Suggestion';
+import BadgeInput from '../../src/components/BadgeInput';
 
 export default {
     title: 'Input/ScaleInput',
@@ -94,7 +94,7 @@ Error.args = {
     error: 'This is wrong',
 };
 
-const SuggestionTemplate: Story<
+const BadgeInputTemplate: Story<
     ScaleInputProps<Option['key'], Option, Option['label']>
 > = (props) => {
     const [{ value }, updateArgs] = useArgs();
@@ -129,20 +129,22 @@ const SuggestionTemplate: Story<
             colorSelector={(d: Option) => d.color}
             onChange={setValue}
             hint={(
-                <Suggestion
+                <BadgeInput
                     name={undefined}
                     value={value}
                     options={suggestionOptions}
                     keySelector={(s) => s.id}
                     labelSelector={(s) => s.label}
                     onChange={setValue}
+                    suggestionMode
+                    smallButtons
                 />
             )}
         />
     );
 };
 
-export const WithSuggestion = SuggestionTemplate.bind({});
+export const WithSuggestion = BadgeInputTemplate.bind({});
 WithSuggestion.args = {
     value: undefined,
 };

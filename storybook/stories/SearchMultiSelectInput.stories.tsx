@@ -4,7 +4,7 @@ import { useArgs } from '@storybook/client-api';
 import SearchMultiSelectInput, {
     Props as SearchMultiSelectInputProps,
 } from '../../src/components/SearchMultiSelectInput';
-import Suggestion from '../../src/components/Suggestion';
+import BadgeInput from '../../src/components/BadgeInput';
 import useQuery, { entityListTransformer } from '../../src/utils/useQuery';
 
 export default {
@@ -113,7 +113,7 @@ SelectedListShownReadOnly.args = {
     readOnly: true,
 };
 
-const SuggestionTemplate: Story<
+const BadgeInputTemplate: Story<
     SearchMultiSelectInputProps<string, string, Option, { containerClassName?: string }, never>
 > = (props) => {
     const [{ value }, updateArgs] = useArgs();
@@ -152,7 +152,7 @@ const SuggestionTemplate: Story<
             onOptionsChange={setCacheOptions}
             onShowDropdownChange={setOpened}
             inputDescription={(
-                <Suggestion
+                <BadgeInput
                     name={undefined}
                     value={value}
                     options={suggestionOptions}
@@ -161,19 +161,21 @@ const SuggestionTemplate: Story<
                     onChange={setValue}
                     // NOTE: This is disabled till suggestion supports multi-select inputs
                     disabled
+                    suggestionMode
+                    smallButtons
                 />
             )}
         />
     );
 };
 
-export const WithSuggestions = SuggestionTemplate.bind({});
-WithSuggestions.args = {
+export const WithSuggestion = BadgeInputTemplate.bind({});
+WithSuggestion.args = {
     value: ['1'],
 };
 
-export const SelectedListShownWithSuggestions = SuggestionTemplate.bind({});
-SelectedListShownWithSuggestions.args = {
+export const SelectedListShownWithSuggestion = BadgeInputTemplate.bind({});
+SelectedListShownWithSuggestion.args = {
     value: ['1', '3'],
     selectionListShown: true,
 };
