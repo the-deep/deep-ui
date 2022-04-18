@@ -8,8 +8,11 @@
         gap: var(--dui-spacing-small);
 
         .button {
-            font-size: var(--dui-font-size-small);
             text-transform: unset;
+
+            &.small-button {
+                font-size: var(--dui-font-size-small);
+            }
         }
     }
 }

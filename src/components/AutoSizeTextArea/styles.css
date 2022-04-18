@@ -23,7 +23,7 @@
         padding: inherit;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
         resize: none;
         line-height: inherit;
         font-family: inherit;

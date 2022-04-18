@@ -54,13 +54,14 @@ export const Default = Template.bind({});
 
 Default.args = {
     label: 'Suggestions:',
-    selectedValueHidden: true,
+    value: 'dogs',
 };
 
-export const SelectedValueShown = Template.bind({});
-SelectedValueShown.args = {
+export const SelectedValueHidden = Template.bind({});
+SelectedValueHidden.args = {
     label: 'Suggestions:',
-    selectedValueHidden: false,
+    selectedValueHidden: true,
+    value: 'dogs',
 };
 
 export const Nlp = Template.bind({});
@@ -68,5 +69,5 @@ Nlp.args = {
     label: 'Suggestions:',
     buttonVariant: 'nlp-tertiary',
     selectedButtonVariant: 'nlp-primary',
-    selectedValueHidden: false,
+    value: 'dogs',
 };

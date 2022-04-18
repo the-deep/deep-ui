@@ -37,6 +37,7 @@ export interface Props<O, N extends NameType, K extends OptionKey> {
     hintContainerClassName?: string;
     errorContainerClassName?: string;
     listContainerClassName?: string;
+    smallButtons?: boolean;
 }
 
 function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Props<O, N, K>) {
@@ -60,6 +61,7 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
         error,
         hint,
         selectedValueHidden,
+        smallButtons,
     } = props;
 
     const handleOptionClick = useCallback((key: K) => {
@@ -97,9 +99,14 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
         disabled,
         variant: valueMap?.[key] ? selectedButtonVariant : buttonVariant,
         onClick: handleOptionClick,
-        spacing: 'compact' as const,
-        className: _cs(buttonClassName, styles.button),
+        spacing: smallButtons ? 'compact' as const : undefined,
+        className: _cs(
+            buttonClassName,
+            styles.button,
+            smallButtons && styles.smallButton,
+        ),
     }), [
+        smallButtons,
         valueMap,
         selectedButtonVariant,
         buttonClassName,
