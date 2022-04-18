@@ -16,4 +16,5 @@ const Template: Story<CalendarProps<CalendarDateProps>> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+    initialDate: '2020-10-12',
 };

@@ -59,6 +59,12 @@ Default.args = {
     ellipsizeOptions: true,
 };
 
+export const NormalSorting = Template.bind({});
+NormalSorting.args = {
+    value: '1',
+    selectedOptionsAtTop: false,
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
     value: '1',

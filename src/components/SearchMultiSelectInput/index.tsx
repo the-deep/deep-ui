@@ -2,14 +2,14 @@ import React, { useCallback, useMemo, useState } from 'react';
 import {
     _cs,
     listToMap,
-    isDefined,
     unique,
+    isDefined,
 } from '@togglecorp/fujs';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
 import DismissibleList from '../DismissibleList';
-import { rankedSearchOnList, genericMemo } from '../../utils';
+import { genericMemo } from '../../utils';
 import Option from './Option';
 
 import styles from './styles.css';
@@ -42,6 +42,8 @@ export type Props<
     onShowDropdownChange?: (value: boolean) => void;
     selectedOptionContainerClassName?: string;
     selectionListShown?: boolean;
+    selectedOptionsAtTop?: boolean;
+    ellipsizeOptions?: boolean;
 }, OMISSION> & (
     SelectInputContainerProps<T, K, O, P,
         'name'
@@ -65,9 +67,7 @@ export type Props<
         | 'onFocusedKeyChange'
         | 'hasValue'
     >
-) & {
-    ellipsizeOptions?: boolean;
-};
+);
 
 const emptyList: unknown[] = [];
 
@@ -100,6 +100,7 @@ function SearchMultiSelectInput<
         readOnly,
         inputDescription,
         ellipsizeOptions,
+        selectedOptionsAtTop = true,
         ...otherProps
     } = props;
 
@@ -118,13 +119,6 @@ function SearchMultiSelectInput<
         [key: string]: boolean,
     }>({});
 
-    const optionsMap = useMemo(
-        () => (
-            listToMap(options, keySelector, (i) => i)
-        ),
-        [options, keySelector],
-    );
-
     const optionsLabelMap = useMemo(
         () => (
             listToMap(options, keySelector, labelSelector)
@@ -139,6 +133,13 @@ function SearchMultiSelectInput<
         [value, optionsLabelMap],
     );
 
+    const optionsMap = useMemo(
+        () => (
+            listToMap(options, keySelector, (i) => i)
+        ),
+        [options, keySelector],
+    );
+
     // NOTE: we can skip this calculation if optionsShowInitially is false
     const selectedOptions = useMemo(
         () => value.map((valueKey) => optionsMap[valueKey]).filter(isDefined),
@@ -147,10 +148,18 @@ function SearchMultiSelectInput<
 
     const realOptions = useMemo(
         () => {
-            const allOptions = unique(
-                [...searchOptions, ...selectedOptions],
-                keySelector,
-            );
+            const allOptions = searchInputValue
+                ? searchOptions
+                : unique(
+                    [...searchOptions, ...selectedOptions],
+                    keySelector,
+                );
+
+            if (!selectedOptionsAtTop) {
+                return sortFunction
+                    ? sortFunction(allOptions, searchInputValue, labelSelector)
+                    : allOptions;
+            }
 
             const initiallySelected = allOptions
                 .filter((item) => selectedKeys[keySelector(item)]);
@@ -159,13 +168,13 @@ function SearchMultiSelectInput<
 
             if (sortFunction) {
                 return [
-                    ...rankedSearchOnList(initiallySelected, searchInputValue, labelSelector),
+                    ...sortFunction(initiallySelected, searchInputValue, labelSelector),
                     ...sortFunction(initiallyNotSelected, searchInputValue, labelSelector),
                 ];
             }
 
             return [
-                ...rankedSearchOnList(initiallySelected, searchInputValue, labelSelector),
+                ...initiallySelected,
                 ...initiallyNotSelected,
             ];
         },
@@ -177,6 +186,7 @@ function SearchMultiSelectInput<
             selectedKeys,
             selectedOptions,
             sortFunction,
+            selectedOptionsAtTop,
         ],
     );
 
@@ -218,6 +228,7 @@ function SearchMultiSelectInput<
 
     const optionRendererParams = useCallback(
         (key: OptionKey, option: O) => {
+            // FIXME: use map
             const isActive = value.findIndex((item) => item === key) !== -1;
 
             return {
@@ -228,7 +239,7 @@ function SearchMultiSelectInput<
                 ellipsize: ellipsizeOptions,
             };
         },
-        [labelSelector, value, optionLabelSelector, ellipsizeOptions],
+        [value, labelSelector, optionLabelSelector, ellipsizeOptions],
     );
 
     // FIXME: value should not be on dependency list
@@ -287,9 +298,9 @@ function SearchMultiSelectInput<
             onFocusedChange={setFocused}
             focusedKey={focusedKey}
             onFocusedKeyChange={setFocusedKey}
+            hasValue={isDefined(value) && value.length > 0}
             persistentOptionPopup
             nonClearable={false}
-            hasValue={isDefined(value) && value.length > 0}
             disabled={disabled}
             readOnly={readOnly}
             inputDescription={(
