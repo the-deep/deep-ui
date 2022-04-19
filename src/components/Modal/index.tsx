@@ -65,6 +65,7 @@ interface BaseProps {
     spacing?: SpacingTypes;
     size?: SizeTypes;
     freeHeight?: boolean;
+    movable?: boolean;
 }
 
 export type Props = BaseProps & ({
@@ -108,24 +109,83 @@ function Modal(props: Props) {
         spacing = 'loose',
         size = 'medium',
         freeHeight,
+        movable = false,
     } = props;
 
     // eslint-disable-next-line react/destructuring-assignment
     const shouldHideHeader = props.hideCloseButton && !heading && !headerActions && !headerIcons;
+    const headerRef = React.useRef<HTMLDivElement>(null);
+    const modalRef = React.useRef<HTMLDivElement>(null);
+    const mouseDownRef = React.useRef<boolean>(false);
+    const mouseDownPositionDiffRef = React.useRef({
+        x: 0,
+        y: 0,
+    });
+    const initialBCRRef = React.useRef<DOMRect>();
+
+    React.useEffect(() => {
+        initialBCRRef.current = modalRef.current?.getBoundingClientRect();
+    }, []);
+
+    React.useEffect(() => {
+        const headerElement = headerRef.current;
+        const modalElement = modalRef.current;
+
+        if (!movable || !headerElement || !modalElement) {
+            return undefined;
+        }
+
+        const handleMouseMove = (e: MouseEvent) => {
+            const bcr = initialBCRRef.current;
+            if (bcr) {
+                const translateX = (e.clientX - mouseDownPositionDiffRef.current.x) - bcr.x;
+                const translateY = (e.clientY - mouseDownPositionDiffRef.current.y) - bcr.y;
+                modalElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            }
+        };
+
+        const handleMouseDown = (e: MouseEvent) => {
+            mouseDownRef.current = true;
+            const currentBCR = modalRef.current?.getBoundingClientRect();
+            if (currentBCR) {
+                mouseDownPositionDiffRef.current.x = e.clientX - currentBCR.x;
+                mouseDownPositionDiffRef.current.y = e.clientY - currentBCR.y;
+            }
+            window.addEventListener('mousemove', handleMouseMove);
+        };
+
+        const handleMouseUp = () => {
+            mouseDownRef.current = false;
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+
+        if (movable) {
+            headerElement.addEventListener('mousedown', handleMouseDown);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            headerElement.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [movable]);
 
     return (
         <BodyBackdrop className={backdropClassName}>
             <div
+                ref={modalRef}
                 className={_cs(
                     styles.modal,
                     spacingToStyleMap[spacing],
                     sizeToStyleMap[size],
                     freeHeight && styles.freeHeight,
                     className,
+                    movable && styles.movable,
                 )}
             >
                 {!shouldHideHeader && (
                     <Header
+                        elementProps={movable ? { ref: headerRef } : undefined}
                         spacing={spacing}
                         className={_cs(styles.modalHeader, headerClassName)}
                         heading={heading}
