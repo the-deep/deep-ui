@@ -8,6 +8,8 @@ type Def = { containerClassName?: string };
 type NameType = string | number | undefined;
 type OptionKey = string | number;
 
+// FIXME: the omissions is not correct
+// we need multiple omission for SearchMultiSelectInputProps
 export type Props<
     T extends OptionKey,
     K extends NameType,
@@ -21,16 +23,13 @@ function MultiSelectInput<T extends OptionKey, K extends NameType, O extends obj
     props: Props<T, K, O, P>,
 ) {
     const {
-        name,
         options,
-        totalOptionsCount, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
         ...otherProps
     } = props;
 
     return (
         <SearchMultiSelectInput
             {...otherProps}
-            name={name}
             options={options}
             sortFunction={rankedSearchOnList}
             searchOptions={options}

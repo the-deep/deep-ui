@@ -11,8 +11,8 @@ type Def = { containerClassName?: string };
 type OptionKey = string | number;
 type NameType = string | number | undefined;
 
-const emptyList: unknown[] = [];
-
+// FIXME: the omissions is not correct
+// we need multiple omission for SearchMultiSelectInputProps
 export type Props<
     T extends OptionKey,
     K extends NameType,
@@ -26,55 +26,16 @@ function SelectInput<T extends OptionKey, K extends NameType, O extends object, 
     props: Props<T, K, O, P>,
 ) {
     const {
-        name,
         options,
-        labelSelector,
-        nonClearable, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
-        onChange, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
-        totalOptionsCount, // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
         ...otherProps
     } = props;
 
-    const [searchInputValue, setSearchInputValue] = React.useState('');
-
-    const searchOptions = React.useMemo(
-        () => rankedSearchOnList(options ?? (emptyList as O[]), searchInputValue, labelSelector),
-        [options, searchInputValue, labelSelector],
-    );
-
-    // NOTE: this looks weird but we need to use typeguard to identify between
-    // different union types (for onChange and nonClearable)
-    // eslint-disable-next-line react/destructuring-assignment
-    if (props.nonClearable) {
-        return (
-            <SearchSelectInput
-                {...otherProps}
-                // eslint-disable-next-line react/destructuring-assignment
-                onChange={props.onChange}
-                // eslint-disable-next-line react/destructuring-assignment
-                nonClearable={props.nonClearable}
-                name={name}
-                options={options}
-                labelSelector={labelSelector}
-                onSearchValueChange={setSearchInputValue}
-                searchOptions={searchOptions}
-                // searchOptionsShownInitially
-            />
-        );
-    }
     return (
         <SearchSelectInput
             {...otherProps}
-            // eslint-disable-next-line react/destructuring-assignment
-            onChange={props.onChange}
-            // eslint-disable-next-line react/destructuring-assignment
-            nonClearable={props.nonClearable}
-            name={name}
             options={options}
-            labelSelector={labelSelector}
-            onSearchValueChange={setSearchInputValue}
-            searchOptions={searchOptions}
-            // searchOptionsShownInitially
+            searchOptions={options}
+            sortFunction={rankedSearchOnList}
         />
     );
 }

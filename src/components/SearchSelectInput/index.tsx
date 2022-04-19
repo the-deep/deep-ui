@@ -11,7 +11,7 @@ import ElementFragments from '../ElementFragments';
 import SelectInputContainer, {
     Props as SelectInputContainerProps,
 } from '../SelectInputContainer';
-import { rankedSearchOnList, genericMemo } from '../../utils';
+import { genericMemo } from '../../utils';
 
 import styles from './styles.css';
 
@@ -64,6 +64,8 @@ export type Props<
     sortFunction?: (options: O[], search: string, labelSelector: (option: O) => string) => O[];
     onSearchValueChange?: (value: string) => void;
     onShowDropdownChange?: (value: boolean) => void;
+    selectedOptionsAtTop?: boolean;
+    ellipsizeOptions?: boolean;
 }, OMISSION> & (
     SelectInputContainerProps<T, K, O, P,
         'name'
@@ -95,9 +97,7 @@ export type Props<
         nonClearable?: false;
         onChange: (newValue: T | undefined, name: K) => void;
     }
-) & {
-    ellipsizeOptions?: boolean;
-};
+);
 
 const emptyList: unknown[] = [];
 
@@ -125,6 +125,7 @@ function SearchSelectInput<
         onSearchValueChange,
         onShowDropdownChange,
         ellipsizeOptions,
+        selectedOptionsAtTop = true,
         ...otherProps
     } = props;
 
@@ -162,10 +163,18 @@ function SearchSelectInput<
 
     const realOptions = useMemo(
         () => {
-            const allOptions = unique(
-                [...searchOptions, ...selectedOptions],
-                keySelector,
-            );
+            const allOptions = searchInputValue
+                ? searchOptions
+                : unique(
+                    [...searchOptions, ...selectedOptions],
+                    keySelector,
+                );
+
+            if (!selectedOptionsAtTop) {
+                return sortFunction
+                    ? sortFunction(allOptions, searchInputValue, labelSelector)
+                    : allOptions;
+            }
 
             const initiallySelected = allOptions
                 .filter((item) => selectedKeys[keySelector(item)]);
@@ -174,13 +183,13 @@ function SearchSelectInput<
 
             if (sortFunction) {
                 return [
-                    ...rankedSearchOnList(initiallySelected, searchInputValue, labelSelector),
+                    ...sortFunction(initiallySelected, searchInputValue, labelSelector),
                     ...sortFunction(initiallyNotSelected, searchInputValue, labelSelector),
                 ];
             }
 
             return [
-                ...rankedSearchOnList(initiallySelected, searchInputValue, labelSelector),
+                ...initiallySelected,
                 ...initiallyNotSelected,
             ];
         },
@@ -192,6 +201,7 @@ function SearchSelectInput<
             selectedKeys,
             selectedOptions,
             sortFunction,
+            selectedOptionsAtTop,
         ],
     );
 

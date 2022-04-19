@@ -84,6 +84,12 @@ Default.args = {
     value: ['1', '3'],
 };
 
+export const NormalSorting = Template.bind({});
+NormalSorting.args = {
+    value: ['1', '3'],
+    selectedOptionsAtTop: false,
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
     value: ['1', '3'],
