@@ -70,4 +70,11 @@
     &.free-height {
         height: auto;
     }
+
+    &.movable {
+        .modal-header {
+            cursor: move;
+            user-select: none;
+        }
+    }
 }
