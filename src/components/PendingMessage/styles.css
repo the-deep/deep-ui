@@ -3,10 +3,12 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     background-color: var(--dui-color-backdrop);
     padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small));
     animation: appear var(--dui-duration-transition-medium) ease-in forwards;
     animation-delay: var(--dui-duration-delay-medium);
+    color: var(--dui-color-text-message);
 
     &.no-debouncing {
         animation-delay: unset;

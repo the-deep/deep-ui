@@ -30,3 +30,12 @@ WithColoredBackground.args = {
     coloredBackground: true,
     label: 'Hello darkness, my old friend',
 };
+
+export const EmptyContent = Template.bind({});
+EmptyContent.args = {
+    icon: <IoFlag />,
+    value: undefined,
+    emptyContent: '-',
+    coloredBackground: true,
+    label: 'Hello darkness, my old friend',
+};

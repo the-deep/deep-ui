@@ -17,6 +17,7 @@ export interface Props {
     variant: InformationVariant;
     valuePrecision?: number;
     coloredBackground?: boolean;
+    emptyContent?: React.ReactNode;
 }
 
 const styleMap: {
@@ -33,10 +34,11 @@ function InformationCard(props: Props) {
         className,
         icon,
         label,
-        value = 0,
+        value,
         variant = 'accent',
         valuePrecision = 0,
         coloredBackground,
+        emptyContent = 0,
     } = props;
 
     return (
@@ -55,6 +57,7 @@ function InformationCard(props: Props) {
                 value={(
                     <NumberOutput
                         value={value}
+                        invalidText={emptyContent}
                         precision={valuePrecision}
                     />
                 )}
