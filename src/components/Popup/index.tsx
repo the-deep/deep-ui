@@ -33,7 +33,10 @@ interface FloatingPlacementProps {
     maxHeight: string | undefined;
 }
 
-function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacementProps {
+function getFloatPlacementOnParentRect(
+    bcr: DOMRect | undefined,
+    placementDirection: 'horizontal' | 'vertical' = 'vertical',
+): FloatingPlacementProps {
     const placement = {
         ...defaultPlacement,
     };
@@ -50,19 +53,47 @@ function getFloatPlacementOnParentRect(bcr: DOMRect | undefined): FloatingPlacem
         const cX = window.innerWidth / 2;
         const cY = window.innerHeight / 2;
 
-        horizontalPosition = (cX - bcr.x) > 0 ? 'right' : 'left';
-        verticalPosition = (cY - bcr.y) > 0 ? 'bottom' : 'top';
+        if (placementDirection === 'horizontal') {
+            const OFFSET = 10;
+            const xEnd = bcr.x + bcr.width;
 
-        if (horizontalPosition === 'left') {
-            placement.right = `${Math.min(window.innerWidth, window.innerWidth - x - width - offsetX)}px`;
-        } else if (horizontalPosition === 'right') {
-            placement.left = `${Math.max(0, x + offsetX)}px`;
-        }
+            const startDiff = bcr.x;
+            const endDiff = window.innerWidth - xEnd;
 
-        if (verticalPosition === 'top') {
-            placement.bottom = `${window.innerHeight - y + 20}px`;
-        } else if (verticalPosition === 'bottom') {
-            placement.top = `${y + height + 20}px`;
+            if (startDiff > endDiff) {
+                horizontalPosition = 'left';
+            } else {
+                horizontalPosition = 'right';
+            }
+
+            verticalPosition = (cY - bcr.y) > 0 ? 'bottom' : 'top';
+
+            if (horizontalPosition === 'left') {
+                placement.right = `${window.innerWidth - x + OFFSET}px`;
+            } else if (horizontalPosition === 'right') {
+                placement.left = `${x + width + OFFSET}px`;
+            }
+
+            if (verticalPosition === 'top') {
+                placement.bottom = `${window.innerHeight - y - OFFSET * 2}px`;
+            } else if (verticalPosition === 'bottom') {
+                placement.top = `${y}px`;
+            }
+        } else {
+            horizontalPosition = (cX - bcr.x) > 0 ? 'right' : 'left';
+            verticalPosition = (cY - bcr.y) > 0 ? 'bottom' : 'top';
+
+            if (horizontalPosition === 'left') {
+                placement.right = `${Math.min(window.innerWidth, window.innerWidth - x - width - offsetX)}px`;
+            } else if (horizontalPosition === 'right') {
+                placement.left = `${Math.max(0, x + offsetX)}px`;
+            }
+
+            if (verticalPosition === 'top') {
+                placement.bottom = `${window.innerHeight - y + 20}px`;
+            } else if (verticalPosition === 'bottom') {
+                placement.top = `${y + height + 20}px`;
+            }
         }
 
         contentWidth = `${width}px`;
@@ -131,6 +162,7 @@ export function usePopupFeatures(
     props: Pick<Props, PopupFeatureKeys> & {
         matchParentWidth?: boolean;
         useMousePosition?: boolean;
+        popupPlacementDirection?: 'horizontal' | 'vertical';
     },
 ) {
     const {
@@ -144,6 +176,7 @@ export function usePopupFeatures(
         matchParentWidth,
         useMousePosition,
         parentRef,
+        popupPlacementDirection,
     } = props;
 
     const [delayedShow, setDelayedShow] = React.useState<boolean | undefined>();
@@ -165,7 +198,7 @@ export function usePopupFeatures(
         maxHeight,
     } = useMousePosition
         ? getFloatPlacementOnMousePosition(mouseX, mouseY)
-        : getFloatPlacementOnParentRect(parentBCR);
+        : getFloatPlacementOnParentRect(parentBCR, popupPlacementDirection);
 
     React.useEffect(() => {
         setDelayedShow(show);
@@ -186,6 +219,7 @@ export function usePopupFeatures(
                     horizontalPosition === 'left' ? styles.left : styles.right,
                     verticalPosition === 'top' ? styles.top : styles.bottom,
                     !show && styles.hidden,
+                    popupPlacementDirection === 'horizontal' && styles.horizontalPlacement,
                 )}
             >
                 <div className={_cs(styles.tip, tipClassName)} />
@@ -221,6 +255,7 @@ export interface Props {
     tipClassName?: string;
     freeWidth?: boolean;
     onUnmount?: () => void;
+    placementDirection?: 'horizontal' | 'vertical';
 }
 
 function Popup(props: Props) {
@@ -235,6 +270,7 @@ function Popup(props: Props) {
         freeWidth = false,
         onUnmount,
         parentRef,
+        placementDirection,
     } = props;
 
     const {
@@ -248,8 +284,9 @@ function Popup(props: Props) {
         elementRef,
         show,
         tipClassName,
-        matchParentWidth: !freeWidth,
+        matchParentWidth: !freeWidth || placementDirection === 'horizontal',
         parentRef,
+        popupPlacementDirection: placementDirection,
     });
 
     const unmountRef = React.useRef<boolean | undefined>();
