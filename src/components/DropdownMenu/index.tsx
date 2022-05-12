@@ -52,6 +52,7 @@ export type Props = Omit<ButtonProps<undefined>, 'className' | 'onClick' | 'name
     popupClassName?: string;
     popupContentClassName?: string;
     popupMatchesParentWidth?: boolean;
+    popupPlacementDirection?: 'horizontal' | 'vertical';
     hideDropdownIcon?: boolean;
     persistent?: boolean;
     componentRef?: React.MutableRefObject<{
@@ -69,6 +70,7 @@ function DropdownMenu(props: Props) {
         popupClassName,
         popupContentClassName,
         popupMatchesParentWidth,
+        popupPlacementDirection,
         hideDropdownIcon,
         persistent = false,
         componentRef,
@@ -116,6 +118,7 @@ function DropdownMenu(props: Props) {
                 contentClassName={popupContentClassName}
                 show={showPopup}
                 freeWidth={!popupMatchesParentWidth}
+                placementDirection={popupPlacementDirection}
             >
                 { children }
             </Popup>

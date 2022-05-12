@@ -21,6 +21,8 @@ export function Default() {
                 <div
                     style={{
                         padding: '10px',
+                        width: '10rem',
+                        border: '1px solid red',
                     }}
                 >
                     This is the parent 1
@@ -35,6 +37,8 @@ export function Default() {
                 <div
                     style={{
                         padding: '10px',
+                        width: '10rem',
+                        border: '1px solid blue',
                     }}
                 >
                     This is the parent 2
@@ -49,10 +53,15 @@ export function Default() {
                 <div
                     style={{
                         padding: '10px',
+                        width: '10rem',
+                        border: '1px solid #f0ef1f',
                     }}
                 >
                     This is the parent 3
-                    <Popup show>
+                    <Popup
+                        show
+                        placementDirection="horizontal"
+                    >
                         <div style={{ padding: '20px' }}>
                             This is the popup content for parent 3
                         </div>
@@ -63,6 +72,8 @@ export function Default() {
                 <div
                     style={{
                         padding: '10px',
+                        width: '10rem',
+                        border: '1px solid green',
                     }}
                 >
                     This is the parent 4

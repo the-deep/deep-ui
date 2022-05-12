@@ -53,6 +53,44 @@
         }
     }
 
+    &.horizontal-placement {
+        .tip {
+            width: var(--dui-height-popup-tip);
+            height: var(--dui-width-popup-tip);
+            top: unset;
+            left: unset;
+            bottom: unset;
+            right: unset;
+            z-index: 1;
+        }
+
+        &.top {
+            .tip {
+                bottom: var(--dui-height-popup-tip);
+            }
+        }
+
+        &.bottom {
+            .tip {
+                top: var(--dui-height-popup-tip);
+            }
+        }
+
+        &.left {
+            .tip {
+                right: calc(-1 * var(--dui-height-popup-tip));
+                clip-path: polygon(100% 50%, 0 0, 0 100%);
+            }
+        }
+
+        &.right {
+            .tip {
+                left: calc(-1 * var(--dui-height-popup-tip) + 1px);
+                clip-path: polygon(100% 0, 0 50%, 100% 100%);
+            }
+        }
+    }
+
     .content {
         overflow: auto;
     }
