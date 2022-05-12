@@ -15,6 +15,7 @@ export type Props = Omit<QuickActionButtonProps<undefined>, 'onClick' | 'name'> 
     label?: React.ReactNode;
     popupClassName?: string;
     popupContentClassName?: string;
+    popupPlacementDirection?: 'horizontal' | 'vertical';
     popupMatchesParentWidth?: boolean;
     persistent?: boolean;
     componentRef?: React.MutableRefObject<{
@@ -29,6 +30,7 @@ function QuickActionDropdownMenu(props: Props) {
         label,
         variant = 'secondary',
         popupClassName,
+        popupPlacementDirection,
         popupContentClassName,
         popupMatchesParentWidth,
         persistent = false,
@@ -71,6 +73,7 @@ function QuickActionDropdownMenu(props: Props) {
                 show={showPopup}
                 elementRef={popupRef}
                 freeWidth={!popupMatchesParentWidth}
+                placementDirection={popupPlacementDirection}
             >
                 {children}
             </Popup>
