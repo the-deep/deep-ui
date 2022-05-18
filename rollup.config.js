@@ -36,7 +36,7 @@ const PLUGINS = [
     }),
     babel({
         // babelHelpers: 'runtime',
-        babelHelpers: 'bundled',
+        babelHelpers: 'bundled', // FIXME: bundled vs runtime?
         exclude: 'node_modules/**',
         extensions: ['.jsx', '.js', '.ts', '.tsx'],
     }),
@@ -52,20 +52,21 @@ const PLUGINS = [
 
 const OUTPUT_DATA = [
     {
-        file: pkg.main,
+        dir: 'build/cjs',
         format: 'cjs',
     },
     {
-        file: pkg.module,
-        format: 'es',
+        dir: 'build/esm/',
+        format: 'esm',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
     },
 ];
 
-const config = OUTPUT_DATA.map(({ file, format }) => ({
+const config = OUTPUT_DATA.map((options) => ({
     input: INPUT_FILE_PATH,
     output: {
-        file,
-        format,
+        ...options,
         sourcemap: true,
         exports: 'named',
     },

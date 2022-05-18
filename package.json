@@ -5,13 +5,13 @@
     "files": [
         "/build"
     ],
-    "sideEffect": [
+    "sideEffects": [
         "src/styles.css"
     ],
-    "main": "build/index.js",
-    "module": "build/index.es.js",
-    "style": "build/index.css",
-    "typings": "build/index.d.ts",
+    "main": "build/cjs/index.js",
+    "module": "build/esm/index.js",
+    "typings": "build/esm/index.d.ts",
+    "style": "build/esm/index.css",
     "scripts": {
         "prepare": "install-peers",
         "build": "rollup -c && tsc --project tsconfig-typings.json",
