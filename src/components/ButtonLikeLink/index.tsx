@@ -1,11 +1,11 @@
 import React from 'react';
-import { isValidUrl, _cs } from '@togglecorp/fujs';
+import { _cs } from '@togglecorp/fujs';
 import {
     Link as RouterLink,
     LinkProps as RouterLinkProps,
 } from 'react-router-dom';
 
-import { genericMemo } from '../../utils';
+import { genericMemo, isValidUrl } from '../../utils';
 import { useButtonFeatures } from '../Button';
 import styles from './styles.css';
 
@@ -51,7 +51,7 @@ function ButtonLikeLink(props: Props) {
     // FIXME: the typing is problematic
     const isExternalLink = React.useMemo(
         () => (
-            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:'))
+            typeof to === 'string' && isValidUrl(to)
         ),
         [to],
     );

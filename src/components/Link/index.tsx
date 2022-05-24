@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     _cs,
-    isValidUrl,
 } from '@togglecorp/fujs';
 import {
     Link as RouterLink,
@@ -11,7 +10,7 @@ import { IoChevronForward } from 'react-icons/io5';
 
 import {
     genericMemo,
-    isLocalUrl,
+    isValidUrl,
 } from '../../utils';
 import { SpacingTypes } from '../../types';
 import Actions from '../Actions';
@@ -55,7 +54,7 @@ function Link(props: Props) {
 
     const isExternalLink = React.useMemo(
         () => (
-            typeof to === 'string' && (isValidUrl(to) || to.startsWith('mailto:') || isLocalUrl(to))
+            typeof to === 'string' && isValidUrl(to)
         ),
         [to],
     );
