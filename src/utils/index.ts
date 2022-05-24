@@ -47,7 +47,15 @@ export function dateStringToDate(value: string) {
     return new Date(`${value}T00:00`);
 }
 
-const localhostRegex = /(?<=\/\/)localhost(?=[:/]|$)/;
-export function isLocalUrl(url: string) {
-    return localhostRegex.test(url);
+export function isValidUrl(url?: string) {
+    if (!url) {
+        return false;
+    }
+    try {
+        // eslint-disable-next-line no-new
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
 }
