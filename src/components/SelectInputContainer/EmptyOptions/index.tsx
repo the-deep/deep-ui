@@ -1,7 +1,9 @@
 import React from 'react';
+import { IoChevronForward } from 'react-icons/io5';
 
 import PendingAnimation from '../../PendingAnimation';
 import { genericMemo } from '../../../utils';
+import Button from '../../Button';
 
 import styles from './styles.css';
 
@@ -10,6 +12,7 @@ export interface Props {
     filtered?: boolean;
     optionsCount: number;
     totalOptionsCount: number | undefined;
+    handleShowMoreClick?: () => void;
 }
 
 function EmptyOptions(props: Props) {
@@ -18,6 +21,7 @@ function EmptyOptions(props: Props) {
         pending = false,
         optionsCount,
         totalOptionsCount = 0,
+        handleShowMoreClick,
     } = props;
 
     if (pending) {
@@ -49,7 +53,20 @@ function EmptyOptions(props: Props) {
         return (
             // FIXME: use message
             <div className={styles.hiddenOptionsCount}>
-                {`and ${hiddenOptions} more`}
+                <span className={styles.hiddenCountMessage}>
+                    {`and ${hiddenOptions} more`}
+                </span>
+                {handleShowMoreClick && (
+                    <Button
+                        className={styles.button}
+                        name={undefined}
+                        onClick={handleShowMoreClick}
+                        actions={<IoChevronForward />}
+                        variant="transparent"
+                    >
+                        show more
+                    </Button>
+                )}
             </div>
         );
     }
