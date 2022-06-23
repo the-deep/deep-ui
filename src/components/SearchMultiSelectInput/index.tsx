@@ -67,7 +67,9 @@ export type Props<
         | 'onFocusedKeyChange'
         | 'hasValue'
     >
-);
+) & {
+    handleShowMoreClick?: () => void;
+};
 
 const emptyList: unknown[] = [];
 
@@ -101,6 +103,8 @@ function SearchMultiSelectInput<
         inputDescription,
         ellipsizeOptions,
         selectedOptionsAtTop = true,
+        totalOptionsCount,
+        handleShowMoreClick,
         ...otherProps
     } = props;
 
@@ -289,6 +293,7 @@ function SearchMultiSelectInput<
             optionRendererParams={optionRendererParams}
             optionContainerClassName={styles.optionContainer}
             onOptionClick={handleOptionClick}
+            totalOptionsCount={totalOptionsCount}
             valueDisplay={valueDisplay}
             onClear={handleClear}
             searchText={searchInputValue}
@@ -303,6 +308,7 @@ function SearchMultiSelectInput<
             nonClearable={false}
             disabled={disabled}
             readOnly={readOnly}
+            handleShowMoreClick={handleShowMoreClick}
             inputDescription={(
                 <>
                     {inputDescription}

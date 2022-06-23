@@ -92,7 +92,9 @@ export type Props<
     grouped?: false;
     groupLabelSelector?: undefined;
     groupKeySelector?: undefined;
-});
+}) & {
+    handleShowMoreClick?: () => void;
+};
 
 const emptyList: unknown[] = [];
 
@@ -140,6 +142,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
         onFocusedChange,
         onDropdownShownChange,
         totalOptionsCount,
+        handleShowMoreClick,
         variant,
         inputDescription,
         hasValue,
@@ -385,6 +388,7 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                     pending={optionsPending}
                     optionsCount={options.length}
                     totalOptionsCount={totalOptionsCount}
+                    handleShowMoreClick={handleShowMoreClick}
                 />
             </Popup>
         </InputContainer>
