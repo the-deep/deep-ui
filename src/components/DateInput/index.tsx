@@ -11,10 +11,12 @@ import {
 import useUiModeClassName from '../../hooks/useUiModeClassName';
 import useBlurEffect from '../../hooks/useBlurEffect';
 import useBooleanState from '../../hooks/useBooleanState';
+import useModalState from '../../hooks/useModalState';
 import InputContainer, { Props as InputContainerProps } from '../InputContainer';
 import RawInput, { Props as RawInputProps } from '../RawInput';
 import Button from '../Button';
 import Popup from '../Popup';
+import Modal from '../Modal';
 import Calendar, { Props as CalendarProps } from '../Calendar';
 import { Props as CalendarDateProps } from '../Calendar/CalendarDate';
 import { genericMemo, ymdToDateString } from '../../utils';
@@ -28,6 +30,7 @@ type InheritedProps<T extends NameType> = (Omit<InputContainerProps, 'input'> & 
 export interface Props<T extends NameType> extends InheritedProps<T> {
     inputElementRef?: React.RefObject<HTMLInputElement>;
     inputClassName?: string;
+    showInModal?: boolean;
 }
 
 function DateInput<T extends NameType>(props: Props<T>) {
@@ -55,6 +58,7 @@ function DateInput<T extends NameType>(props: Props<T>) {
         onChange,
         name,
         value,
+        showInModal,
         ...dateInputProps
     } = props;
 
@@ -71,6 +75,30 @@ function DateInput<T extends NameType>(props: Props<T>) {
         setShowCalendarFalse,,
         toggleShowCalendar,
     ] = useBooleanState(false);
+
+    const [
+        dateModalShown,
+        setDateModalVisible,
+        setDateModalHidden,
+    ] = useModalState(false);
+
+    const handleShowCalendar = React.useCallback(() => {
+        if (showInModal) {
+            setDateModalVisible();
+        }
+        toggleShowCalendar();
+    }, [
+        showInModal,
+        setDateModalVisible,
+        toggleShowCalendar,
+    ]);
+
+    const handleFocus = React.useCallback(() => {
+        if (showInModal) {
+            setDateModalVisible();
+        }
+        setShowCalendarTrue();
+    }, [showInModal, setShowCalendarTrue, setDateModalVisible]);
 
     const handlePopupBlur = React.useCallback(
         (isClickedOnPopup: boolean, isClickedOnParent: boolean, e: MouseEvent) => {
@@ -104,8 +132,17 @@ function DateInput<T extends NameType>(props: Props<T>) {
                 onChange(ymdToDateString(year, month, day), name);
             }
             setShowCalendarFalse();
+            if (showInModal) {
+                setDateModalHidden();
+            }
         },
-        [name, onChange, setShowCalendarFalse],
+        [
+            name,
+            onChange,
+            setShowCalendarFalse,
+            setDateModalHidden,
+            showInModal,
+        ],
     );
 
     const handleClearButtonClick = React.useCallback(() => {
@@ -138,7 +175,7 @@ function DateInput<T extends NameType>(props: Props<T>) {
                                 <Button
                                     name={undefined}
                                     variant="action"
-                                    onClick={toggleShowCalendar}
+                                    onClick={handleShowCalendar}
                                     title="Set current date"
                                     disabled={disabled}
                                 >
@@ -181,12 +218,12 @@ function DateInput<T extends NameType>(props: Props<T>) {
                         uiMode={uiMode}
                         disabled={disabled}
                         value={value}
-                        onFocus={setShowCalendarTrue}
+                        onFocus={handleFocus}
                         type="date"
                     />
                 )}
             />
-            {!readOnly && (
+            {!readOnly && !showInModal && (
                 <Popup
                     parentRef={containerRef}
                     elementRef={popupRef}
@@ -203,6 +240,23 @@ function DateInput<T extends NameType>(props: Props<T>) {
                         activeDate={value ?? undefined}
                     />
                 </Popup>
+            )}
+            {!readOnly && showInModal && dateModalShown && (
+                <Modal
+                    onCloseButtonClick={setDateModalHidden}
+                    className={styles.calendarModal}
+                    spacing="compact"
+                    size="free"
+                    freeHeight
+                >
+                    <Calendar
+                        onDateClick={handleCalendarDateClick}
+                        className={styles.calendar}
+                        monthSelectionPopupClassName={calendarMonthSelectionPopupClassName}
+                        initialDate={value ?? undefined}
+                        activeDate={value ?? undefined}
+                    />
+                </Modal>
             )}
         </>
     );

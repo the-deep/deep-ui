@@ -33,6 +33,11 @@ Default.args = {
     label: 'Birthdate',
 };
 
+export const ShowInModal = Template.bind({});
+ShowInModal.args = {
+    showInModal: true,
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
     label: 'Birthdate',
