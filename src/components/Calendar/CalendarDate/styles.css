@@ -5,6 +5,7 @@
 
     &.today {
         color: var(--dui-color-accent);
+        border: var(--dui-width-separator-thin) solid var(--dui-color-separator);
         font-weight: var(--dui-font-weight-bold);
     }
 

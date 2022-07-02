@@ -196,6 +196,34 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                             optionsPopupContentClassName={styles.popupContent}
                         />
                     </div>
+                    <div className={styles.actions}>
+                        <Button
+                            name={undefined}
+                            variant="action"
+                            title="Go to current year / month"
+                            onClick={handleGotoCurrentButtonClick}
+                        >
+                            <IoTimeOutline />
+                        </Button>
+                        <Button
+                            name={undefined}
+                            variant="action"
+                            onClick={handlePreviousMonthButtonClick}
+                            title="Previous month"
+                            disabled={isNotDefined(year)}
+                        >
+                            <IoChevronBack />
+                        </Button>
+                        <Button
+                            name={undefined}
+                            variant="action"
+                            onClick={handleNextMonthButtonClick}
+                            title="Next month"
+                            disabled={isNotDefined(year)}
+                        >
+                            <IoChevronForward />
+                        </Button>
+                    </div>
                 </div>
                 <div className={styles.weekDays}>
                     {weekDayNames.map((wd) => (
@@ -260,34 +288,6 @@ function Calendar<P extends CalendarDateProps>(props: Props<P>) {
                     Please select a valid year and month to view the dates
                 </div>
             )}
-            <div className={styles.actions}>
-                <Button
-                    name={undefined}
-                    variant="action"
-                    title="Go to current year / month"
-                    onClick={handleGotoCurrentButtonClick}
-                >
-                    <IoTimeOutline />
-                </Button>
-                <Button
-                    name={undefined}
-                    variant="action"
-                    onClick={handlePreviousMonthButtonClick}
-                    title="Previous month"
-                    disabled={isNotDefined(year)}
-                >
-                    <IoChevronBack />
-                </Button>
-                <Button
-                    name={undefined}
-                    variant="action"
-                    onClick={handleNextMonthButtonClick}
-                    title="Next month"
-                    disabled={isNotDefined(year)}
-                >
-                    <IoChevronForward />
-                </Button>
-            </div>
         </div>
     );
 }
