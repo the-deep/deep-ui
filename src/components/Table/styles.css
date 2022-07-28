@@ -82,7 +82,7 @@
                     overflow: initial;
                     text-overflow: initial;
                     white-space: initial;
-                    word-break: break-all;
+                    word-break: break-word;
                 }
             }
 
@@ -91,7 +91,7 @@
                     overflow: initial;
                     text-overflow: initial;
                     white-space: initial;
-                    word-break: break-all;
+                    word-break: break-word;
                 }
             }
         }

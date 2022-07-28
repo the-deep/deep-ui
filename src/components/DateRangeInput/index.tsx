@@ -377,7 +377,7 @@ function DateRangeInput<N extends NameType>(props: Props<N>) {
                     </>
                 )}
             />
-            {!readOnly && (
+            {!readOnly && showCalendar && (
                 <Popup
                     parentRef={containerRef}
                     elementRef={popupRef}
