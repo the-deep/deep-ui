@@ -216,6 +216,35 @@ export const Variants: Story = () => (
                         Goto Togglecorp
                     </DropdownMenuItem>
                 </DropdownMenu>
+                <DropdownMenu
+                    variant="general"
+                    label="Disabled items"
+                >
+                    <DropdownMenuItem
+                        name={undefined}
+                        onClick={handleMenuItemClick}
+                        disabled
+                    >
+                        Home
+                    </DropdownMenuItem>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+                        Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+                        Projects
+                    </DropdownMenuItem>
+                    <Separator />
+                    <DropdownMenuItem name={undefined} onClick={handleMenuItemClick}>
+                        Logout
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                        href="https://togglecorp.com"
+                        actions={<IoExitOutline />}
+                        disabled
+                    >
+                        Goto Togglecorp
+                    </DropdownMenuItem>
+                </DropdownMenu>
             </div>
         </section>
     </div>

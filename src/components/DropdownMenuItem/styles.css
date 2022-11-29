@@ -27,8 +27,13 @@
     &.loose-spacing {
         --spacing: var(--dui-spacing-large);
     }
-}
 
+    &.disabled {
+        pointer-events: none;
+        opacity: var(--dui-opacity-disabled-element);
+        filter: saturate(var(--dui-saturation-disabled-element));
+    }
+}
 .separator {
     margin: var(--dui-spacing-extra-small) 0;
     border: var(--dui-width-separator-thin) solid var(--dui-color-separator);

@@ -39,6 +39,7 @@ export function Separator({ className }: { className?: string }) {
 
 interface BaseProps extends ElementFragmentProps {
     className?: string;
+    disabled?: boolean;
 }
 
 export type Props<N extends string | number | undefined> = BaseProps & ({
@@ -61,12 +62,14 @@ function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>
         actionsContainerClassName,
         spacing = 'comfortable',
         href,
+        disabled = false,
     } = props;
 
     const className = _cs(
         styles.dropdownMenuItem,
         spacingToStyleMap[spacing],
         classNameFromProps,
+        disabled && styles.disabled,
     );
 
     const content = (
@@ -116,6 +119,7 @@ function DropdownMenuItem<N extends string | number | undefined>(props: Props<N>
             name={props.name}
             // eslint-disable-next-line react/destructuring-assignment
             onClick={props.onClick}
+            disabled={disabled}
         >
             {content}
         </RawButton>
