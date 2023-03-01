@@ -88,10 +88,12 @@ export type Props<
     grouped: true;
     groupLabelSelector: (option: O) => string;
     groupKeySelector: (option: O) => string | number;
+    groupComparator?: (a: string | number, b: string | number) => number;
 } | {
     grouped?: false;
     groupLabelSelector?: undefined;
     groupKeySelector?: undefined;
+    groupComparator?: undefined;
 }) & {
     handleShowMoreClick?: () => void;
 };
@@ -295,6 +297,8 @@ function SelectInputContainer<OK extends OptionKey, N extends NameType, O extend
                 groupRendererParams={groupRendererParams}
                 // eslint-disable-next-line react/destructuring-assignment
                 groupKeySelector={props.groupKeySelector}
+                // eslint-disable-next-line react/destructuring-assignment
+                groupComparator={props.groupComparator}
             />
         );
     } else {

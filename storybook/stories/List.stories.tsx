@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { compareString } from '@togglecorp/fujs';
 import { Story } from '@storybook/react/types-6-0';
 
 import List, { Props as ListProps } from '../../src/components/List';
@@ -111,6 +112,19 @@ Grouped.args = {
     groupRenderer: Group,
     groupRendererParams: (key) => ({ title: key }),
     grouped: true,
+};
+
+export const GroupedAndCompared = Template.bind({});
+GroupedAndCompared.args = {
+    data: options,
+    keySelector: (d) => d.key,
+    renderer: Option,
+    rendererParams: (_, option) => ({ childeren: option.label }),
+    groupKeySelector: (d) => d.group,
+    groupRenderer: Group,
+    groupRendererParams: (key) => ({ title: key }),
+    grouped: true,
+    groupComparator: (a, b) => (compareString(b, a)),
 };
 
 export const CollapsedGrouped = Template.bind({});
