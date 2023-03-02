@@ -1,4 +1,5 @@
 import React from 'react';
+import { compareString } from '@togglecorp/fujs';
 import { Story } from '@storybook/react/types-6-0';
 import { useArgs } from '@storybook/client-api';
 import SelectInput, { Props as SelectInputProps } from '../../src/components/SelectInput';
@@ -98,7 +99,7 @@ const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containe
             grouped
             groupKeySelector={(d) => d.parentKey}
             groupLabelSelector={(d) => d.parentLabel}
-            optionLabelSelector={() => 'Hello'}
+            optionLabelSelector={(d) => d.label}
         />
     );
 };
@@ -112,6 +113,11 @@ NoValueGrouped.args = {
 export const DefaultGrouped = GroupedTemplate.bind({});
 DefaultGrouped.args = {
     value: '1',
+};
+
+export const GroupedAndCompared = GroupedTemplate.bind({});
+GroupedAndCompared.args = {
+    groupComparator: (a, b) => (compareString(b, a)),
 };
 
 export const DisabledGrouped = GroupedTemplate.bind({});
