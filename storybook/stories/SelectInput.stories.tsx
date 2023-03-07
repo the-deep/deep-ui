@@ -26,7 +26,7 @@ const options: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<SelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const Template: Story<SelectInputProps<string, never, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string) => {
@@ -79,7 +79,7 @@ ReadOnly.args = {
 };
 
 // eslint-disable-next-line max-len
-const GroupedTemplate: Story<SelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const GroupedTemplate: Story<SelectInputProps<string, string, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string) => {

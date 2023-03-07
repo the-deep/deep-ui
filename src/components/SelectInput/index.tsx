@@ -15,15 +15,22 @@ type NameType = string | number | undefined;
 // we need multiple omission for SearchMultiSelectInputProps
 export type Props<
     T extends OptionKey,
+    GT extends OptionKey,
     K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
-> = SearchSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially' | 'totalOptionsCount'>;
+> = SearchSelectInputProps<T, GT, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'searchOptionsShownInitially' | 'totalOptionsCount'>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function SelectInput<T extends OptionKey, K extends NameType, O extends object, P extends Def>(
-    props: Props<T, K, O, P>,
+function SelectInput<
+    T extends OptionKey,
+    GT extends OptionKey,
+    K extends NameType,
+    O extends object,
+    P extends Def
+>(
+    props: Props<T, GT, K, O, P>,
 ) {
     const {
         options,

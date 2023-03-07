@@ -32,7 +32,7 @@ const options: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<MultiSelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const Template: Story<MultiSelectInputProps<string, never, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string[]) => {
@@ -92,7 +92,7 @@ SelectedListShownReadOnly.args = {
 };
 
 // eslint-disable-next-line max-len
-const GroupedTemplate: Story<MultiSelectInputProps<string, string, Option, { containerClassName?: string }>> = (props) => {
+const GroupedTemplate: Story<MultiSelectInputProps<string, string, string, Option, { containerClassName?: string }>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string[]) => {

@@ -28,6 +28,7 @@ const options: Option[] = [
 const Template: Story<
     SelectInputContainerProps<
         string,
+        never,
         string,
         Option,
         { containerClassName?: string, children: React.ReactNode },

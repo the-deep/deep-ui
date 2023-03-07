@@ -20,6 +20,7 @@ type NameType = string | number | undefined;
 
 export type Props<
     T extends OptionKey,
+    GT extends OptionKey,
     K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
@@ -45,7 +46,7 @@ export type Props<
     selectedOptionsAtTop?: boolean;
     ellipsizeOptions?: boolean;
 }, OMISSION> & (
-    SelectInputContainerProps<T, K, O, P,
+    SelectInputContainerProps<T, GT, K, O, P,
         'name'
         | 'nonClearable'
         | 'onClear'
@@ -75,12 +76,13 @@ const emptyList: unknown[] = [];
 
 function SearchMultiSelectInput<
     T extends OptionKey,
+    GT extends OptionKey,
     K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
 >(
-    props: Props<T, K, O, P, never>,
+    props: Props<T, GT, K, O, P, never>,
 ) {
     const {
         keySelector,
