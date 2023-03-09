@@ -12,15 +12,22 @@ type OptionKey = string | number;
 // we need multiple omission for SearchMultiSelectInputProps
 export type Props<
     T extends OptionKey,
+    GT extends OptionKey,
     K extends NameType,
     // eslint-disable-next-line @typescript-eslint/ban-types
     O extends object,
     P extends Def,
-> = SearchMultiSelectInputProps<T, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'onShowDropdownChange' | 'totalOptionsCount'>;
+> = SearchMultiSelectInputProps<T, GT, K, O, P, 'onSearchValueChange' | 'searchOptions' | 'onShowDropdownChange' | 'totalOptionsCount'>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function MultiSelectInput<T extends OptionKey, K extends NameType, O extends object, P extends Def>(
-    props: Props<T, K, O, P>,
+function MultiSelectInput<
+    T extends OptionKey,
+    GT extends OptionKey,
+    K extends NameType,
+    O extends object,
+    P extends Def
+>(
+    props: Props<T, GT, K, O, P>,
 ) {
     const {
         options,

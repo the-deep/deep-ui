@@ -34,7 +34,7 @@ const suggestionOptions: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<SearchMultiSelectInputProps<string, string, Option, { containerClassName?: string }, never>> = (props) => {
+const Template: Story<SearchMultiSelectInputProps<string, never, string, Option, { containerClassName?: string }, never>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string[]) => {
@@ -120,7 +120,7 @@ SelectedListShownReadOnly.args = {
 };
 
 const HiddenOptionsTemplate: Story<
-SearchMultiSelectInputProps<string, string, Option, { containerClassName?: string }, never>
+    SearchMultiSelectInputProps<string, never, string, Option, { containerClassName?: string }, never>
 > = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
@@ -166,7 +166,7 @@ ShowHiddenOptions.args = {
 };
 
 const BadgeInputTemplate: Story<
-    SearchMultiSelectInputProps<string, string, Option, { containerClassName?: string }, never>
+    SearchMultiSelectInputProps<string, never, string, Option, { containerClassName?: string }, never>
 > = (props) => {
     const [{ value }, updateArgs] = useArgs();
 

@@ -26,7 +26,7 @@ const options: Option[] = [
 ];
 
 // eslint-disable-next-line max-len
-const Template: Story<SearchSelectInputProps<string, string, Option, { containerClassName?: string }, never>> = (props) => {
+const Template: Story<SearchSelectInputProps<string, never, string, Option, { containerClassName?: string }, never>> = (props) => {
     const [{ value }, updateArgs] = useArgs();
 
     const setValue = (e: string | undefined) => {

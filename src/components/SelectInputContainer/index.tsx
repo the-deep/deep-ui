@@ -52,6 +52,7 @@ function Group({
 
 export type Props<
     OK extends OptionKey,
+    GK extends OptionKey,
     N extends NameType,
     O,
     P extends ContentBaseProps,
@@ -87,8 +88,8 @@ export type Props<
 }, OMISSION> & Omit<InputContainerProps, 'input'> & ({
     grouped: true;
     groupLabelSelector: (option: O) => string;
-    groupKeySelector: (option: O) => string | number;
-    groupComparator?: (a: string | number, b: string | number) => number;
+    groupKeySelector: (option: O) => GK;
+    groupComparator?: (a: GK, b: GK) => number;
 } | {
     grouped?: false;
     groupLabelSelector?: undefined;
@@ -101,8 +102,8 @@ export type Props<
 const emptyList: unknown[] = [];
 
 // eslint-disable-next-line @typescript-eslint/ban-types, max-len
-function SelectInputContainer<OK extends OptionKey, N extends NameType, O extends object, P extends ContentBaseProps>(
-    props: Props<OK, N, O, P, never>,
+function SelectInputContainer<OK extends OptionKey, GK extends OptionKey, N extends NameType, O extends object, P extends ContentBaseProps>(
+    props: Props<OK, GK, N, O, P, never>,
 ) {
     const {
         actions,
