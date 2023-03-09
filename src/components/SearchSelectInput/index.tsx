@@ -97,7 +97,9 @@ export type Props<
         nonClearable?: false;
         onChange: (newValue: T | undefined, name: K) => void;
     }
-);
+) & {
+    handleShowMoreClick?: () => void;
+};
 
 const emptyList: unknown[] = [];
 
@@ -126,6 +128,7 @@ function SearchSelectInput<
         onShowDropdownChange,
         ellipsizeOptions,
         selectedOptionsAtTop = true,
+        handleShowMoreClick,
         ...otherProps
     } = props;
 
@@ -307,6 +310,7 @@ function SearchSelectInput<
             onFocusedKeyChange={setFocusedKey}
             hasValue={isDefined(value)}
             persistentOptionPopup={false}
+            handleShowMoreClick={handleShowMoreClick}
         />
     );
 }

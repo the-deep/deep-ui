@@ -86,3 +86,49 @@ ReadOnly.args = {
     value: '1',
     readOnly: true,
 };
+
+const HiddenOptionsTemplate: Story<
+SearchSelectInputProps<string, string, Option, { containerClassName?: string }, never>
+> = (props) => {
+    const [{ value }, updateArgs] = useArgs();
+
+    const setValue = (e: string[]) => {
+        updateArgs({ value: e });
+    };
+
+    const [searchValue, setSearchValue] = useState('');
+    const [opened, setOpened] = useState(false);
+    const [cacheOptions, setCacheOptions] = useState<Option[] | undefined | null>([
+        options[2],
+        options[3],
+    ]);
+
+    const [pending, searchOptions] = useQuery(
+        options,
+        searchValue,
+        entityListTransformer,
+        !opened,
+    );
+    return (
+        <SearchSelectInput
+            label="Vegetables"
+            {...props}
+            totalOptionsCount={200}
+            options={cacheOptions}
+            value={value}
+            onChange={setValue}
+            keySelector={(d) => d.id}
+            labelSelector={(d) => d.name}
+            searchOptions={searchOptions}
+            onSearchValueChange={setSearchValue}
+            optionsPending={pending}
+            onOptionsChange={setCacheOptions}
+            onShowDropdownChange={setOpened}
+        />
+    );
+};
+
+export const ShowHiddenOptions = HiddenOptionsTemplate.bind({});
+ShowHiddenOptions.args = {
+    handleShowMoreClick: () => console.warn('I am clicked!'),
+};
