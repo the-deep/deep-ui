@@ -4,11 +4,6 @@ import { useArgs } from '@storybook/client-api';
 
 import MultiBadgeInput, { Props as MultiBadgeInputProps } from '../../src/components/MultiBadgeInput';
 
-interface Option {
-    key: string;
-    label: string;
-}
-
 export default {
     title: 'Input/MultiBadgeInput',
     component: MultiBadgeInput,
