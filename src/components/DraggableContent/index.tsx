@@ -17,6 +17,7 @@ export interface Props extends Omit<ContainerProps, 'containerElementProps'> {
     dropEffect?: 'copy' | 'move' | 'link' | 'none';
     onDragStart?: (value: SerializableValue) => void;
     onDragStop?: (value: SerializableValue) => void;
+    dragByContainer?: boolean;
 }
 
 function DraggableContent(props: Props) {
@@ -29,6 +30,7 @@ function DraggableContent(props: Props) {
         value,
         name,
         headerActions,
+        dragByContainer = false,
         ...containerProps
     } = props;
 
@@ -75,21 +77,24 @@ function DraggableContent(props: Props) {
     return (
         <Container
             {...containerProps}
-            className={_cs(styles.draggableContent, className)}
+            className={_cs(styles.draggableContent, className, dragByContainer && styles.drag)}
             containerElementProps={{
                 draggable,
                 onDragStart: handleDragStart,
+                onMouseDown: dragByContainer ? handleDragHandleMouseDown : undefined,
             }}
             headerActions={(
                 <>
                     {headerActions}
-                    <div
-                        role="presentation"
-                        onMouseDown={handleDragHandleMouseDown}
-                        className={styles.dragContainer}
-                    >
-                        <GrDrag className={styles.icon} />
-                    </div>
+                    {!dragByContainer && (
+                        <div
+                            role="presentation"
+                            onMouseDown={handleDragHandleMouseDown}
+                            className={styles.dragContainer}
+                        >
+                            <GrDrag className={styles.icon} />
+                        </div>
+                    )}
                 </>
             )}
         >

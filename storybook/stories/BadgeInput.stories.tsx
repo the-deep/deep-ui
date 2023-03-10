@@ -4,11 +4,6 @@ import { useArgs } from '@storybook/client-api';
 
 import BadgeInput, { Props as BadgeInputProps } from '../../src/components/BadgeInput';
 
-interface Option {
-    key: string;
-    label: string;
-}
-
 export default {
     title: 'Input/BadgeInput',
     component: BadgeInput,
