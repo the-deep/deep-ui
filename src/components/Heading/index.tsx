@@ -14,7 +14,7 @@ const colorVariantToStyleMap: {
     [key in ColorVariantTypes]: string;
 } = {
     brand: styles.brand,
-    accent: styles.brand,
+    accent: styles.accent,
     default: styles.default,
 };
 
