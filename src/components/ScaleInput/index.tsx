@@ -86,6 +86,7 @@ function ScaleInput<
         colorSelector,
         className,
         hint,
+        spacing = "compact",
         ...otherProps
     } = props;
 
@@ -98,7 +99,7 @@ function ScaleInput<
             {...otherProps}
             className={_cs(className, styles.scaleInput)}
             renderer={MemoizedScale}
-            spacing="compact"
+            spacing={spacing}
             rendererParams={finalRendererParams}
             listContainerClassName={_cs(
                 listContainerClassName,
