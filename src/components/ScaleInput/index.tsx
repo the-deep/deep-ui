@@ -86,7 +86,7 @@ function ScaleInput<
         colorSelector,
         className,
         hint,
-        spacing = "compact",
+        spacing = 'compact',
         ...otherProps
     } = props;
 
