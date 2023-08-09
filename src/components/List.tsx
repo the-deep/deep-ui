@@ -153,9 +153,10 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
         }
 
         return (
-            <>
+            <div
+                key={key}
+            >
                 <Renderer
-                    key={key}
                     className={rendererClassName}
                     {...extraProps}
                 />
@@ -168,7 +169,7 @@ function GroupedList<D, P, K extends OptionKey, GP extends GroupCommonProps, GK 
                         width={borderBetweenItemWidth}
                     />
                 )}
-            </>
+            </div>
         );
     }, [
         Renderer,
