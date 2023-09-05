@@ -1,19 +1,44 @@
 .key-figure {
+    --spacing: var(--dui-spacing-medium);
+
     border-radius: var(--dui-radius-border-medium);
     background-color: var(--dui-color-surface-information);
-    padding: calc(var(--dui-spacing-large) - var(--dui-spacing-small)) calc(var(--dui-spacing-extra-large) - var(--dui-spacing-small));
+    padding: var(--spacing);
+    gap: var(--dui-spacing-small);
 
     .value {
-        padding: var(--dui-spacing-small);
         color: var(--dui-color-accent);
         font-size: var(--dui-font-size-super-large);
         font-weight: var(--dui-font-weight-bold);
+
+        &.small {
+            font-size: var(--dui-font-size-extra-large);
+        }
     }
 
     .description {
-        padding: var(--dui-spacing-small);
         color: var(--dui-color-accent);
         font-size: var(--dui-font-size-large);
         font-weight: var(--dui-font-weight-bold);
+
+        &.small {
+            font-size: var(--dui-font-size-medium);
+        }
+    }
+
+    &.no-spacing {
+        --spacing: 0;
+    }
+
+    &.compact-spacing {
+        --spacing: var(--dui-spacing-small);
+    }
+
+    &.comfortable-spacing {
+        --spacing: var(--dui-spacing-medium);
+    }
+
+    &.loose-spacing {
+        --spacing: var(--dui-spacing-large);
     }
 }
