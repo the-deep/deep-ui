@@ -21,6 +21,8 @@ export interface Props<O, N extends NameType, K extends OptionKey> {
     options: O[] | null | undefined;
     keySelector: (datum: O) => K;
     labelSelector: (datum: O) => string;
+    titleSelector?: (datum: O) => string | undefined;
+    iconSelector?: (datum: O) => React.ReactNode | undefined;
     onChange?: (value: K[] | undefined, name: N) => void;
     disabled?: boolean | undefined;
     selectedButtonVariant?: ButtonVariant;
@@ -48,6 +50,8 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
         disabled,
         labelSelector,
         keySelector,
+        titleSelector,
+        iconSelector,
         value,
         listClassName,
         containerClassName,
@@ -96,6 +100,8 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
     const rendererParams = useCallback((key: K, data: O) => ({
         name: keySelector(data),
         children: labelSelector(data),
+        title: titleSelector ? titleSelector(data) : undefined,
+        icons: iconSelector ? iconSelector(data) : undefined,
         disabled,
         variant: valueMap?.[key] ? selectedButtonVariant : buttonVariant,
         onClick: handleOptionClick,
@@ -107,6 +113,8 @@ function MultiBadgeInput<O, N extends NameType, K extends OptionKey>(props: Prop
         ),
     }), [
         smallButtons,
+        titleSelector,
+        iconSelector,
         valueMap,
         selectedButtonVariant,
         buttonClassName,

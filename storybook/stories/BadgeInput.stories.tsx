@@ -1,5 +1,6 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
+import { IoBugOutline } from 'react-icons/io5';
 import { useArgs } from '@storybook/client-api';
 
 import BadgeInput, { Props as BadgeInputProps } from '../../src/components/BadgeInput';
@@ -21,14 +22,19 @@ const Template: Story<BadgeInputProps<string, string, string>> = (args) => {
         {
             key: 'cats',
             label: 'Cats',
+            title: 'Meow!',
+            icon: undefined,
         },
         {
             key: 'dogs',
             label: 'Dogs',
+            title: 'Bhow Bhow!',
+            icon: undefined,
         },
         {
             key: 'monkeys',
             label: 'Monkeys',
+            icon: (<IoBugOutline />),
         },
     ];
 
@@ -40,6 +46,8 @@ const Template: Story<BadgeInputProps<string, string, string>> = (args) => {
             options={suggestionOptions}
             keySelector={(s) => s.key}
             labelSelector={(s) => s.label}
+            titleSelector={(s) => s.title}
+            iconSelector={(s) => s.icon}
             onChange={handleChange}
         />
     );
