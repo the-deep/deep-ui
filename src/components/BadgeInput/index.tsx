@@ -18,6 +18,8 @@ export interface Props<O, N extends NameType, K extends OptionKey> {
     options: O[] | null | undefined;
     keySelector: (datum: O) => K;
     labelSelector: (datum: O) => string;
+    titleSelector?: (datum: O) => string | undefined;
+    iconSelector?: (datum: O) => React.ReactNode | undefined;
     onChange?: (value: K | undefined, name: N) => void;
     disabled?: boolean | undefined;
     selectedButtonVariant?: ButtonVariant;
@@ -46,6 +48,8 @@ function BadgeInput<O, N extends NameType, K extends OptionKey>(props: Props<O, 
         disabled,
         labelSelector,
         keySelector,
+        titleSelector,
+        iconSelector,
         value,
         listClassName,
         containerClassName,
@@ -76,6 +80,8 @@ function BadgeInput<O, N extends NameType, K extends OptionKey>(props: Props<O, 
     const rendererParams = useCallback((key: K, data: O) => ({
         name: keySelector(data),
         children: labelSelector(data),
+        title: titleSelector ? titleSelector(data) : undefined,
+        icons: iconSelector ? iconSelector(data) : undefined,
         disabled,
         variant: value === key ? selectedButtonVariant : buttonVariant,
         onClick: handleOptionClick,
@@ -87,6 +93,8 @@ function BadgeInput<O, N extends NameType, K extends OptionKey>(props: Props<O, 
         ),
     }), [
         smallButtons,
+        titleSelector,
+        iconSelector,
         value,
         selectedButtonVariant,
         buttonClassName,
