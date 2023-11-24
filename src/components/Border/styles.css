@@ -4,9 +4,39 @@
 
     position: relative;
     background-color: var(--dui-color-separator);
-    width: 100%;
-    height: var(--border-width);
     --animation-name: grow-h;
+
+    &.top, &.bottom {
+        height: var(--border-width);
+        width: 100%;
+
+        /* NOTE: this assumes border to be in horizontal direction */
+        &.extend-to-spacing {
+            &::before {
+                position: absolute;
+                left: calc(-1 * var(--spacing));
+                background-color: var(--dui-color-separator);
+                width: var(--spacing);
+                height: var(--border-width);
+                content: '';
+            }
+
+            &::after {
+                position: absolute;
+                right: calc(-1 * var(--spacing));
+                background-color: var(--dui-color-separator);
+                width: var(--spacing);
+                height: var(--border-width);
+                content: '';
+            }
+        }
+    }
+
+    &.right, &.left {
+        flex-shrink: 0;
+        width: var(--border-width);
+        height: initial;
+    }
 
     &.absolutely-positioned {
         position: absolute;
@@ -97,27 +127,6 @@
 
     &.dense {
         --border-width: var(--dui-width-separator-dense);
-    }
-
-    /* NOTE: this assumes border to be in horizontal direction */
-    &.extend-to-spacing {
-        &::before {
-            position: absolute;
-            left: calc(-1 * var(--spacing));
-            background-color: var(--dui-color-separator);
-            width: var(--spacing);
-            height: var(--border-width);
-            content: '';
-        }
-
-        &::after {
-            position: absolute;
-            right: calc(-1 * var(--spacing));
-            background-color: var(--dui-color-separator);
-            width: var(--spacing);
-            height: var(--border-width);
-            content: '';
-        }
     }
 
     &.no-spacing {

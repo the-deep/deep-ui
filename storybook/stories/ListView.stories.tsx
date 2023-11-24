@@ -88,10 +88,6 @@ const Template: Story<ListViewProps<OptionFields, OptionProps, string, any, any>
                     filtered={filtered}
                     errored={errored}
                     onReload={() => { console.warn('reloaded'); }}
-                    direction="vertical"
-                    spacing="comfortable"
-                    messageShown
-                    messageIconShown
                     // eslint-disable-next-line react/destructuring-assignment
                     data={empty ? [] : args.data}
                 />
@@ -107,4 +103,35 @@ Default.args = {
     renderer: Option,
     rendererParams: (_, option) => ({ children: option.label }),
     borderBetweenItem: true,
+    spacing: 'comfortable',
+    messageShown: true,
+    messageIconShown: true,
+    direction: 'vertical',
+};
+
+export const Reversed = Template.bind({});
+Reversed.args = {
+    data: options,
+    keySelector: (d) => d.key,
+    renderer: Option,
+    rendererParams: (_, option) => ({ children: option.label }),
+    borderBetweenItem: true,
+    reverse: true,
+    spacing: 'comfortable',
+    messageShown: true,
+    messageIconShown: true,
+    direction: 'vertical',
+};
+
+export const Horizontal = Template.bind({});
+Horizontal.args = {
+    data: options,
+    keySelector: (d) => d.key,
+    renderer: Option,
+    rendererParams: (_, option) => ({ children: option.label }),
+    borderBetweenItem: true,
+    spacing: 'comfortable',
+    messageShown: true,
+    messageIconShown: true,
+    direction: 'horizontal',
 };

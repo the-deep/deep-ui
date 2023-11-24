@@ -9,6 +9,16 @@
         }
     }
 
+    &.horizontal {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing);
+
+        &.reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
     &.empty {
         &.pending {
             min-height: calc(2em + var(--dui-spacing-medium) * 2);
