@@ -10,6 +10,10 @@
         .heading-container {
             .heading {
                 color: var(--dui-color-accent);
+
+                &.errored {
+                    color: var(--dui-color-danger);
+                }
             }
         }
 
@@ -20,6 +24,10 @@
 
         &.clickable-header {
             cursor: pointer;
+        }
+
+        &.errored {
+            background-color: var(--dui-color-surface-negative);
         }
     }
 
@@ -59,6 +67,9 @@
 
     &.loose-spacing {
         --spacing: var(--dui-spacing-large);
+    }
+    &.errored {
+        border: var(--dui-width-separator-thin) solid var(--dui-color-danger);
     }
 }
 
