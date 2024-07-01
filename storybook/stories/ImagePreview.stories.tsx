@@ -28,6 +28,12 @@ Default.args = {
     // alt: 'Image cannot be loaded',
 };
 
+export const NoZoomOnScroll = Template.bind({});
+NoZoomOnScroll.args = {
+    src: 'https://i.imgur.com/5ehANlp.jpg',
+    disableZoomOnScroll: true,
+};
+
 export const WithoutImage = Template.bind({});
 WithoutImage.args = {
     src: '',

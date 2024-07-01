@@ -27,6 +27,7 @@ export interface Props {
     src: HTMLImageProps['src'];
     alt: HTMLImageProps['alt'];
     hideTools?: boolean;
+    disableZoomOnScroll?: boolean;
 }
 
 function ImagePreview(props: Props) {
@@ -35,6 +36,7 @@ function ImagePreview(props: Props) {
         src,
         alt,
         hideTools,
+        disableZoomOnScroll,
     } = props;
 
     const [expanded, , setExpandedFalse, , toggleExpanded] = useBooleanState(false);
@@ -65,7 +67,10 @@ function ImagePreview(props: Props) {
         >
             {pending && <PendingMessage />}
             <TransformWrapper
-                wheel={{ step: 0.2 }}
+                wheel={{
+                    step: 0.2,
+                    wheelDisabled: disableZoomOnScroll,
+                }}
                 centerZoomedOut
                 centerOnInit
                 minScale={0.2}
