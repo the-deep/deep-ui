@@ -44,3 +44,10 @@ DisabledExpandableContainer.args = {
     children: 'I should expand on arrow click and not the whole header.',
     disabled: true,
 };
+
+export const ErroredExpandableContainer = Template.bind({});
+ErroredExpandableContainer.args = {
+    heading: 'Extended Matrixes',
+    children: 'I should expand on arrow click and not the whole header.',
+    errored: true,
+};

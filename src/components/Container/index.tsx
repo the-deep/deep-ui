@@ -61,6 +61,7 @@ export interface Props {
     ellipsizeHeading?: boolean;
     withoutExternalPadding?: boolean;
     visibleOverflow?: boolean;
+    errored?: boolean;
 }
 
 function Container(props: Props) {
@@ -103,6 +104,7 @@ function Container(props: Props) {
         withoutExternalPadding,
         visibleOverflow,
         headingDescriptionClassName,
+        errored,
     } = props;
 
     const internalRef = React.useRef<HTMLDivElement>(null);
@@ -126,6 +128,7 @@ function Container(props: Props) {
                 spacingToStyleMap[spacing],
                 withoutExternalPadding && styles.withoutExternalPadding,
                 visibleOverflow && styles.visibleOverflow,
+                errored && styles.errored,
                 className,
             )}
             ref={elementRef}

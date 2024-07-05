@@ -58,3 +58,9 @@ export const Default = Template.bind({});
 Default.args = {
     children: 'A lof of ui elements',
 };
+
+export const Errored = Template.bind({});
+Errored.args = {
+    children: 'A lof of ui elements',
+    errored: true,
+};

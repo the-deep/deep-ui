@@ -56,6 +56,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
         spacing = 'comfortable',
         withoutExternalPadding,
         withoutBorder,
+        errored,
         ...otherProps
     } = props;
 
@@ -78,6 +79,7 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
                 withoutExternalPadding && styles.withoutExternalPadding,
                 !withoutBorder && styles.withBorder,
                 expanded && styles.expanded,
+                errored && styles.errored,
                 className,
             )}
             headerElementProps={
@@ -89,9 +91,14 @@ function ControlledExpandableContainer<T>(props: Props<T>) {
                 styles.header,
                 headerClassName,
                 expansionTriggerArea === 'header' && !disabled && styles.clickableHeader,
+                errored && styles.errored,
             )}
             headingContainerClassName={_cs(styles.headingContainer, headingContainerClassName)}
-            headingClassName={_cs(styles.heading, headingClassName)}
+            headingClassName={_cs(
+                styles.heading,
+                headingClassName,
+                errored && styles.errored,
+            )}
             heading={heading}
             headingSize={headingSize ?? 'small'}
             spacing={spacing}

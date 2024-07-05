@@ -53,6 +53,9 @@
             overflow: visible;
         }
     }
+    &.errored {
+        border: var(--dui-width-separator-thin) solid var(--dui-color-danger);
+    }
 }
 
 @keyframes get-focus {
