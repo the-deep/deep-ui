@@ -36,8 +36,6 @@ export type Props<
     compactEmptyMessage?: boolean;
     compactAndVerticalEmptyMessage?: boolean;
     compactPendingMessage?: boolean;
-    // FIXME: need proper documentation for direction
-    direction?: 'horizontal' | 'vertical';
     messageShown?: boolean;
     messageIconShown?: boolean;
     style?: React.CSSProperties,
@@ -75,7 +73,7 @@ function ListView<
         compactAndVerticalEmptyMessage,
         messageActions,
         spacing = 'none',
-        direction = 'horizontal',
+        direction = 'vertical',
         messageShown = false,
         messageIconShown = false,
         style,
@@ -93,7 +91,9 @@ function ListView<
                 empty && styles.empty,
                 pending && styles.pending,
                 spacingToStyleMap[spacing],
-                direction === 'vertical' && styles.vertical,
+                direction === 'vertical'
+                    ? styles.vertical
+                    : styles.horizontal,
                 reverse && styles.reverse,
                 className,
             )}
@@ -123,6 +123,7 @@ function ListView<
                 <List
                     data={data}
                     spacing={spacing}
+                    direction={direction}
                     {...otherListProps}
                 />
             )}
